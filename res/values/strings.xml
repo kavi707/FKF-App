@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">Fauzias</string>
     <string name="loadingMessage">Application is loading. Please wait ...</string>
+    <string name="loginButtonLabel">Login</string>
+    <string name="orTextLabel">or</string>
+    <string name="recipesTextLabel">Browse Recipes</string>
+    <string name="accountCreateTextLabel">Don\'t you have an account?</string>
+    <string name="registerButtonLabel">Register</string>
 </resources>
