@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- login view string resources -->
     <string name="app_name">Fauzias</string>
     <string name="loadingMessage">Application is loading. Please wait ...</string>
     <string name="loginButtonLabel">Login</string>
@@ -7,4 +8,10 @@
     <string name="recipesTextLabel">Browse Recipes</string>
     <string name="accountCreateTextLabel">Don\'t you have an account?</string>
     <string name="registerButtonLabel">Register</string>
+    <string name="username_label">Username</string>
+    <string name="password_label">Password</string>
+
+    <!-- register view string resources -->
+    <string name="firstNameLabel">First Name</string>
+    <string name="lastNameLabel">Last Name</string>
 </resources>

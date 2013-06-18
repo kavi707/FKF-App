@@ -12,14 +12,14 @@
         <EditText
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="New EditText"
+                android:hint="@string/username_label"
                 android:id="@+id/usernameEditText"
                 android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
 
         <EditText android:layout_width="250dp"
                   android:layout_height="wrap_content"
                   android:password="true"
-                  android:text="New EditText"
+                  android:hint="@string/password_label"
                   android:id="@+id/passwordEditText"
                   android:layout_above="@+id/loginButton" android:layout_alignLeft="@+id/usernameEditText"
                   android:layout_marginBottom="16dp"/>
