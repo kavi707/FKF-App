@@ -2,78 +2,104 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:background="@drawable/login_480_800"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
+    <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="250dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-    <EditText
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:hint="@string/firstNameLabel"
-            android:id="@+id/firstNameEditText"
-            android:layout_gravity="center"/>
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-    <EditText
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:hint="@string/lastNameLabel"
-            android:id="@+id/lastNameEditText"
-            android:layout_gravity="center"/>
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-    <EditText
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:hint="@string/username_label"
-            android:id="@+id/registerUserNameEditText"
-            android:layout_gravity="center"/>
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-    <EditText
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:hint="@string/password_label"
-            android:id="@+id/registerPasswordEditText"
-            android:layout_gravity="center"/>
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="@string/newsletterCheckBoxLabel"
-            android:id="@+id/newsletterCheckBox"
-            android:layout_marginLeft="35dp"
-            android:layout_gravity="left|center_vertical"/>
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-    <Button
-            android:layout_width="400dp"
-            android:layout_height="40dp"
-            android:text="@string/registerButtonLabel"
-            android:textColor="@color/white"
-            android:background="@color/green"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:id="@+id/newRegisterButton"
-            android:layout_gravity="center"/>
+            android:layout_height="fill_parent">
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/login_480_800"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="250dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:hint="@string/firstNameLabel"
+                    android:id="@+id/firstNameEditText"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:hint="@string/lastNameLabel"
+                    android:id="@+id/lastNameEditText"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:hint="@string/username_label"
+                    android:id="@+id/registerUserNameEditText"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:hint="@string/password_label"
+                    android:id="@+id/registerPasswordEditText"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="@string/newsletterCheckBoxLabel"
+                    android:id="@+id/newsletterCheckBox"
+                    android:layout_marginLeft="35dp"
+                    android:layout_gravity="left|center_vertical"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <Button
+                    android:layout_width="400dp"
+                    android:layout_height="50dp"
+                    android:text="@string/registerButtonLabel"
+                    android:textColor="@color/white"
+                    android:background="@color/green"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:id="@+id/newRegisterButton"
+                    android:layout_gravity="center"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

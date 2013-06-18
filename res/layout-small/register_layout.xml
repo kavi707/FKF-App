@@ -2,7 +2,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:background="@drawable/login_240_320"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -12,6 +11,7 @@
         <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:background="@drawable/login_240_320"
                 android:orientation="vertical">
             <TextView
                     android:layout_width="fill_parent"
@@ -58,6 +58,10 @@
                     android:textStyle="bold"
                     android:id="@+id/newRegisterButton"
                     android:layout_gravity="center"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
