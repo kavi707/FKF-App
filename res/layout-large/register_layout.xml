@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:text="Sign up for Newsletter"
+            android:text="@string/newsletterCheckBoxLabel"
             android:id="@+id/newsletterCheckBox"
             android:layout_marginLeft="35dp"
             android:layout_gravity="left|center_vertical"/>
@@ -74,6 +74,6 @@
             android:background="@color/green"
             android:textSize="25dp"
             android:textStyle="bold"
-            android:id="@+id/button"
+            android:id="@+id/newRegisterButton"
             android:layout_gravity="center"/>
 </LinearLayout>

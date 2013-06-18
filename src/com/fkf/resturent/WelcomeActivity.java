@@ -7,6 +7,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.fkf.resturent.templates.LoginActivity;
 
+/**
+ * Holding the loading ui
+ * @author Kavimal Wijewardana <kavi707@gmail.com>
+ */
 public class WelcomeActivity extends Activity {
     /**
      * Called when the activity is first created.
