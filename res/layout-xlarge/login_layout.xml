@@ -2,27 +2,28 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:background="@drawable/login_320_480"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="485dp">
+            android:layout_height="1065dp">
         <EditText
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="New EditText"
                 android:id="@+id/usernameEditText"
-                android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="125dp"/>
 
         <EditText android:layout_width="250dp"
                   android:layout_height="wrap_content"
                   android:password="true"
                   android:text="New EditText"
                   android:id="@+id/passwordEditText"
-                  android:layout_above="@+id/loginButton" android:layout_alignLeft="@+id/usernameEditText"
-                  android:layout_marginBottom="16dp"/>
+                  android:layout_alignLeft="@+id/usernameEditText"
+                  android:layout_below="@+id/usernameEditText"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -32,22 +33,23 @@
                 android:background="@color/green"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:layout_above="@+id/textView" android:layout_alignLeft="@+id/passwordEditText"
-                android:layout_marginBottom="24dp" android:layout_alignRight="@+id/passwordEditText"/>
+                android:layout_alignLeft="@+id/usernameEditText"
+                android:layout_below="@+id/passwordEditText"
+                android:layout_alignRight="@+id/usernameEditText"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/orTextLabel"
                 android:textSize="18dp"
-                android:id="@+id/textView" android:layout_above="@+id/textView2" android:layout_centerHorizontal="true"
-                android:layout_marginBottom="15dp"/>
+                android:layout_centerHorizontal="true" android:layout_alignParentTop="true"
+                android:layout_marginTop="290dp"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recipesTextLabel"
                 android:textSize="18dp"
-                android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
-                android:layout_marginBottom="19dp" android:id="@+id/textView2"/>
+                android:layout_centerHorizontal="true" android:layout_alignParentTop="true"
+                android:layout_marginTop="325dp"/>
     </RelativeLayout>
     <RelativeLayout
             android:layout_width="fill_parent"
@@ -59,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/accountCreateTextLabel"
                 android:layout_alignParentLeft="true" android:layout_marginLeft="20dp"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true" android:id="@+id/textView"/>
         <Button
                 android:layout_width="90dp"
                 android:layout_height="30dp"
@@ -70,6 +72,6 @@
                 android:background="@color/green"
                 android:id="@+id/registerButton"
                 android:layout_centerVertical="true" android:layout_alignParentRight="true"
-                android:layout_marginRight="12dp"/>
+                android:layout_marginRight="44dp"/>
     </RelativeLayout>
 </LinearLayout>

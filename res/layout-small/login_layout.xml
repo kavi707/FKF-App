@@ -2,27 +2,28 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:background="@drawable/login_320_480"
+              android:background="@drawable/login_240_320"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="485dp">
+            android:layout_height="306dp">
         <EditText
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="New EditText"
                 android:id="@+id/usernameEditText"
-                android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
+                android:layout_marginTop="100dp"
+                android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
 
         <EditText android:layout_width="250dp"
                   android:layout_height="wrap_content"
                   android:password="true"
                   android:text="New EditText"
                   android:id="@+id/passwordEditText"
-                  android:layout_above="@+id/loginButton" android:layout_alignLeft="@+id/usernameEditText"
-                  android:layout_marginBottom="16dp"/>
+                  android:layout_alignLeft="@+id/usernameEditText"
+                  android:layout_below="@+id/usernameEditText"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -32,22 +33,22 @@
                 android:background="@color/green"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:layout_above="@+id/textView" android:layout_alignLeft="@+id/passwordEditText"
-                android:layout_marginBottom="24dp" android:layout_alignRight="@+id/passwordEditText"/>
+                android:layout_alignLeft="@+id/usernameEditText"
+                android:layout_below="@+id/passwordEditText"
+                android:layout_alignRight="@+id/usernameEditText"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/orTextLabel"
                 android:textSize="18dp"
-                android:id="@+id/textView" android:layout_above="@+id/textView2" android:layout_centerHorizontal="true"
-                android:layout_marginBottom="15dp"/>
+                android:layout_marginTop="29dp" android:layout_below="@+id/loginButton"
+                android:layout_centerHorizontal="true" android:id="@+id/textView"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recipesTextLabel"
                 android:textSize="18dp"
-                android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
-                android:layout_marginBottom="19dp" android:id="@+id/textView2"/>
+                android:layout_below="@+id/textView" android:layout_centerHorizontal="true"/>
     </RelativeLayout>
     <RelativeLayout
             android:layout_width="fill_parent"
@@ -69,7 +70,8 @@
                 android:textColor="@color/white"
                 android:background="@color/green"
                 android:id="@+id/registerButton"
-                android:layout_centerVertical="true" android:layout_alignParentRight="true"
-                android:layout_marginRight="12dp"/>
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="210dp"
+                android:layout_centerVertical="true"/>
     </RelativeLayout>
 </LinearLayout>
