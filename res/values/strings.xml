@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- login view string resources -->
+    <!-- login_layout view string resources -->
     <string name="app_name">Fauzias</string>
     <string name="loadingMessage">Application is loading. Please wait ...</string>
     <string name="loginButtonLabel">Login</string>

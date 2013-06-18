@@ -2,78 +2,110 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:background="@drawable/login_320_480"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="485dp">
-        <EditText
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/username_label"
-                android:id="@+id/usernameEditText"
-                android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
+            android:layout_height="fill_parent">
+        <LinearLayout
+                android:orientation="vertical"
+                android:background="@drawable/login_320_480"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
-        <EditText android:layout_width="250dp"
-                  android:layout_height="wrap_content"
-                  android:password="true"
-                  android:hint="@string/password_label"
-                  android:id="@+id/passwordEditText"
-                  android:layout_above="@+id/loginButton" android:layout_alignLeft="@+id/usernameEditText"
-                  android:layout_marginBottom="16dp"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="@string/loginButtonLabel"
-                android:id="@+id/loginButton"
-                android:textColor="@color/white"
-                android:background="@color/green"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_above="@+id/textView" android:layout_alignLeft="@+id/passwordEditText"
-                android:layout_marginBottom="24dp" android:layout_alignRight="@+id/passwordEditText"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/orTextLabel"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:id="@+id/textView" android:layout_above="@+id/textView2" android:layout_centerHorizontal="true"
-                android:layout_marginBottom="15dp"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/recipesTextLabel"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
-                android:layout_marginBottom="19dp" android:id="@+id/textView2"/>
-    </RelativeLayout>
-    <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@color/brown"
-            android:layout_gravity="left|center_vertical">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:text="@string/accountCreateTextLabel"
-                android:layout_alignParentLeft="true" android:layout_marginLeft="20dp"
-                android:layout_centerVertical="true"/>
-        <Button
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:text="@string/registerButtonLabel"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:background="@color/green"
-                android:id="@+id/registerButton"
-                android:layout_centerVertical="true" android:layout_alignParentRight="true"
-                android:layout_marginRight="12dp"/>
-    </RelativeLayout>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="150dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+            <EditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/username_label"
+                    android:id="@+id/usernameEditText"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+
+            <EditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:password="true"
+                    android:text="@string/password_label"
+                    android:id="@+id/passwordEditText"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:text="@string/loginButtonLabel"
+                    android:id="@+id/loginButton"
+                    android:textColor="@color/white"
+                    android:background="@color/green"
+                    android:textSize="24dp"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/orTextLabel"
+                    android:layout_gravity="center"
+                    android:textSize="22dp"
+                    android:id="@+id/textView2"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recipesTextLabel"
+                    android:layout_gravity="center"
+                    android:textSize="22dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/textView"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+
+            <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="left|center_vertical">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/accountCreateTextLabel"
+                        android:layout_gravity="left|center_vertical"/>
+
+                <Button
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:text="@string/registerButtonLabel"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@color/green"
+                        android:id="@+id/registerButton"
+                        android:layout_gravity="right|center_vertical"/>
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -2,7 +2,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:background="@drawable/login_240_320"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -11,82 +10,86 @@
             android:layout_height="fill_parent">
         <LinearLayout
                 android:orientation="vertical"
+                android:background="@drawable/login_240_320"
                 android:layout_width="fill_parent"
-                android:layout_gravity="bottom"
                 android:layout_height="fill_parent">
-            <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="300dp">
-                <EditText
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:text="New EditText"
-                        android:id="@+id/usernameEditText"
-                        android:layout_marginTop="115dp"
-                        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
 
-                <EditText android:layout_width="250dp"
-                          android:layout_height="wrap_content"
-                          android:password="true"
-                          android:text="New EditText"
-                          android:id="@+id/passwordEditText"
-                          android:layout_alignLeft="@+id/usernameEditText"
-                          android:layout_below="@+id/usernameEditText"/>
-                <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="@string/loginButtonLabel"
-                        android:id="@+id/loginButton"
-                        android:textColor="@color/white"
-                        android:background="@color/green"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:layout_alignLeft="@+id/usernameEditText"
-                        android:layout_below="@+id/passwordEditText"
-                        android:layout_alignRight="@+id/usernameEditText"/>
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:text="@string/orTextLabel"
-                        android:textSize="18dp"
-                        android:layout_marginTop="29dp" android:layout_below="@+id/loginButton"
-                        android:layout_centerHorizontal="true" android:id="@+id/textView"/>
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/recipesTextLabel"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        android:layout_below="@+id/textView" android:layout_centerHorizontal="true"/>
-            </RelativeLayout>
-
-            <RelativeLayout
+            <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/brown"
+                    android:layout_height="160dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+            <EditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/username_label"
+                    android:id="@+id/usernameEditText"/>
+
+            <EditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:password="true"
+                    android:id="@+id/passwordEditText"/>
+
+            <Button
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:text="@string/loginButtonLabel"
+                    android:id="@+id/loginButton"
+                    android:textColor="@color/white"
+                    android:background="@color/green"
+                    android:textSize="24dp"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/orTextLabel"
+                    android:layout_gravity="center"
+                    android:textSize="22dp"
+                    android:id="@+id/textView2"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recipesTextLabel"
+                    android:layout_gravity="center"
+                    android:textSize="22dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/textView"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+
+            <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
                     android:layout_gravity="left|center_vertical">
+
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/accountCreateTextLabel"
-                        android:textColor="@color/white"
-                        android:layout_alignParentLeft="true" android:layout_marginLeft="20dp"
-                        android:layout_centerVertical="true"/>
+                        android:layout_gravity="left|center_vertical"/>
+
                 <Button
-                        android:layout_width="90dp"
-                        android:layout_height="30dp"
+                        android:layout_width="60dp"
+                        android:layout_height="20dp"
                         android:text="@string/registerButtonLabel"
-                        android:textSize="16dp"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:background="@color/green"
                         android:id="@+id/registerButton"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="210dp"
-                        android:layout_centerVertical="true"/>
-            </RelativeLayout>
+                        android:layout_gravity="right|center_vertical"/>
+            </FrameLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

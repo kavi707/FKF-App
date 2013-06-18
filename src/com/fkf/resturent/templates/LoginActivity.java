@@ -9,7 +9,7 @@ import com.fkf.resturent.R;
 
 /**
  * Created by kavi on 6/16/13.
- * Hold the login view functionalities.
+ * Hold the login_layout view functionalities.
  * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class LoginActivity extends Activity {
