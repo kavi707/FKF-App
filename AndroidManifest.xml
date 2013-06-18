@@ -13,5 +13,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".templates.LoginActivity"/>
+        <activity android:name=".templates.RegisterActivity"/>
     </application>
 </manifest> 
