@@ -14,5 +14,6 @@
         </activity>
         <activity android:name=".templates.LoginActivity"/>
         <activity android:name=".templates.RegisterActivity"/>
+        <activity android:name=".templates.RecipesActivity"/>
     </application>
 </manifest> 

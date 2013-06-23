@@ -15,6 +15,7 @@ import com.fkf.resturent.R;
 public class LoginActivity extends Activity {
 
     private Button registerButton;
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,21 @@ public class LoginActivity extends Activity {
 
     private void setUpView() {
         registerButton = (Button) findViewById(R.id.registerButton);
+        loginButton = (Button) findViewById(R.id.loginButton);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
+            }
+        });
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
+                startActivity(recipesIntent);
             }
         });
     }
