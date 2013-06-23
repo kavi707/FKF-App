@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.fkf.resturent.R;
+import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +31,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     LinearLayout content, menu;
     ListView menuItemList;
     HorizontalScrollView horizontalScroll;
-    ImageButton btn1,btn2,btn3,btn4,btn5;
+
+    //yummy image buttons in the horizontal scroll
+    ImageButton firstYummyImageButton;
+    ImageButton secondYummyImageButton;
+    ImageButton thirdYummyImageButton;
+    ImageButton forthYummyImageButton;
+    ImageButton fifthYummyImageButton;
 
     private ArrayAdapter<String> menuItemListAdapter;
 
@@ -38,6 +45,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     TranslateAnimation slide;
     int marginX, animateFromX, animateToX = 0;
     boolean menuOpen = false;
+
+    private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,36 +60,53 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         ArrayList<String> menuItems = new ArrayList<String>();
 
         horizontalScroll = (HorizontalScrollView) findViewById(R.id.horizontalScroll);
-        btn1 = (ImageButton) findViewById(R.id.btn1);
-        btn2 = (ImageButton) findViewById(R.id.btn2);
-        btn3 = (ImageButton) findViewById(R.id.btn3);
-        btn4 = (ImageButton) findViewById(R.id.btn4);
-        btn5 = (ImageButton) findViewById(R.id.btn5);
+        firstYummyImageButton = (ImageButton) findViewById(R.id.firstYummyImageButton);
+        secondYummyImageButton = (ImageButton) findViewById(R.id.secondYummyImageButton);
+        thirdYummyImageButton = (ImageButton) findViewById(R.id.thirdYummyImageButton);
+        forthYummyImageButton = (ImageButton) findViewById(R.id.forthYummyImageButton);
+        fifthYummyImageButton = (ImageButton) findViewById(R.id.fifthYummyImageButton);
 
-        File imageFile = new File("/sdcard/fauzias/appicon.png");
-        Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
-        btn1.setImageBitmap(bitmap);
-        btn2.setImageBitmap(bitmap);
-        btn3.setImageBitmap(bitmap);
-        btn4.setImageBitmap(bitmap);
-        btn5.setImageBitmap(bitmap);
+
+        //Embedded images to yummys buttons
+        File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1.png");
+        Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
+        firstYummyImageButton.setImageBitmap(firstBitmap);
+
+        File secondImageFile = new File("/sdcard/fauzias/latest_yummys/icon_2.png");
+        Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
+        secondYummyImageButton.setImageBitmap(secondBitmap);
+
+        File thirdImageFile = new File("/sdcard/fauzias/latest_yummys/icon_3.png");
+        Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
+        thirdYummyImageButton.setImageBitmap(thirdBitmap);
+
+        File forthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_4.png");
+        Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
+        forthYummyImageButton.setImageBitmap(forthBitmap);
+
+        File fifthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_5.png");
+        Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
+        fifthYummyImageButton.setImageBitmap(fifthBitmap);
+
+
+
+        //add items to category menu list
+        menuItems = localDatabaseSQLiteOpenHelper.getAllCategories();
 
         menu = (LinearLayout)findViewById(R.id.menu);
-
         menuItemList = (ListView) findViewById(R.id.menu_item_list);
-        menuItems.add("One");
-        menuItems.add("Two");
-        menuItems.add("Three");
-
         menuItemListAdapter = new ArrayAdapter<String>(this, R.layout.menu_button_view, menuItems);
         menuItemList.setAdapter(menuItemListAdapter);
 
+
+        //content view
         content = (LinearLayout)findViewById(R.id.content);
         contentParams = (LinearLayout.LayoutParams)content.getLayoutParams();
         contentParams.width = getWindowManager().getDefaultDisplay().getWidth();	// Ensures constant width of content during menu sliding
         contentParams.leftMargin = -(menu.getLayoutParams().width);		// Position the content at the start of the screen
         content.setLayoutParams(contentParams);
 
+        //menu view button click actions
         menu_button = (ImageButton)findViewById(R.id.menu_button);
         menu_button.setOnClickListener(this);
 
@@ -91,7 +117,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                 ViewGroup.LayoutParams scrollParams = horizontalScroll.getLayoutParams();
 
-                if(itemContent.equals("One")){
+                if(itemContent.equals("Latest")){
                     scrollParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
                     horizontalScroll.setLayoutParams(scrollParams);
                 } else {

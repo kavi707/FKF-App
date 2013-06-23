@@ -103,11 +103,13 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="@string/accountCreateTextLabel"
+                        android:layout_marginLeft="15dp"
                         android:layout_gravity="left|center_vertical"/>
 
                 <Button
                         android:layout_width="140dp"
                         android:layout_height="40dp"
+                        android:layout_marginRight="15dp"
                         android:text="@string/registerButtonLabel"
                         android:textSize="20dp"
                         android:textStyle="bold"
