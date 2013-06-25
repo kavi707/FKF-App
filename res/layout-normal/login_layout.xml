@@ -77,8 +77,8 @@
                     android:text="@string/recipesTextLabel"
                     android:layout_gravity="center"
                     android:textSize="22dp"
-                    android:textColor="@color/white"
-                    android:id="@+id/textView"/>
+                    android:textColor="@color/light_blue"
+                    android:id="@+id/browsRecipesTextView"/>
 
             <TextView
                     android:layout_width="fill_parent"

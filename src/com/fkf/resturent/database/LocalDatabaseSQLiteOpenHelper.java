@@ -90,7 +90,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public ArrayList<String> getAllCategories(){
         ArrayList<String> categoryList = new ArrayList<String>();
-        categoryList.add("Latest");
+        categoryList.add("Latest"); //default item for view the latest yummys and other stuff
         localFKFDatabase = this.getWritableDatabase();
 
         try {

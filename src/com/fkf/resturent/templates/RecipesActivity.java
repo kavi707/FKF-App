@@ -1,6 +1,7 @@
 package com.fkf.resturent.templates;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -13,8 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fkf.resturent.R;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
@@ -27,10 +30,12 @@ import java.util.ArrayList;
  */
 public class RecipesActivity extends Activity implements View.OnClickListener{
 
-    ImageButton menu_button;
+    ImageButton menuButton, logoutButton;
     LinearLayout content, menu;
     ListView menuItemList;
     HorizontalScrollView horizontalScroll;
+    TextView loggedUserTextView;
+    ImageView profileImageView;
 
     //yummy image buttons in the horizontal scroll
     ImageButton firstYummyImageButton;
@@ -57,7 +62,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     }
 
     private void setUpViews() {
-        ArrayList<String> menuItems = new ArrayList<String>();
+        ArrayList<String> menuItems;
 
         horizontalScroll = (HorizontalScrollView) findViewById(R.id.horizontalScroll);
         firstYummyImageButton = (ImageButton) findViewById(R.id.firstYummyImageButton);
@@ -107,8 +112,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         content.setLayoutParams(contentParams);
 
         //menu view button click actions
-        menu_button = (ImageButton)findViewById(R.id.menu_button);
-        menu_button.setOnClickListener(this);
+        menuButton = (ImageButton)findViewById(R.id.menu_button);
+        menuButton.setOnClickListener(this);
 
         menuItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -126,6 +131,33 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 }
             }
         });
+
+        //logout button & profile image
+        logoutButton = (ImageButton) findViewById(R.id.logoutButton);
+        profileImageView = (ImageView) findViewById(R.id.userIconImageView);
+        if(LoginActivity.LOGGED_STATUS == 0) {
+            logoutButton.setVisibility(View.GONE);
+        } else if(LoginActivity.LOGGED_STATUS == 1){
+            //Embedded images to profile pic image view
+            File profilePicImage = new File("/sdcard/fauzias/user/profile_pic.png");
+            Bitmap profilePicBitmap = BitmapFactory.decodeFile(profilePicImage.getAbsolutePath());
+            profileImageView.setImageBitmap(profilePicBitmap);
+
+            logoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LoginActivity.LOGGED_STATUS = 0;
+                    LoginActivity.LOGGED_USER = null;
+                    Intent loginIntent = new Intent(RecipesActivity.this, LoginActivity.class);
+                    startActivity(loginIntent);
+                    finish();
+                }
+            });
+
+            //Logged user textView
+            loggedUserTextView = (TextView) findViewById(R.id.userNameTextView);
+            loggedUserTextView.setText("Welcome " + LoginActivity.LOGGED_USER);
+        }
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
