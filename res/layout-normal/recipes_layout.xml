@@ -73,12 +73,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dip"
                 android:background="#ffffffff" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray"
+            android:orientation="horizontal">
+            <ImageButton
+                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:src="@drawable/search"
+                    android:id="@+id/searchRecipeImageButton"
+                    android:layout_marginLeft="1dp"/>
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchRecipeEditText"
+                android:layout_marginTop="2dp"
+                android:hint="@string/search_recipe_label"/>
 
+        </LinearLayout>
         <LinearLayout
                 android:id="@+id/first_content"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:background="#ffdcdcdc"
+                android:background="@color/gray"
                 android:orientation="vertical" >
 
             <HorizontalScrollView
@@ -185,19 +203,6 @@
                         android:layout_height="fill_parent"
                         />
             </LinearLayout>
-
-            <!--<ScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent">
-
-            </ScrollView>-->
-
         </LinearLayout>
-
-        <!--<ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffdcdcdc" >
-        </ScrollView>-->
     </LinearLayout>
 </LinearLayout>
