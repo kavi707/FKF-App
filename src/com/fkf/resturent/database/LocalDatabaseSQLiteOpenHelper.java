@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.fkf.resturent.templates.LoginActivity;
+
 import java.util.ArrayList;
 
 /**
@@ -113,7 +115,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public ArrayList<String> getAllCategories(){
         ArrayList<String> categoryList = new ArrayList<String>();
-        categoryList.add("Latest"); //default item for view the latest yummys and other stuff
+        categoryList.add("Latest Yummys"); //default item for view the latest yummys and other stuff
+        //If user logged in to application
+        if(LoginActivity.LOGGED_STATUS == 1){
+            categoryList.add("My Favorites");
+        }
         localFKFDatabase = this.getWritableDatabase();
 
         try {

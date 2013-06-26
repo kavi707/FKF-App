@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- login_layout view string resources -->
-    <string name="app_name">Fauzias</string>
+    <string name="app_name">Fauzia\'s Kitchen Fun</string>
     <string name="loadingMessage">Application is loading. Please wait ...</string>
     <string name="loginButtonLabel">Login</string>
     <string name="orTextLabel">or</string>

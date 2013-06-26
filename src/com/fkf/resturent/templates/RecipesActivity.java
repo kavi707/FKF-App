@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.fkf.resturent.R;
@@ -34,6 +35,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ImageButton menuButton, logoutButton;
     LinearLayout content, menu;
     ListView menuItemList, recipeItemList;
+    ScrollView latestAndPopularScrollBar;
     HorizontalScrollView horizontalScroll;
     TextView loggedUserTextView;
     ImageView profileImageView;
@@ -67,6 +69,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         ArrayList<String> menuItems;
 
         horizontalScroll = (HorizontalScrollView) findViewById(R.id.horizontalScroll);
+        latestAndPopularScrollBar = (ScrollView) findViewById(R.id.latestAndPopularScrollBar);
+
         firstYummyImageButton = (ImageButton) findViewById(R.id.firstYummyImageButton);
         secondYummyImageButton = (ImageButton) findViewById(R.id.secondYummyImageButton);
         thirdYummyImageButton = (ImageButton) findViewById(R.id.thirdYummyImageButton);
@@ -122,14 +126,14 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String itemContent = (String) (menuItemList.getItemAtPosition(i));
 
-                ViewGroup.LayoutParams scrollParams = horizontalScroll.getLayoutParams();
+                ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
 
-                if(itemContent.equals("Latest")){
+                if(itemContent.equals("Latest Yummys")){
                     scrollParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                    horizontalScroll.setLayoutParams(scrollParams);
+                    latestAndPopularScrollBar.setLayoutParams(scrollParams);
                 } else {
                     scrollParams.height = 0;
-                    horizontalScroll.setLayoutParams(scrollParams);
+                    latestAndPopularScrollBar.setLayoutParams(scrollParams);
                 }
             }
         });
