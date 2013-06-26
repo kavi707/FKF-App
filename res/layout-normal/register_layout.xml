@@ -12,6 +12,7 @@
         <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
                 android:background="@drawable/login_320_480"
                 android:orientation="vertical">
 
@@ -45,6 +46,7 @@
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/password_label"
+                    android:password="true"
                     android:id="@+id/registerPasswordEditText"
                     android:layout_gravity="center"/>
 
