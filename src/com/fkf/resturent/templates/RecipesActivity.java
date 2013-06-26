@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fkf.resturent.R;
+import com.fkf.resturent.adapter.RecipeListAdapter;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 
 import java.io.File;
@@ -32,7 +33,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
     ImageButton menuButton, logoutButton;
     LinearLayout content, menu;
-    ListView menuItemList;
+    ListView menuItemList, recipeItemList;
     HorizontalScrollView horizontalScroll;
     TextView loggedUserTextView;
     ImageView profileImageView;
@@ -45,6 +46,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ImageButton fifthYummyImageButton;
 
     private ArrayAdapter<String> menuItemListAdapter;
+    private RecipeListAdapter recipeListAdapter;
 
     LinearLayout.LayoutParams contentParams;
     TranslateAnimation slide;
@@ -123,7 +125,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 ViewGroup.LayoutParams scrollParams = horizontalScroll.getLayoutParams();
 
                 if(itemContent.equals("Latest")){
-                    scrollParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    scrollParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                     horizontalScroll.setLayoutParams(scrollParams);
                 } else {
                     scrollParams.height = 0;
@@ -158,6 +160,11 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             loggedUserTextView = (TextView) findViewById(R.id.userNameTextView);
             loggedUserTextView.setText("Welcome " + LoginActivity.LOGGED_USER);
         }
+
+        //set recipes to the recipe item list
+        recipeItemList = (ListView) findViewById(R.id.recipeItemList);
+        recipeListAdapter = new RecipeListAdapter(localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(1), this);
+        recipeItemList.setAdapter(recipeListAdapter);
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {

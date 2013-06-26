@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String RECIPES_TABLE_NAME = "recipes";
     public static final String RECIPE_ID = "recipe_id";
     public static final String RECIPE_NAME = "recipe_name";
+    public static final String RECIPE_DESCRIPTION = "recipe_description";
     //category id must be on column of this recipe table
     public static final String ADDED_DATE = "added_date";
     public static final String RATINGS = "ratings";
@@ -55,11 +57,29 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         String createRecipesTableQuery = "create table " + RECIPES_TABLE_NAME + " ( " +
                 RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
                 RECIPE_NAME + " text, " +
+                RECIPE_DESCRIPTION + " text, " +
                 CATEGORY_ID + " int, " +
                 ADDED_DATE + " text, " +
                 RATINGS + " int " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
+
+        //temp testing purpose value adding
+        for (int i = 0; i < 3; i++) {
+            ContentValues values = new ContentValues();
+            values.put(RECIPE_NAME, "recipe name - " + i);
+            values.put(RECIPE_DESCRIPTION, "recipe des - " + i);
+            values.put(CATEGORY_ID, 1);
+            values.put(ADDED_DATE, "26-06-2013");
+            values.put(RATINGS, i);
+
+            try {
+                sqLiteDatabase.insert(RECIPES_TABLE_NAME, null, values);
+            } catch (SQLiteException ex) {
+                throw ex;
+            }
+        }
+        // temp block
     }
 
     /**
@@ -87,7 +107,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         // temp block
     }
 
-
+    /**
+     * get all recipe categories for the item menu
+     * @return
+     */
     public ArrayList<String> getAllCategories(){
         ArrayList<String> categoryList = new ArrayList<String>();
         categoryList.add("Latest"); //default item for view the latest yummys and other stuff
@@ -111,5 +134,45 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         }
 
         return categoryList;
+    }
+
+    public ArrayList<Recipe> getRecipesFromCategoryId(int categoryId) {
+        ArrayList<Recipe> selectedRecipeList = new ArrayList<Recipe>();
+        localFKFDatabase = this.getWritableDatabase();
+
+        try {
+            String grepRecipeListQry = "select * from " + RECIPES_TABLE_NAME + " where " + CATEGORY_ID + " = " + categoryId;
+            Cursor recipeCursor = localFKFDatabase.rawQuery(grepRecipeListQry, null);
+
+            recipeCursor.moveToFirst();
+            Recipe recipe;
+
+            if(!recipeCursor.isAfterLast()) {
+                do {
+                    int recipeId = recipeCursor.getInt(0);
+                    String recipeName = recipeCursor.getString(1);
+                    String recipeDescription = recipeCursor.getString(2);
+                    int recipeCategoryId = recipeCursor.getInt(3);
+                    String recipeAddedDate = recipeCursor.getString(4);
+                    int recipeRatings = recipeCursor.getInt(5);
+
+                    recipe = new Recipe();
+
+                    recipe.setId(recipeId);
+                    recipe.setName(recipeName);
+                    recipe.setDescription(recipeDescription);
+                    recipe.setCategoryId(recipeCategoryId);
+                    recipe.setAddedDate(recipeAddedDate);
+                    recipe.setRatings(recipeRatings);
+
+                    selectedRecipeList.add(recipe);
+                } while (recipeCursor.moveToNext());
+            }
+            recipeCursor.close();
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+
+        return selectedRecipeList;
     }
 }
