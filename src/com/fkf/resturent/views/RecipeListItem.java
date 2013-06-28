@@ -12,6 +12,8 @@ import com.fkf.resturent.database.Recipe;
 
 /**
  * Created by kavi on 6/26/13.
+ * Object for recipes_list_item in recipes_layout.xml recipes list
+ * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class RecipeListItem extends LinearLayout {
 

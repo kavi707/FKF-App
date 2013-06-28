@@ -2,6 +2,8 @@ package com.fkf.resturent.database;
 
 /**
  * Created by kavi on 6/26/13.
+ * Recipe object for recipes table in sqlite database
+ * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class Recipe {
 

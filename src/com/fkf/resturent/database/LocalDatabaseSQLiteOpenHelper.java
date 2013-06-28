@@ -14,6 +14,10 @@ import java.util.ArrayList;
 
 /**
  * Created by kavi on 6/23/13.
+ * local sqlite database using for application offline functioning
+ * create tables,
+ * data insert/delete/update cases
+ * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 

@@ -9,6 +9,7 @@ import com.fkf.resturent.templates.LoginActivity;
 
 /**
  * Holding the loading ui
+ * main.xml Activity class
  * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class WelcomeActivity extends Activity {

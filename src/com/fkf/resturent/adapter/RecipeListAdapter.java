@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Created by kavi on 6/26/13.
+ * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class RecipeListAdapter extends BaseAdapter{
 

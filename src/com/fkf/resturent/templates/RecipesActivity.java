@@ -29,6 +29,9 @@ import java.util.ArrayList;
 
 /**
  * Created by kavi on 6/22/13.
+ * Hold the main menu ui for logged user and un-logged user.
+ * recipes_layout.xml Activity class
+ * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class RecipesActivity extends Activity implements View.OnClickListener{
 
