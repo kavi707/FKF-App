@@ -18,4 +18,6 @@
 
     <!-- recipes layout string resources -->
     <string name="search_recipe_label">search your recipe</string>
+    <string name="latestYummyLabel">Latest Yummys</string>
+    <string name="popularYummyLabel">Popular Yummys</string>
 </resources>

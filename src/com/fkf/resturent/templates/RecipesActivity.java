@@ -1,6 +1,7 @@
 package com.fkf.resturent.templates;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import com.fkf.resturent.R;
 import com.fkf.resturent.adapter.RecipeListAdapter;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
+import com.fkf.resturent.database.Recipe;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ListView menuItemList, recipeItemList;
     ScrollView latestAndPopularScrollBar;
     HorizontalScrollView horizontalScroll;
-    TextView loggedUserTextView;
+    TextView loggedUserTextView, yummyCategoryNameTextView;
     ImageView profileImageView;
 
     //yummy image buttons in the horizontal scroll
@@ -52,6 +54,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
     private ArrayAdapter<String> menuItemListAdapter;
     private RecipeListAdapter recipeListAdapter;
+    private ArrayList<Recipe> recipeList;
+    private Context context = this;
 
     LinearLayout.LayoutParams contentParams;
     TranslateAnimation slide;
@@ -124,6 +128,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         menuButton = (ImageButton)findViewById(R.id.menu_button);
         menuButton.setOnClickListener(this);
 
+        //yummy list view for selected yummy category
+        recipeItemList = (ListView) findViewById(R.id.recipeItemList);
+
+        //selected yummy's category name textView
+        yummyCategoryNameTextView = (TextView) findViewById(R.id.yummyCategoryNameTextView);
+
+        //selected yummy category list view
         menuItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -137,6 +148,19 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 } else {
                     scrollParams.height = 0;
                     latestAndPopularScrollBar.setLayoutParams(scrollParams);
+
+                    if(itemContent.equals("My Favorites")) {
+                        yummyCategoryNameTextView.setText("My Favorite yummys");
+                        recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(1); //need to get my favorite yummys from api
+                    } else {
+
+                        String[] itemContentArray = itemContent.split(" ");
+                        yummyCategoryNameTextView.setText(itemContentArray[0]);
+                        recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(Integer.parseInt(itemContentArray[2]));
+                    }
+
+                    recipeListAdapter = new RecipeListAdapter(recipeList, context);
+                    recipeItemList.setAdapter(recipeListAdapter);
                 }
             }
         });
@@ -169,7 +193,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         }
 
         //set recipes to the recipe item list
-        recipeItemList = (ListView) findViewById(R.id.recipeItemList);
+
         recipeListAdapter = new RecipeListAdapter(localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(1), this);
         recipeItemList.setAdapter(recipeListAdapter);
     }

@@ -122,6 +122,13 @@
                     android:background="@color/gray"
                     android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/latestYummyLabel"
+                    android:textStyle="bold"/>
+
                 <HorizontalScrollView
                         android:id="@+id/horizontalScroll"
                         android:layout_width="wrap_content"
@@ -224,6 +231,13 @@
                         </LinearLayout>
                     </LinearLayout>
                 </HorizontalScrollView>
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/popularYummyLabel"
+                        android:textStyle="bold"/>
 
                 <!--popular yummys : yummy 1-->
                 <LinearLayout
@@ -397,6 +411,12 @@
                 android:layout_height="fill_parent"
                 android:background="@color/gray"
                 android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/yummyCategoryNameTextView"/>
 
             <ListView
                     android:id="@+id/recipeItemList"
