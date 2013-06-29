@@ -24,7 +24,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:focusableInTouchMode="true"
-                    android:hint="@string/username_label"
+                    android:hint="@string/usernameLabel"
                     android:id="@+id/usernameEditText"/>
 
             <EditText
@@ -33,7 +33,7 @@
                     android:layout_gravity="center"
                     android:focusableInTouchMode="true"
                     android:password="true"
-                    android:hint="@string/password_label"
+                    android:hint="@string/passwordLabel"
                     android:id="@+id/passwordEditText"/>
 
             <Button

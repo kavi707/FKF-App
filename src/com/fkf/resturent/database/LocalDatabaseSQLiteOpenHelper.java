@@ -119,10 +119,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public ArrayList<String> getAllCategories(){
         ArrayList<String> categoryList = new ArrayList<String>();
-        categoryList.add("Latest Yummys"); //default item for view the latest yummys and other stuff
+        categoryList.add(":Latest Yummys"); //default item for view the latest yummys and other stuff
         //If user logged in to application
         if(LoginActivity.LOGGED_STATUS == 1){
-            categoryList.add("My Favorites");
+            categoryList.add(":My Favorites");
         }
         localFKFDatabase = this.getWritableDatabase();
 
@@ -134,8 +134,9 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
             if(!categoryCursor.isAfterLast()) {
                 do {
+                    int categoryId = categoryCursor.getInt(0);
                     String categoryName = categoryCursor.getString(1);
-                    categoryList.add(categoryName);
+                    categoryList.add(categoryId+ ":" + categoryName);
                 } while (categoryCursor.moveToNext());
             }
             categoryCursor.close();
@@ -153,6 +154,46 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         try {
             String grepRecipeListQry = "select * from " + RECIPES_TABLE_NAME + " where " + CATEGORY_ID + " = " + categoryId;
             Cursor recipeCursor = localFKFDatabase.rawQuery(grepRecipeListQry, null);
+
+            recipeCursor.moveToFirst();
+            Recipe recipe;
+
+            if(!recipeCursor.isAfterLast()) {
+                do {
+                    int recipeId = recipeCursor.getInt(0);
+                    String recipeName = recipeCursor.getString(1);
+                    String recipeDescription = recipeCursor.getString(2);
+                    int recipeCategoryId = recipeCursor.getInt(3);
+                    String recipeAddedDate = recipeCursor.getString(4);
+                    int recipeRatings = recipeCursor.getInt(5);
+
+                    recipe = new Recipe();
+
+                    recipe.setId(recipeId);
+                    recipe.setName(recipeName);
+                    recipe.setDescription(recipeDescription);
+                    recipe.setCategoryId(recipeCategoryId);
+                    recipe.setAddedDate(recipeAddedDate);
+                    recipe.setRatings(recipeRatings);
+
+                    selectedRecipeList.add(recipe);
+                } while (recipeCursor.moveToNext());
+            }
+            recipeCursor.close();
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+
+        return selectedRecipeList;
+    }
+
+    public ArrayList<Recipe> getRecipeFromRecipeId(int selectedRecipeId) {
+        ArrayList<Recipe> selectedRecipeList = new ArrayList<Recipe>();
+        localFKFDatabase = this.getWritableDatabase();
+
+        try {
+            String grepRecipeQry = "select * from " + RECIPES_TABLE_NAME + " where " + RECIPE_ID + " = " + selectedRecipeId;
+            Cursor recipeCursor = localFKFDatabase.rawQuery(grepRecipeQry, null);
 
             recipeCursor.moveToFirst();
             Recipe recipe;

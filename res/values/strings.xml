@@ -8,8 +8,8 @@
     <string name="recipesTextLabel">Browse Recipes</string>
     <string name="accountCreateTextLabel">Don\'t you have an account?</string>
     <string name="registerButtonLabel">Register</string>
-    <string name="username_label">Username</string>
-    <string name="password_label">Password</string>
+    <string name="usernameLabel">Username</string>
+    <string name="passwordLabel">Password</string>
 
     <!-- register view string resources -->
     <string name="firstNameLabel">First Name</string>
@@ -20,4 +20,7 @@
     <string name="search_recipe_label">search your recipe</string>
     <string name="latestYummyLabel">Latest Yummys</string>
     <string name="popularYummyLabel">Popular Yummys</string>
+
+    <!-- single recipe layout string resources -->
+    <string name="singleRecipeContentLabel">Recipe Content</string>
 </resources>

@@ -33,13 +33,13 @@
             <EditText
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/username_label"
+                    android:hint="@string/usernameLabel"
                     android:id="@+id/registerUserNameEditText"
                     android:layout_gravity="center"/>
             <EditText
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/password_label"
+                    android:hint="@string/passwordLabel"
                     android:password="true"
                     android:id="@+id/registerPasswordEditText"
                     android:layout_gravity="center"/>
