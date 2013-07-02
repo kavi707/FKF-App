@@ -1,8 +1,15 @@
 package com.fkf.resturent;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.fkf.resturent.templates.LoginActivity;
@@ -10,6 +17,7 @@ import com.fkf.resturent.templates.LoginActivity;
 /**
  * Holding the loading ui
  * main.xml Activity class
+ *
  * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class WelcomeActivity extends Activity {
@@ -22,6 +30,11 @@ public class WelcomeActivity extends Activity {
     private ProgressBar appLoadingProgressBar;
     private TextView appLoadingProgressTitleTextView;
 
+    final Context context = this;
+    private Handler mHandler;
+
+    private AlertDialog messageBalloonAlertDialog;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,25 +46,90 @@ public class WelcomeActivity extends Activity {
     private void setUpViews() {
 
         appLoadingProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
+        appLoadingProgressTitleTextView = (TextView) findViewById(R.id.progressBarTitleTextView);
+        mHandler = new Handler();
 
         final Thread timerThread = new Thread() {
             @Override
             public void run() {
                 mbActive = true;
+                int progress = 0;
 
                 try {
                     int waited = 0;
-                    while(mbActive && (waited < TIMER_RUNTIME)) {
+                    while (mbActive && (waited < TIMER_RUNTIME)) {
                         sleep(200);
-                        if(mbActive) {
+                        if (mbActive) {
                             waited += 200;
-                            updateProgress(waited);
+                            progress = updateProgress(waited);
+
+                            switch (progress) {
+                                case 0:
+                                    appLoadingProgressTitleTextView.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            appLoadingProgressTitleTextView.setText("Loading configurations ...");
+                                        }
+                                    });
+                                    break;
+                                case 20:
+                                    appLoadingProgressTitleTextView.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            appLoadingProgressTitleTextView.setText("Loading the application templates");
+                                        }
+                                    });
+                                    break;
+                                case 50:
+                                    appLoadingProgressTitleTextView.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            appLoadingProgressTitleTextView.setText("Check the local database connections ...");
+                                        }
+                                    });
+                                    break;
+                                case 80:
+                                    appLoadingProgressTitleTextView.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            appLoadingProgressTitleTextView.setText("Check the Internet connection ...");
+                                        }
+                                    });
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (isOnline()) {
+                                                mbActive = false;
+                                                messageBalloonAlertDialog = new AlertDialog.Builder(context)
+                                                        .setTitle(R.string.warning)
+                                                        .setMessage("Internet connection is not available. Do you need to continue offline?")
+                                                        .setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                                appLoadingProgressBar.setProgress(100);
+                                                                onContinue();
+                                                            }
+                                                        })
+                                                        .setNegativeButton(R.string.no, new AlertDialog.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                                finish();
+                                                            }
+                                                        }).create();
+                                                messageBalloonAlertDialog.show();
+                                            }
+                                        }
+                                    });
+                                    break;
+                                case 100:
+                                    onContinue();
+                                    break;
+                            }
+                            appLoadingProgressBar.setProgress(progress);
                         }
                     }
                 } catch (InterruptedException e) {
                     // do nothing
-                } finally {
-                    onContinue();
                 }
             }
         };
@@ -63,17 +141,30 @@ public class WelcomeActivity extends Activity {
         super.onDestroy();
     }
 
-    public void updateProgress(final int timePassed) {
-        if(null != appLoadingProgressBar) {
+    public int updateProgress(final int timePassed) {
+        if (null != appLoadingProgressBar) {
             // Ignore rounding error here
             final int progress = appLoadingProgressBar.getMax() * timePassed / TIMER_RUNTIME;
-            appLoadingProgressBar.setProgress(progress);
+            return progress;
         }
+        return 0;
     }
 
     public void onContinue() {
         Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
         startActivity(loginIntent);
         finish();
+    }
+
+    private boolean isOnline() {
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- common string resources -->
+    <string name="success">Success</string>
+    <string name="warning">Warning</string>
+    <string name="error">Error</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">Ok</string>
+
     <!-- login_layout view string resources -->
     <string name="app_name">Fauzia\'s Kitchen Fun</string>
     <string name="loadingMessage">Application is loading. Please wait ...</string>
