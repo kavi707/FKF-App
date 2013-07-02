@@ -5,13 +5,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import com.fkf.resturent.services.ActivityUserPermissionServices;
 import com.fkf.resturent.templates.LoginActivity;
 
 /**
@@ -34,6 +32,8 @@ public class WelcomeActivity extends Activity {
     private Handler mHandler;
 
     private AlertDialog messageBalloonAlertDialog;
+
+    private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,7 +98,8 @@ public class WelcomeActivity extends Activity {
                                     mHandler.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            if (isOnline()) {
+                                            //check the internet connection for the device
+                                            if (!userPermissionServices.isOnline(WelcomeActivity.this)) {
                                                 mbActive = false;
                                                 messageBalloonAlertDialog = new AlertDialog.Builder(context)
                                                         .setTitle(R.string.warning)
@@ -141,7 +142,7 @@ public class WelcomeActivity extends Activity {
         super.onDestroy();
     }
 
-    public int updateProgress(final int timePassed) {
+    private int updateProgress(final int timePassed) {
         if (null != appLoadingProgressBar) {
             // Ignore rounding error here
             final int progress = appLoadingProgressBar.getMax() * timePassed / TIMER_RUNTIME;
@@ -150,21 +151,9 @@ public class WelcomeActivity extends Activity {
         return 0;
     }
 
-    public void onContinue() {
+    private void onContinue() {
         Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
         startActivity(loginIntent);
         finish();
-    }
-
-    private boolean isOnline() {
-
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-
-        return false;
     }
 }
