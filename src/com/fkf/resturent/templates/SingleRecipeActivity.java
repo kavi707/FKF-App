@@ -2,6 +2,7 @@ package com.fkf.resturent.templates;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -42,16 +43,20 @@ public class SingleRecipeActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         int selectedRecipeId = extras.getInt("SELECTED_RECIPE_ID");
 
-        ArrayList<Recipe> selectedRecipes = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeId(selectedRecipeId);
-        if(selectedRecipes.size() != 1) {
-            // Error message abt data querying
-        } else {
-            selectedRecipe = selectedRecipes.get(0);
+        if(selectedRecipeId < 0) {
 
-            singleRecipeNameTextView.setText(selectedRecipe.getName());
-            singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
-            singleRecipeDescriptionTextView.setText(selectedRecipe.getDescription());
-            singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " contents");
+        } else {
+            ArrayList<Recipe> selectedRecipes = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeId(selectedRecipeId);
+            if(selectedRecipes.size() != 1) {
+                // Error message abt data querying
+            } else {
+                selectedRecipe = selectedRecipes.get(0);
+
+                singleRecipeNameTextView.setText(selectedRecipe.getName());
+                singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
+                singleRecipeDescriptionTextView.setText(selectedRecipe.getDescription());
+                singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " contents");
+            }
         }
     }
 }

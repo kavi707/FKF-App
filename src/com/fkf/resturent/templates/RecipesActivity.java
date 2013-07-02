@@ -40,7 +40,7 @@ import java.util.ArrayList;
 public class RecipesActivity extends Activity implements View.OnClickListener{
 
     ImageButton menuButton, logoutButton;
-    LinearLayout content, menu;
+    LinearLayout content, menu, firstPopularYummyLinear, secondPopularYummyLinear, thirdPopularYummyLinear;
     ListView menuItemList, recipeItemList;
     ScrollView latestAndPopularScrollBar;
     HorizontalScrollView horizontalScroll;
@@ -107,6 +107,85 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         File fifthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_5.png");
         Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
         fifthYummyImageButton.setImageBitmap(fifthBitmap);
+
+
+        //latest yummys image button click events
+        firstYummyImageButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -1);
+                startActivity(singleRecipeIntent);
+            }
+        });
+
+        secondYummyImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -2);
+                startActivity(singleRecipeIntent);
+            }
+        });
+
+        thirdYummyImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -3);
+                startActivity(singleRecipeIntent);
+            }
+        });
+
+        forthYummyImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -4);
+                startActivity(singleRecipeIntent);
+            }
+        });
+
+        fifthYummyImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -5);
+                startActivity(singleRecipeIntent);
+            }
+        });
+
+
+        //popular yummys linear layout click events
+        firstPopularYummyLinear = (LinearLayout) findViewById(R.id.firstPopularYummyLinear);
+        firstPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -6);
+                startActivity(singleRecipeIntent);
+            }
+        });
+
+        secondPopularYummyLinear = (LinearLayout) findViewById(R.id.secondPopularYummyLinear);
+        secondPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -7);
+                startActivity(singleRecipeIntent);
+            }
+        });
+
+        thirdPopularYummyLinear = (LinearLayout) findViewById(R.id.thirdPopularYummyLinear);
+        thirdPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -8);
+                startActivity(singleRecipeIntent);
+            }
+        });
 
 
 

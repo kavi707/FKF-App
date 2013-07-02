@@ -239,8 +239,15 @@
                         android:text="@string/popularYummyLabel"
                         android:textStyle="bold"/>
 
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:background="@color/black"
+                        android:layout_height="2dp"/>
+
                 <!--popular yummys : yummy 1-->
                 <LinearLayout
+                        android:id="@+id/firstPopularYummyLinear"
+                        android:duplicateParentState="true"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:orientation="horizontal">
@@ -294,8 +301,15 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:background="@color/black"
+                        android:layout_height="2dp"/>
+
                 <!-- popular yummys : yummy 2 -->
                 <LinearLayout
+                        android:id="@+id/secondPopularYummyLinear"
+                        android:duplicateParentState="true"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:orientation="horizontal">
@@ -349,8 +363,15 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:background="@color/black"
+                        android:layout_height="2dp"/>
+
                 <!-- popular yummys : yummy 3 -->
                 <LinearLayout
+                        android:id="@+id/thirdPopularYummyLinear"
+                        android:duplicateParentState="true"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:orientation="horizontal">
