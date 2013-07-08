@@ -2,11 +2,13 @@ package com.fkf.resturent;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.fkf.resturent.services.ActivityUserPermissionServices;
@@ -109,6 +111,13 @@ public class WelcomeActivity extends Activity {
                                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                                 appLoadingProgressBar.setProgress(100);
                                                                 onContinue();
+                                                            }
+                                                        })
+                                                        .setNeutralButton("settings", new AlertDialog.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                                context.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+                                                                finish();
                                                             }
                                                         })
                                                         .setNegativeButton(R.string.no, new AlertDialog.OnClickListener() {
