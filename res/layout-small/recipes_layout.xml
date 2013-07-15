@@ -242,7 +242,7 @@
                 <TextView
                         android:layout_width="fill_parent"
                         android:background="@color/black"
-                        android:layout_height="2dp"/>
+                        android:layout_height="1dp"/>
 
                 <!--popular yummys : yummy 1-->
                 <LinearLayout
@@ -304,7 +304,7 @@
                 <TextView
                         android:layout_width="fill_parent"
                         android:background="@color/black"
-                        android:layout_height="2dp"/>
+                        android:layout_height="1dp"/>
 
                 <!-- popular yummys : yummy 2 -->
                 <LinearLayout
@@ -366,7 +366,7 @@
                 <TextView
                         android:layout_width="fill_parent"
                         android:background="@color/black"
-                        android:layout_height="2dp"/>
+                        android:layout_height="1dp"/>
 
                 <!-- popular yummys : yummy 3 -->
                 <LinearLayout
