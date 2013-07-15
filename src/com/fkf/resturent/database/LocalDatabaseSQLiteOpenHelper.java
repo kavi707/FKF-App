@@ -226,4 +226,38 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
         return selectedRecipeList;
     }
+
+    /**
+     * save the given recipe from caller function
+     * @param recipe
+     */
+    public void saveRecipe(Recipe recipe) {
+
+        localFKFDatabase = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(RECIPE_NAME, recipe.getName());
+        values.put(RECIPE_DESCRIPTION, recipe.getDescription());
+        values.put(CATEGORY_ID, recipe.getCategoryId());
+        values.put(ADDED_DATE, "26-06-2013");
+        values.put(RATINGS, recipe.getRatings());
+
+        try {
+            localFKFDatabase.insert(RECIPES_TABLE_NAME, null, values);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
+
+    /**
+     * delete all recipes in local database
+     */
+    public void deleteAllRecipes() {
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            localFKFDatabase.delete(RECIPES_TABLE_NAME, null, null);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
 }

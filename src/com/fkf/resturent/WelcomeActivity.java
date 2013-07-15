@@ -127,6 +127,8 @@ public class WelcomeActivity extends Activity {
                                                             }
                                                         }).create();
                                                 messageBalloonAlertDialog.show();
+                                            } else {
+                                                userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
                                             }
                                         }
                                     });

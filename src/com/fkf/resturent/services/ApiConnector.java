@@ -1,6 +1,7 @@
 package com.fkf.resturent.services;
 
 import android.util.Log;
+import com.fkf.resturent.database.Recipe;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -27,7 +28,15 @@ import java.util.List;
  */
 public class ApiConnector {
 
-    public void sendHTTPPost(){
+    public ArrayList<Recipe> getRecipesFromServer() {
+        //initialize json object according to request
+        JSONObject reqJSONObject = new JSONObject();
+
+        sendHTTPPost(reqJSONObject);
+        return null;
+    }
+
+    private void sendHTTPPost(JSONObject req){
 
         HttpClient client = new DefaultHttpClient();
         HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000);
