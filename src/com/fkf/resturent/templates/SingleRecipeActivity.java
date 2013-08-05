@@ -3,12 +3,14 @@ package com.fkf.resturent.templates;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.fkf.resturent.R;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
+import com.fkf.resturent.services.image.loader.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ public class SingleRecipeActivity extends Activity {
     private RatingBar singleRecipeRatingBar;
     private TextView singleRecipeDescriptionTextView;
     private TextView singleRecipeContentLabelTextView;
+    private ImageView singleRecipeImageViewer;
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
     private Recipe selectedRecipe;
@@ -39,6 +42,7 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeRatingBar = (RatingBar) findViewById(R.id.singleRecipeRatingBar);
         singleRecipeDescriptionTextView = (TextView) findViewById(R.id.singleRecipeDescriptionTextView);
         singleRecipeContentLabelTextView = (TextView) findViewById(R.id.singleRecipeContentLabelTextView);
+        singleRecipeImageViewer = (ImageView) findViewById(R.id.singleRecipeImageView);
 
         Bundle extras = getIntent().getExtras();
         int selectedRecipeId = extras.getInt("SELECTED_RECIPE_ID");
@@ -56,6 +60,18 @@ public class SingleRecipeActivity extends Activity {
                 singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
                 singleRecipeDescriptionTextView.setText(selectedRecipe.getDescription());
                 singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " contents");
+
+                String imageUrl = "http://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Small_Flag_of_the_United_Nations_ZP.svg/488px-Small_Flag_of_the_United_Nations_ZP.svg.png";
+//                String imageUrl = selectedRecipe.getImageUrl();
+//                Log.d("url", imageUrl);
+                int loader = R.drawable.default_recipe_image;
+
+                try {
+                    ImageLoader imageLoader = new ImageLoader(getApplicationContext());
+                    imageLoader.DisplayImage(imageUrl, loader, singleRecipeImageViewer);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
