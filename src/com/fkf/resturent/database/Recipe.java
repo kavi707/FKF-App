@@ -13,6 +13,7 @@ public class Recipe {
     private int categoryId;
     private String addedDate;
     private int ratings;
+    private String imageUrl;
 
     public int getId() {
         return id;
@@ -60,5 +61,13 @@ public class Recipe {
 
     public void setRatings(int ratings) {
         this.ratings = ratings;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

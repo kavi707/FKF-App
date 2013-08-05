@@ -34,6 +34,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     //category id must be on column of this recipe table
     public static final String ADDED_DATE = "added_date";
     public static final String RATINGS = "ratings";
+    public static final String IMAGE_URL = "image_url";
 
     //category table and columns
     public static final String CATEGORY_TABLE_NAME = "categories";
@@ -66,7 +67,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 RECIPE_DESCRIPTION + " text, " +
                 CATEGORY_ID + " int, " +
                 ADDED_DATE + " text, " +
-                RATINGS + " int " +
+                RATINGS + " int, " +
+                IMAGE_URL + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
 
@@ -78,6 +80,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             values.put(CATEGORY_ID, 1);
             values.put(ADDED_DATE, "26-06-2013");
             values.put(RATINGS, i);
+            values.put(IMAGE_URL, "http://news.cnet.com/i/bto/20080112/small_car.jpg");
 
             try {
                 sqLiteDatabase.insert(RECIPES_TABLE_NAME, null, values);
@@ -166,6 +169,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     int recipeCategoryId = recipeCursor.getInt(3);
                     String recipeAddedDate = recipeCursor.getString(4);
                     int recipeRatings = recipeCursor.getInt(5);
+                    String imageUrl = recipeCursor.getString(6);
 
                     recipe = new Recipe();
 
@@ -175,6 +179,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setCategoryId(recipeCategoryId);
                     recipe.setAddedDate(recipeAddedDate);
                     recipe.setRatings(recipeRatings);
+                    recipe.setImageUrl(imageUrl);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -183,6 +188,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         } catch (SQLiteException ex) {
             throw ex;
         }
+
+        Log.d("selected list count ", String.valueOf(selectedRecipeList.size()));
 
         return selectedRecipeList;
     }
@@ -206,6 +213,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     int recipeCategoryId = recipeCursor.getInt(3);
                     String recipeAddedDate = recipeCursor.getString(4);
                     int recipeRatings = recipeCursor.getInt(5);
+                    String recipeImageUrl = recipeCursor.getString(6);
 
                     recipe = new Recipe();
 
@@ -215,6 +223,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setCategoryId(recipeCategoryId);
                     recipe.setAddedDate(recipeAddedDate);
                     recipe.setRatings(recipeRatings);
+                    recipe.setImageUrl(recipeImageUrl);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -241,6 +250,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(CATEGORY_ID, recipe.getCategoryId());
         values.put(ADDED_DATE, "26-06-2013");
         values.put(RATINGS, recipe.getRatings());
+        values.put(IMAGE_URL, recipe.getImageUrl());
 
         try {
             localFKFDatabase.insert(RECIPES_TABLE_NAME, null, values);
@@ -258,6 +268,40 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             localFKFDatabase.delete(RECIPES_TABLE_NAME, null, null);
         } catch (SQLiteException ex) {
             throw ex;
+        }
+    }
+
+    /**
+     * this method is for testing purposes. check the recipes in local database.
+     */
+    public void getAllRecipes() {
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            String grepRecipeQry = "select * from " + RECIPES_TABLE_NAME;
+            Cursor recipeCursor = localFKFDatabase.rawQuery(grepRecipeQry, null);
+
+            recipeCursor.moveToFirst();
+
+            if(!recipeCursor.isAfterLast()) {
+                do {
+                    int recipeId = recipeCursor.getInt(0);
+                    Log.d("id", String.valueOf(recipeId));
+                    String recipeName = recipeCursor.getString(1);
+                    Log.d("recipeName", recipeName);
+                    String recipeDescription = recipeCursor.getString(2);
+                    Log.d("recipeDes", recipeDescription);
+                    int recipeCategoryId = recipeCursor.getInt(3);
+                    Log.d("recipeCategory", String.valueOf(recipeCategoryId));
+                    String recipeAddedDate = recipeCursor.getString(4);
+                    Log.d("recipeAddDate", recipeAddedDate);
+                    int recipeRatings = recipeCursor.getInt(5);
+                    Log.d("recipeRatings", String.valueOf(recipeRatings));
+                    String recipeImageUrl = recipeCursor.getString(6);
+                    Log.d("url", recipeImageUrl);
+                } while (recipeCursor.moveToNext());
+            }
+        } catch (SQLiteException ex) {
+
         }
     }
 }

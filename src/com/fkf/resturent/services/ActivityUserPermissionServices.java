@@ -61,8 +61,8 @@ public class ActivityUserPermissionServices {
         recipe1.setCategoryId(2);
         recipe1.setRatings(3);
 
-        newRecipes.add(recipe);
-        newRecipes.add(recipe1);
+        /*newRecipes.add(recipe);
+        newRecipes.add(recipe1);*/
         //temp data
 
         if(newRecipes.size() != 0) {

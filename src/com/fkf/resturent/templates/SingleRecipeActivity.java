@@ -61,9 +61,7 @@ public class SingleRecipeActivity extends Activity {
                 singleRecipeDescriptionTextView.setText(selectedRecipe.getDescription());
                 singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " contents");
 
-                String imageUrl = "http://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Small_Flag_of_the_United_Nations_ZP.svg/488px-Small_Flag_of_the_United_Nations_ZP.svg.png";
-//                String imageUrl = selectedRecipe.getImageUrl();
-//                Log.d("url", imageUrl);
+                String imageUrl = selectedRecipe.getImageUrl();
                 int loader = R.drawable.default_recipe_image;
 
                 try {
