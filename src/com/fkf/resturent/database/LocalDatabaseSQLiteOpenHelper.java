@@ -236,6 +236,47 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return selectedRecipeList;
     }
 
+    public ArrayList<Recipe> searchRecipesFromGivenRecipeName(String key) {
+        ArrayList<Recipe> selectedRecipeList = new ArrayList<Recipe>();
+        localFKFDatabase = this.getWritableDatabase();
+
+        try {
+            String qry = "SELECT * FROM " + RECIPES_TABLE_NAME + " WHERE " + RECIPE_NAME + " LIKE '%" + key + "%'";
+            Cursor recipeCursor = localFKFDatabase.rawQuery(qry, null);
+
+            recipeCursor.moveToFirst();
+            Recipe recipe;
+
+            if(!recipeCursor.isAfterLast()) {
+                do {
+                    int recipeId = recipeCursor.getInt(0);
+                    String recipeName = recipeCursor.getString(1);
+                    String recipeDescription = recipeCursor.getString(2);
+                    int recipeCategoryId = recipeCursor.getInt(3);
+                    String recipeAddedDate = recipeCursor.getString(4);
+                    int recipeRatings = recipeCursor.getInt(5);
+                    String recipeImageUrl = recipeCursor.getString(6);
+
+                    recipe = new Recipe();
+
+                    recipe.setId(recipeId);
+                    recipe.setName(recipeName);
+                    recipe.setDescription(recipeDescription);
+                    recipe.setCategoryId(recipeCategoryId);
+                    recipe.setAddedDate(recipeAddedDate);
+                    recipe.setRatings(recipeRatings);
+                    recipe.setImageUrl(recipeImageUrl);
+
+                    selectedRecipeList.add(recipe);
+                } while (recipeCursor.moveToNext());
+            }
+            recipeCursor.close();
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+        return selectedRecipeList;
+    }
+
     /**
      * save the given recipe from caller function
      * @param recipe

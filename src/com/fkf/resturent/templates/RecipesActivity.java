@@ -6,27 +6,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.*;
 
 import com.fkf.resturent.R;
 import com.fkf.resturent.adapter.RecipeListAdapter;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
-import com.fkf.resturent.views.RecipeListItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,13 +29,14 @@ import java.util.ArrayList;
  */
 public class RecipesActivity extends Activity implements View.OnClickListener{
 
-    ImageButton menuButton, logoutButton;
+    ImageButton menuButton, logoutButton, searchRecipeButton;
     LinearLayout content, menu, firstPopularYummyLinear, secondPopularYummyLinear, thirdPopularYummyLinear;
     ListView menuItemList, recipeItemList;
     ScrollView latestAndPopularScrollBar;
     HorizontalScrollView horizontalScroll;
     TextView loggedUserTextView, yummyCategoryNameTextView;
     ImageView profileImageView;
+    EditText searchRecipeEditText;
 
     //yummy image buttons in the horizontal scroll
     ImageButton firstYummyImageButton;
@@ -235,7 +226,6 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         yummyCategoryNameTextView.setText("My Favorite yummys");
                         recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(1); //need to get my favorite yummys from api
                     } else {
-
                         String[] itemContentArray = itemContent.split(":");
                         yummyCategoryNameTextView.setText(itemContentArray[1]);
                         recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(Integer.parseInt(itemContentArray[0]));
@@ -286,6 +276,25 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             loggedUserTextView = (TextView) findViewById(R.id.userNameTextView);
             loggedUserTextView.setText("Welcome " + LoginActivity.LOGGED_USER);
         }
+
+        //recipes search from given name
+        searchRecipeButton = (ImageButton) findViewById(R.id.searchRecipeImageButton);
+        searchRecipeEditText = (EditText) findViewById(R.id.searchRecipeEditText);
+        searchRecipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String searchKey = searchRecipeEditText.getText().toString();
+
+                recipeList = localDatabaseSQLiteOpenHelper.searchRecipesFromGivenRecipeName(searchKey);
+
+                ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
+                scrollParams.height = 0;
+                latestAndPopularScrollBar.setLayoutParams(scrollParams);
+
+                recipeListAdapter = new RecipeListAdapter(recipeList, context);
+                recipeItemList.setAdapter(recipeListAdapter);
+            }
+        });
 
     }
 
