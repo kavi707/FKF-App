@@ -52,7 +52,7 @@ public class RecipeListAdapter extends BaseAdapter{
             recipeListItem = (RecipeListItem) view;
         }
 
-        recipeListItem.setRecipe(recipeList.get(i));
+        recipeListItem.setRecipe(recipeList.get(i), this.context);
         return  recipeListItem;
     }
 }

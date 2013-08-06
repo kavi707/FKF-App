@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.fkf.resturent.R;
 import com.fkf.resturent.database.Recipe;
+import com.fkf.resturent.services.image.loader.ImageLoader;
 
 /**
  * Created by kavi on 6/26/13.
@@ -41,11 +42,19 @@ public class RecipeListItem extends LinearLayout {
         return recipe;
     }
 
-    public void setRecipe(Recipe recipe) {
+    public void setRecipe(Recipe recipe, Context context) {
         this.recipe = recipe;
 
         recipeNameTextView.setText(recipe.getName());
         recipeDescriptionTextView.setText(recipe.getDescription());
         recipeRatingBar.setRating(recipe.getRatings());
+
+        int loader = R.drawable.fkf;
+        try {
+            ImageLoader imageLoader = new ImageLoader(context);
+            imageLoader.DisplayImage(recipe.getImageUrl(), loader, recipeImageView);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
