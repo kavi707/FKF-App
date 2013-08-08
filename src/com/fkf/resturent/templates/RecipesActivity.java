@@ -215,14 +215,14 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                 ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
 
-                if(itemContent.equals(":Latest Yummys")){
+                if(itemContent.equals("Latest Yummys")){
                     scrollParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                     latestAndPopularScrollBar.setLayoutParams(scrollParams);
                 } else {
                     scrollParams.height = 0;
                     latestAndPopularScrollBar.setLayoutParams(scrollParams);
 
-                    if(itemContent.equals(":My Favorites")) {
+                    if(itemContent.equals("My Favorites")) {
                         yummyCategoryNameTextView.setText("My Favorite yummys");
                         recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(1); //need to get my favorite yummys from api
                     } else {

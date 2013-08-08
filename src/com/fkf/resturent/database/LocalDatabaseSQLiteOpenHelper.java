@@ -41,6 +41,13 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String CATEGORY_ID = "category_id";
     public static final String CATEGORY_NAME = "category_name";
 
+    //last database modified date & time details table columns
+    public static final String LAST_MODIFIED_DETAILS_TABLE_NAME = "last_modified_details";
+    public static final String MODIFICATION_ID = "modification_id";
+    public static final String MODIFIED_DATE = "modified_date";
+    public static final String MODIFIED_TIME = "modified_time";
+    public static final String MODIFICATION_STATUS = "modification_status";
+
     public LocalDatabaseSQLiteOpenHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
     }
@@ -49,6 +56,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         createRecipesTable(sqLiteDatabase);
         createCategoriesTable(sqLiteDatabase);
+        createLastDatabaseModificationDetailsTable(sqLiteDatabase);
     }
 
     @Override
@@ -57,7 +65,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * create recipes table store recipes after sync with the central db
+     * create recipes table
      * @param sqLiteDatabase
      */
     private void createRecipesTable(SQLiteDatabase sqLiteDatabase) {
@@ -92,7 +100,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * create recipe categories table store recipes after sync with the central db
+     * create recipe categories table
      * @param sqLiteDatabase
      */
     private void createCategoriesTable(SQLiteDatabase sqLiteDatabase) {
@@ -117,15 +125,29 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * create last database modification details table
+     * @param sqLiteDatabase
+     */
+    private void createLastDatabaseModificationDetailsTable(SQLiteDatabase sqLiteDatabase) {
+        String createModificationDetailTableQuery = "create table " + LAST_MODIFIED_DETAILS_TABLE_NAME + " ( " +
+                MODIFICATION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
+                MODIFIED_DATE + " text, " +
+                MODIFIED_TIME + " text, " +
+                MODIFICATION_STATUS + " text " +
+                ");";
+        sqLiteDatabase.execSQL(createModificationDetailTableQuery);
+    }
+
+    /**
      * get all recipe categories for the item menu
      * @return
      */
     public ArrayList<String> getAllCategories(){
         ArrayList<String> categoryList = new ArrayList<String>();
-        categoryList.add(":Latest Yummys"); //default item for view the latest yummys and other stuff
+        categoryList.add("Latest Yummys"); //default item for view the latest yummys and other stuff
         //If user logged in to application
         if(LoginActivity.LOGGED_STATUS == 1){
-            categoryList.add(":My Favorites");
+            categoryList.add("My Favorites");
         }
         localFKFDatabase = this.getWritableDatabase();
 
