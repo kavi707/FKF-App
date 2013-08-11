@@ -36,6 +36,12 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String RATINGS = "ratings";
     public static final String IMAGE_URL = "image_url";
 
+    //popular yummy table
+    public static final String POPULAR_YUMMY_TABLE_NAME = "popular_yummys";
+
+    //latest yummy table
+    public static final String LATEST_YUMMY_TABLE_NAME = "latest_yummys";
+
     //category table and columns
     public static final String CATEGORY_TABLE_NAME = "categories";
     public static final String CATEGORY_ID = "category_id";
@@ -57,6 +63,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         createRecipesTable(sqLiteDatabase);
         createCategoriesTable(sqLiteDatabase);
         createLastDatabaseModificationDetailsTable(sqLiteDatabase);
+        createPopularYummysTable(sqLiteDatabase);
+        createLatestYummysTable(sqLiteDatabase);
     }
 
     @Override
@@ -97,6 +105,40 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             }
         }
         // temp block
+    }
+
+    /**
+     * create popular yummys table
+     * @param sqLiteDatabase
+     */
+    private void createPopularYummysTable(SQLiteDatabase sqLiteDatabase) {
+        String createRecipesTableQuery = "create table " + POPULAR_YUMMY_TABLE_NAME + " ( " +
+                RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
+                RECIPE_NAME + " text, " +
+                RECIPE_DESCRIPTION + " text, " +
+                CATEGORY_ID + " int, " +
+                ADDED_DATE + " text, " +
+                RATINGS + " int, " +
+                IMAGE_URL + " text " +
+                ");";
+        sqLiteDatabase.execSQL(createRecipesTableQuery);
+    }
+
+    /**
+     * create latest yummys table
+     * @param sqLiteDatabase
+     */
+    private void createLatestYummysTable(SQLiteDatabase sqLiteDatabase) {
+        String createRecipesTableQuery = "create table " + LATEST_YUMMY_TABLE_NAME + " ( " +
+                RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
+                RECIPE_NAME + " text, " +
+                RECIPE_DESCRIPTION + " text, " +
+                CATEGORY_ID + " int, " +
+                ADDED_DATE + " text, " +
+                RATINGS + " int, " +
+                IMAGE_URL + " text " +
+                ");";
+        sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
 
     /**
