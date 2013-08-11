@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 /**
  * Created by kavi on 6/29/13.
+ * Hold the new single recipe view functionalities.
+ * single_recipe_layout.xml Activity class
+ * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class SingleRecipeActivity extends Activity {
 

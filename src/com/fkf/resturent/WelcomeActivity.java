@@ -2,7 +2,6 @@ package com.fkf.resturent;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -128,7 +127,14 @@ public class WelcomeActivity extends Activity {
                                                         }).create();
                                                 messageBalloonAlertDialog.show();
                                             } else {
+                                                //create app dir if not exists
+                                                userPermissionServices.createAppDirectories();
+                                                //update the database if server database is modified
                                                 userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
+                                                //populate latest yummy details and download images
+                                                userPermissionServices.populateLatestYummyDetails();
+                                                //populate popular yummy details and download images
+                                                userPermissionServices.populatePopularYummyDetails();
                                             }
                                         }
                                     });

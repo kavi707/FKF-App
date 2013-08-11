@@ -5,10 +5,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
+import com.fkf.resturent.services.image.downloader.DownloadFile;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * holding the service use by the templates
@@ -35,6 +40,69 @@ public class ActivityUserPermissionServices {
         }
 
         return false;
+    }
+
+    /**
+     * create application directories in SD card for hold images
+     */
+    public void createAppDirectories() {
+
+        File appDir = new File(Environment.getExternalStorageDirectory()+"/fauzias");
+        if(!appDir.isDirectory()) {
+            File appDirLatestYummy = new File(Environment.getExternalStorageDirectory()+"/fauzias/latest_yummys");
+            File appDirPopularYummy = new File(Environment.getExternalStorageDirectory()+"/fauzias/popular_yummys");
+            File appDirUser = new File(Environment.getExternalStorageDirectory()+"/fauzias/user");
+            try {
+                appDir.mkdir();
+                appDirLatestYummy.mkdir();
+                appDirPopularYummy.mkdir();
+                appDirUser.mkdir();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * download latest yummy icon images from urls and save them to SD card location
+     */
+    public void populateLatestYummyDetails() {
+
+        //TODO need to get the latest yummys from server
+        //TODO populate local database from latest yummys
+        //TODO download images for selected latest yummys
+
+        DownloadFile downloadFile = new DownloadFile();
+        String url = "http://mathworld.wolfram.com/images/gifs/smstdo-o.jpg";
+        String newName = "icon_1";
+        String path = Environment.getExternalStorageDirectory() + "/fauzias/latest_yummys/";
+        Map<String, String> downloadingDetails = new HashMap<String, String>();
+        downloadingDetails.put("url", url);
+        downloadingDetails.put("path", path);
+        downloadingDetails.put("name", newName);
+
+        downloadFile.execute(downloadingDetails);
+    }
+
+    /**
+     * download popular yummy icon images from urls and save them to SD card location
+     */
+    public void populatePopularYummyDetails() {
+
+        //TODO need to get the popular yummys from server
+        //TODO populate local database from popular yummys
+        //TODO download images for selected popular yummys
+
+        DownloadFile downloadFile = new DownloadFile();
+        String url = "http://mathworld.wolfram.com/images/gifs/smstdo-o.jpg";
+        String newName = "icon_1";
+        String path = Environment.getExternalStorageDirectory() + "/fauzias/popular_yummys/";
+        Map<String, String> downloadingDetails = new HashMap<String, String>();
+        downloadingDetails.put("url", url);
+        downloadingDetails.put("path", path);
+        downloadingDetails.put("name", newName);
+
+        downloadFile.execute(downloadingDetails);
     }
 
     /**
