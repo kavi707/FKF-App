@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.util.Log;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.services.image.downloader.DownloadFile;
@@ -72,9 +73,12 @@ public class ActivityUserPermissionServices {
         //TODO populate local database from latest yummys
         //TODO download images for selected latest yummys
 
+        connector.getLatestYummysFromServer();
+
         DownloadFile downloadFile = new DownloadFile();
-        String url = "http://mathworld.wolfram.com/images/gifs/smstdo-o.jpg";
-        String newName = "icon_1";
+//        String url = "http://mathworld.wolfram.com/images/gifs/smstdo-o.jpg";
+        String url = "http://www.fauziaskitchenfun.com/sites/default/files/styles/featured/public/orange%20cake.jpg";
+        String newName = "icon_2";
         String path = Environment.getExternalStorageDirectory() + "/fauzias/latest_yummys/";
         Map<String, String> downloadingDetails = new HashMap<String, String>();
         downloadingDetails.put("url", url);
@@ -94,8 +98,9 @@ public class ActivityUserPermissionServices {
         //TODO download images for selected popular yummys
 
         DownloadFile downloadFile = new DownloadFile();
-        String url = "http://mathworld.wolfram.com/images/gifs/smstdo-o.jpg";
-        String newName = "icon_1";
+//        String url = "http://mathworld.wolfram.com/images/gifs/smstdo-o.jpg";
+        String url = "http://www.fauziaskitchenfun.com/sites/default/files/styles/featured/public/orange%20cake.jpg";
+        String newName = "icon_2";
         String path = Environment.getExternalStorageDirectory() + "/fauzias/popular_yummys/";
         Map<String, String> downloadingDetails = new HashMap<String, String>();
         downloadingDetails.put("url", url);

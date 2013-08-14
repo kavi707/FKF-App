@@ -5,16 +5,23 @@ import com.fkf.resturent.database.Recipe;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -29,13 +36,53 @@ import java.util.List;
 public class ApiConnector {
 
     public ArrayList<Recipe> getRecipesFromServer() {
-        //initialize json object according to request
-        JSONObject reqJSONObject = new JSONObject();
-
-        sendHTTPPost(reqJSONObject);
         return null;
     }
 
+    public ArrayList<Recipe> getLatestYummysFromServer() {
+        String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/latest");
+        try {
+            JSONArray jsonArray = new JSONArray(jsonResult);
+            JSONObject jsonData = null;
+            for(int i = 0; i < jsonArray.length(); i++) {
+                jsonData = jsonArray.getJSONObject(i);
+                //just for test
+                Log.d("File Name : ", jsonData.getString("title"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * function to call to rest api
+     * @param requestUrl
+     */
+    private String callWebService(String requestUrl){
+
+        String restCallResult = null;
+
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpGet request = new HttpGet(requestUrl);
+        ResponseHandler<String> handler = new BasicResponseHandler();
+        try {
+            restCallResult = httpclient.execute(request, handler);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        httpclient.getConnectionManager().shutdown();
+
+        return restCallResult;
+    }
+
+    /**
+     * function to send http posts with json object
+     * @param req
+     */
     private void sendHTTPPost(JSONObject req){
 
         HttpClient client = new DefaultHttpClient();
@@ -47,7 +94,7 @@ public class ApiConnector {
 
         try {
             HttpPost post = new HttpPost("http://10.0.2.2:7000/sms/send");
-//            HttpPost post = new HttpPost("http://10.0.2.2/courses/quiz-api/add");
+//            HttpPost post = new HttpPost("http://www.fauziaskitchenfun.com/api/latest");
             //initialized json object
             addresses.add("tel:94776351232");
             jsonObject.put("applicationId","APP_000001");

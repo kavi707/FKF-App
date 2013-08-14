@@ -88,19 +88,19 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
         firstYummyImageButton.setImageBitmap(firstBitmap);
 
-        File secondImageFile = new File("/sdcard/fauzias/latest_yummys/icon_2.png");
+        File secondImageFile = new File("/sdcard/fauzias/latest_yummys/icon_2.jpg");
         Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
         secondYummyImageButton.setImageBitmap(secondBitmap);
 
-        File thirdImageFile = new File("/sdcard/fauzias/latest_yummys/icon_3.png");
+        File thirdImageFile = new File("/sdcard/fauzias/latest_yummys/icon_3.jpg");
         Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
         thirdYummyImageButton.setImageBitmap(thirdBitmap);
 
-        File forthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_4.png");
+        File forthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_4.jpg");
         Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
         forthYummyImageButton.setImageBitmap(forthBitmap);
 
-        File fifthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_5.png");
+        File fifthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_5.jpg");
         Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
         fifthYummyImageButton.setImageBitmap(fifthBitmap);
 
