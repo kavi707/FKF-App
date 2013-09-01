@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,37 +19,42 @@ import java.util.Map;
  *
  * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
-public class DownloadFile extends AsyncTask<Map<String, String>, Integer, String> {
+public class DownloadFile extends AsyncTask<List<Map<String, String>>, Integer, String> {
     @Override
-    protected String doInBackground(Map<String, String>... downloadFilesDetails) {
+    protected String doInBackground(List<Map<String, String>>... downloadFilesDetails) {
 
-        Map<String, String> downloadFile = downloadFilesDetails[0];
+        List<Map<String, String>> downloadFile = downloadFilesDetails[0];
 
-        try {
-            URL url = new URL(downloadFile.get("url"));
-            URLConnection connection = url.openConnection();
-            connection.connect();
+        for (Map<String, String> stringStringMap : downloadFile) {
 
-            int fileLength = connection.getContentLength();
+            try {
 
-            InputStream inputStream = new BufferedInputStream(url.openStream());
-            OutputStream outputStream = new FileOutputStream(downloadFile.get("path")+downloadFile.get("name")+".jpg");
+                URL url = new URL(stringStringMap.get("url"));
+                URLConnection connection = url.openConnection();
+                connection.connect();
 
-            byte data[] = new byte[1024];
-            long total = 0;
-            int count;
-            while ((count = inputStream.read(data)) != -1) {
-                total += count;
-                publishProgress((int)(total * 100 / fileLength));
-                outputStream.write(data, 0, count);
+                int fileLength = connection.getContentLength();
+
+                InputStream inputStream = new BufferedInputStream(url.openStream());
+                OutputStream outputStream = new FileOutputStream(stringStringMap.get("path")+stringStringMap.get("name")+".jpg");
+
+                byte data[] = new byte[1024];
+                long total = 0;
+                int count;
+                while ((count = inputStream.read(data)) != -1) {
+                    total += count;
+                    publishProgress((int)(total * 100 / fileLength));
+                    outputStream.write(data, 0, count);
+                }
+
+                outputStream.flush();
+                outputStream.close();
+                inputStream.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-
-            outputStream.flush();
-            outputStream.close();
-            inputStream.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
+
         return null;
     }
 }

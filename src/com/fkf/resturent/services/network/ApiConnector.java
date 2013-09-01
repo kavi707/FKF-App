@@ -35,11 +35,12 @@ import java.util.List;
  */
 public class ApiConnector {
 
-    public ArrayList<Recipe> getRecipesFromServer() {
+    public ArrayList<Recipe> getRecipesFromServer(String timeStamp) {
+        String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp);
         return null;
     }
 
-    public ArrayList<Recipe> getLatestYummysFromServer() {
+    public List<Recipe> getLatestYummysFromServer() {
         String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/latest");
         List<Recipe> recipeList = new ArrayList<Recipe>();
         try {
@@ -47,19 +48,18 @@ public class ApiConnector {
             JSONObject jsonData = null;
             for(int i = 0; i < jsonArray.length(); i++) {
                 jsonData = jsonArray.getJSONObject(i);
-                //just for test
-                Log.d("File Name : ", jsonData.getString("title"));
 
                 Recipe getRecipe = new Recipe();
+                getRecipe.setProductId(jsonData.getString("nid"));
                 getRecipe.setName(jsonData.getString("title"));
-//                getRecipe.setImageUrl();
 
+                recipeList.add(getRecipe);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return recipeList;
     }
 
     /**

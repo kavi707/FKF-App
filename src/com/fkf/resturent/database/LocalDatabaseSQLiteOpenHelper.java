@@ -11,6 +11,7 @@ import android.util.Log;
 import com.fkf.resturent.templates.LoginActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kavi on 6/23/13.
@@ -41,9 +42,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     //popular yummy table
     public static final String POPULAR_YUMMY_TABLE_NAME = "popular_yummys";
+    public static final String POPULAR_INDEX = "popular_index";
 
     //latest yummy table
     public static final String LATEST_YUMMY_TABLE_NAME = "latest_yummys";
+    public static final String LATEST_INDEX = "latest_index";
 
     //category table and columns
     public static final String CATEGORY_TABLE_NAME = "categories";
@@ -53,9 +56,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     //last database modified date & time details table columns
     public static final String LAST_MODIFIED_DETAILS_TABLE_NAME = "last_modified_details";
     public static final String MODIFICATION_ID = "modification_id";
-    public static final String MODIFIED_DATE = "modified_date";
-    public static final String MODIFIED_TIME = "modified_time";
-    public static final String MODIFICATION_STATUS = "modification_status";
+    public static final String MODIFIED_TIME_STAMP = "modified_time_stamp";
 
     public LocalDatabaseSQLiteOpenHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
@@ -123,6 +124,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     private void createPopularYummysTable(SQLiteDatabase sqLiteDatabase) {
         String createRecipesTableQuery = "create table " + POPULAR_YUMMY_TABLE_NAME + " ( " +
                 RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
+                POPULAR_INDEX + " int, " +
                 PRODUCT_ID + " text, " +
                 RECIPE_NAME + " text, " +
                 RECIPE_DESCRIPTION + " text, " +
@@ -143,6 +145,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     private void createLatestYummysTable(SQLiteDatabase sqLiteDatabase) {
         String createRecipesTableQuery = "create table " + LATEST_YUMMY_TABLE_NAME + " ( " +
                 RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
+                LATEST_INDEX + " int, " +
                 PRODUCT_ID + " text, " +
                 RECIPE_NAME + " text, " +
                 RECIPE_DESCRIPTION + " text, " +
@@ -188,11 +191,69 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     private void createLastDatabaseModificationDetailsTable(SQLiteDatabase sqLiteDatabase) {
         String createModificationDetailTableQuery = "create table " + LAST_MODIFIED_DETAILS_TABLE_NAME + " ( " +
                 MODIFICATION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
-                MODIFIED_DATE + " text, " +
-                MODIFIED_TIME + " text, " +
-                MODIFICATION_STATUS + " text " +
+                MODIFIED_TIME_STAMP + " text " +
                 ");";
         sqLiteDatabase.execSQL(createModificationDetailTableQuery);
+    }
+
+    /**
+     * return last modified time stamp saved in local database
+     * @return
+     */
+    public String getLastModificationTimeStamp() {
+        localFKFDatabase = this.getWritableDatabase();
+        String lastModificationTimeStamp = null;
+
+        try {
+            String grepLastModificationDetailsQuery = "select * from " + LAST_MODIFIED_DETAILS_TABLE_NAME;
+            Cursor lastModificationDetailCursor = localFKFDatabase.rawQuery(grepLastModificationDetailsQuery, null);
+            lastModificationDetailCursor.moveToFirst();
+
+            if(!lastModificationDetailCursor.isAfterLast()) {
+                do {
+                    int modificationId = lastModificationDetailCursor.getInt(0);
+                    String timeStamp = lastModificationDetailCursor.getString(1);
+
+                    lastModificationTimeStamp = timeStamp;
+                } while (lastModificationDetailCursor.moveToNext());
+            }
+            lastModificationDetailCursor.close();
+
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+
+        return lastModificationTimeStamp;
+    }
+
+    /**
+     * set new modified time stamp to local database
+     * @param newModifiedTimeStamp
+     */
+    public void setLastModificationTimeStamp(String newModifiedTimeStamp) {
+
+        localFKFDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(MODIFIED_TIME_STAMP, newModifiedTimeStamp);
+
+        try {
+            localFKFDatabase.insert(LAST_MODIFIED_DETAILS_TABLE_NAME, null, values);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
+
+    /**
+     * delete last modified time stamp from the local database
+     */
+    public void deleteLastModifiedTimeStamp() {
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            localFKFDatabase.delete(LAST_MODIFIED_DETAILS_TABLE_NAME, null, null);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
     }
 
     /**
@@ -398,6 +459,40 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         } catch (SQLiteException ex) {
             throw ex;
         }
+    }
+
+    /**
+     * save the given latest recipe from the caller function
+     * @param latestRecipes
+     */
+    public void saveLatestYummyRecipe(List<Recipe> latestRecipes) {
+
+        localFKFDatabase = this.getWritableDatabase();
+        ContentValues values;
+
+        int latestRecipeCount = 1;
+        for (Recipe latestRecipe : latestRecipes) {
+            values = new ContentValues();
+            values.put(LATEST_INDEX, latestRecipeCount);
+            values.put(PRODUCT_ID, latestRecipe.getProductId());
+            values.put(RECIPE_NAME, latestRecipe.getName());
+            values.put(RECIPE_DESCRIPTION, latestRecipe.getDescription());
+            values.put(INGREDIENTS, latestRecipe.getIngredients());
+            values.put(INSTRUCTIONS, latestRecipe.getInstructions());
+            values.put(CATEGORY_ID, latestRecipe.getCategoryId());
+            values.put(ADDED_DATE, "26-06-2013");
+            values.put(RATINGS, latestRecipe.getRatings());
+            values.put(IMAGE_URL, latestRecipe.getImageUrl());
+
+            try {
+                localFKFDatabase.insert(LATEST_YUMMY_TABLE_NAME, null, values);
+            } catch (SQLiteException ex) {
+                throw ex;
+            }
+
+            latestRecipeCount++;
+        }
+
     }
 
     /**

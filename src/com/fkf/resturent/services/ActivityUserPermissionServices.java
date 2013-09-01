@@ -2,7 +2,6 @@ package com.fkf.resturent.services;
 
 import android.app.Activity;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -10,11 +9,12 @@ import android.util.Log;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.services.image.downloader.DownloadFile;
+import com.fkf.resturent.services.network.ApiConnector;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * holding the service use by the templates
@@ -67,25 +67,41 @@ public class ActivityUserPermissionServices {
     /**
      * download latest yummy icon images from urls and save them to SD card location
      */
-    public void populateLatestYummyDetails() {
+    public void populateLatestYummyDetails(Activity activity) {
 
-        //TODO need to get the latest yummys from server
-        //TODO populate local database from latest yummys
-        //TODO download images for selected latest yummys
+        LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
+        List<Recipe> latestYummyList = connector.getLatestYummysFromServer();
 
-        connector.getLatestYummysFromServer();
+        for (Recipe recipe : latestYummyList) {
+            localDatabaseSQLiteOpenHelper.saveRecipe(recipe);
+        }
+
+        localDatabaseSQLiteOpenHelper.saveLatestYummyRecipe(latestYummyList);
 
         DownloadFile downloadFile = new DownloadFile();
-//        String url = "http://mathworld.wolfram.com/images/gifs/smstdo-o.jpg";
-        String url = "http://www.fauziaskitchenfun.com/sites/default/files/styles/featured/public/orange%20cake.jpg";
-        String newName = "icon_2";
         String path = Environment.getExternalStorageDirectory() + "/fauzias/latest_yummys/";
-        Map<String, String> downloadingDetails = new HashMap<String, String>();
-        downloadingDetails.put("url", url);
-        downloadingDetails.put("path", path);
-        downloadingDetails.put("name", newName);
 
-        downloadFile.execute(downloadingDetails);
+        List<Map<String, String>> downloadDetailsList = new ArrayList<Map<String, String>>();
+
+        int recipeCount = 1;
+        if(latestYummyList != null) {
+            for (Recipe recipe : latestYummyList) {
+                String url = recipe.getImageUrl();
+                String newName = "icon_" + recipeCount;
+
+                Map<String, String> downloadingDetails = new HashMap<String, String>();
+                downloadingDetails.put("url", url);
+                downloadingDetails.put("path", path);
+                downloadingDetails.put("name", newName);
+
+                downloadDetailsList.add(downloadingDetails);
+
+                recipeCount++;
+            }
+        }
+
+        downloadFile.execute(downloadDetailsList);
+
     }
 
     /**
@@ -107,7 +123,7 @@ public class ActivityUserPermissionServices {
         downloadingDetails.put("path", path);
         downloadingDetails.put("name", newName);
 
-        downloadFile.execute(downloadingDetails);
+        //downloadFile.execute(downloadingDetails);
     }
 
     /**
@@ -118,32 +134,15 @@ public class ActivityUserPermissionServices {
     public boolean updateLocalRecipesFromServerRecipes(Activity activity) {
 
         LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
-//        ArrayList<Recipe> newRecipes = connector.getRecipesFromServer();
-        ArrayList<Recipe> newRecipes = new ArrayList<Recipe>();
+        String lastModifiedTimeStamp = localDatabaseSQLiteOpenHelper.getLastModificationTimeStamp();
+        localDatabaseSQLiteOpenHelper.deleteLastModifiedTimeStamp();
+        ArrayList<Recipe> newRecipes = connector.getRecipesFromServer(lastModifiedTimeStamp);
 
-        //temp data
-        Recipe recipe = new Recipe();
-        recipe.setName("Recipe Name 1");
-        recipe.setDescription("Recipe Description 1");
-        recipe.setCategoryId(1);
-        recipe.setRatings(4);
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddhhmmss");
+        String currentTimeStamp = simpleDateFormat.format(date);
 
-        Recipe recipe1 = new Recipe();
-        recipe1.setName("Recipe Name 2");
-        recipe1.setDescription("Recipe Description 2");
-        recipe1.setCategoryId(2);
-        recipe1.setRatings(3);
-
-        /*newRecipes.add(recipe);
-        newRecipes.add(recipe1);*/
-        //temp data
-
-        if(newRecipes.size() != 0) {
-            localDatabaseSQLiteOpenHelper.deleteAllRecipes();
-            for (Recipe newRecipe : newRecipes) {
-                localDatabaseSQLiteOpenHelper.saveRecipe(newRecipe);
-            }
-        }
+        localDatabaseSQLiteOpenHelper.setLastModificationTimeStamp(currentTimeStamp);
 
         return true;
     }

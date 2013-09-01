@@ -7,11 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
+import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.services.ActivityUserPermissionServices;
 import com.fkf.resturent.templates.LoginActivity;
+
+import java.util.List;
 
 /**
  * Holding the loading ui
@@ -35,11 +40,16 @@ public class WelcomeActivity extends Activity {
     private AlertDialog messageBalloonAlertDialog;
 
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
+    private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.
+                ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         setUpViews();
     }
@@ -132,7 +142,7 @@ public class WelcomeActivity extends Activity {
                                                 //update the database if server database is modified
                                                 userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
                                                 //populate latest yummy details and download images
-                                                userPermissionServices.populateLatestYummyDetails();
+                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this);
                                                 //populate popular yummy details and download images
                                                 userPermissionServices.populatePopularYummyDetails();
                                             }
