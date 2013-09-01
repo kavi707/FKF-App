@@ -8,8 +8,11 @@ package com.fkf.resturent.database;
 public class Recipe {
 
     private int id;
+    private String productId;
     private String name;
     private String description;
+    private String ingredients;
+    private String instructions;
     private int categoryId;
     private String addedDate;
     private int ratings;
@@ -21,6 +24,14 @@ public class Recipe {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -37,6 +48,22 @@ public class Recipe {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 
     public int getCategoryId() {

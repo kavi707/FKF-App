@@ -243,22 +243,28 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             if(!recipeCursor.isAfterLast()) {
                 do {
                     int recipeId = recipeCursor.getInt(0);
-                    String recipeName = recipeCursor.getString(1);
-                    String recipeDescription = recipeCursor.getString(2);
-                    int recipeCategoryId = recipeCursor.getInt(3);
-                    String recipeAddedDate = recipeCursor.getString(4);
-                    int recipeRatings = recipeCursor.getInt(5);
-                    String imageUrl = recipeCursor.getString(6);
+                    String productId = recipeCursor.getString(1);
+                    String recipeName = recipeCursor.getString(2);
+                    String recipeDescription = recipeCursor.getString(3);
+                    String recipeIngredients = recipeCursor.getString(4);
+                    String recipeInstructions = recipeCursor.getString(5);
+                    int recipeCategoryId = recipeCursor.getInt(6);
+                    String recipeAddedDate = recipeCursor.getString(7);
+                    int recipeRatings = recipeCursor.getInt(8);
+                    String recipeImageUrl = recipeCursor.getString(9);
 
                     recipe = new Recipe();
 
                     recipe.setId(recipeId);
+                    recipe.setProductId(productId);
                     recipe.setName(recipeName);
                     recipe.setDescription(recipeDescription);
+                    recipe.setIngredients(recipeIngredients);
+                    recipe.setInstructions(recipeInstructions);
                     recipe.setCategoryId(recipeCategoryId);
                     recipe.setAddedDate(recipeAddedDate);
                     recipe.setRatings(recipeRatings);
-                    recipe.setImageUrl(imageUrl);
+                    recipe.setImageUrl(recipeImageUrl);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -287,18 +293,24 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             if(!recipeCursor.isAfterLast()) {
                 do {
                     int recipeId = recipeCursor.getInt(0);
-                    String recipeName = recipeCursor.getString(1);
-                    String recipeDescription = recipeCursor.getString(2);
-                    int recipeCategoryId = recipeCursor.getInt(3);
-                    String recipeAddedDate = recipeCursor.getString(4);
-                    int recipeRatings = recipeCursor.getInt(5);
-                    String recipeImageUrl = recipeCursor.getString(6);
+                    String productId = recipeCursor.getString(1);
+                    String recipeName = recipeCursor.getString(2);
+                    String recipeDescription = recipeCursor.getString(3);
+                    String recipeIngredients = recipeCursor.getString(4);
+                    String recipeInstructions = recipeCursor.getString(5);
+                    int recipeCategoryId = recipeCursor.getInt(6);
+                    String recipeAddedDate = recipeCursor.getString(7);
+                    int recipeRatings = recipeCursor.getInt(8);
+                    String recipeImageUrl = recipeCursor.getString(9);
 
                     recipe = new Recipe();
 
                     recipe.setId(recipeId);
+                    recipe.setProductId(productId);
                     recipe.setName(recipeName);
                     recipe.setDescription(recipeDescription);
+                    recipe.setIngredients(recipeIngredients);
+                    recipe.setInstructions(recipeInstructions);
                     recipe.setCategoryId(recipeCategoryId);
                     recipe.setAddedDate(recipeAddedDate);
                     recipe.setRatings(recipeRatings);
@@ -329,18 +341,24 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             if(!recipeCursor.isAfterLast()) {
                 do {
                     int recipeId = recipeCursor.getInt(0);
-                    String recipeName = recipeCursor.getString(1);
-                    String recipeDescription = recipeCursor.getString(2);
-                    int recipeCategoryId = recipeCursor.getInt(3);
-                    String recipeAddedDate = recipeCursor.getString(4);
-                    int recipeRatings = recipeCursor.getInt(5);
-                    String recipeImageUrl = recipeCursor.getString(6);
+                    String productId = recipeCursor.getString(1);
+                    String recipeName = recipeCursor.getString(2);
+                    String recipeDescription = recipeCursor.getString(3);
+                    String recipeIngredients = recipeCursor.getString(4);
+                    String recipeInstructions = recipeCursor.getString(5);
+                    int recipeCategoryId = recipeCursor.getInt(6);
+                    String recipeAddedDate = recipeCursor.getString(7);
+                    int recipeRatings = recipeCursor.getInt(8);
+                    String recipeImageUrl = recipeCursor.getString(9);
 
                     recipe = new Recipe();
 
                     recipe.setId(recipeId);
+                    recipe.setProductId(productId);
                     recipe.setName(recipeName);
                     recipe.setDescription(recipeDescription);
+                    recipe.setIngredients(recipeIngredients);
+                    recipe.setInstructions(recipeInstructions);
                     recipe.setCategoryId(recipeCategoryId);
                     recipe.setAddedDate(recipeAddedDate);
                     recipe.setRatings(recipeRatings);
@@ -365,8 +383,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         localFKFDatabase = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(PRODUCT_ID, recipe.getProductId());
         values.put(RECIPE_NAME, recipe.getName());
         values.put(RECIPE_DESCRIPTION, recipe.getDescription());
+        values.put(INGREDIENTS, recipe.getIngredients());
+        values.put(INSTRUCTIONS, recipe.getInstructions());
         values.put(CATEGORY_ID, recipe.getCategoryId());
         values.put(ADDED_DATE, "26-06-2013");
         values.put(RATINGS, recipe.getRatings());
