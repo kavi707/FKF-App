@@ -1,4 +1,4 @@
-package com.fkf.resturent.services;
+package com.fkf.resturent.services.network;
 
 import android.util.Log;
 import com.fkf.resturent.database.Recipe;
@@ -41,6 +41,7 @@ public class ApiConnector {
 
     public ArrayList<Recipe> getLatestYummysFromServer() {
         String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/latest");
+        List<Recipe> recipeList = new ArrayList<Recipe>();
         try {
             JSONArray jsonArray = new JSONArray(jsonResult);
             JSONObject jsonData = null;
@@ -48,6 +49,11 @@ public class ApiConnector {
                 jsonData = jsonArray.getJSONObject(i);
                 //just for test
                 Log.d("File Name : ", jsonData.getString("title"));
+
+                Recipe getRecipe = new Recipe();
+                getRecipe.setName(jsonData.getString("title"));
+//                getRecipe.setImageUrl();
+
             }
         } catch (JSONException e) {
             e.printStackTrace();

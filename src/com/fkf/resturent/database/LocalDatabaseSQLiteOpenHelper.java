@@ -29,9 +29,12 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     //recipes table and columns
     public static final String RECIPES_TABLE_NAME = "recipes";
     public static final String RECIPE_ID = "recipe_id";
+    public static final String PRODUCT_ID = "product_id";
     public static final String RECIPE_NAME = "recipe_name";
     public static final String RECIPE_DESCRIPTION = "recipe_description";
     //category id must be on column of this recipe table
+    public static final String INGREDIENTS = "ingredients";
+    public static final String INSTRUCTIONS = "instructions";
     public static final String ADDED_DATE = "added_date";
     public static final String RATINGS = "ratings";
     public static final String IMAGE_URL = "image_url";
@@ -79,8 +82,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     private void createRecipesTable(SQLiteDatabase sqLiteDatabase) {
         String createRecipesTableQuery = "create table " + RECIPES_TABLE_NAME + " ( " +
                 RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
+                PRODUCT_ID + " text, " +
                 RECIPE_NAME + " text, " +
                 RECIPE_DESCRIPTION + " text, " +
+                INGREDIENTS + " text, " +
+                INSTRUCTIONS + " text, " +
                 CATEGORY_ID + " int, " +
                 ADDED_DATE + " text, " +
                 RATINGS + " int, " +
@@ -91,8 +97,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         //temp testing purpose value adding
         for (int i = 0; i < 3; i++) {
             ContentValues values = new ContentValues();
+            values.put(PRODUCT_ID, 683 + i);
             values.put(RECIPE_NAME, "recipe name - " + i);
             values.put(RECIPE_DESCRIPTION, "recipe des - " + i);
+            values.put(INGREDIENTS, "recipe ingredients " + i);
+            values.put(INSTRUCTIONS, "recipe instructions " + i);
             values.put(CATEGORY_ID, 1);
             values.put(ADDED_DATE, "26-06-2013");
             values.put(RATINGS, i);
@@ -114,8 +123,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     private void createPopularYummysTable(SQLiteDatabase sqLiteDatabase) {
         String createRecipesTableQuery = "create table " + POPULAR_YUMMY_TABLE_NAME + " ( " +
                 RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
+                PRODUCT_ID + " text, " +
                 RECIPE_NAME + " text, " +
                 RECIPE_DESCRIPTION + " text, " +
+                INGREDIENTS + " text, " +
+                INSTRUCTIONS + " text, " +
                 CATEGORY_ID + " int, " +
                 ADDED_DATE + " text, " +
                 RATINGS + " int, " +
@@ -131,8 +143,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     private void createLatestYummysTable(SQLiteDatabase sqLiteDatabase) {
         String createRecipesTableQuery = "create table " + LATEST_YUMMY_TABLE_NAME + " ( " +
                 RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
+                PRODUCT_ID + " text, " +
                 RECIPE_NAME + " text, " +
                 RECIPE_DESCRIPTION + " text, " +
+                INGREDIENTS + " text, " +
+                INSTRUCTIONS + " text, " +
                 CATEGORY_ID + " int, " +
                 ADDED_DATE + " text, " +
                 RATINGS + " int, " +
