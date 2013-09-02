@@ -134,7 +134,8 @@ public class ActivityUserPermissionServices {
         LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
         String lastModifiedTimeStamp = localDatabaseSQLiteOpenHelper.getLastModificationTimeStamp();
         localDatabaseSQLiteOpenHelper.deleteLastModifiedTimeStamp();
-        ArrayList<Recipe> newRecipes = connector.getRecipesFromServer(lastModifiedTimeStamp);
+
+        connector.getRecipesFromServer(lastModifiedTimeStamp, activity);
 
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddhhmmss");

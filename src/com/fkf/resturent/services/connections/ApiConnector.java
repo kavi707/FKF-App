@@ -1,5 +1,6 @@
 package com.fkf.resturent.services.connections;
 
+import android.app.Activity;
 import android.util.Log;
 import com.fkf.resturent.database.Recipe;
 import org.apache.http.HttpEntity;
@@ -35,8 +36,14 @@ import java.util.List;
  */
 public class ApiConnector {
 
-    public ArrayList<Recipe> getRecipesFromServer(String timeStamp) {
-        String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp);
+    public ArrayList<Recipe> getRecipesFromServer(String timeStamp, Activity activity) {
+
+        //TODO need to remove the following hardcoded timeStamp     value
+        //this initialization is for testing
+        timeStamp = "1376430210";
+        RecipeDataSyncTask dataSyncTask = new RecipeDataSyncTask(activity);
+        dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp);
+
         return null;
     }
 
@@ -70,7 +77,7 @@ public class ApiConnector {
      * function to call to rest connections
      * @param requestUrl
      */
-    private String callWebService(String requestUrl){
+    protected String callWebService(String requestUrl){
 
         String restCallResult = null;
 
