@@ -7,7 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Environment;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
-import com.fkf.resturent.services.image.downloader.DownloadFile;
+import com.fkf.resturent.services.image.downloader.DownloadFileTask;
 import com.fkf.resturent.services.connections.ApiConnector;
 
 import java.io.File;
@@ -76,7 +76,7 @@ public class ActivityUserPermissionServices {
 
         localDatabaseSQLiteOpenHelper.saveLatestYummyRecipe(latestYummyList);
 
-        DownloadFile downloadFile = new DownloadFile();
+        DownloadFileTask downloadFile = new DownloadFileTask();
         String path = Environment.getExternalStorageDirectory() + "/fauzias/latest_yummys/";
 
         List<Map<String, String>> downloadDetailsList = new ArrayList<Map<String, String>>();
@@ -111,7 +111,7 @@ public class ActivityUserPermissionServices {
         //TODO populate local database from popular yummys
         //TODO download images for selected popular yummys
 
-        DownloadFile downloadFile = new DownloadFile();
+        DownloadFileTask downloadFile = new DownloadFileTask();
 //        String url = "http://mathworld.wolfram.com/images/gifs/smstdo-o.jpg";
         String url = "http://www.fauziaskitchenfun.com/sites/default/files/styles/featured/public/orange%20cake.jpg";
         String newName = "icon_2";

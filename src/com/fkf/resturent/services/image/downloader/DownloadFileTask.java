@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
-public class DownloadFile extends AsyncTask<List<Map<String, String>>, Integer, String> {
+public class DownloadFileTask extends AsyncTask<List<Map<String, String>>, Integer, String> {
     @Override
     protected String doInBackground(List<Map<String, String>>... downloadFilesDetails) {
 
