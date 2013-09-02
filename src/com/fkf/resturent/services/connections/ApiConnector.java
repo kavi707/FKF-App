@@ -1,4 +1,4 @@
-package com.fkf.resturent.services.network;
+package com.fkf.resturent.services.connections;
 
 import android.util.Log;
 import com.fkf.resturent.database.Recipe;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * setup and communicate with the server api
+ * setup and communicate with the server connections
  * Created by kavi on 7/9/13.
  *
  * @author Kavimal Wijewardana <kavi707@gmail.com>
@@ -44,26 +44,30 @@ public class ApiConnector {
         String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/latest");
         List<Recipe> recipeList = new ArrayList<Recipe>();
         try {
-            JSONArray jsonArray = new JSONArray(jsonResult);
-            JSONObject jsonData = null;
-            for(int i = 0; i < jsonArray.length(); i++) {
-                jsonData = jsonArray.getJSONObject(i);
+            if (jsonResult != null) {
+                JSONArray jsonArray = new JSONArray(jsonResult);
+                JSONObject jsonData = null;
+                for(int i = 0; i < jsonArray.length(); i++) {
+                    jsonData = jsonArray.getJSONObject(i);
 
-                Recipe getRecipe = new Recipe();
-                getRecipe.setProductId(jsonData.getString("nid"));
-                getRecipe.setName(jsonData.getString("title"));
+                    Recipe getRecipe = new Recipe();
+                    getRecipe.setProductId(jsonData.getString("nid"));
+                    getRecipe.setName(jsonData.getString("title"));
 
-                recipeList.add(getRecipe);
+                    recipeList.add(getRecipe);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            throw e;
         }
 
         return recipeList;
     }
 
     /**
-     * function to call to rest api
+     * function to call to rest connections
      * @param requestUrl
      */
     private String callWebService(String requestUrl){
@@ -100,7 +104,7 @@ public class ApiConnector {
 
         try {
             HttpPost post = new HttpPost("http://10.0.2.2:7000/sms/send");
-//            HttpPost post = new HttpPost("http://www.fauziaskitchenfun.com/api/latest");
+//            HttpPost post = new HttpPost("http://www.fauziaskitchenfun.com/connections/latest");
             //initialized json object
             addresses.add("tel:94776351232");
             jsonObject.put("applicationId","APP_000001");

@@ -5,14 +5,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
-import android.util.Log;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.services.image.downloader.DownloadFile;
-import com.fkf.resturent.services.network.ApiConnector;
+import com.fkf.resturent.services.connections.ApiConnector;
 
 import java.io.File;
-import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
