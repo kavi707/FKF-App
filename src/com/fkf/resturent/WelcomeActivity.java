@@ -141,6 +141,8 @@ public class WelcomeActivity extends Activity {
                                                 userPermissionServices.createAppDirectories();
                                                 //update the database if server database is modified
                                                 userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
+                                                //update the recipe categories from the server data
+                                                userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
                                                 //populate latest yummy details and download images
 //                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this);
                                                 //populate popular yummy details and download images

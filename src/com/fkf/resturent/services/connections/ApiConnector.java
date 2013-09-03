@@ -36,15 +36,18 @@ import java.util.List;
  */
 public class ApiConnector {
 
-    public ArrayList<Recipe> getRecipesFromServer(String timeStamp, Activity activity) {
+    public void getRecipesFromServer(String timeStamp, Activity activity) {
 
         //TODO need to remove the following hardcoded timeStamp     value
         //this initialization is for testing
         timeStamp = "1376430210";
         RecipeDataSyncTask dataSyncTask = new RecipeDataSyncTask(activity);
         dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp);
+    }
 
-        return null;
+    public void getRecipeCategoriesFromServer(Activity activity) {
+        RecipeCategoryDataSyncTask dataSyncTask = new RecipeCategoryDataSyncTask(activity);
+        dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/category/retrieve");
     }
 
     public List<Recipe> getLatestYummysFromServer() {

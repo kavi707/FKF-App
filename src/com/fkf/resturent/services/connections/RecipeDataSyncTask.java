@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Background task for sync server data with the local data
+ * Background task for sync server recipes data with the local data
  * Created by kavi on 9/2/13.
  *
  * @author Kavimal Wijewardana <kavi707@gmail.com>

@@ -112,7 +112,6 @@ public class ActivityUserPermissionServices {
         //TODO download images for selected popular yummys
 
         DownloadFileTask downloadFile = new DownloadFileTask();
-//        String url = "http://mathworld.wolfram.com/images/gifs/smstdo-o.jpg";
         String url = "http://www.fauziaskitchenfun.com/sites/default/files/styles/featured/public/orange%20cake.jpg";
         String newName = "icon_2";
         String path = Environment.getExternalStorageDirectory() + "/fauzias/popular_yummys/";
@@ -143,6 +142,17 @@ public class ActivityUserPermissionServices {
 
         localDatabaseSQLiteOpenHelper.setLastModificationTimeStamp(currentTimeStamp);
 
+        return true;
+    }
+
+    /**
+     * update recipe categories from server database
+     * @param activity
+     * @return
+     */
+    public boolean updateLocalRecipeCategoriesFromServer(Activity activity) {
+
+        connector.getRecipeCategoriesFromServer(activity);
         return true;
     }
 }

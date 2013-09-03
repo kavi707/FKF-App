@@ -51,6 +51,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     //category table and columns
     public static final String CATEGORY_TABLE_NAME = "categories";
     public static final String CATEGORY_ID = "category_id";
+    public static final String CATEGORY_PRODUCT_ID = "category_product_id";
     public static final String CATEGORY_NAME = "category_name";
 
     //last database modified date & time details table columns
@@ -94,27 +95,6 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 IMAGE_URL + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
-
-        //temp testing purpose value adding
-        for (int i = 0; i < 3; i++) {
-            ContentValues values = new ContentValues();
-            values.put(PRODUCT_ID, 683 + i);
-            values.put(RECIPE_NAME, "recipe name - " + i);
-            values.put(RECIPE_DESCRIPTION, "recipe des - " + i);
-            values.put(INGREDIENTS, "recipe ingredients " + i);
-            values.put(INSTRUCTIONS, "recipe instructions " + i);
-            values.put(CATEGORY_ID, 1);
-            values.put(ADDED_DATE, "26-06-2013");
-            values.put(RATINGS, i);
-            values.put(IMAGE_URL, "http://news.cnet.com/i/bto/20080112/small_car.jpg");
-
-            try {
-                sqLiteDatabase.insert(RECIPES_TABLE_NAME, null, values);
-            } catch (SQLiteException ex) {
-                throw ex;
-            }
-        }
-        // temp block
     }
 
     /**
@@ -166,22 +146,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     private void createCategoriesTable(SQLiteDatabase sqLiteDatabase) {
         String createCategoriesTableQuery = "create table " + CATEGORY_TABLE_NAME + " ( " +
                 CATEGORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
+                CATEGORY_PRODUCT_ID + " int, " +
                 CATEGORY_NAME + " text " +
                 ");";
         sqLiteDatabase.execSQL(createCategoriesTableQuery);
-
-        //temp testing purpose value adding
-        for (int i = 0; i < 3; i++) {
-            ContentValues values = new ContentValues();
-            values.put(CATEGORY_NAME, "item - " + i);
-
-            try {
-                sqLiteDatabase.insert(CATEGORY_TABLE_NAME, null, values);
-            } catch (SQLiteException ex) {
-                throw ex;
-            }
-        }
-        // temp block
     }
 
     /**
@@ -277,8 +245,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
             if(!categoryCursor.isAfterLast()) {
                 do {
-                    int categoryId = categoryCursor.getInt(0);
-                    String categoryName = categoryCursor.getString(1);
+                    int categoryId = categoryCursor.getInt(1);
+                    String categoryName = categoryCursor.getString(2);
                     categoryList.add(categoryId+ ":" + categoryName);
                 } while (categoryCursor.moveToNext());
             }
@@ -288,6 +256,38 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         }
 
         return categoryList;
+    }
+
+    /**
+     * Add new category from the given category product id and category name
+     * @param categoryProductId
+     * @param categoryName
+     */
+    public void addNewCategory(int categoryProductId, String categoryName) {
+
+        localFKFDatabase = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(CATEGORY_PRODUCT_ID, categoryProductId);
+        values.put(CATEGORY_NAME, categoryName);
+
+        try {
+            localFKFDatabase.insert(CATEGORY_TABLE_NAME, null, values);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
+
+    /**
+     * delete current categories from the local database
+     */
+    public void deleteAllCategories() {
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            localFKFDatabase.delete(CATEGORY_TABLE_NAME, null, null);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
     }
 
     public ArrayList<Recipe> getRecipesFromCategoryId(int categoryId) {
