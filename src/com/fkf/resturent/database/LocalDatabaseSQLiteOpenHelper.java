@@ -228,12 +228,21 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      * get all recipe categories for the item menu
      * @return
      */
-    public ArrayList<String> getAllCategories(){
-        ArrayList<String> categoryList = new ArrayList<String>();
-        categoryList.add("Latest Yummys"); //default item for view the latest yummys and other stuff
+//    public ArrayList<String> getAllCategories(){
+    public ArrayList<RecipeCategory> getAllCategories(){
+        ArrayList<RecipeCategory> recipeCategoryList = new ArrayList<RecipeCategory>();
+
+        RecipeCategory latestYummy = new RecipeCategory();
+        latestYummy.setCategoryName("Latest Yummys");
+        latestYummy.setCategoryId(-1);
+        recipeCategoryList.add(latestYummy);
+
         //If user logged in to application
         if(LoginActivity.LOGGED_STATUS == 1){
-            categoryList.add("My Favorites");
+            RecipeCategory myFavorite = new RecipeCategory();
+            myFavorite.setCategoryName("My Favorites");
+            myFavorite.setCategoryId(-2);
+            recipeCategoryList.add(myFavorite);
         }
         localFKFDatabase = this.getWritableDatabase();
 
@@ -247,7 +256,13 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 do {
                     int categoryId = categoryCursor.getInt(1);
                     String categoryName = categoryCursor.getString(2);
-                    categoryList.add(categoryId+ ":" + categoryName);
+
+                    RecipeCategory recipeCategory = new RecipeCategory();
+                    recipeCategory.setCategoryId(categoryId);
+                    recipeCategory.setCategoryName(categoryName);
+
+                    recipeCategoryList.add(recipeCategory);
+
                 } while (categoryCursor.moveToNext());
             }
             categoryCursor.close();
@@ -255,7 +270,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             throw ex;
         }
 
-        return categoryList;
+        return recipeCategoryList;
     }
 
     /**
