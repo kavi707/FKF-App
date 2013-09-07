@@ -2,6 +2,7 @@ package com.fkf.resturent.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -46,7 +47,8 @@ public class RecipeListItem extends LinearLayout {
         this.recipe = recipe;
 
         recipeNameTextView.setText(recipe.getName());
-        recipeDescriptionTextView.setText(recipe.getDescription());
+        String shortDesc = recipe.getDescription().substring(0, 60);
+        recipeDescriptionTextView.setText(shortDesc);
         recipeRatingBar.setRating(recipe.getRatings());
 
         int loader = R.drawable.fkf;

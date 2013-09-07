@@ -15,8 +15,10 @@ import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.services.ActivityUserPermissionServices;
 import com.fkf.resturent.templates.LoginActivity;
+import com.fkf.resturent.templates.RecipesActivity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Holding the loading ui
@@ -181,8 +183,20 @@ public class WelcomeActivity extends Activity {
     }
 
     private void onContinue() {
-        Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
-        startActivity(loginIntent);
-        finish();
+
+        Map<String, String> lastLoginDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
+        if(!lastLoginDetails.isEmpty()) {
+            LoginActivity.LOGGED_STATUS = 1;
+            LoginActivity.LOGGED_USER = lastLoginDetails.get("username");
+            LoginActivity.LOGGED_USER_PASSWORD = lastLoginDetails.get("password");
+
+            Intent recipeIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
+            startActivity(recipeIntent);
+            finish();
+        } else {
+            Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+            finish();
+        }
     }
 }

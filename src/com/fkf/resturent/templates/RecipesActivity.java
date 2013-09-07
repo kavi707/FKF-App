@@ -53,7 +53,6 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ImageView secondPopularYummyImageView;
     ImageView thirdPopularYummyImageView;
 
-    private ArrayAdapter<String> menuItemListAdapter;
     private RecipeCategoryListAdapter recipeCategoryListAdapter;
     private RecipeListAdapter recipeListAdapter;
     private ArrayList<Recipe> recipeList;
@@ -295,6 +294,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 public void onClick(View view) {
                     LoginActivity.LOGGED_STATUS = 0;
                     LoginActivity.LOGGED_USER = null;
+                    LoginActivity.LOGGED_USER_PASSWORD = null;
+                    localDatabaseSQLiteOpenHelper.deleteLoginDetails();
                     Intent loginIntent = new Intent(RecipesActivity.this, LoginActivity.class);
                     startActivity(loginIntent);
                     finish();

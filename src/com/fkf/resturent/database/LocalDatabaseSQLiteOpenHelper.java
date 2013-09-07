@@ -11,7 +11,9 @@ import android.util.Log;
 import com.fkf.resturent.templates.LoginActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kavi on 6/23/13.
@@ -59,6 +61,13 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String MODIFICATION_ID = "modification_id";
     public static final String MODIFIED_TIME_STAMP = "modified_time_stamp";
 
+    //last login details table columns
+    public static final String LOGIN_DETAIL_TABLE_NAME = "last_login_details";
+    public static final String LOGIN_ID = "id";
+    public static final String LOGIN_STATUS = "login_status";
+    public static final String LAST_LOGIN_USERNAME = "last_login_username";
+    public static final String LAST_LOGIN_PASSWORD = "last_login_password";
+
     public LocalDatabaseSQLiteOpenHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
     }
@@ -68,6 +77,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         createRecipesTable(sqLiteDatabase);
         createCategoriesTable(sqLiteDatabase);
         createLastDatabaseModificationDetailsTable(sqLiteDatabase);
+        createLastLoginDetailsTable(sqLiteDatabase);
         createPopularYummysTable(sqLiteDatabase);
         createLatestYummysTable(sqLiteDatabase);
     }
@@ -165,6 +175,20 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * create last login details table
+     * @param sqLiteDatabase
+     */
+    private void createLastLoginDetailsTable(SQLiteDatabase sqLiteDatabase) {
+        String createLastLoginTableQuery = "create table " + LOGIN_DETAIL_TABLE_NAME + " ( " +
+                LOGIN_ID + " int not null, " +
+                LOGIN_STATUS + " int, " +
+                LAST_LOGIN_USERNAME + " text, " +
+                LAST_LOGIN_PASSWORD + " text " +
+                ");";
+        sqLiteDatabase.execSQL(createLastLoginTableQuery);
+    }
+
+    /**
      * return last modified time stamp saved in local database
      * @return
      */
@@ -225,10 +249,77 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * delete login details from the database
+     */
+    public void deleteLoginDetails(){
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            localFKFDatabase.delete(LOGIN_DETAIL_TABLE_NAME, LOGIN_ID + "=1",null);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
+
+    /**
+     * add last login detail record to system
+     * @param data
+     * @return
+     */
+    public boolean insertLoginDetails(Map<String, String> data) {
+
+        boolean result = false;
+        localFKFDatabase = this.getWritableDatabase();
+        assert(data != null);
+        ContentValues values = new ContentValues();
+        values.put(LOGIN_ID, 1);
+        values.put(LOGIN_STATUS, data.get("loginStatus"));
+        values.put(LAST_LOGIN_USERNAME, data.get("username"));
+        values.put(LAST_LOGIN_PASSWORD, data.get("password"));
+
+        try {
+            localFKFDatabase.insert(LOGIN_DETAIL_TABLE_NAME, null, values);
+            result = true;
+        } catch (SQLiteException ex) {
+            result = false;
+            throw ex;
+        }
+
+        return result;
+    }
+
+    /**
+     * get last login detail record
+     * @return
+     */
+    public Map<String, String> getLoginDetails(){
+
+        Map<String, String> detailsMap = new HashMap<String, String>();
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            String getLoginDetailsQry = "select * from " + LOGIN_DETAIL_TABLE_NAME + " where " + LOGIN_ID + " = 1";
+            Cursor loginDetailsCursor = localFKFDatabase.rawQuery(getLoginDetailsQry, null);
+            loginDetailsCursor.moveToFirst();
+
+            if(!loginDetailsCursor.isAfterLast()){
+                do {
+                    detailsMap.put("loginStatus", loginDetailsCursor.getString(1));
+                    detailsMap.put("email", loginDetailsCursor.getString(2));
+                    detailsMap.put("password", loginDetailsCursor.getString(3));
+                } while (loginDetailsCursor.moveToNext());
+            }
+            loginDetailsCursor.close();
+        } catch (SQLiteException ex) {
+            detailsMap = null;
+            throw ex;
+        }
+
+        return detailsMap;
+    }
+
+    /**
      * get all recipe categories for the item menu
      * @return
      */
-//    public ArrayList<String> getAllCategories(){
     public ArrayList<RecipeCategory> getAllCategories(){
         ArrayList<RecipeCategory> recipeCategoryList = new ArrayList<RecipeCategory>();
 
