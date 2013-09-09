@@ -187,6 +187,7 @@ public class WelcomeActivity extends Activity {
         Map<String, String> lastLoginDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
         if(!lastLoginDetails.isEmpty()) {
             LoginActivity.LOGGED_STATUS = 1;
+            LoginActivity.LOGGED_USER_ID = lastLoginDetails.get("userId");
             LoginActivity.LOGGED_USER = lastLoginDetails.get("username");
             LoginActivity.LOGGED_USER_PASSWORD = lastLoginDetails.get("password");
 

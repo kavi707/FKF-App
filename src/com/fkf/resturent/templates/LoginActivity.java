@@ -25,6 +25,7 @@ public class LoginActivity extends Activity {
     private Button loginButton;
     private TextView browsRecipesTextView;
 
+    public static String LOGGED_USER_ID;
     public static String LOGGED_USER;
     public static String LOGGED_USER_PASSWORD;
     public static int LOGGED_STATUS = 0;
@@ -57,12 +58,14 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //TODO these following values are for tempory usage. Need to get values from entered username password
+                LOGGED_USER_ID = "1";
                 LOGGED_USER = "kavimal"; //tempory initialization
                 LOGGED_USER_PASSWORD = "kavi123";
                 LOGGED_STATUS = 1;
 
                 Map<String, String> loginData = new HashMap<String, String>();
                 loginData.put("loginStatus", "1");
+                loginData.put("userId", LOGGED_USER_ID);
                 loginData.put("username",LOGGED_USER);
                 loginData.put("password",LOGGED_USER_PASSWORD);
 

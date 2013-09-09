@@ -64,6 +64,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     //last login details table columns
     public static final String LOGIN_DETAIL_TABLE_NAME = "last_login_details";
     public static final String LOGIN_ID = "id";
+    public static final String LOGIN_USER_ID = "user_id";
     public static final String LOGIN_STATUS = "login_status";
     public static final String LAST_LOGIN_USERNAME = "last_login_username";
     public static final String LAST_LOGIN_PASSWORD = "last_login_password";
@@ -182,6 +183,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         String createLastLoginTableQuery = "create table " + LOGIN_DETAIL_TABLE_NAME + " ( " +
                 LOGIN_ID + " int not null, " +
                 LOGIN_STATUS + " int, " +
+                LOGIN_USER_ID + " text, " +
                 LAST_LOGIN_USERNAME + " text, " +
                 LAST_LOGIN_PASSWORD + " text " +
                 ");";
@@ -273,6 +275,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(LOGIN_ID, 1);
         values.put(LOGIN_STATUS, data.get("loginStatus"));
+        values.put(LOGIN_USER_ID, data.get("userId"));
         values.put(LAST_LOGIN_USERNAME, data.get("username"));
         values.put(LAST_LOGIN_PASSWORD, data.get("password"));
 
@@ -303,8 +306,9 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             if(!loginDetailsCursor.isAfterLast()){
                 do {
                     detailsMap.put("loginStatus", loginDetailsCursor.getString(1));
-                    detailsMap.put("email", loginDetailsCursor.getString(2));
-                    detailsMap.put("password", loginDetailsCursor.getString(3));
+                    detailsMap.put("userId", loginDetailsCursor.getString(2));
+                    detailsMap.put("email", loginDetailsCursor.getString(3));
+                    detailsMap.put("password", loginDetailsCursor.getString(4));
                 } while (loginDetailsCursor.moveToNext());
             }
             loginDetailsCursor.close();
