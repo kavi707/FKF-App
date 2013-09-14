@@ -71,6 +71,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     //logged user favorite recipes table columns
     public static final String USER_FAVORITE_RECIPES_TABLE_NAME = "user_favorite_recipes";
+    public static final String ID = "id";
     // other columns are get from the recipes table column names
 
     public LocalDatabaseSQLiteOpenHelper(Context context) {
@@ -209,7 +210,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     private void createUserFavoriteRecipesTable(SQLiteDatabase sqLiteDatabase) {
         String createUserFavoriteRecipesTableQuery = "create table " + USER_FAVORITE_RECIPES_TABLE_NAME + " ( " +
-                RECIPE_ID + " int not null, " +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
                 PRODUCT_ID + " text, " +
                 LOGIN_USER_ID + " text " +
                 ");";
