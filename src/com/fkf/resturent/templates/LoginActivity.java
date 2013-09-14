@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.fkf.resturent.R;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
+import com.fkf.resturent.services.ActivityUserPermissionServices;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class LoginActivity extends Activity {
     public static String LOGGED_USER_PASSWORD;
     public static int LOGGED_STATUS = 0;
 
-
+    private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
 
     @Override
@@ -59,8 +60,8 @@ public class LoginActivity extends Activity {
             public void onClick(View view) {
                 //TODO these following values are for tempory usage. Need to get values from entered username password
                 LOGGED_USER_ID = "1";
-                LOGGED_USER = "kavimal"; //tempory initialization
-                LOGGED_USER_PASSWORD = "kavi123";
+                LOGGED_USER = "test_app"; //tempory initialization
+                LOGGED_USER_PASSWORD = "test_app";
                 LOGGED_STATUS = 1;
 
                 Map<String, String> loginData = new HashMap<String, String>();
@@ -70,6 +71,8 @@ public class LoginActivity extends Activity {
                 loginData.put("password",LOGGED_USER_PASSWORD);
 
                 localDatabaseSQLiteOpenHelper.insertLoginDetails(loginData);
+                //update the logged user's favorite recipes
+                userPermissionServices.updateUserFavoriteRecipesFromServer(LoginActivity.this);
 
                 Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
                 startActivity(recipesIntent);

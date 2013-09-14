@@ -155,4 +155,15 @@ public class ActivityUserPermissionServices {
         connector.getRecipeCategoriesFromServer(activity);
         return true;
     }
+
+    /**
+     * update logged user favorite recipes from server database
+     * @param activity
+     * @return
+     */
+    public boolean updateUserFavoriteRecipesFromServer(Activity activity) {
+
+        connector.getUserFavoriteRecipeIdsFromServer(activity);
+        return true;
+    }
 }

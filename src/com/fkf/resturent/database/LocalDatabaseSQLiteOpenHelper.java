@@ -69,6 +69,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String LAST_LOGIN_USERNAME = "last_login_username";
     public static final String LAST_LOGIN_PASSWORD = "last_login_password";
 
+    //logged user favorite recipes table columns
+    public static final String USER_FAVORITE_RECIPES_TABLE_NAME = "user_favorite_recipes";
+    // other columns are get from the recipes table column names
+
     public LocalDatabaseSQLiteOpenHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
     }
@@ -81,12 +85,21 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         createLastLoginDetailsTable(sqLiteDatabase);
         createPopularYummysTable(sqLiteDatabase);
         createLatestYummysTable(sqLiteDatabase);
+        createUserFavoriteRecipesTable(sqLiteDatabase);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
 
     }
+
+
+
+
+
+                            /******************************************************/
+                            /********* Database table creation methods ************/
+                            /******************************************************/
 
     /**
      * create recipes table
@@ -191,6 +204,50 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * create logged user favorite recipes table
+     * @param sqLiteDatabase
+     */
+    private void createUserFavoriteRecipesTable(SQLiteDatabase sqLiteDatabase) {
+        String createUserFavoriteRecipesTableQuery = "create table " + USER_FAVORITE_RECIPES_TABLE_NAME + " ( " +
+                RECIPE_ID + " int not null, " +
+                PRODUCT_ID + " text, " +
+                LOGIN_USER_ID + " text " +
+                ");";
+        sqLiteDatabase.execSQL(createUserFavoriteRecipesTableQuery);
+    }
+
+
+
+
+
+                            /***************************************************/
+                            /********* Database functioning methods ************/
+                            /***************************************************/
+
+
+
+    /**********************************************************/
+    /********* Last Modified details table methods ************/
+    /**********************************************************/
+    /**
+     * set new modified time stamp to local database
+     * @param newModifiedTimeStamp
+     */
+    public void setLastModificationTimeStamp(String newModifiedTimeStamp) {
+
+        localFKFDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(MODIFIED_TIME_STAMP, newModifiedTimeStamp);
+
+        try {
+            localFKFDatabase.insert(LAST_MODIFIED_DETAILS_TABLE_NAME, null, values);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
+
+    /**
      * return last modified time stamp saved in local database
      * @return
      */
@@ -221,24 +278,6 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * set new modified time stamp to local database
-     * @param newModifiedTimeStamp
-     */
-    public void setLastModificationTimeStamp(String newModifiedTimeStamp) {
-
-        localFKFDatabase = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put(MODIFIED_TIME_STAMP, newModifiedTimeStamp);
-
-        try {
-            localFKFDatabase.insert(LAST_MODIFIED_DETAILS_TABLE_NAME, null, values);
-        } catch (SQLiteException ex) {
-            throw ex;
-        }
-    }
-
-    /**
      * delete last modified time stamp from the local database
      */
     public void deleteLastModifiedTimeStamp() {
@@ -250,18 +289,12 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * delete login details from the database
-     */
-    public void deleteLoginDetails(){
-        localFKFDatabase = this.getWritableDatabase();
-        try {
-            localFKFDatabase.delete(LOGIN_DETAIL_TABLE_NAME, LOGIN_ID + "=1",null);
-        } catch (SQLiteException ex) {
-            throw ex;
-        }
-    }
 
+
+
+    /**************************************************/
+    /********* Login details table methods ************/
+    /**************************************************/
     /**
      * add last login detail record to system
      * @param data
@@ -321,6 +354,43 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * delete login details from the database
+     */
+    public void deleteLoginDetails(){
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            localFKFDatabase.delete(LOGIN_DETAIL_TABLE_NAME, LOGIN_ID + "=1",null);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
+
+
+
+    /****************************************************/
+    /********* Recipe category table methods ************/
+    /****************************************************/
+    /**
+     * Add new category from the given category product id and category name
+     * @param categoryProductId
+     * @param categoryName
+     */
+    public void addNewCategory(int categoryProductId, String categoryName) {
+
+        localFKFDatabase = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(CATEGORY_PRODUCT_ID, categoryProductId);
+        values.put(CATEGORY_NAME, categoryName);
+
+        try {
+            localFKFDatabase.insert(CATEGORY_TABLE_NAME, null, values);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
+
+    /**
      * get all recipe categories for the item menu
      * @return
      */
@@ -369,32 +439,45 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Add new category from the given category product id and category name
-     * @param categoryProductId
-     * @param categoryName
-     */
-    public void addNewCategory(int categoryProductId, String categoryName) {
-
-        localFKFDatabase = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(CATEGORY_PRODUCT_ID, categoryProductId);
-        values.put(CATEGORY_NAME, categoryName);
-
-        try {
-            localFKFDatabase.insert(CATEGORY_TABLE_NAME, null, values);
-        } catch (SQLiteException ex) {
-            throw ex;
-        }
-    }
-
-    /**
      * delete current categories from the local database
      */
     public void deleteAllCategories() {
         localFKFDatabase = this.getWritableDatabase();
         try {
             localFKFDatabase.delete(CATEGORY_TABLE_NAME, null, null);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
+
+
+
+
+
+    /********************************************/
+    /********* Recipes table methods ************/
+    /********************************************/
+    /**
+     * save the given recipe from caller function
+     * @param recipe
+     */
+    public void saveRecipe(Recipe recipe) {
+
+        localFKFDatabase = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(PRODUCT_ID, recipe.getProductId());
+        values.put(RECIPE_NAME, recipe.getName());
+        values.put(RECIPE_DESCRIPTION, recipe.getDescription());
+        values.put(INGREDIENTS, recipe.getIngredients());
+        values.put(INSTRUCTIONS, recipe.getInstructions());
+        values.put(CATEGORY_ID, recipe.getCategoryId());
+        values.put(ADDED_DATE, "26-06-2013");
+        values.put(RATINGS, recipe.getRatings());
+        values.put(IMAGE_URL, recipe.getImageUrl());
+
+        try {
+            localFKFDatabase.insert(RECIPES_TABLE_NAME, null, values);
         } catch (SQLiteException ex) {
             throw ex;
         }
@@ -546,31 +629,56 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * save the given recipe from caller function
-     * @param recipe
+     * this method is for testing purposes. check the recipes in local database.
      */
-    public void saveRecipe(Recipe recipe) {
-
+    public void getAllRecipes() {
         localFKFDatabase = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(PRODUCT_ID, recipe.getProductId());
-        values.put(RECIPE_NAME, recipe.getName());
-        values.put(RECIPE_DESCRIPTION, recipe.getDescription());
-        values.put(INGREDIENTS, recipe.getIngredients());
-        values.put(INSTRUCTIONS, recipe.getInstructions());
-        values.put(CATEGORY_ID, recipe.getCategoryId());
-        values.put(ADDED_DATE, "26-06-2013");
-        values.put(RATINGS, recipe.getRatings());
-        values.put(IMAGE_URL, recipe.getImageUrl());
-
         try {
-            localFKFDatabase.insert(RECIPES_TABLE_NAME, null, values);
+            String grepRecipeQry = "select * from " + RECIPES_TABLE_NAME;
+            Cursor recipeCursor = localFKFDatabase.rawQuery(grepRecipeQry, null);
+
+            recipeCursor.moveToFirst();
+
+            if(!recipeCursor.isAfterLast()) {
+                do {
+                    int recipeId = recipeCursor.getInt(0);
+                    Log.d("id", String.valueOf(recipeId));
+                    String recipeName = recipeCursor.getString(1);
+                    Log.d("recipeName", recipeName);
+                    String recipeDescription = recipeCursor.getString(2);
+                    Log.d("recipeDes", recipeDescription);
+                    int recipeCategoryId = recipeCursor.getInt(3);
+                    Log.d("recipeCategory", String.valueOf(recipeCategoryId));
+                    String recipeAddedDate = recipeCursor.getString(4);
+                    Log.d("recipeAddDate", recipeAddedDate);
+                    int recipeRatings = recipeCursor.getInt(5);
+                    Log.d("recipeRatings", String.valueOf(recipeRatings));
+                    String recipeImageUrl = recipeCursor.getString(6);
+                    Log.d("url", recipeImageUrl);
+                } while (recipeCursor.moveToNext());
+            }
+        } catch (SQLiteException ex) {
+
+        }
+    }
+
+    /**
+     * delete all recipes in local database
+     */
+    public void deleteAllRecipes() {
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            localFKFDatabase.delete(RECIPES_TABLE_NAME, null, null);
         } catch (SQLiteException ex) {
             throw ex;
         }
     }
 
+
+
+    /***************************************************/
+    /********* Latest Recipes table methods ************/
+    /***************************************************/
     /**
      * save the given latest recipe from the caller function
      * @param latestRecipes
@@ -605,49 +713,69 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     }
 
+
+
+
+    /**********************************************************/
+    /********* User favorite Recipes table methods ************/
+    /**********************************************************/
     /**
-     * delete all recipes in local database
+     *
+     * @param recipeProductId
+     * @param userId
      */
-    public void deleteAllRecipes() {
+    public void saveUserFavoriteRecipes(int recipeProductId, String userId) {
+
         localFKFDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(PRODUCT_ID, recipeProductId);
+        values.put(LOGIN_USER_ID, userId);
+
         try {
-            localFKFDatabase.delete(RECIPES_TABLE_NAME, null, null);
+            localFKFDatabase.insert(USER_FAVORITE_RECIPES_TABLE_NAME, null, values);
         } catch (SQLiteException ex) {
             throw ex;
         }
     }
 
     /**
-     * this method is for testing purposes. check the recipes in local database.
+     * query favorite recipe ids from local database and return them as string list
+     * @return
      */
-    public void getAllRecipes() {
+    public List<String> getLoggedUserFavoriteRecipeIds() {
         localFKFDatabase = this.getWritableDatabase();
+        List<String> favoriteRecipeIds = new ArrayList<String>();
+
         try {
-            String grepRecipeQry = "select * from " + RECIPES_TABLE_NAME;
-            Cursor recipeCursor = localFKFDatabase.rawQuery(grepRecipeQry, null);
+            String getUserFavoriteRecipesQuery = "SELECT * FROM " + USER_FAVORITE_RECIPES_TABLE_NAME;
+            Cursor favoriteRecipesCursor = localFKFDatabase.rawQuery(getUserFavoriteRecipesQuery, null);
 
-            recipeCursor.moveToFirst();
+            favoriteRecipesCursor.moveToFirst();
 
-            if(!recipeCursor.isAfterLast()) {
-                do {
-                    int recipeId = recipeCursor.getInt(0);
-                    Log.d("id", String.valueOf(recipeId));
-                    String recipeName = recipeCursor.getString(1);
-                    Log.d("recipeName", recipeName);
-                    String recipeDescription = recipeCursor.getString(2);
-                    Log.d("recipeDes", recipeDescription);
-                    int recipeCategoryId = recipeCursor.getInt(3);
-                    Log.d("recipeCategory", String.valueOf(recipeCategoryId));
-                    String recipeAddedDate = recipeCursor.getString(4);
-                    Log.d("recipeAddDate", recipeAddedDate);
-                    int recipeRatings = recipeCursor.getInt(5);
-                    Log.d("recipeRatings", String.valueOf(recipeRatings));
-                    String recipeImageUrl = recipeCursor.getString(6);
-                    Log.d("url", recipeImageUrl);
-                } while (recipeCursor.moveToNext());
+            if(!favoriteRecipesCursor.isAfterLast()) {
+
+                do{
+                    String favoriteRecipeProductId = favoriteRecipesCursor.getString(1);
+                    favoriteRecipeIds.add(favoriteRecipeProductId);
+                } while (favoriteRecipesCursor.moveToNext());
             }
         } catch (SQLiteException ex) {
+            throw ex;
+        }
 
+        return favoriteRecipeIds;
+    }
+
+    /**
+     * delete user favorite recipe table items from the local database
+     */
+    public void deleteAllUserFavoriteRecipes() {
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            localFKFDatabase.delete(USER_FAVORITE_RECIPES_TABLE_NAME, null, null);
+        } catch (SQLiteException ex) {
+            throw ex;
         }
     }
 }

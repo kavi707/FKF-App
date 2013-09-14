@@ -3,6 +3,7 @@ package com.fkf.resturent.services.connections;
 import android.app.Activity;
 import android.util.Log;
 import com.fkf.resturent.database.Recipe;
+import com.fkf.resturent.templates.LoginActivity;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -36,6 +37,45 @@ import java.util.List;
  */
 public class ApiConnector {
 
+    /**
+     * add recipe to user favorite list
+     * @param recipeId
+     * @return
+     */
+    public boolean addToMyFavorite(String recipeId) {
+
+        String addMyFavoriteUrl = "http://www.fauziaskitchenfun.com/api/favourites/create";
+        boolean result = false;
+
+        JSONObject reqParams = new JSONObject();
+        try {
+            reqParams.put("username", LoginActivity.LOGGED_USER);
+            reqParams.put("password", LoginActivity.LOGGED_USER_PASSWORD);
+            reqParams.put("id", recipeId);
+
+            result = this.sendHTTPPost(reqParams, addMyFavoriteUrl);
+
+            return result;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return result;
+        }
+    }
+
+    /**
+     * update the local database from logged user favorite recipes
+     * @param activity
+     */
+    public void getUserFavoriteRecipeIdsFromServer(Activity activity) {
+        FavoriteRecipeSyncTask favoriteRecipeSyncTask = new FavoriteRecipeSyncTask(activity);
+        favoriteRecipeSyncTask.execute("http://www.fauziaskitchenfun.com/api/favourites/retrieve?userid=" + LoginActivity.LOGGED_USER_ID);
+    }
+
+    /**
+     * get the updated recipes from the server using given time stamp
+     * @param timeStamp
+     * @param activity
+     */
     public void getRecipesFromServer(String timeStamp, Activity activity) {
 
         //TODO need to remove the following hardcoded timeStamp     value
@@ -45,11 +85,19 @@ public class ApiConnector {
         dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp);
     }
 
+    /**
+     * get all categories from the server
+     * @param activity
+     */
     public void getRecipeCategoriesFromServer(Activity activity) {
         RecipeCategoryDataSyncTask dataSyncTask = new RecipeCategoryDataSyncTask(activity);
         dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/category/retrieve");
     }
 
+    /**
+     * get latest yummys from the server
+     * @return
+     */
     public List<Recipe> getLatestYummysFromServer() {
         String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/latest");
         List<Recipe> recipeList = new ArrayList<Recipe>();
@@ -103,31 +151,17 @@ public class ApiConnector {
      * function to send http posts with json object
      * @param req
      */
-    private void sendHTTPPost(JSONObject req){
+    private boolean sendHTTPPost(JSONObject req, String url){
 
         HttpClient client = new DefaultHttpClient();
         HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000);
         HttpResponse response;
 
-        JSONObject jsonObject = new JSONObject();
-        List<String> addresses = new ArrayList<String>();
-
         try {
-            HttpPost post = new HttpPost("http://10.0.2.2:7000/sms/send");
-//            HttpPost post = new HttpPost("http://www.fauziaskitchenfun.com/connections/latest");
-            //initialized json object
-            addresses.add("tel:94776351232");
-            jsonObject.put("applicationId","APP_000001");
-            jsonObject.put("password", "pass");
-            jsonObject.put("message","Hi android");
-            jsonObject.put("destinationAddresses",addresses);
-            jsonObject.put("deliveryStatusRequest",0);
+//            HttpPost post = new HttpPost("http://10.0.2.2:7000/sms/send");
+            HttpPost post = new HttpPost(url);
 
-            /*jsonObject.put("quizName", "test quiz");
-            jsonObject.put("quizDescription", "test quiz description");
-            jsonObject.put("quizTime", "60");*/
-
-            StringEntity se = new StringEntity(jsonObject.toString());
+            StringEntity se = new StringEntity(req.toString());
             se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             post.setEntity(se);
             response = client.execute(post);
@@ -147,16 +181,20 @@ public class ApiConnector {
                     }
                     in.close();
                     String result = builder.toString();
-                    Log.d("Tag","Success Response : " + result);
+                    Log.d("status","Success Response : " + result);
+                    return true;
                 } else {
                     Log.d("error status code", String.valueOf(statusCode));
+                    return false;
                 }
             } else {
                 Log.d("Error", "null response after sending http req");
+                return false;
             }
 
         } catch (Exception ex) {
             Log.d("Exception", ex.toString());
+            return false;
         }
     }
 }
