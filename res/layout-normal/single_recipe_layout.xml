@@ -30,7 +30,7 @@
                     android:layout_height="fill_parent">
 
                 <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="260dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Large Text"
@@ -41,7 +41,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/add_favorite"
-                        android:id="@+id/imageButton" android:layout_gravity="right|center_vertical"/>
+                        android:id="@+id/myFavoriteImageButton"
+                        android:layout_gravity="right|center_vertical"/>
             </FrameLayout>
 
             <TextView

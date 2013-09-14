@@ -44,8 +44,13 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
                     getRecipe.setProductId(jsonData.getString("id"));
                     getRecipe.setName(jsonData.getString("title"));
                     getRecipe.setImageUrl(jsonData.getString("image_s"));
-                    getRecipe.setDescription(jsonData.getString("desc"));
-                    getRecipe.setInstructions(jsonData.getString("instructions"));
+
+                    String description = jsonData.getString("desc").replace("[\"", "").replace("\"]", "");
+                    getRecipe.setDescription(description);
+
+                    String instructions = jsonData.getString("instructions").replace("[\"", "").replace("\"]", "");
+                    getRecipe.setInstructions(instructions);
+
                     getRecipe.setRatings(jsonData.getInt("rating"));
                     getRecipe.setCategoryId(jsonData.getInt("category"));
                     getRecipe.setAddedDate(jsonData.getString("created"));

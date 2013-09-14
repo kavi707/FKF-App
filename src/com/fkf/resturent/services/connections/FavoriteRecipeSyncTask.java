@@ -35,7 +35,7 @@ public class FavoriteRecipeSyncTask extends AsyncTask<String, Void, String> {
                 for(int i=0; i < jsonArray.length(); i++) {
                     jsonData = jsonArray.getJSONObject(i);
 
-                    this.localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(jsonData.getInt("id"), LoginActivity.LOGGED_USER_ID);
+                    this.localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(jsonData.getString("id"), LoginActivity.LOGGED_USER_ID);
                 }
             }
         } catch (JSONException e) {

@@ -658,6 +658,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     Log.d("url", recipeImageUrl);
                 } while (recipeCursor.moveToNext());
             }
+            recipeCursor.close();
         } catch (SQLiteException ex) {
 
         }
@@ -725,7 +726,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param recipeProductId
      * @param userId
      */
-    public void saveUserFavoriteRecipes(int recipeProductId, String userId) {
+    public void saveUserFavoriteRecipes(String recipeProductId, String userId) {
 
         localFKFDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -761,11 +762,51 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     favoriteRecipeIds.add(favoriteRecipeProductId);
                 } while (favoriteRecipesCursor.moveToNext());
             }
+            favoriteRecipesCursor.close();
         } catch (SQLiteException ex) {
             throw ex;
         }
 
         return favoriteRecipeIds;
+    }
+
+    /**
+     * check given recipe is favorite recipe of the logged user
+     * @param recipeProductId
+     * @param userId
+     * @return
+     */
+    public boolean isUserFavoriteRecipe(String recipeProductId, String userId) {
+        boolean isFavorite = false;
+        localFKFDatabase = this.getWritableDatabase();
+
+        try {
+            String isFavoriteCheckQuery = "SELECT * FROM " + USER_FAVORITE_RECIPES_TABLE_NAME + " WHERE " + PRODUCT_ID + "=" + recipeProductId
+                    + " AND " + LOGIN_USER_ID + "=" + userId;
+
+            Cursor favoriteRecipeCursor = localFKFDatabase.rawQuery(isFavoriteCheckQuery, null);
+
+            if(!favoriteRecipeCursor.isAfterLast()) {
+                isFavorite = true;
+            } else {
+                isFavorite = false;
+            }
+            favoriteRecipeCursor.close();
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+
+        return isFavorite;
+    }
+
+    public void removeFromUserFavorite(String recipeProductId) {
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            String where = PRODUCT_ID + " = '" + recipeProductId + "'";
+            localFKFDatabase.delete(USER_FAVORITE_RECIPES_TABLE_NAME, where, null);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
     }
 
     /**

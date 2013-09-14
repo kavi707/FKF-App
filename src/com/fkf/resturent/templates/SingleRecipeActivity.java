@@ -3,6 +3,8 @@ package com.fkf.resturent.templates;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import com.fkf.resturent.R;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
+import com.fkf.resturent.services.connections.ApiConnector;
 import com.fkf.resturent.services.image.loader.ImageLoader;
 
 import java.util.ArrayList;
@@ -27,9 +30,12 @@ public class SingleRecipeActivity extends Activity {
     private TextView singleRecipeDescriptionTextView;
     private TextView singleRecipeContentLabelTextView;
     private ImageView singleRecipeImageViewer;
+    private ImageButton singleRecipeMyFavoriteImageButton;
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
+    private ApiConnector connector = new ApiConnector();
     private Recipe selectedRecipe;
+    private boolean isFavorite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,7 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeDescriptionTextView = (TextView) findViewById(R.id.singleRecipeDescriptionTextView);
         singleRecipeContentLabelTextView = (TextView) findViewById(R.id.singleRecipeContentLabelTextView);
         singleRecipeImageViewer = (ImageView) findViewById(R.id.singleRecipeImageView);
+        singleRecipeMyFavoriteImageButton = (ImageButton) findViewById(R.id.myFavoriteImageButton);
 
         Bundle extras = getIntent().getExtras();
         int selectedRecipeId = extras.getInt("SELECTED_RECIPE_ID");
@@ -73,6 +80,27 @@ public class SingleRecipeActivity extends Activity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                isFavorite = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+
+                if(isFavorite) {
+                    singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.remove_favorite);
+                }
+
+                singleRecipeMyFavoriteImageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(isFavorite) {
+                            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.add_favorite);
+                            localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
+                            //TODO remove favorite function must be added to here.
+                        } else {
+                            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.remove_favorite);
+                            localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                            boolean addFavoriteResult = connector.addToMyFavorite(selectedRecipe.getProductId());
+                        }
+                    }
+                });
             }
         }
     }
