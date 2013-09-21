@@ -27,7 +27,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * setup and communicate with the server connections
@@ -37,6 +39,33 @@ import java.util.List;
  */
 public class ApiConnector {
 
+    //TODO this is not complete
+    public Map<String, Object> userLogin(Map<String, String> loginData) {
+        Map<String, Object> statusMap = new HashMap<String, Object>();
+        String userLoginUrl = "http://www.fauziaskitchenfun.com/api/user/login";
+        String result = null;
+
+        JSONObject reqParams = new JSONObject();
+        try {
+            reqParams.put("username", loginData.get("username"));
+            reqParams.put("password", loginData.get("password"));
+
+            result = this.sendHTTPPost(reqParams, userLoginUrl);
+            JSONObject jsonData = new JSONObject(result);
+            JSONObject jsonUserData = new JSONObject((String) jsonData.get("user"));
+
+            String userId = jsonUserData.getString("uid");
+            statusMap.put("status", true);
+            statusMap.put("userId", userId);
+            statusMap.put("username", loginData.get("username"));
+            statusMap.put("password", loginData.get("password"));
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return  statusMap;
+    }
+
     /**
      * add recipe to user favorite list
      * @param recipeId
@@ -45,21 +74,96 @@ public class ApiConnector {
     public boolean addToMyFavorite(String recipeId) {
 
         String addMyFavoriteUrl = "http://www.fauziaskitchenfun.com/api/favourites/create";
-        boolean result = false;
+        String result = null;
+        boolean status = false;
 
         JSONObject reqParams = new JSONObject();
         try {
             reqParams.put("username", LoginActivity.LOGGED_USER);
             reqParams.put("password", LoginActivity.LOGGED_USER_PASSWORD);
             reqParams.put("id", recipeId);
+            reqParams.put("action", "add");
 
             result = this.sendHTTPPost(reqParams, addMyFavoriteUrl);
+            JSONObject jsonData = new JSONObject(result);
 
-            return result;
+            String state = jsonData.getString("status");
+            if(state.equals(true))
+                status = true;
+            else
+                status = false;
         } catch (JSONException e) {
+            status = false;
             e.printStackTrace();
-            return result;
         }
+
+        return status;
+    }
+
+    /**
+     * remove recipe from user favorite
+     * @param recipeId
+     * @return
+     */
+    public boolean removeFromMyFavorite(String recipeId) {
+        String addMyFavoriteUrl = "http://www.fauziaskitchenfun.com/api/favourites/create";
+        String result = null;
+        boolean status = false;
+
+        JSONObject reqParams = new JSONObject();
+        try {
+            reqParams.put("username", LoginActivity.LOGGED_USER);
+            reqParams.put("password", LoginActivity.LOGGED_USER_PASSWORD);
+            reqParams.put("id", recipeId);
+            reqParams.put("action", "remove");
+
+            result = this.sendHTTPPost(reqParams, addMyFavoriteUrl);
+            JSONObject jsonData = new JSONObject(result);
+
+            String state = jsonData.getString("status");
+            if(state.equals(true))
+                status = true;
+            else
+                status = false;
+        } catch (JSONException e) {
+            status = false;
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
+    /**
+     * check the given recipe is user favorite or not
+     * @param recipeId
+     * @return
+     */
+    public boolean isMyFavorite(String recipeId) {
+        String addMyFavoriteUrl = "http://www.fauziaskitchenfun.com/api/favourites/create";
+        String result = null;
+        boolean status = false;
+
+        JSONObject reqParams = new JSONObject();
+        try {
+            reqParams.put("username", LoginActivity.LOGGED_USER);
+            reqParams.put("password", LoginActivity.LOGGED_USER_PASSWORD);
+            reqParams.put("id", recipeId);
+            reqParams.put("action", "check");
+
+            result = this.sendHTTPPost(reqParams, addMyFavoriteUrl);
+            JSONObject jsonData = new JSONObject(result);
+
+            String state = jsonData.getString("status");
+            if(state.equals(true))
+                status = true;
+            else
+                status = false;
+        } catch (JSONException e) {
+            status = false;
+            e.printStackTrace();
+        }
+
+        return status;
     }
 
     /**
@@ -151,11 +255,13 @@ public class ApiConnector {
      * function to send http posts with json object
      * @param req
      */
-    private boolean sendHTTPPost(JSONObject req, String url){
+    private String sendHTTPPost(JSONObject req, String url){
 
         HttpClient client = new DefaultHttpClient();
         HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000);
         HttpResponse response;
+
+        String responseResult = null;
 
         try {
 //            HttpPost post = new HttpPost("http://10.0.2.2:7000/sms/send");
@@ -181,20 +287,21 @@ public class ApiConnector {
                     }
                     in.close();
                     String result = builder.toString();
+                    responseResult = result;
                     Log.d("status","Success Response : " + result);
-                    return true;
                 } else {
                     Log.d("error status code", String.valueOf(statusCode));
-                    return false;
+                    responseResult = "error";
                 }
             } else {
                 Log.d("Error", "null response after sending http req");
-                return false;
+                responseResult = "error";
             }
 
         } catch (Exception ex) {
             Log.d("Exception", ex.toString());
-            return false;
         }
+
+        return responseResult;
     }
 }

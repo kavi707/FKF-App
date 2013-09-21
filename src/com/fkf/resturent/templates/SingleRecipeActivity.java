@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
+import android.widget.*;
 
 import com.fkf.resturent.R;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
+import com.fkf.resturent.services.ActivityUserPermissionServices;
 import com.fkf.resturent.services.connections.ApiConnector;
 import com.fkf.resturent.services.image.loader.ImageLoader;
 
@@ -32,10 +30,12 @@ public class SingleRecipeActivity extends Activity {
     private ImageView singleRecipeImageViewer;
     private ImageButton singleRecipeMyFavoriteImageButton;
 
+    private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
     private ApiConnector connector = new ApiConnector();
     private Recipe selectedRecipe;
     private boolean isFavorite = false;
+    private boolean isOnline = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +81,28 @@ public class SingleRecipeActivity extends Activity {
                     e.printStackTrace();
                 }
 
-                isFavorite = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                isOnline = userPermissionServices.isOnline(SingleRecipeActivity.this);
+
+                boolean dbFovStatus = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                if (isOnline) {
+                    boolean serverFovStatus = connector.isMyFavorite(selectedRecipe.getProductId());
+
+                    if (dbFovStatus && serverFovStatus) {
+                        isFavorite = true;
+                    } else {
+                        if (dbFovStatus) {
+                            localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
+                            isFavorite = false;
+                        }
+
+                        if (serverFovStatus) {
+                            localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                            isFavorite = true;
+                        }
+                    }
+                } else {
+                    isFavorite = dbFovStatus;
+                }
 
                 if(isFavorite) {
                     singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.remove_favorite);
@@ -90,14 +111,36 @@ public class SingleRecipeActivity extends Activity {
                 singleRecipeMyFavoriteImageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(isFavorite) {
-                            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.add_favorite);
-                            localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
-                            //TODO remove favorite function must be added to here.
+
+                        if (isOnline) {
+                            if (isFavorite) {
+
+                                boolean removeFavoriteResult = connector.removeFromMyFavorite(selectedRecipe.getProductId());
+                                if(removeFavoriteResult) {
+                                    singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.add_favorite);
+                                    localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
+                                    Toast.makeText(getApplicationContext(),
+                                            "Removed this recipe from you favorite list", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Removing was failed", Toast.LENGTH_LONG).show();
+                                }
+                            } else {
+
+                                boolean addFavoriteResult = connector.addToMyFavorite(selectedRecipe.getProductId());
+                                if(addFavoriteResult) {
+                                    singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.remove_favorite);
+                                    localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                                    Toast.makeText(getApplicationContext(),
+                                            "This recipe is added to your favorite list", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Adding was failed", Toast.LENGTH_LONG).show();
+                                }
+                            }
                         } else {
-                            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.remove_favorite);
-                            localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
-                            boolean addFavoriteResult = connector.addToMyFavorite(selectedRecipe.getProductId());
+                            Toast.makeText(getApplicationContext(),
+                                    "Application is in offline mode. Please on your mobile data", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
