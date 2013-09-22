@@ -2,6 +2,7 @@ package com.fkf.resturent.services.connections;
 
 import android.app.Activity;
 import android.util.Log;
+import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.templates.LoginActivity;
 import org.apache.http.HttpEntity;
@@ -39,26 +40,32 @@ import java.util.Map;
  */
 public class ApiConnector {
 
-    //TODO this is not complete
-    public Map<String, Object> userLogin(Map<String, String> loginData) {
-        Map<String, Object> statusMap = new HashMap<String, Object>();
-        String userLoginUrl = "http://www.fauziaskitchenfun.com/api/user/login";
+    /**
+     * this is for user login post method. Its returns logged user's user id
+     * @param username
+     * @param password
+     * @return statusMap
+     */
+    //TODO need to handle the error, username or password case
+    public Map<String, String> userLogin(String username, String password) {
+        Map<String, String> statusMap = new HashMap<String, String>();
+        String userLoginUrl = "http://www.fauziaskitchenfun.com/api/user/login"; //TODO Url has been changed. but new url is not working
         String result = null;
 
         JSONObject reqParams = new JSONObject();
         try {
-            reqParams.put("username", loginData.get("username"));
-            reqParams.put("password", loginData.get("password"));
+            reqParams.put("username", username);
+            reqParams.put("password", password);
 
             result = this.sendHTTPPost(reqParams, userLoginUrl);
             JSONObject jsonData = new JSONObject(result);
-            JSONObject jsonUserData = new JSONObject((String) jsonData.get("user"));
+            JSONObject jsonUserData = (JSONObject) jsonData.get("user");
 
             String userId = jsonUserData.getString("uid");
-            statusMap.put("status", true);
+            statusMap.put("loginStatus", "1");
             statusMap.put("userId", userId);
-            statusMap.put("username", loginData.get("username"));
-            statusMap.put("password", loginData.get("password"));
+            statusMap.put("username", username);
+            statusMap.put("password", password);
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
@@ -71,7 +78,7 @@ public class ApiConnector {
      * @param recipeId
      * @return
      */
-    public boolean addToMyFavorite(String recipeId) {
+    public boolean addToMyFavorite(String recipeId, Activity activity) {
 
         String addMyFavoriteUrl = "http://www.fauziaskitchenfun.com/api/favourites/create";
         String result = null;
@@ -79,8 +86,11 @@ public class ApiConnector {
 
         JSONObject reqParams = new JSONObject();
         try {
-            reqParams.put("username", LoginActivity.LOGGED_USER);
-            reqParams.put("password", LoginActivity.LOGGED_USER_PASSWORD);
+            LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
+            Map<String, String> loggedUserDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
+
+            reqParams.put("username", loggedUserDetails.get("username"));
+            reqParams.put("password", loggedUserDetails.get("username"));
             reqParams.put("id", recipeId);
             reqParams.put("action", "add");
 
@@ -88,7 +98,7 @@ public class ApiConnector {
             JSONObject jsonData = new JSONObject(result);
 
             String state = jsonData.getString("status");
-            if(state.equals(true))
+            if(state.equals("true"))
                 status = true;
             else
                 status = false;
@@ -105,15 +115,18 @@ public class ApiConnector {
      * @param recipeId
      * @return
      */
-    public boolean removeFromMyFavorite(String recipeId) {
+    public boolean removeFromMyFavorite(String recipeId, Activity activity) {
         String addMyFavoriteUrl = "http://www.fauziaskitchenfun.com/api/favourites/create";
         String result = null;
         boolean status = false;
 
         JSONObject reqParams = new JSONObject();
         try {
-            reqParams.put("username", LoginActivity.LOGGED_USER);
-            reqParams.put("password", LoginActivity.LOGGED_USER_PASSWORD);
+            LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
+            Map<String, String> loggedUserDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
+
+            reqParams.put("username", loggedUserDetails.get("username"));
+            reqParams.put("password", loggedUserDetails.get("username"));
             reqParams.put("id", recipeId);
             reqParams.put("action", "remove");
 
@@ -121,7 +134,7 @@ public class ApiConnector {
             JSONObject jsonData = new JSONObject(result);
 
             String state = jsonData.getString("status");
-            if(state.equals(true))
+            if(state.equals("true"))
                 status = true;
             else
                 status = false;
@@ -138,15 +151,18 @@ public class ApiConnector {
      * @param recipeId
      * @return
      */
-    public boolean isMyFavorite(String recipeId) {
+    public boolean isMyFavorite(String recipeId, Activity activity) {
         String addMyFavoriteUrl = "http://www.fauziaskitchenfun.com/api/favourites/create";
         String result = null;
         boolean status = false;
 
         JSONObject reqParams = new JSONObject();
         try {
-            reqParams.put("username", LoginActivity.LOGGED_USER);
-            reqParams.put("password", LoginActivity.LOGGED_USER_PASSWORD);
+            LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
+            Map<String, String> loggedUserDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
+
+            reqParams.put("username", loggedUserDetails.get("username"));
+            reqParams.put("password", loggedUserDetails.get("username"));
             reqParams.put("id", recipeId);
             reqParams.put("action", "check");
 
@@ -154,7 +170,7 @@ public class ApiConnector {
             JSONObject jsonData = new JSONObject(result);
 
             String state = jsonData.getString("status");
-            if(state.equals(true))
+            if(state.equals("true"))
                 status = true;
             else
                 status = false;
@@ -184,7 +200,6 @@ public class ApiConnector {
 
         //TODO need to remove the following hardcoded timeStamp     value
         //this initialization is for testing
-        timeStamp = "1376430210";
         RecipeDataSyncTask dataSyncTask = new RecipeDataSyncTask(activity);
         dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp);
     }

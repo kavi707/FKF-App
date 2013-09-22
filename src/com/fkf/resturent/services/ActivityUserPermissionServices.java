@@ -134,13 +134,10 @@ public class ActivityUserPermissionServices {
         String lastModifiedTimeStamp = localDatabaseSQLiteOpenHelper.getLastModificationTimeStamp();
         localDatabaseSQLiteOpenHelper.deleteLastModifiedTimeStamp();
 
+        //TODO this initialization is for temp
+        if(lastModifiedTimeStamp == null)
+            lastModifiedTimeStamp = "1376430210";
         connector.getRecipesFromServer(lastModifiedTimeStamp, activity);
-
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddhhmmss");
-        String currentTimeStamp = simpleDateFormat.format(date);
-
-        localDatabaseSQLiteOpenHelper.setLastModificationTimeStamp(currentTimeStamp);
 
         return true;
     }

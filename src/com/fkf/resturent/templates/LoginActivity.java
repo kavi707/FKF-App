@@ -3,13 +3,16 @@ package com.fkf.resturent.templates;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.fkf.resturent.R;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.services.ActivityUserPermissionServices;
+import com.fkf.resturent.services.connections.ApiConnector;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,11 +29,15 @@ public class LoginActivity extends Activity {
     private Button loginButton;
     private TextView browsRecipesTextView;
 
+    private EditText usernameEditText;
+    private EditText passwordEditText;
+
     public static String LOGGED_USER_ID;
     public static String LOGGED_USER;
     public static String LOGGED_USER_PASSWORD;
     public static int LOGGED_STATUS = 0;
 
+    private ApiConnector connector = new ApiConnector();
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
 
@@ -47,6 +54,9 @@ public class LoginActivity extends Activity {
         loginButton = (Button) findViewById(R.id.loginButton);
         browsRecipesTextView = (TextView) findViewById(R.id.browsRecipesTextView);
 
+        usernameEditText = (EditText) findViewById(R.id.usernameEditText);
+        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,25 +68,30 @@ public class LoginActivity extends Activity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO these following values are for tempory usage. Need to get values from entered username password
-                LOGGED_USER_ID = "1";
-                LOGGED_USER = "test_app"; //tempory initialization
-                LOGGED_USER_PASSWORD = "test_app";
-                LOGGED_STATUS = 1;
+                String getUsername = usernameEditText.getText().toString();
+                String getPassword = passwordEditText.getText().toString();
 
-                Map<String, String> loginData = new HashMap<String, String>();
-                loginData.put("loginStatus", "1");
-                loginData.put("userId", LOGGED_USER_ID);
-                loginData.put("username",LOGGED_USER);
-                loginData.put("password",LOGGED_USER_PASSWORD);
+                if (userPermissionServices.isOnline(LoginActivity.this)) {
+                    Map<String, String> loginResult = connector.userLogin(getUsername, getPassword);
 
-                localDatabaseSQLiteOpenHelper.insertLoginDetails(loginData);
-                //update the logged user's favorite recipes
-                userPermissionServices.updateUserFavoriteRecipesFromServer(LoginActivity.this);
+                    if (loginResult.get("loginStatus").equals("1")) {
 
-                Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
-                startActivity(recipesIntent);
-                finish();
+                        LOGGED_USER_ID = loginResult.get("userId");
+                        LOGGED_USER = loginResult.get("username");
+                        LOGGED_USER_PASSWORD = loginResult.get("password");
+                        LOGGED_STATUS = 1;
+
+                        localDatabaseSQLiteOpenHelper.insertLoginDetails(loginResult);
+                        //update the logged user's favorite recipes
+                        userPermissionServices.updateUserFavoriteRecipesFromServer(LoginActivity.this);
+
+                        Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
+                        startActivity(recipesIntent);
+                        finish();
+                    } else {
+                        //TODO this is for user login fail cases.
+                    }
+                }
             }
         });
 

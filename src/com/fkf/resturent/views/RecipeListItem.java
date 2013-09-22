@@ -47,7 +47,13 @@ public class RecipeListItem extends LinearLayout {
         this.recipe = recipe;
 
         recipeNameTextView.setText(recipe.getName());
-        String shortDesc = recipe.getDescription().substring(0, 60);
+        String description = recipe.getDescription();
+        String shortDesc = "";
+        if(description.length() > 60) {
+            shortDesc = description.substring(0, 60);
+        } else {
+            shortDesc = description;
+        }
         recipeDescriptionTextView.setText(shortDesc);
         recipeRatingBar.setRating(recipe.getRatings());
 

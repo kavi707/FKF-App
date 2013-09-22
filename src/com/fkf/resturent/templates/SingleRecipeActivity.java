@@ -85,7 +85,7 @@ public class SingleRecipeActivity extends Activity {
 
                 boolean dbFovStatus = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
                 if (isOnline) {
-                    boolean serverFovStatus = connector.isMyFavorite(selectedRecipe.getProductId());
+                    boolean serverFovStatus = connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
 
                     if (dbFovStatus && serverFovStatus) {
                         isFavorite = true;
@@ -115,7 +115,7 @@ public class SingleRecipeActivity extends Activity {
                         if (isOnline) {
                             if (isFavorite) {
 
-                                boolean removeFavoriteResult = connector.removeFromMyFavorite(selectedRecipe.getProductId());
+                                boolean removeFavoriteResult = connector.removeFromMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
                                 if(removeFavoriteResult) {
                                     singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.add_favorite);
                                     localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
@@ -127,7 +127,7 @@ public class SingleRecipeActivity extends Activity {
                                 }
                             } else {
 
-                                boolean addFavoriteResult = connector.addToMyFavorite(selectedRecipe.getProductId());
+                                boolean addFavoriteResult = connector.addToMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
                                 if(addFavoriteResult) {
                                     singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.remove_favorite);
                                     localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);

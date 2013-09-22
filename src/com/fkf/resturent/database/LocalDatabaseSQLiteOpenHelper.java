@@ -341,7 +341,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 do {
                     detailsMap.put("loginStatus", loginDetailsCursor.getString(1));
                     detailsMap.put("userId", loginDetailsCursor.getString(2));
-                    detailsMap.put("email", loginDetailsCursor.getString(3));
+                    detailsMap.put("username", loginDetailsCursor.getString(3));
                     detailsMap.put("password", loginDetailsCursor.getString(4));
                 } while (loginDetailsCursor.moveToNext());
             }
