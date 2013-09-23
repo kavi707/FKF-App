@@ -20,6 +20,11 @@
                     android:layout_width="fill_parent"
                     android:layout_height="160dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
 
             <EditText
                     android:layout_width="260dp"
@@ -33,6 +38,13 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/lastNameLabel"
                     android:id="@+id/lastNameEditText"
+                    android:layout_gravity="center"/>
+
+            <EditText
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/emailLabel"
+                    android:id="@+id/userEmailEditText"
                     android:layout_gravity="center"/>
 
             <EditText

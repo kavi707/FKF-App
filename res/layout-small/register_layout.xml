@@ -33,6 +33,12 @@
             <EditText
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
+                    android:hint="@string/emailLabel"
+                    android:id="@+id/userEmailEditText"
+                    android:layout_gravity="center"/>
+            <EditText
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
                     android:hint="@string/usernameLabel"
                     android:id="@+id/registerUserNameEditText"
                     android:layout_gravity="center"/>

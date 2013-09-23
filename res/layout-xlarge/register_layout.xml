@@ -34,6 +34,17 @@
             android:textAppearance="?android:attr/textAppearanceLarge"/>
     <EditText
             android:layout_width="650dp"
+            android:layout_height="wrap_content"
+            android:textSize="40dp"
+            android:hint="@string/emailLabel"
+            android:id="@+id/userEmailEditText"
+            android:layout_gravity="center"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <EditText
+            android:layout_width="650dp"
             android:layout_height="75dp"
             android:textSize="40dp"
             android:hint="@string/usernameLabel"

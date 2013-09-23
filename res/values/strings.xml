@@ -23,6 +23,7 @@
     <!-- register view string resources -->
     <string name="firstNameLabel">First Name</string>
     <string name="lastNameLabel">Last Name</string>
+    <string name="emailLabel">Email</string>
     <string name="newsletterCheckBoxLabel">Sign up for Newsletter</string>
 
     <!-- recipes layout string resources -->
