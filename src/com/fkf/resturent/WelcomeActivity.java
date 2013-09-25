@@ -145,6 +145,8 @@ public class WelcomeActivity extends Activity {
                                                 //update the database if server database is modified
                                                 userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
                                                 //update the recipe categories from the server data
+
+                                                //TODO following cases must happen if recipes are updated only. This case must be handle
                                                 userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
                                                 //populate latest yummy details and download images
                                                 userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this);
