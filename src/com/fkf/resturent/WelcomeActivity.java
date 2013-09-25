@@ -147,9 +147,9 @@ public class WelcomeActivity extends Activity {
                                                 //update the recipe categories from the server data
                                                 userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
                                                 //populate latest yummy details and download images
-//                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this);
+                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this);
                                                 //populate popular yummy details and download images
-//                                                userPermissionServices.populatePopularYummyDetails();
+                                                userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this);
                                             }
                                         }
                                     });

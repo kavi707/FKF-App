@@ -88,8 +88,8 @@ public class LoginActivity extends Activity {
                         Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
                         startActivity(recipesIntent);
                         finish();
-                    } else {
-                        //TODO this is for user login fail cases.
+                    } else if (loginResult.get("loginStatus").equals("2")) {
+                        //TODO need to handle username password error case
                     }
                 }
             }

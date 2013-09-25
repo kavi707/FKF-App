@@ -49,7 +49,7 @@ public class ApiConnector {
     //TODO need to handle the error, username or password case
     public Map<String, String> userLogin(String username, String password) {
         Map<String, String> statusMap = new HashMap<String, String>();
-        String userLoginUrl = "http://www.fauziaskitchenfun.com/api/user/login"; //TODO Url has been changed. but new url is not working
+        String userLoginUrl = "http://www.fauziaskitchenfun.com/api/user_login"; //TODO Url has been changed. but new url is not working
         String result = null;
 
         JSONObject reqParams = new JSONObject();
@@ -61,11 +61,15 @@ public class ApiConnector {
             JSONObject jsonData = new JSONObject(result);
             JSONObject jsonUserData = (JSONObject) jsonData.get("user");
 
-            String userId = jsonUserData.getString("uid");
-            statusMap.put("loginStatus", "1");
-            statusMap.put("userId", userId);
-            statusMap.put("username", username);
-            statusMap.put("password", password);
+            if(jsonUserData != null) {
+                String userId = jsonUserData.getString("uid");
+                statusMap.put("loginStatus", "1");
+                statusMap.put("userId", userId);
+                statusMap.put("username", username);
+                statusMap.put("password", password);
+            } else {
+                //TODO need to handle the user name password error case
+            }
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
@@ -217,9 +221,9 @@ public class ApiConnector {
      * get latest yummys from the server
      * @return
      */
-    public List<Recipe> getLatestYummysFromServer() {
-        String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/latest");
-        List<Recipe> recipeList = new ArrayList<Recipe>();
+    public List<String> getLatestYummysFromServer() {
+        String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/latest_recipe");
+        List<String> recipeList = new ArrayList<String>();
         try {
             if (jsonResult != null) {
                 JSONArray jsonArray = new JSONArray(jsonResult);
@@ -227,11 +231,28 @@ public class ApiConnector {
                 for(int i = 0; i < jsonArray.length(); i++) {
                     jsonData = jsonArray.getJSONObject(i);
 
-                    Recipe getRecipe = new Recipe();
-                    getRecipe.setProductId(jsonData.getString("nid"));
-                    getRecipe.setName(jsonData.getString("title"));
+                    recipeList.add(jsonData.getString("id"));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            throw e;
+        }
 
-                    recipeList.add(getRecipe);
+        return recipeList;
+    }
+
+    public List<String> getPopularYummysFromServer() {
+        String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/top_recipe");
+        List<String> recipeList = new ArrayList<String>();
+        try {
+            if(jsonResult != null) {
+                JSONArray jsonArray = new JSONArray(jsonResult);
+                JSONObject jsonData = null;
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    jsonData = jsonArray.getJSONObject(i);
+                    recipeList.add(jsonData.getString("id"));
                 }
             }
         } catch (JSONException e) {

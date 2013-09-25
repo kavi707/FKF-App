@@ -130,15 +130,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         String createRecipesTableQuery = "create table " + POPULAR_YUMMY_TABLE_NAME + " ( " +
                 RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
                 POPULAR_INDEX + " int, " +
-                PRODUCT_ID + " text, " +
-                RECIPE_NAME + " text, " +
-                RECIPE_DESCRIPTION + " text, " +
-                INGREDIENTS + " text, " +
-                INSTRUCTIONS + " text, " +
-                CATEGORY_ID + " int, " +
-                ADDED_DATE + " text, " +
-                RATINGS + " int, " +
-                IMAGE_URL + " text " +
+                PRODUCT_ID + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
@@ -151,15 +143,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         String createRecipesTableQuery = "create table " + LATEST_YUMMY_TABLE_NAME + " ( " +
                 RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
                 LATEST_INDEX + " int, " +
-                PRODUCT_ID + " text, " +
-                RECIPE_NAME + " text, " +
-                RECIPE_DESCRIPTION + " text, " +
-                INGREDIENTS + " text, " +
-                INSTRUCTIONS + " text, " +
-                CATEGORY_ID + " int, " +
-                ADDED_DATE + " text, " +
-                RATINGS + " int, " +
-                IMAGE_URL + " text " +
+                PRODUCT_ID + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
@@ -582,6 +566,54 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return selectedRecipeList;
     }
 
+    public ArrayList<Recipe> getRecipeFromRecipeProductId(String selectedRecipeId) {
+        ArrayList<Recipe> selectedRecipeList = new ArrayList<Recipe>();
+        localFKFDatabase = this.getWritableDatabase();
+
+        try {
+            String grepRecipeQry = "select * from " + RECIPES_TABLE_NAME + " where " + PRODUCT_ID + " = " + selectedRecipeId;
+            Cursor recipeCursor = localFKFDatabase.rawQuery(grepRecipeQry, null);
+
+            recipeCursor.moveToFirst();
+            Recipe recipe;
+
+            if(!recipeCursor.isAfterLast()) {
+                do {
+                    int recipeId = recipeCursor.getInt(0);
+                    String productId = recipeCursor.getString(1);
+                    String recipeName = recipeCursor.getString(2);
+                    String recipeDescription = recipeCursor.getString(3);
+                    String recipeIngredients = recipeCursor.getString(4);
+                    String recipeInstructions = recipeCursor.getString(5);
+                    int recipeCategoryId = recipeCursor.getInt(6);
+                    String recipeAddedDate = recipeCursor.getString(7);
+                    int recipeRatings = recipeCursor.getInt(8);
+                    String recipeImageUrl = recipeCursor.getString(9);
+
+                    recipe = new Recipe();
+
+                    recipe.setId(recipeId);
+                    recipe.setProductId(productId);
+                    recipe.setName(recipeName);
+                    recipe.setDescription(recipeDescription);
+                    recipe.setIngredients(recipeIngredients);
+                    recipe.setInstructions(recipeInstructions);
+                    recipe.setCategoryId(recipeCategoryId);
+                    recipe.setAddedDate(recipeAddedDate);
+                    recipe.setRatings(recipeRatings);
+                    recipe.setImageUrl(recipeImageUrl);
+
+                    selectedRecipeList.add(recipe);
+                } while (recipeCursor.moveToNext());
+            }
+            recipeCursor.close();
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+
+        return selectedRecipeList;
+    }
+
     public ArrayList<Recipe> searchRecipesFromGivenRecipeName(String key) {
         ArrayList<Recipe> selectedRecipeList = new ArrayList<Recipe>();
         localFKFDatabase = this.getWritableDatabase();
@@ -683,26 +715,18 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     /***************************************************/
     /**
      * save the given latest recipe from the caller function
-     * @param latestRecipes
+     * @param latestRecipesProductIds
      */
-    public void saveLatestYummyRecipe(List<Recipe> latestRecipes) {
+    public void saveLatestYummyRecipe(List<String> latestRecipesProductIds) {
 
         localFKFDatabase = this.getWritableDatabase();
         ContentValues values;
 
         int latestRecipeCount = 1;
-        for (Recipe latestRecipe : latestRecipes) {
+        for (String latestRecipesProductId : latestRecipesProductIds) {
             values = new ContentValues();
             values.put(LATEST_INDEX, latestRecipeCount);
-            values.put(PRODUCT_ID, latestRecipe.getProductId());
-            values.put(RECIPE_NAME, latestRecipe.getName());
-            values.put(RECIPE_DESCRIPTION, latestRecipe.getDescription());
-            values.put(INGREDIENTS, latestRecipe.getIngredients());
-            values.put(INSTRUCTIONS, latestRecipe.getInstructions());
-            values.put(CATEGORY_ID, latestRecipe.getCategoryId());
-            values.put(ADDED_DATE, "26-06-2013");
-            values.put(RATINGS, latestRecipe.getRatings());
-            values.put(IMAGE_URL, latestRecipe.getImageUrl());
+            values.put(PRODUCT_ID, latestRecipesProductId);
 
             try {
                 localFKFDatabase.insert(LATEST_YUMMY_TABLE_NAME, null, values);
@@ -711,6 +735,39 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             }
 
             latestRecipeCount++;
+        }
+
+    }
+
+
+
+
+
+    /***************************************************/
+    /********* Popular Recipes table methods ************/
+    /***************************************************/
+    /**
+     * save the given popular recipe from the caller function
+     * @param popularRecipesProductIds
+     */
+    public void savePopularYummyRecipe(List<String> popularRecipesProductIds) {
+
+        localFKFDatabase = this.getWritableDatabase();
+        ContentValues values;
+
+        int popularRecipeCount = 1;
+        for (String popularRecipesProductId : popularRecipesProductIds) {
+            values = new ContentValues();
+            values.put(POPULAR_INDEX, popularRecipeCount);
+            values.put(PRODUCT_ID, popularRecipesProductId);
+
+            try {
+                localFKFDatabase.insert(POPULAR_YUMMY_TABLE_NAME, null, values);
+            } catch (SQLiteException ex) {
+                throw ex;
+            }
+
+            popularRecipeCount++;
         }
 
     }
