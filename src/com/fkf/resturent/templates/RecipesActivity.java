@@ -23,6 +23,7 @@ import com.fkf.resturent.database.RecipeCategory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kavi on 6/22/13.
@@ -250,9 +251,18 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         scrollParams.height = 0;
                         latestAndPopularScrollBar.setLayoutParams(scrollParams);
 
-                        if(itemContent.equals("My Favorites")) {
+                        if(itemContent.getCategoryName().equals("My Favorites")) {
                             yummyCategoryNameTextView.setText("My Favorite yummys");
-                            recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(1); //need to get my favorite yummys from api
+                            List<String> favoriteIds = localDatabaseSQLiteOpenHelper.getLoggedUserFavoriteRecipeIds();
+                            List<Recipe> tempRecipeList;
+                            recipeList = new ArrayList<Recipe>();
+                            for (String favoriteId : favoriteIds) {
+                                tempRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeId(Integer.parseInt(favoriteId));
+                                if(!tempRecipeList.isEmpty()) {
+                                    Recipe tempRecipe = tempRecipeList.get(0);
+                                    recipeList.add(tempRecipe);
+                                }
+                            }
                         } else {
                             yummyCategoryNameTextView.setText(itemContent.getCategoryName());
                             recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(itemContent.getCategoryId());
@@ -269,10 +279,9 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Recipe itemContent = (Recipe) (recipeItemList.getItemAtPosition(i));
-
                 if(itemContent != null) {
                     Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                    singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", itemContent.getId());
+                    singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(itemContent.getProductId()));
                     startActivity(singleRecipeIntent);
                 }
             }

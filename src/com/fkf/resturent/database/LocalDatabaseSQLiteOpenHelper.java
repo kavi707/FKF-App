@@ -523,7 +523,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         localFKFDatabase = this.getWritableDatabase();
 
         try {
-            String grepRecipeQry = "select * from " + RECIPES_TABLE_NAME + " where " + RECIPE_ID + " = " + selectedRecipeId;
+            String grepRecipeQry = "select * from " + RECIPES_TABLE_NAME + " where " + PRODUCT_ID + " = " + selectedRecipeId;
             Cursor recipeCursor = localFKFDatabase.rawQuery(grepRecipeQry, null);
 
             recipeCursor.moveToFirst();
