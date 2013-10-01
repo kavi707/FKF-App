@@ -33,12 +33,6 @@
                     android:id="@+id/firstNameEditText"
                     android:layout_gravity="center"/>
 
-            <EditText
-                    android:layout_width="260dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/lastNameLabel"
-                    android:id="@+id/lastNameEditText"
-                    android:layout_gravity="center"/>
 
             <EditText
                     android:layout_width="260dp"
@@ -61,6 +55,11 @@
                     android:password="true"
                     android:id="@+id/registerPasswordEditText"
                     android:layout_gravity="center"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             <CheckBox
                     android:layout_width="wrap_content"

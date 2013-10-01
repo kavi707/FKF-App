@@ -1,6 +1,7 @@
 package com.fkf.resturent.templates;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,8 @@ public class LoginActivity extends Activity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
+
+    private ProgressDialog progress;
 
     public static String LOGGED_USER_ID;
     public static String LOGGED_USER;
@@ -81,9 +84,16 @@ public class LoginActivity extends Activity {
                         LOGGED_USER_PASSWORD = loginResult.get("password");
                         LOGGED_STATUS = 1;
 
+                        /*progress = new ProgressDialog(LoginActivity.this);
+                        progress.setTitle("Loading");
+                        progress.setMessage("Wait while loading...");
+                        progress.show();*/
+
                         localDatabaseSQLiteOpenHelper.insertLoginDetails(loginResult);
                         //update the logged user's favorite recipes
                         userPermissionServices.updateUserFavoriteRecipesFromServer(LoginActivity.this);
+
+                        //progress.dismiss();
 
                         Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
                         startActivity(recipesIntent);
@@ -98,6 +108,13 @@ public class LoginActivity extends Activity {
         browsRecipesTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 LOGGED_STATUS = 0;
                 Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
                 startActivity(recipesIntent);

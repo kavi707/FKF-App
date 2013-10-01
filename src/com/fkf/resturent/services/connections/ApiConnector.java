@@ -41,6 +41,43 @@ import java.util.Map;
 public class ApiConnector {
 
     /**
+     * register a new user from given params
+     * @param userRegParams
+     * @return
+     */
+    public Map<String, String> userCreate(Map<String, String> userRegParams) {
+        Map<String, String> statusMap = new HashMap<String, String>();
+        String userRegUrl = "http://www.fauziaskitchenfun.com/api/user_add";
+        String result = null;
+
+        JSONObject reqParams = new JSONObject();
+        try {
+//            reqParams.put("name", userRegParams.get("uName"));
+            reqParams.put("name", "iwa");
+//            reqParams.put("mail", userRegParams.get("email"));
+            reqParams.put("mail", "iwa@gmail.com");
+//            reqParams.put("pass", userRegParams.get("pass"));
+            reqParams.put("pass", "kavi");
+//            reqParams.put("field_fname[und][0][value]", userRegParams.get("fName"));
+//            reqParams.put("field_fname[und][0][value]", "kavi");
+            /*if(userRegParams.get("newsAlert").equals("1")) {
+                reqParams.put("newsletters[2]", 2);
+            }*/
+//            reqParams.put("hash", userRegParams.get("hash"));
+            reqParams.put("hash", "8d9dceaeffcf7dc14118b695fc7f70e8");
+
+            result = this.sendHTTPPost(reqParams, userRegUrl);
+
+            Log.d("User Reg >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.", result);
+            JSONObject jsonData = new JSONObject(result);
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return statusMap;
+    }
+
+    /**
      * this is for user login post method. Its returns logged user's user id
      * @param username
      * @param password

@@ -148,6 +148,13 @@ public class WelcomeActivity extends Activity {
 
                                                 //TODO following cases must happen if recipes are updated only. This case must be handle
                                                 userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+
+                                                try {
+                                                    Thread.sleep(3000);
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
+                                                }
+
                                                 //populate latest yummy details and download images
                                                 userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this);
                                                 //populate popular yummy details and download images
