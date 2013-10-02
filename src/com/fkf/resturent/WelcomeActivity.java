@@ -37,7 +37,7 @@ public class WelcomeActivity extends Activity {
     private TextView appLoadingProgressTitleTextView;
 
     final Context context = this;
-    private Handler mHandler, secondMHandler;
+    private Handler mHandler;
 
     private AlertDialog messageBalloonAlertDialog;
 
@@ -62,7 +62,6 @@ public class WelcomeActivity extends Activity {
         appLoadingProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
         appLoadingProgressTitleTextView = (TextView) findViewById(R.id.progressBarTitleTextView);
         mHandler = new Handler();
-        secondMHandler = new Handler();
 
         final Thread timerThread = new Thread() {
             @Override
@@ -94,7 +93,7 @@ public class WelcomeActivity extends Activity {
                                             appLoadingProgressTitleTextView.setText("Check the Internet connection ...");
                                         }
                                     });
-                                    secondMHandler.post(new Runnable() {
+                                    mHandler.post(new Runnable() {
                                         @Override
                                         public void run() {
                                             if (!userPermissionServices.isOnline(WelcomeActivity.this)) {
@@ -132,6 +131,11 @@ public class WelcomeActivity extends Activity {
 
                                                 //TODO following cases must happen if recipes are updated only. This case must be handle
                                                 userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+
+                                                //populate latest yummy details and download images
+                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this);
+                                                //populate popular yummy details and download images
+                                                userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this);
                                             }
                                         }
                                     });
@@ -149,18 +153,6 @@ public class WelcomeActivity extends Activity {
                                         @Override
                                         public void run() {
                                             appLoadingProgressTitleTextView.setText("Latest Yummys and Popular Yummys ...");
-                                        }
-                                    });
-                                    mHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            //check the internet connection for the device
-                                            if (userPermissionServices.isOnline(WelcomeActivity.this)) {
-                                                //populate latest yummy details and download images
-                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this);
-                                                //populate popular yummy details and download images
-//                                                userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this);
-                                            }
                                         }
                                     });
                                     break;

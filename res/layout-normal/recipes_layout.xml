@@ -425,6 +425,11 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:background="@color/black"
+                        android:layout_height="1dp"/>
+
                 <!-- popular yummys : yummy 4 -->
                 <LinearLayout
                         android:id="@+id/forthPopularYummyLinear"
@@ -481,6 +486,11 @@
                                 android:layout_gravity="left|center_vertical"/>
                     </LinearLayout>
                 </LinearLayout>
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:background="@color/black"
+                        android:layout_height="1dp"/>
 
                 <!-- popular yummys : yummy 5 -->
                 <LinearLayout
@@ -539,6 +549,11 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:background="@color/black"
+                        android:layout_height="1dp"/>
+
                 <!-- popular yummys : yummy 6 -->
                 <LinearLayout
                         android:id="@+id/sixthPopularYummyLinear"
@@ -595,6 +610,11 @@
                                 android:layout_gravity="left|center_vertical"/>
                     </LinearLayout>
                 </LinearLayout>
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:background="@color/black"
+                        android:layout_height="1dp"/>
             </LinearLayout>
         </ScrollView>
 

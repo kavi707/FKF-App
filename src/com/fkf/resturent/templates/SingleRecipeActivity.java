@@ -12,6 +12,9 @@ import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.services.ActivityUserPermissionServices;
 import com.fkf.resturent.services.connections.ApiConnector;
 import com.fkf.resturent.services.image.loader.ImageLoader;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,7 @@ public class SingleRecipeActivity extends Activity {
     private TextView singleRecipeNameTextView;
     private RatingBar singleRecipeRatingBar;
     private TextView singleRecipeDescriptionTextView;
+    private TextView singleRecipeInstructionTextView;
     private TextView singleRecipeContentLabelTextView;
     private ImageView singleRecipeImageViewer;
     private ImageButton singleRecipeMyFavoriteImageButton;
@@ -52,6 +56,7 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeNameTextView = (TextView) findViewById(R.id.singleRecipeNameTextView);
         singleRecipeRatingBar = (RatingBar) findViewById(R.id.singleRecipeRatingBar);
         singleRecipeDescriptionTextView = (TextView) findViewById(R.id.singleRecipeDescriptionTextView);
+        singleRecipeInstructionTextView = (TextView) findViewById(R.id.singleRecipeInstructionTextView);
         singleRecipeContentLabelTextView = (TextView) findViewById(R.id.singleRecipeContentLabelTextView);
         singleRecipeImageViewer = (ImageView) findViewById(R.id.singleRecipeImageView);
         singleRecipeMyFavoriteImageButton = (ImageButton) findViewById(R.id.myFavoriteImageButton);
@@ -100,7 +105,8 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeNameTextView.setText(selectedRecipe.getName());
         singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
         singleRecipeDescriptionTextView.setText(selectedRecipe.getDescription());
-        singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " contents");
+        singleRecipeInstructionTextView.setText(selectedRecipe.getInstructions());
+        singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " Ingredients");
 
         String imageUrl = selectedRecipe.getImageUrl();
         int loader = R.drawable.default_recipe_image;
@@ -109,6 +115,30 @@ public class SingleRecipeActivity extends Activity {
             ImageLoader imageLoader = new ImageLoader(getApplicationContext());
             imageLoader.DisplayImage(imageUrl, loader, singleRecipeImageViewer);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String ingredients = selectedRecipe.getIngredients();
+        try {
+            JSONArray ingredientJsonArray = new JSONArray(ingredients);
+            JSONObject ingredientJsonObj = null;
+            JSONArray itemsJsonArray = null;
+            JSONObject itemJsonObj = null;
+            if(ingredientJsonArray.length() == 1 ) {
+                ingredientJsonObj = ingredientJsonArray.getJSONObject(0);
+                itemsJsonArray = ingredientJsonObj.getJSONArray("items");
+                for (int j = 0; j < itemsJsonArray.length(); j ++) {
+                    itemJsonObj = itemsJsonArray.getJSONObject(j);
+
+                    Log.d("name ++++++++++++++++++++++", itemJsonObj.getString("name"));
+                    Log.d("unit ++++++++++++++++++++++", itemJsonObj.getString("unit"));
+                }
+            } else {
+                for (int i = 0; i < ingredientJsonArray.length(); i ++) {
+                    ingredientJsonObj = ingredientJsonArray.getJSONObject(i);
+                }
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
