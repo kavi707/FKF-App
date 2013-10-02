@@ -32,6 +32,7 @@ public class SingleRecipeActivity extends Activity {
     private TextView singleRecipeDescriptionTextView;
     private TextView singleRecipeInstructionTextView;
     private TextView singleRecipeContentLabelTextView;
+    private TextView singleRecipeIngredientTextView;
     private ImageView singleRecipeImageViewer;
     private ImageButton singleRecipeMyFavoriteImageButton;
 
@@ -58,6 +59,7 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeDescriptionTextView = (TextView) findViewById(R.id.singleRecipeDescriptionTextView);
         singleRecipeInstructionTextView = (TextView) findViewById(R.id.singleRecipeInstructionTextView);
         singleRecipeContentLabelTextView = (TextView) findViewById(R.id.singleRecipeContentLabelTextView);
+        singleRecipeIngredientTextView = (TextView) findViewById(R.id.singleRecipeIngredientTextView);
         singleRecipeImageViewer = (ImageView) findViewById(R.id.singleRecipeImageView);
         singleRecipeMyFavoriteImageButton = (ImageButton) findViewById(R.id.myFavoriteImageButton);
 
@@ -119,6 +121,7 @@ public class SingleRecipeActivity extends Activity {
         }
 
         String ingredients = selectedRecipe.getIngredients();
+        String ingredientString = "";
         try {
             JSONArray ingredientJsonArray = new JSONArray(ingredients);
             JSONObject ingredientJsonObj = null;
@@ -130,13 +133,66 @@ public class SingleRecipeActivity extends Activity {
                 for (int j = 0; j < itemsJsonArray.length(); j ++) {
                     itemJsonObj = itemsJsonArray.getJSONObject(j);
 
-                    Log.d("name ++++++++++++++++++++++", itemJsonObj.getString("name"));
-                    Log.d("unit ++++++++++++++++++++++", itemJsonObj.getString("unit"));
+                    if(ingredientString.equals("")) {
+                        ingredientString = itemJsonObj.getString("name");
+                        if(!itemJsonObj.getString("unit").equals("null")) {
+                            ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                        }
+                        if(!itemJsonObj.getString("note").equals("null")) {
+                            ingredientString = ingredientString + " " + itemJsonObj.getString("note");
+                        }
+                        ingredientString = ingredientString + "\n";
+                    } else {
+                        ingredientString = ingredientString + itemJsonObj.getString("name");
+                        if(!itemJsonObj.getString("unit").equals("null")) {
+                            ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                        }
+                        if(!itemJsonObj.getString("note").equals("null")) {
+                            ingredientString = ingredientString + " " + itemJsonObj.getString("note");
+                        }
+                        ingredientString = ingredientString + "\n";
+                    }
                 }
+
+                singleRecipeIngredientTextView.setText(ingredientString);
             } else {
                 for (int i = 0; i < ingredientJsonArray.length(); i ++) {
                     ingredientJsonObj = ingredientJsonArray.getJSONObject(i);
+                    if(i == 0) {
+                        ingredientString = " * " + ingredientJsonObj.getString("title") + "\n";
+                        itemsJsonArray = ingredientJsonObj.getJSONArray("items");
+                        for (int k = 0; k < itemsJsonArray.length(); k++) {
+                            itemJsonObj = itemsJsonArray.getJSONObject(k);
+
+                            ingredientString = ingredientString + itemJsonObj.getString("name");
+                            if(!itemJsonObj.getString("unit").equals("null")) {
+                                ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                            }
+                            if(!itemJsonObj.getString("note").equals("null")) {
+                                ingredientString = ingredientString + " " + itemJsonObj.getString("note");
+                            }
+                            ingredientString = ingredientString + "\n";
+                        }
+                    } else {
+                        ingredientString = ingredientString + "\n";
+                        ingredientString = ingredientString + " * " + ingredientJsonObj.getString("title") + "\n";
+                        itemsJsonArray = ingredientJsonObj.getJSONArray("items");
+                        for (int m = 0; m < itemsJsonArray.length(); m++) {
+                            itemJsonObj = itemsJsonArray.getJSONObject(m);
+
+                            ingredientString = ingredientString + itemJsonObj.getString("name");
+                            if(!itemJsonObj.getString("unit").equals("null")) {
+                                ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                            }
+                            if(!itemJsonObj.getString("note").equals("null")) {
+                                ingredientString = ingredientString + " " + itemJsonObj.getString("note");
+                            }
+                            ingredientString = ingredientString + "\n";
+                        }
+                    }
                 }
+
+                singleRecipeIngredientTextView.setText(ingredientString);
             }
         } catch (JSONException e) {
             e.printStackTrace();
