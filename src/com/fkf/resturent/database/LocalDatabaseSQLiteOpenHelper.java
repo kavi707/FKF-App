@@ -523,7 +523,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         localFKFDatabase = this.getWritableDatabase();
 
         try {
-            String grepRecipeQry = "select * from " + RECIPES_TABLE_NAME + " where " + PRODUCT_ID + " = " + selectedRecipeId;
+            String grepRecipeQry = "select * from " + RECIPES_TABLE_NAME + " where " + RECIPE_ID + " = " + selectedRecipeId;
             Cursor recipeCursor = localFKFDatabase.rawQuery(grepRecipeQry, null);
 
             recipeCursor.moveToFirst();
@@ -725,6 +725,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         int latestRecipeCount = 1;
         for (String latestRecipesProductId : latestRecipesProductIds) {
             values = new ContentValues();
+            Log.d("product id *****************************", latestRecipesProductId);
             values.put(LATEST_INDEX, latestRecipeCount);
             values.put(PRODUCT_ID, latestRecipesProductId);
 
@@ -736,11 +737,44 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
             latestRecipeCount++;
         }
+    }
 
+    public String getLatestRecipeFromIndex(int index) {
+
+        String recipeProductId = "";
+        List<String> recipeProductIdList = new ArrayList<String>();
+        localFKFDatabase = this.getWritableDatabase();
+
+        try {
+            String getLatestRecipeQry = "SELECT * FROM " + LATEST_YUMMY_TABLE_NAME + " WHERE " + LATEST_INDEX + " = " + index;
+            Cursor latestRecipeCursor = localFKFDatabase.rawQuery(getLatestRecipeQry, null);
+
+            latestRecipeCursor.moveToFirst();
+            if(!latestRecipeCursor.isAfterLast()) {
+                do {
+                    recipeProductIdList.add(latestRecipeCursor.getString(2));
+                } while (latestRecipeCursor.moveToNext());
+            }
+
+            if(!recipeProductIdList.isEmpty()) {
+                recipeProductId = recipeProductIdList.get(0);
+            }
+            latestRecipeCursor.close();
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+        return recipeProductId;
     }
 
 
-
+    public void deleteAllLatestRecipes() {
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            localFKFDatabase.delete(LATEST_YUMMY_TABLE_NAME, null, null);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
 
 
     /***************************************************/
@@ -770,6 +804,32 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             popularRecipeCount++;
         }
 
+    }
+
+    public String getPopularRecipeFromIndex(int index) {
+
+        String recipeProductId = "";
+        List<String> recipeProductIdList = new ArrayList<String>();
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            String getPopularRecipeQry = "SELECT * FROM " + POPULAR_YUMMY_TABLE_NAME + " WHERE " + POPULAR_INDEX + " = " + index;
+            Cursor popularRecipeCursor = localFKFDatabase.rawQuery(getPopularRecipeQry, null);
+
+            popularRecipeCursor.moveToFirst();
+            if(!popularRecipeCursor.isAfterLast()) {
+                do {
+                    recipeProductIdList.add(popularRecipeCursor.getString(1));
+                } while (popularRecipeCursor.moveToNext());
+            }
+
+            if(!recipeProductIdList.isEmpty()) {
+                recipeProductId = recipeProductIdList.get(0);
+            }
+            popularRecipeCursor.close();
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+        return recipeProductId;
     }
 
 

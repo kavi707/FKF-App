@@ -37,7 +37,7 @@ public class WelcomeActivity extends Activity {
     private TextView appLoadingProgressTitleTextView;
 
     final Context context = this;
-    private Handler mHandler;
+    private Handler mHandler, secondMHandler;
 
     private AlertDialog messageBalloonAlertDialog;
 
@@ -62,6 +62,7 @@ public class WelcomeActivity extends Activity {
         appLoadingProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
         appLoadingProgressTitleTextView = (TextView) findViewById(R.id.progressBarTitleTextView);
         mHandler = new Handler();
+        secondMHandler = new Handler();
 
         final Thread timerThread = new Thread() {
             @Override
@@ -90,29 +91,12 @@ public class WelcomeActivity extends Activity {
                                     appLoadingProgressTitleTextView.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            appLoadingProgressTitleTextView.setText("Loading the application templates");
-                                        }
-                                    });
-                                    break;
-                                case 50:
-                                    appLoadingProgressTitleTextView.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            appLoadingProgressTitleTextView.setText("Check the local database connections ...");
-                                        }
-                                    });
-                                    break;
-                                case 80:
-                                    appLoadingProgressTitleTextView.post(new Runnable() {
-                                        @Override
-                                        public void run() {
                                             appLoadingProgressTitleTextView.setText("Check the Internet connection ...");
                                         }
                                     });
-                                    mHandler.post(new Runnable() {
+                                    secondMHandler.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            //check the internet connection for the device
                                             if (!userPermissionServices.isOnline(WelcomeActivity.this)) {
                                                 mbActive = false;
                                                 messageBalloonAlertDialog = new AlertDialog.Builder(context)
@@ -148,17 +132,34 @@ public class WelcomeActivity extends Activity {
 
                                                 //TODO following cases must happen if recipes are updated only. This case must be handle
                                                 userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
-
-                                                try {
-                                                    Thread.sleep(3000);
-                                                } catch (InterruptedException e) {
-                                                    e.printStackTrace();
-                                                }
-
+                                            }
+                                        }
+                                    });
+                                    break;
+                                case 50:
+                                    appLoadingProgressTitleTextView.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            appLoadingProgressTitleTextView.setText("Populating recipes from Fauzia's Kitchen ...");
+                                        }
+                                    });
+                                    break;
+                                case 80:
+                                    appLoadingProgressTitleTextView.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            appLoadingProgressTitleTextView.setText("Latest Yummys and Popular Yummys ...");
+                                        }
+                                    });
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            //check the internet connection for the device
+                                            if (userPermissionServices.isOnline(WelcomeActivity.this)) {
                                                 //populate latest yummy details and download images
                                                 userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this);
                                                 //populate popular yummy details and download images
-                                                userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this);
+//                                                userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this);
                                             }
                                         }
                                     });

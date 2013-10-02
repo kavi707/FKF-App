@@ -34,7 +34,15 @@ import java.util.List;
 public class RecipesActivity extends Activity implements View.OnClickListener{
 
     ImageButton menuButton, logoutButton, searchRecipeButton;
-    LinearLayout content, menu, firstPopularYummyLinear, secondPopularYummyLinear, thirdPopularYummyLinear;
+    LinearLayout content, menu;
+
+    LinearLayout firstPopularYummyLinear;
+    LinearLayout secondPopularYummyLinear;
+    LinearLayout thirdPopularYummyLinear;
+    LinearLayout forthPopularYummyLinear;
+    LinearLayout fifthPopularYummyLinear;
+    LinearLayout sixthPopularYummyLinear;
+
     ListView menuItemList, recipeItemList;
     ScrollView latestAndPopularScrollBar;
     HorizontalScrollView horizontalScroll;
@@ -53,6 +61,9 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ImageView firstPopularYummyImageView;
     ImageView secondPopularYummyImageView;
     ImageView thirdPopularYummyImageView;
+    ImageView forthPopularYummyImageView;
+    ImageView fifthPopularYummyImageView;
+    ImageView sixthPopularYummyImageView;
 
     private RecipeCategoryListAdapter recipeCategoryListAdapter;
     private RecipeListAdapter recipeListAdapter;
@@ -205,7 +216,53 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             }
         });
 
+        //forth popular yummy
+        forthPopularYummyImageView = (ImageView) findViewById(R.id.forthPopularRecipeImageView);
+        File forthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_4.jpg");
+        Bitmap forthPopularBitmap = BitmapFactory.decodeFile(forthPopularImageFile.getAbsolutePath());
+        forthPopularYummyImageView.setImageBitmap(forthPopularBitmap);
 
+        forthPopularYummyLinear = (LinearLayout) findViewById(R.id.forthPopularYummyLinear);
+        forthPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -9);
+                startActivity(singleRecipeIntent);
+            }
+        });
+
+        //fifth popular yummy
+        fifthPopularYummyImageView = (ImageView) findViewById(R.id.fifthPopularRecipeImageView);
+        File fifthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_5.jpg");
+        Bitmap fifthPopularBitmap = BitmapFactory.decodeFile(fifthPopularImageFile.getAbsolutePath());
+        fifthPopularYummyImageView.setImageBitmap(fifthPopularBitmap);
+
+        fifthPopularYummyLinear = (LinearLayout) findViewById(R.id.fifthPopularYummyLinear);
+        fifthPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -10);
+                startActivity(singleRecipeIntent);
+            }
+        });
+
+        //sixth popular yummy
+        sixthPopularYummyImageView = (ImageView) findViewById(R.id.sixthPopularRecipeImageView);
+        File sixthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_6.jpg");
+        Bitmap sixthPopularBitmap = BitmapFactory.decodeFile(sixthPopularImageFile.getAbsolutePath());
+        sixthPopularYummyImageView.setImageBitmap(sixthPopularBitmap);
+
+        sixthPopularYummyLinear = (LinearLayout) findViewById(R.id.sixthPopularYummyLinear);
+        sixthPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -11);
+                startActivity(singleRecipeIntent);
+            }
+        });
 
         //add items to category menu list
         menuItems = localDatabaseSQLiteOpenHelper.getAllCategories();
@@ -257,7 +314,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             List<Recipe> tempRecipeList;
                             recipeList = new ArrayList<Recipe>();
                             for (String favoriteId : favoriteIds) {
-                                tempRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeId(Integer.parseInt(favoriteId));
+                                tempRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(favoriteId);
                                 if(!tempRecipeList.isEmpty()) {
                                     Recipe tempRecipe = tempRecipeList.get(0);
                                     recipeList.add(tempRecipe);

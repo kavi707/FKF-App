@@ -71,6 +71,7 @@ public class ActivityUserPermissionServices {
         LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
         List<String> latestYummyIdList = connector.getLatestYummysFromServer();
 
+        localDatabaseSQLiteOpenHelper.deleteAllLatestRecipes();
         localDatabaseSQLiteOpenHelper.saveLatestYummyRecipe(latestYummyIdList);
 
         DownloadFileTask downloadFile = new DownloadFileTask();

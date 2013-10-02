@@ -424,6 +424,177 @@
                                 android:layout_gravity="left|center_vertical"/>
                     </LinearLayout>
                 </LinearLayout>
+
+                <!-- popular yummys : yummy 4 -->
+                <LinearLayout
+                        android:id="@+id/forthPopularYummyLinear"
+                        android:duplicateParentState="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginLeft="5dp"
+                            android:src="@drawable/fkf"
+                            android:id="@+id/forthPopularRecipeImageView"/>
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="Large Text"
+                                android:id="@+id/forthPopularRecipeNameTextView"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="left"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Medium Text"
+                                android:id="@+id/forthPopularRecipeDescriptionTextView"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="left"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        <RatingBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:id="@+id/forthPopularRecipeRatingBar"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="left|center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- popular yummys : yummy 5 -->
+                <LinearLayout
+                        android:id="@+id/fifthPopularYummyLinear"
+                        android:duplicateParentState="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginLeft="5dp"
+                            android:src="@drawable/fkf"
+                            android:id="@+id/fifthPopularRecipeImageView"/>
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="Large Text"
+                                android:id="@+id/fifthPopularRecipeNameTextView"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="left"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Medium Text"
+                                android:id="@+id/fifthPopularRecipeDescriptionTextView"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="left"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        <RatingBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:id="@+id/fifthPopularRecipeRatingBar"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="left|center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- popular yummys : yummy 6 -->
+                <LinearLayout
+                        android:id="@+id/sixthPopularYummyLinear"
+                        android:duplicateParentState="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginLeft="5dp"
+                            android:src="@drawable/fkf"
+                            android:id="@+id/sixthPopularRecipeImageView"/>
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="Large Text"
+                                android:id="@+id/sixthPopularRecipeNameTextView"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="left"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Medium Text"
+                                android:id="@+id/sixthPopularRecipeDescriptionTextView"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="left"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        <RatingBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:id="@+id/sixthPopularRecipeRatingBar"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="left|center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
 
