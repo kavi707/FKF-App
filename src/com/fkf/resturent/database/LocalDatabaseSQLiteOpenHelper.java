@@ -382,18 +382,6 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public ArrayList<RecipeCategory> getAllCategories(){
         ArrayList<RecipeCategory> recipeCategoryList = new ArrayList<RecipeCategory>();
 
-        RecipeCategory latestYummy = new RecipeCategory();
-        latestYummy.setCategoryName("Latest Yummys");
-        latestYummy.setCategoryId(-1);
-        recipeCategoryList.add(latestYummy);
-
-        //If user logged in to application
-        if(LoginActivity.LOGGED_STATUS == 1){
-            RecipeCategory myFavorite = new RecipeCategory();
-            myFavorite.setCategoryName("My Favorites");
-            myFavorite.setCategoryId(-2);
-            recipeCategoryList.add(myFavorite);
-        }
         localFKFDatabase = this.getWritableDatabase();
 
         try {
@@ -409,7 +397,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
                     RecipeCategory recipeCategory = new RecipeCategory();
                     recipeCategory.setCategoryId(categoryId);
-                    recipeCategory.setCategoryName(categoryName);
+                    recipeCategory.setCategoryName("  " + categoryName);
 
                     recipeCategoryList.add(recipeCategory);
 

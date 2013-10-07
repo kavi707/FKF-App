@@ -43,6 +43,25 @@
                 android:layout_height="2dip"
                 android:background="#ffffffff"/>
 
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="  Home"
+                android:textColor="@color/normal_gray"
+                android:id="@+id/menuHomeTextView"
+                android:background="@drawable/category_list_background"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="  My Favorite Recipes"
+                android:id="@+id/menuMyFavoriteTextView"
+                android:background="@color/green"/>
+
         <ListView
                 android:id="@+id/menu_item_list"
                 android:layout_width="match_parent"
@@ -702,7 +721,7 @@
                 android:layout_width="284dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/category_name_textview_background"
-                android:textSize="22dip"
+                android:textSize="18dip"
                 android:textStyle="italic|bold"
                 android:gravity="center_vertical"
                 android:id="@+id/yummyCategoryNameTextView"/>

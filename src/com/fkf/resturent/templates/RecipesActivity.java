@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ListView menuItemList, recipeItemList;
     ScrollView latestAndPopularScrollBar;
     HorizontalScrollView horizontalScroll;
-    TextView loggedUserTextView, yummyCategoryNameTextView;
+    TextView loggedUserTextView, yummyCategoryNameTextView, homeTextView, myFavoriteTextView;
     ImageView profileImageView;
     EditText searchRecipeEditText;
 
@@ -288,6 +287,10 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             }
         });
 
+        //Following items are always in menu list
+        homeTextView = (TextView) findViewById(R.id.menuHomeTextView);
+        myFavoriteTextView = (TextView) findViewById(R.id.menuMyFavoriteTextView);
+
         //add items to category menu list
         menuItems = localDatabaseSQLiteOpenHelper.getAllCategories();
 
@@ -314,6 +317,49 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //selected yummy's category name textView
         yummyCategoryNameTextView = (TextView) findViewById(R.id.yummyCategoryNameTextView);
 
+        //Home list item for get back to latest and popular yummys
+        homeTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
+                scrollParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                latestAndPopularScrollBar.setLayoutParams(scrollParams);
+            }
+        });
+
+        //Favorite list item for view user favorite yummys
+        //If user logged in to application
+        if (LoginActivity.LOGGED_STATUS == 1) {
+
+            myFavoriteTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
+
+                    scrollParams.height = 0;
+                    latestAndPopularScrollBar.setLayoutParams(scrollParams);
+
+                    yummyCategoryNameTextView.setText("  My Favorite yummys");
+                    List<String> favoriteIds = localDatabaseSQLiteOpenHelper.getLoggedUserFavoriteRecipeIds();
+                    List<Recipe> tempRecipeList;
+                    recipeList = new ArrayList<Recipe>();
+                    for (String favoriteId : favoriteIds) {
+                        tempRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(favoriteId);
+                        if (!tempRecipeList.isEmpty()) {
+                            Recipe tempRecipe = tempRecipeList.get(0);
+                            recipeList.add(tempRecipe);
+                        }
+                    }
+
+                    recipeListAdapter = new RecipeListAdapter(recipeList, context);
+                    recipeItemList.setAdapter(recipeListAdapter);
+                }
+            });
+        } else {
+            ViewGroup.LayoutParams myFavoriteTextViewLayoutParams = myFavoriteTextView.getLayoutParams();
+            myFavoriteTextViewLayoutParams.height = 0;
+        }
+
         //selected yummy category list view
         //category list on item click
         menuItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -322,36 +368,16 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 RecipeCategory itemContent = (RecipeCategory) (menuItemList.getItemAtPosition(i));
 
                 if(itemContent != null) {
-
                     ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
 
-                    if(itemContent.getCategoryName().equals("Latest Yummys")){
-                        scrollParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                        latestAndPopularScrollBar.setLayoutParams(scrollParams);
-                    } else {
-                        scrollParams.height = 0;
-                        latestAndPopularScrollBar.setLayoutParams(scrollParams);
+                    scrollParams.height = 0;
+                    latestAndPopularScrollBar.setLayoutParams(scrollParams);
 
-                        if(itemContent.getCategoryName().equals("My Favorites")) {
-                            yummyCategoryNameTextView.setText("My Favorite yummys");
-                            List<String> favoriteIds = localDatabaseSQLiteOpenHelper.getLoggedUserFavoriteRecipeIds();
-                            List<Recipe> tempRecipeList;
-                            recipeList = new ArrayList<Recipe>();
-                            for (String favoriteId : favoriteIds) {
-                                tempRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(favoriteId);
-                                if(!tempRecipeList.isEmpty()) {
-                                    Recipe tempRecipe = tempRecipeList.get(0);
-                                    recipeList.add(tempRecipe);
-                                }
-                            }
-                        } else {
-                            yummyCategoryNameTextView.setText("  " + itemContent.getCategoryName());
-                            recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(itemContent.getCategoryId());
-                        }
+                    yummyCategoryNameTextView.setText("  " + itemContent.getCategoryName());
+                    recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(itemContent.getCategoryId());
 
-                        recipeListAdapter = new RecipeListAdapter(recipeList, context);
-                        recipeItemList.setAdapter(recipeListAdapter);
-                    }
+                    recipeListAdapter = new RecipeListAdapter(recipeList, context);
+                    recipeItemList.setAdapter(recipeListAdapter);
                 }
             }
         });
