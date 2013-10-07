@@ -171,8 +171,12 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //first popular yummy
         firstPopularYummyImageView = (ImageView) findViewById(R.id.firstPopularRecipeImageView);
         File firstPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_1.jpg");
-        Bitmap firstPopularBitmap = BitmapFactory.decodeFile(firstPopularImageFile.getAbsolutePath());
-        firstPopularYummyImageView.setImageBitmap(firstPopularBitmap);
+        if(firstPopularImageFile.exists()) {
+            Bitmap firstPopularBitmap = BitmapFactory.decodeFile(firstPopularImageFile.getAbsolutePath());
+            firstPopularYummyImageView.setImageBitmap(firstPopularBitmap);
+        } else {
+            firstPopularYummyImageView.setImageResource(R.drawable.fkf);
+        }
 
         firstPopularYummyLinear = (LinearLayout) findViewById(R.id.firstPopularYummyLinear);
         firstPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
@@ -187,8 +191,12 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //second popular yummy
         secondPopularYummyImageView = (ImageView) findViewById(R.id.secondPopularRecipeImageView);
         File secondPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_2.jpg");
-        Bitmap secondPopularBitmap = BitmapFactory.decodeFile(secondPopularImageFile.getAbsolutePath());
-        secondPopularYummyImageView.setImageBitmap(secondPopularBitmap);
+        if(secondPopularImageFile.exists()) {
+            Bitmap secondPopularBitmap = BitmapFactory.decodeFile(secondPopularImageFile.getAbsolutePath());
+            secondPopularYummyImageView.setImageBitmap(secondPopularBitmap);
+        } else {
+            secondPopularYummyImageView.setImageResource(R.drawable.fkf);
+        }
 
         secondPopularYummyLinear = (LinearLayout) findViewById(R.id.secondPopularYummyLinear);
         secondPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
@@ -203,8 +211,12 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //third popular yummy
         thirdPopularYummyImageView = (ImageView) findViewById(R.id.thirdPopularRecipeImageView);
         File thirdPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_3.jpg");
-        Bitmap thirdPopularBitmap = BitmapFactory.decodeFile(thirdPopularImageFile.getAbsolutePath());
-        thirdPopularYummyImageView.setImageBitmap(thirdPopularBitmap);
+        if(thirdPopularImageFile.exists()) {
+            Bitmap thirdPopularBitmap = BitmapFactory.decodeFile(thirdPopularImageFile.getAbsolutePath());
+            thirdPopularYummyImageView.setImageBitmap(thirdPopularBitmap);
+        } else {
+            thirdPopularYummyImageView.setImageResource(R.drawable.fkf);
+        }
 
         thirdPopularYummyLinear = (LinearLayout) findViewById(R.id.thirdPopularYummyLinear);
         thirdPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
@@ -219,8 +231,12 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //forth popular yummy
         forthPopularYummyImageView = (ImageView) findViewById(R.id.forthPopularRecipeImageView);
         File forthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_4.jpg");
-        Bitmap forthPopularBitmap = BitmapFactory.decodeFile(forthPopularImageFile.getAbsolutePath());
-        forthPopularYummyImageView.setImageBitmap(forthPopularBitmap);
+        if(forthPopularImageFile.exists()) {
+            Bitmap forthPopularBitmap = BitmapFactory.decodeFile(forthPopularImageFile.getAbsolutePath());
+            forthPopularYummyImageView.setImageBitmap(forthPopularBitmap);
+        } else {
+            forthPopularYummyImageView.setImageResource(R.drawable.fkf);
+        }
 
         forthPopularYummyLinear = (LinearLayout) findViewById(R.id.forthPopularYummyLinear);
         forthPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
@@ -235,8 +251,12 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //fifth popular yummy
         fifthPopularYummyImageView = (ImageView) findViewById(R.id.fifthPopularRecipeImageView);
         File fifthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_5.jpg");
-        Bitmap fifthPopularBitmap = BitmapFactory.decodeFile(fifthPopularImageFile.getAbsolutePath());
-        fifthPopularYummyImageView.setImageBitmap(fifthPopularBitmap);
+        if(fifthPopularImageFile.exists()) {
+            Bitmap fifthPopularBitmap = BitmapFactory.decodeFile(fifthPopularImageFile.getAbsolutePath());
+            fifthPopularYummyImageView.setImageBitmap(fifthPopularBitmap);
+        } else {
+            fifthPopularYummyImageView.setImageResource(R.drawable.fkf);
+        }
 
         fifthPopularYummyLinear = (LinearLayout) findViewById(R.id.fifthPopularYummyLinear);
         fifthPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
@@ -251,8 +271,12 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //sixth popular yummy
         sixthPopularYummyImageView = (ImageView) findViewById(R.id.sixthPopularRecipeImageView);
         File sixthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_6.jpg");
-        Bitmap sixthPopularBitmap = BitmapFactory.decodeFile(sixthPopularImageFile.getAbsolutePath());
-        sixthPopularYummyImageView.setImageBitmap(sixthPopularBitmap);
+        if(sixthPopularImageFile.exists()) {
+            Bitmap sixthPopularBitmap = BitmapFactory.decodeFile(sixthPopularImageFile.getAbsolutePath());
+            sixthPopularYummyImageView.setImageBitmap(sixthPopularBitmap);
+        } else {
+            sixthPopularYummyImageView.setImageResource(R.drawable.fkf);
+        }
 
         sixthPopularYummyLinear = (LinearLayout) findViewById(R.id.sixthPopularYummyLinear);
         sixthPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
@@ -321,7 +345,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                                 }
                             }
                         } else {
-                            yummyCategoryNameTextView.setText(itemContent.getCategoryName());
+                            yummyCategoryNameTextView.setText("  " + itemContent.getCategoryName());
                             recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(itemContent.getCategoryId());
                         }
 

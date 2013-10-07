@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import android.widget.Toast;
 import com.fkf.resturent.R;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.services.ActivityUserPermissionServices;
@@ -99,7 +100,9 @@ public class LoginActivity extends Activity {
                         startActivity(recipesIntent);
                         finish();
                     } else if (loginResult.get("loginStatus").equals("2")) {
-                        //TODO need to handle username password error case
+                        String errorMsg = loginResult.get("msg");
+                        Toast.makeText(getApplicationContext(),
+                                "Login failed. Because of " + errorMsg, Toast.LENGTH_LONG).show();
                     }
                 }
             }

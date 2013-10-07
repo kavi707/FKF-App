@@ -83,10 +83,9 @@ public class ApiConnector {
      * @param password
      * @return statusMap
      */
-    //TODO need to handle the error, username or password case
     public Map<String, String> userLogin(String username, String password) {
         Map<String, String> statusMap = new HashMap<String, String>();
-        String userLoginUrl = "http://www.fauziaskitchenfun.com/api/user_login"; //TODO Url has been changed. but new url is not working
+        String userLoginUrl = "http://www.fauziaskitchenfun.com/api/user_login";
         String result = null;
 
         JSONObject reqParams = new JSONObject();
@@ -96,16 +95,20 @@ public class ApiConnector {
 
             result = this.sendHTTPPost(reqParams, userLoginUrl);
             JSONObject jsonData = new JSONObject(result);
-            JSONObject jsonUserData = (JSONObject) jsonData.get("user");
+            String loginStatus = jsonData.getString("status");
+            if(loginStatus.equals("true")) {
+                JSONObject jsonUserData = (JSONObject) jsonData.get("data");
 
-            if(jsonUserData != null) {
-                String userId = jsonUserData.getString("uid");
-                statusMap.put("loginStatus", "1");
-                statusMap.put("userId", userId);
-                statusMap.put("username", username);
-                statusMap.put("password", password);
-            } else {
-                //TODO need to handle the user name password error case
+                if(jsonUserData != null) {
+                    String userId = jsonUserData.getString("uid");
+                    statusMap.put("loginStatus", "1");
+                    statusMap.put("userId", userId);
+                    statusMap.put("username", username);
+                    statusMap.put("password", password);
+                }
+            } else if(loginStatus.equals("false")) {
+                statusMap.put("loginStatus", "2");
+                statusMap.put("msg", jsonData.getString("msg"));
             }
         } catch (JSONException ex) {
             ex.printStackTrace();

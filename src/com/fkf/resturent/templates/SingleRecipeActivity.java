@@ -201,8 +201,13 @@ public class SingleRecipeActivity extends Activity {
         isOnline = userPermissionServices.isOnline(SingleRecipeActivity.this);
 
         boolean dbFovStatus = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+        Log.d("Online >>>>>>>>>>>>>>>>>>>>>>>>...", String.valueOf(isOnline));
+        Log.d("DB Favorite >>>>>>>>>>>>>>>>>>>>>>>>... 1st", String.valueOf(dbFovStatus));
         if (isOnline) {
             boolean serverFovStatus = connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
+
+            Log.d("Server Favorite >>>>>>>>>>>>>>>>>>>>>>>>...", String.valueOf(serverFovStatus));
+            Log.d("DB Favorite >>>>>>>>>>>>>>>>>>>>>>>>...", String.valueOf(dbFovStatus));
 
             if (dbFovStatus && serverFovStatus) {
                 isFavorite = true;
@@ -229,7 +234,32 @@ public class SingleRecipeActivity extends Activity {
             @Override
             public void onClick(View view) {
 
+                boolean dbFovStatusBtnClickTest = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                Log.d("button click db >>>>>>>>>>>>>>>>>>>>>...", String.valueOf(dbFovStatusBtnClickTest));
                 if (isOnline) {
+                    boolean serverFovStatusBtnClickTest = connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
+                    Log.d("button click server >>>>>>>>>>>>>>>>>>>>>...", String.valueOf(serverFovStatusBtnClickTest));
+
+                    if (dbFovStatusBtnClickTest && serverFovStatusBtnClickTest) {
+                        isFavorite = true;
+                    } else {
+                        if (dbFovStatusBtnClickTest) {
+                            localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
+                            isFavorite = false;
+                        }
+
+                        if (serverFovStatusBtnClickTest) {
+                            localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                            isFavorite = true;
+                        }
+
+                        if(!dbFovStatusBtnClickTest && !serverFovStatusBtnClickTest) {
+                            isFavorite = false;
+                        }
+                    }
+
+                    Log.d("button click IsFavorite >>>>>>>>>>>>>>>>>>>>>...", String.valueOf(isFavorite));
+
                     if (isFavorite) {
 
                         boolean removeFavoriteResult = connector.removeFromMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
