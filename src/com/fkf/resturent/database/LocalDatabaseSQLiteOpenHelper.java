@@ -41,6 +41,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String ADDED_DATE = "added_date";
     public static final String RATINGS = "ratings";
     public static final String IMAGE_URL = "image_url";
+    public static final String IMAGE_URL_XS = "image_url_xs";
+    public static final String IMAGE_URL_S = "image_url_s";
+    public static final String IMAGE_URL_M = "image_url_m";
+    public static final String IMAGE_URL_L = "image_url_l";
 
     //popular yummy table
     public static final String POPULAR_YUMMY_TABLE_NAME = "popular_yummys";
@@ -117,7 +121,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 CATEGORY_ID + " int, " +
                 ADDED_DATE + " text, " +
                 RATINGS + " int, " +
-                IMAGE_URL + " text " +
+                IMAGE_URL + " text, " +
+                IMAGE_URL_XS + " text, " +
+                IMAGE_URL_S + " text, " +
+                IMAGE_URL_M + " text, " +
+                IMAGE_URL_L + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
@@ -130,7 +138,12 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         String createRecipesTableQuery = "create table " + POPULAR_YUMMY_TABLE_NAME + " ( " +
                 RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
                 POPULAR_INDEX + " int, " +
-                PRODUCT_ID + " text " +
+                PRODUCT_ID + " text, " +
+                RECIPE_NAME + " text, " +
+                IMAGE_URL_XS + " text, " +
+                IMAGE_URL_S + " text, " +
+                IMAGE_URL_M + " text, " +
+                IMAGE_URL_L + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
@@ -143,7 +156,12 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         String createRecipesTableQuery = "create table " + LATEST_YUMMY_TABLE_NAME + " ( " +
                 RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT not null, " +
                 LATEST_INDEX + " int, " +
-                PRODUCT_ID + " text " +
+                PRODUCT_ID + " text, " +
+                RECIPE_NAME + " text, " +
+                IMAGE_URL_XS + " text, " +
+                IMAGE_URL_S + " text, " +
+                IMAGE_URL_M + " text, " +
+                IMAGE_URL_L + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
@@ -448,6 +466,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(ADDED_DATE, "26-06-2013");
         values.put(RATINGS, recipe.getRatings());
         values.put(IMAGE_URL, recipe.getImageUrl());
+        values.put(IMAGE_URL_XS, recipe.getImageUrl_xs());
+        values.put(IMAGE_URL_S, recipe.getImageUrl_s());
+        values.put(IMAGE_URL_M, recipe.getImageUrl_m());
+        values.put(IMAGE_URL_L, recipe.getImageUrl_l());
 
         try {
             localFKFDatabase.insert(RECIPES_TABLE_NAME, null, values);
@@ -479,6 +501,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeAddedDate = recipeCursor.getString(7);
                     int recipeRatings = recipeCursor.getInt(8);
                     String recipeImageUrl = recipeCursor.getString(9);
+                    String recipeImageUrl_xs = recipeCursor.getString(10);
+                    String recipeImageUrl_s = recipeCursor.getString(11);
+                    String recipeImageUrl_m = recipeCursor.getString(12);
+                    String recipeImageUrl_l = recipeCursor.getString(13);
 
                     recipe = new Recipe();
 
@@ -492,6 +518,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setAddedDate(recipeAddedDate);
                     recipe.setRatings(recipeRatings);
                     recipe.setImageUrl(recipeImageUrl);
+                    recipe.setImageUrl_xs(recipeImageUrl_xs);
+                    recipe.setImageUrl_s(recipeImageUrl_s);
+                    recipe.setImageUrl_m(recipeImageUrl_m);
+                    recipe.setImageUrl_l(recipeImageUrl_l);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -529,6 +559,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeAddedDate = recipeCursor.getString(7);
                     int recipeRatings = recipeCursor.getInt(8);
                     String recipeImageUrl = recipeCursor.getString(9);
+                    String recipeImageUrl_xs = recipeCursor.getString(10);
+                    String recipeImageUrl_s = recipeCursor.getString(11);
+                    String recipeImageUrl_m = recipeCursor.getString(12);
+                    String recipeImageUrl_l = recipeCursor.getString(13);
 
                     recipe = new Recipe();
 
@@ -542,6 +576,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setAddedDate(recipeAddedDate);
                     recipe.setRatings(recipeRatings);
                     recipe.setImageUrl(recipeImageUrl);
+                    recipe.setImageUrl_xs(recipeImageUrl_xs);
+                    recipe.setImageUrl_s(recipeImageUrl_s);
+                    recipe.setImageUrl_m(recipeImageUrl_m);
+                    recipe.setImageUrl_l(recipeImageUrl_l);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -577,6 +615,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeAddedDate = recipeCursor.getString(7);
                     int recipeRatings = recipeCursor.getInt(8);
                     String recipeImageUrl = recipeCursor.getString(9);
+                    String recipeImageUrl_xs = recipeCursor.getString(10);
+                    String recipeImageUrl_s = recipeCursor.getString(11);
+                    String recipeImageUrl_m = recipeCursor.getString(12);
+                    String recipeImageUrl_l = recipeCursor.getString(13);
 
                     recipe = new Recipe();
 
@@ -590,6 +632,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setAddedDate(recipeAddedDate);
                     recipe.setRatings(recipeRatings);
                     recipe.setImageUrl(recipeImageUrl);
+                    recipe.setImageUrl_xs(recipeImageUrl_xs);
+                    recipe.setImageUrl_s(recipeImageUrl_s);
+                    recipe.setImageUrl_m(recipeImageUrl_m);
+                    recipe.setImageUrl_l(recipeImageUrl_l);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -625,6 +671,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeAddedDate = recipeCursor.getString(7);
                     int recipeRatings = recipeCursor.getInt(8);
                     String recipeImageUrl = recipeCursor.getString(9);
+                    String recipeImageUrl_xs = recipeCursor.getString(10);
+                    String recipeImageUrl_s = recipeCursor.getString(11);
+                    String recipeImageUrl_m = recipeCursor.getString(12);
+                    String recipeImageUrl_l = recipeCursor.getString(13);
 
                     recipe = new Recipe();
 
@@ -638,6 +688,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setAddedDate(recipeAddedDate);
                     recipe.setRatings(recipeRatings);
                     recipe.setImageUrl(recipeImageUrl);
+                    recipe.setImageUrl_xs(recipeImageUrl_xs);
+                    recipe.setImageUrl_s(recipeImageUrl_s);
+                    recipe.setImageUrl_m(recipeImageUrl_m);
+                    recipe.setImageUrl_l(recipeImageUrl_l);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -703,19 +757,24 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     /***************************************************/
     /**
      * save the given latest recipe from the caller function
-     * @param latestRecipesProductIds
+     * @param latestRecipes
      */
-    public void saveLatestYummyRecipe(List<String> latestRecipesProductIds) {
+    public void saveLatestYummyRecipe(List<PopularOrLatestRecipe> latestRecipes) {
 
         localFKFDatabase = this.getWritableDatabase();
         ContentValues values;
 
         int latestRecipeCount = 1;
-        for (String latestRecipesProductId : latestRecipesProductIds) {
+        for (PopularOrLatestRecipe latestRecipe : latestRecipes) {
             values = new ContentValues();
-            Log.d("product id *****************************", latestRecipesProductId);
+            Log.d("product id *****************************", latestRecipe.getProductId());
             values.put(LATEST_INDEX, latestRecipeCount);
-            values.put(PRODUCT_ID, latestRecipesProductId);
+            values.put(PRODUCT_ID, latestRecipe.getProductId());
+            values.put(RECIPE_NAME, latestRecipe.getRecipeName());
+            values.put(IMAGE_URL_XS, latestRecipe.getImageUrlXS());
+            values.put(IMAGE_URL_S, latestRecipe.getImageUrlS());
+            values.put(IMAGE_URL_M, latestRecipe.getImageUrlM());
+            values.put(IMAGE_URL_L, latestRecipe.getImageUrlL());
 
             try {
                 localFKFDatabase.insert(LATEST_YUMMY_TABLE_NAME, null, values);
@@ -770,18 +829,23 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     /***************************************************/
     /**
      * save the given popular recipe from the caller function
-     * @param popularRecipesProductIds
+     * @param popularRecipes
      */
-    public void savePopularYummyRecipe(List<String> popularRecipesProductIds) {
+    public void savePopularYummyRecipe(List<PopularOrLatestRecipe> popularRecipes) {
 
         localFKFDatabase = this.getWritableDatabase();
         ContentValues values;
 
         int popularRecipeCount = 1;
-        for (String popularRecipesProductId : popularRecipesProductIds) {
+        for (PopularOrLatestRecipe popularRecipe : popularRecipes) {
             values = new ContentValues();
             values.put(POPULAR_INDEX, popularRecipeCount);
-            values.put(PRODUCT_ID, popularRecipesProductId);
+            values.put(PRODUCT_ID, popularRecipe.getProductId());
+            values.put(RECIPE_NAME, popularRecipe.getRecipeName());
+            values.put(IMAGE_URL_XS, popularRecipe.getImageUrlXS());
+            values.put(IMAGE_URL_S, popularRecipe.getImageUrlS());
+            values.put(IMAGE_URL_M, popularRecipe.getImageUrlM());
+            values.put(IMAGE_URL_L, popularRecipe.getImageUrlL());
 
             try {
                 localFKFDatabase.insert(POPULAR_YUMMY_TABLE_NAME, null, values);

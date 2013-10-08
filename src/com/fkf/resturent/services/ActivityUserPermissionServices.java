@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Environment;
 import android.util.Log;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
+import com.fkf.resturent.database.PopularOrLatestRecipe;
 import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.services.image.downloader.DownloadFileTask;
 import com.fkf.resturent.services.connections.ApiConnector;
@@ -69,10 +70,10 @@ public class ActivityUserPermissionServices {
     public void populateLatestYummyDetails(Activity activity) {
 
         LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
-        List<String> latestYummyIdList = connector.getLatestYummysFromServer();
+        List<PopularOrLatestRecipe> latestYummyList = connector.getLatestYummysFromServer();
 
         localDatabaseSQLiteOpenHelper.deleteAllLatestRecipes();
-        localDatabaseSQLiteOpenHelper.saveLatestYummyRecipe(latestYummyIdList);
+        localDatabaseSQLiteOpenHelper.saveLatestYummyRecipe(latestYummyList);
 
         DownloadFileTask downloadFile = new DownloadFileTask();
         String path = Environment.getExternalStorageDirectory() + "/fauzias/latest_yummys/";
@@ -80,23 +81,19 @@ public class ActivityUserPermissionServices {
         List<Map<String, String>> downloadDetailsList = new ArrayList<Map<String, String>>();
 
         int recipeCount = 1;
-        if (latestYummyIdList != null) {
-            for (String recipeProductId : latestYummyIdList) {
-                ArrayList<Recipe> selectedRecipes = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(recipeProductId);
+        if (latestYummyList != null) {
+            for (PopularOrLatestRecipe latestRecipe : latestYummyList) {
 
-                if (!selectedRecipes.isEmpty()) {
-                    Recipe recipe = selectedRecipes.get(0);
+                String url = latestRecipe.getImageUrlS();
+                String newName = "icon_" + recipeCount;
 
-                    String url = recipe.getImageUrl();
-                    String newName = "icon_" + recipeCount;
+                Map<String, String> downloadingDetails = new HashMap<String, String>();
+                downloadingDetails.put("url", url);
+                downloadingDetails.put("path", path);
+                downloadingDetails.put("name", newName);
 
-                    Map<String, String> downloadingDetails = new HashMap<String, String>();
-                    downloadingDetails.put("url", url);
-                    downloadingDetails.put("path", path);
-                    downloadingDetails.put("name", newName);
+                downloadDetailsList.add(downloadingDetails);
 
-                    downloadDetailsList.add(downloadingDetails);
-                }
                 recipeCount++;
             }
         }
@@ -111,9 +108,9 @@ public class ActivityUserPermissionServices {
     public void populatePopularYummyDetails(Activity activity) {
 
         LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
-        List<String> popularRecipeIdsList = connector.getPopularYummysFromServer();
+        List<PopularOrLatestRecipe> popularRecipesList = connector.getPopularYummysFromServer();
 
-        localDatabaseSQLiteOpenHelper.savePopularYummyRecipe(popularRecipeIdsList);
+        localDatabaseSQLiteOpenHelper.savePopularYummyRecipe(popularRecipesList);
 
         DownloadFileTask downloadFile = new DownloadFileTask();
         String path = Environment.getExternalStorageDirectory() + "/fauzias/popular_yummys/";
@@ -121,23 +118,19 @@ public class ActivityUserPermissionServices {
         List<Map<String, String>> downloadDetailsList = new ArrayList<Map<String, String>>();
 
         int recipeCount = 1;
-        if (popularRecipeIdsList != null) {
-            for (String recipeProductId : popularRecipeIdsList) {
-                ArrayList<Recipe> selectedRecipes = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(recipeProductId);
+        if (popularRecipesList != null) {
+            for (PopularOrLatestRecipe popularRecipe : popularRecipesList) {
 
-                if (!selectedRecipes.isEmpty()) {
-                    Recipe recipe = selectedRecipes.get(0);
+                String url = popularRecipe.getImageUrlS();
+                String newName = "icon_" + recipeCount;
 
-                    String url = recipe.getImageUrl();
-                    String newName = "icon_" + recipeCount;
+                Map<String, String> downloadingDetails = new HashMap<String, String>();
+                downloadingDetails.put("url", url);
+                downloadingDetails.put("path", path);
+                downloadingDetails.put("name", newName);
 
-                    Map<String, String> downloadingDetails = new HashMap<String, String>();
-                    downloadingDetails.put("url", url);
-                    downloadingDetails.put("path", path);
-                    downloadingDetails.put("name", newName);
+                downloadDetailsList.add(downloadingDetails);
 
-                    downloadDetailsList.add(downloadingDetails);
-                }
                 recipeCount++;
 
             }

@@ -58,9 +58,9 @@
                 android:layout_height="40dip"
                 android:gravity="center_vertical"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="  My Favorite Recipes"
+                android:textColor="@color/green"
                 android:id="@+id/menuMyFavoriteTextView"
-                android:background="@color/green"/>
+                android:background="@drawable/my_favorite_menu_item_background"/>
 
         <ListView
                 android:id="@+id/menu_item_list"
@@ -252,16 +252,15 @@
                 </HorizontalScrollView>
 
                 <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
                         android:layout_width="284dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:background="@drawable/popular"
                         android:textStyle="bold"/>
-
-                <TextView
-                        android:layout_width="fill_parent"
-                        android:background="@color/black"
-                        android:layout_height="1dp"/>
 
                 <!--popular yummys : yummy 1-->
                 <LinearLayout
@@ -287,7 +286,7 @@
                                 android:layout_width="160dp"
                                 android:layout_height="100dp"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/fkf"
+                                android:src="@drawable/fkf_m"
                                 android:id="@+id/firstPopularRecipeImageView"/>
                     </LinearLayout>
 
@@ -362,7 +361,7 @@
                                 android:layout_width="160dp"
                                 android:layout_height="100dp"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/fkf"
+                                android:src="@drawable/fkf_m"
                                 android:id="@+id/secondPopularRecipeImageView"/>
                     </LinearLayout>
 
@@ -436,7 +435,7 @@
                                 android:layout_width="160dp"
                                 android:layout_height="100dp"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/fkf"
+                                android:src="@drawable/fkf_m"
                                 android:id="@+id/thirdPopularRecipeImageView"/>
                     </LinearLayout>
 
@@ -510,7 +509,7 @@
                                 android:layout_width="160dp"
                                 android:layout_height="100dp"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/fkf"
+                                android:src="@drawable/fkf_m"
                                 android:id="@+id/forthPopularRecipeImageView"/>
                     </LinearLayout>
 
@@ -584,7 +583,7 @@
                                 android:layout_width="160dp"
                                 android:layout_height="100dp"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/fkf"
+                                android:src="@drawable/fkf_m"
                                 android:id="@+id/fifthPopularRecipeImageView"/>
                     </LinearLayout>
 
@@ -658,7 +657,7 @@
                                 android:layout_width="160dp"
                                 android:layout_height="100dp"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/fkf"
+                                android:src="@drawable/fkf_m"
                                 android:id="@+id/sixthPopularRecipeImageView"/>
                     </LinearLayout>
 

@@ -21,7 +21,7 @@
                 android:layout_width="160dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/fkf"
+                android:src="@drawable/fkf_m"
                 android:id="@+id/recipeImageView"/>
     </LinearLayout>
 

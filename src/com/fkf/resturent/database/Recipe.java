@@ -17,6 +17,10 @@ public class Recipe {
     private String addedDate;
     private int ratings;
     private String imageUrl;
+    private String imageUrl_xs;
+    private String imageUrl_s;
+    private String imageUrl_m;
+    private String imageUrl_l;
 
     public int getId() {
         return id;
@@ -96,5 +100,37 @@ public class Recipe {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl_xs() {
+        return imageUrl_xs;
+    }
+
+    public void setImageUrl_xs(String imageUrl_xs) {
+        this.imageUrl_xs = imageUrl_xs;
+    }
+
+    public String getImageUrl_s() {
+        return imageUrl_s;
+    }
+
+    public void setImageUrl_s(String imageUrl_s) {
+        this.imageUrl_s = imageUrl_s;
+    }
+
+    public String getImageUrl_m() {
+        return imageUrl_m;
+    }
+
+    public void setImageUrl_m(String imageUrl_m) {
+        this.imageUrl_m = imageUrl_m;
+    }
+
+    public String getImageUrl_l() {
+        return imageUrl_l;
+    }
+
+    public void setImageUrl_l(String imageUrl_l) {
+        this.imageUrl_l = imageUrl_l;
     }
 }

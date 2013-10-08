@@ -99,24 +99,48 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         //Embedded images to yummys buttons
         File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1.jpg");
-        Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
-        firstYummyImageButton.setImageBitmap(firstBitmap);
+        if(firstImageFile.exists()) {
+            Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
+            firstYummyImageButton.setImageBitmap(firstBitmap);
+        } else {
+            firstYummyImageButton.setImageResource(R.drawable.fkf_xs);
+        }
+
 
         File secondImageFile = new File("/sdcard/fauzias/latest_yummys/icon_2.jpg");
-        Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
-        secondYummyImageButton.setImageBitmap(secondBitmap);
+        if(secondImageFile.exists()) {
+            Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
+            secondYummyImageButton.setImageBitmap(secondBitmap);
+        } else {
+            secondYummyImageButton.setImageResource(R.drawable.fkf_xs);
+        }
+
 
         File thirdImageFile = new File("/sdcard/fauzias/latest_yummys/icon_3.jpg");
-        Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
-        thirdYummyImageButton.setImageBitmap(thirdBitmap);
+        if(thirdImageFile.exists()) {
+            Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
+            thirdYummyImageButton.setImageBitmap(thirdBitmap);
+        } else {
+            thirdYummyImageButton.setImageResource(R.drawable.fkf_xs);
+        }
+
 
         File forthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_4.jpg");
-        Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
-        forthYummyImageButton.setImageBitmap(forthBitmap);
+        if(forthImageFile.exists()) {
+            Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
+            forthYummyImageButton.setImageBitmap(forthBitmap);
+        } else {
+            forthYummyImageButton.setImageResource(R.drawable.fkf_xs);
+        }
+
 
         File fifthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_5.jpg");
-        Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
-        fifthYummyImageButton.setImageBitmap(fifthBitmap);
+        if(fifthImageFile.exists()) {
+            Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
+            fifthYummyImageButton.setImageBitmap(fifthBitmap);
+        } else {
+            fifthYummyImageButton.setImageResource(R.drawable.fkf_xs);
+        }
 
 
         //latest yummys image button click events
@@ -174,7 +198,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap firstPopularBitmap = BitmapFactory.decodeFile(firstPopularImageFile.getAbsolutePath());
             firstPopularYummyImageView.setImageBitmap(firstPopularBitmap);
         } else {
-            firstPopularYummyImageView.setImageResource(R.drawable.fkf);
+            firstPopularYummyImageView.setImageResource(R.drawable.fkf_m);
         }
 
         firstPopularYummyLinear = (LinearLayout) findViewById(R.id.firstPopularYummyLinear);
@@ -194,7 +218,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap secondPopularBitmap = BitmapFactory.decodeFile(secondPopularImageFile.getAbsolutePath());
             secondPopularYummyImageView.setImageBitmap(secondPopularBitmap);
         } else {
-            secondPopularYummyImageView.setImageResource(R.drawable.fkf);
+            secondPopularYummyImageView.setImageResource(R.drawable.fkf_m);
         }
 
         secondPopularYummyLinear = (LinearLayout) findViewById(R.id.secondPopularYummyLinear);
@@ -214,7 +238,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap thirdPopularBitmap = BitmapFactory.decodeFile(thirdPopularImageFile.getAbsolutePath());
             thirdPopularYummyImageView.setImageBitmap(thirdPopularBitmap);
         } else {
-            thirdPopularYummyImageView.setImageResource(R.drawable.fkf);
+            thirdPopularYummyImageView.setImageResource(R.drawable.fkf_m);
         }
 
         thirdPopularYummyLinear = (LinearLayout) findViewById(R.id.thirdPopularYummyLinear);
@@ -234,7 +258,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap forthPopularBitmap = BitmapFactory.decodeFile(forthPopularImageFile.getAbsolutePath());
             forthPopularYummyImageView.setImageBitmap(forthPopularBitmap);
         } else {
-            forthPopularYummyImageView.setImageResource(R.drawable.fkf);
+            forthPopularYummyImageView.setImageResource(R.drawable.fkf_m);
         }
 
         forthPopularYummyLinear = (LinearLayout) findViewById(R.id.forthPopularYummyLinear);
@@ -254,7 +278,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap fifthPopularBitmap = BitmapFactory.decodeFile(fifthPopularImageFile.getAbsolutePath());
             fifthPopularYummyImageView.setImageBitmap(fifthPopularBitmap);
         } else {
-            fifthPopularYummyImageView.setImageResource(R.drawable.fkf);
+            fifthPopularYummyImageView.setImageResource(R.drawable.fkf_m);
         }
 
         fifthPopularYummyLinear = (LinearLayout) findViewById(R.id.fifthPopularYummyLinear);
@@ -274,7 +298,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap sixthPopularBitmap = BitmapFactory.decodeFile(sixthPopularImageFile.getAbsolutePath());
             sixthPopularYummyImageView.setImageBitmap(sixthPopularBitmap);
         } else {
-            sixthPopularYummyImageView.setImageResource(R.drawable.fkf);
+            sixthPopularYummyImageView.setImageResource(R.drawable.fkf_m);
         }
 
         sixthPopularYummyLinear = (LinearLayout) findViewById(R.id.sixthPopularYummyLinear);
@@ -324,6 +348,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
                 scrollParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 latestAndPopularScrollBar.setLayoutParams(scrollParams);
+
+                animateFromX = 0;
+                animateToX = -(menu.getLayoutParams().width);
+                marginX = -(menu.getLayoutParams().width);
+                menuOpen = false;
+
+                slideMenuIn(animateFromX, animateToX, marginX);
             }
         });
 
@@ -353,6 +384,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                     recipeListAdapter = new RecipeListAdapter(recipeList, context);
                     recipeItemList.setAdapter(recipeListAdapter);
+
+                    animateFromX = 0;
+                    animateToX = -(menu.getLayoutParams().width);
+                    marginX = -(menu.getLayoutParams().width);
+                    menuOpen = false;
+
+                    slideMenuIn(animateFromX, animateToX, marginX);
                 }
             });
         } else {
@@ -378,6 +416,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                     recipeListAdapter = new RecipeListAdapter(recipeList, context);
                     recipeItemList.setAdapter(recipeListAdapter);
+
+                    animateFromX = 0;
+                    animateToX = -(menu.getLayoutParams().width);
+                    marginX = -(menu.getLayoutParams().width);
+                    menuOpen = false;
+
+                    slideMenuIn(animateFromX, animateToX, marginX);
                 }
             }
         });

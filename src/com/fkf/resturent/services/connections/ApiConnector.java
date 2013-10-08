@@ -3,6 +3,7 @@ package com.fkf.resturent.services.connections;
 import android.app.Activity;
 import android.util.Log;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
+import com.fkf.resturent.database.PopularOrLatestRecipe;
 import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.templates.LoginActivity;
 import org.apache.http.HttpEntity;
@@ -261,9 +262,9 @@ public class ApiConnector {
      * get latest yummys from the server
      * @return
      */
-    public List<String> getLatestYummysFromServer() {
+    public List<PopularOrLatestRecipe> getLatestYummysFromServer() {
         String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/latest_recipe");
-        List<String> recipeList = new ArrayList<String>();
+        List<PopularOrLatestRecipe> latestRecipeList = new ArrayList<PopularOrLatestRecipe>();
         try {
             if (jsonResult != null) {
                 JSONArray jsonArray = new JSONArray(jsonResult);
@@ -271,7 +272,15 @@ public class ApiConnector {
                 for(int i = 0; i < jsonArray.length(); i++) {
                     jsonData = jsonArray.getJSONObject(i);
 
-                    recipeList.add(jsonData.getString("id"));
+                    PopularOrLatestRecipe popularOrLatestRecipe = new PopularOrLatestRecipe();
+                    popularOrLatestRecipe.setProductId(jsonData.getString("id"));
+                    popularOrLatestRecipe.setRecipeName(jsonData.getString("title"));
+                    popularOrLatestRecipe.setImageUrlXS(jsonData.getString("image_xs"));
+                    popularOrLatestRecipe.setImageUrlS(jsonData.getString("image_s"));
+                    popularOrLatestRecipe.setImageUrlM(jsonData.getString("image_m"));
+                    popularOrLatestRecipe.setImageUrlL(jsonData.getString("image_l"));
+
+                    latestRecipeList.add(popularOrLatestRecipe);
                 }
             }
         } catch (JSONException e) {
@@ -280,12 +289,13 @@ public class ApiConnector {
             throw e;
         }
 
-        return recipeList;
+        return latestRecipeList;
     }
 
-    public List<String> getPopularYummysFromServer() {
+    public List<PopularOrLatestRecipe> getPopularYummysFromServer() {
         String jsonResult = callWebService("http://www.fauziaskitchenfun.com/api/top_recipe");
         List<String> recipeList = new ArrayList<String>();
+        List<PopularOrLatestRecipe> popularRecipeList = new ArrayList<PopularOrLatestRecipe>();
         try {
             if(jsonResult != null) {
                 JSONArray jsonArray = new JSONArray(jsonResult);
@@ -293,6 +303,16 @@ public class ApiConnector {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     jsonData = jsonArray.getJSONObject(i);
                     recipeList.add(jsonData.getString("id"));
+
+                    PopularOrLatestRecipe popularOrLatestRecipe = new PopularOrLatestRecipe();
+                    popularOrLatestRecipe.setProductId(jsonData.getString("id"));
+                    popularOrLatestRecipe.setRecipeName(jsonData.getString("title"));
+                    popularOrLatestRecipe.setImageUrlXS(jsonData.getString("image_xs"));
+                    popularOrLatestRecipe.setImageUrlS(jsonData.getString("image_s"));
+                    popularOrLatestRecipe.setImageUrlM(jsonData.getString("image_m"));
+                    popularOrLatestRecipe.setImageUrlL(jsonData.getString("image_l"));
+
+                    popularRecipeList.add(popularOrLatestRecipe);
                 }
             }
         } catch (JSONException e) {
@@ -301,7 +321,7 @@ public class ApiConnector {
             throw e;
         }
 
-        return recipeList;
+        return popularRecipeList;
     }
 
     /**
