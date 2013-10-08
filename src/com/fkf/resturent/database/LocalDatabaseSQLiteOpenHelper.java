@@ -813,6 +813,47 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return recipeProductId;
     }
 
+    public List<PopularOrLatestRecipe> getAllLatestRecipes() {
+
+        List<PopularOrLatestRecipe> latestRecipesList = new ArrayList<PopularOrLatestRecipe>();
+        localFKFDatabase = this.getWritableDatabase();
+
+        try {
+            String getLatestRecipeQry = "SELECT * FROM " + LATEST_YUMMY_TABLE_NAME;
+            Cursor latestRecipeCursor = localFKFDatabase.rawQuery(getLatestRecipeQry, null);
+
+            latestRecipeCursor.moveToFirst();
+            if(!latestRecipeCursor.isAfterLast()) {
+                do {
+                    int index = latestRecipeCursor.getInt(1);
+                    String productId = latestRecipeCursor.getString(2);
+                    String recipeName = latestRecipeCursor.getString(3);
+                    String imageUrlXS = latestRecipeCursor.getString(4);
+                    String imageUrlS = latestRecipeCursor.getString(5);
+                    String imageUrlM = latestRecipeCursor.getString(6);
+                    String imageUrlL = latestRecipeCursor.getString(7);
+
+                    PopularOrLatestRecipe popularOrLatestRecipe = new PopularOrLatestRecipe();
+                    popularOrLatestRecipe.setIndex(index);
+                    popularOrLatestRecipe.setProductId(productId);
+                    popularOrLatestRecipe.setRecipeName(recipeName);
+                    popularOrLatestRecipe.setImageUrlXS(imageUrlXS);
+                    popularOrLatestRecipe.setImageUrlS(imageUrlS);
+                    popularOrLatestRecipe.setImageUrlM(imageUrlM);
+                    popularOrLatestRecipe.setImageUrlL(imageUrlL);
+
+                    latestRecipesList.add(popularOrLatestRecipe);
+                } while (latestRecipeCursor.moveToNext());
+            }
+
+            latestRecipeCursor.close();
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+
+        return latestRecipesList;
+    }
+
 
     public void deleteAllLatestRecipes() {
         localFKFDatabase = this.getWritableDatabase();

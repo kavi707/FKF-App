@@ -17,6 +17,7 @@ import com.fkf.resturent.R;
 import com.fkf.resturent.adapter.RecipeCategoryListAdapter;
 import com.fkf.resturent.adapter.RecipeListAdapter;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
+import com.fkf.resturent.database.PopularOrLatestRecipe;
 import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.database.RecipeCategory;
 
@@ -55,6 +56,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ImageButton thirdYummyImageButton;
     ImageButton forthYummyImageButton;
     ImageButton fifthYummyImageButton;
+
+    //latest yummy text views
+    TextView firstYummyTextView;
+    TextView secondYummyTextView;
+    TextView thirdYummyTextView;
+    TextView forthYummyTextView;
+    TextView fifthYummyTextView;
 
     //popular yummy imageViews
     ImageView firstPopularYummyImageView;
@@ -96,12 +104,26 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         forthYummyImageButton = (ImageButton) findViewById(R.id.forthYummyImageButton);
         fifthYummyImageButton = (ImageButton) findViewById(R.id.fifthYummyImageButton);
 
+        firstYummyTextView = (TextView) findViewById(R.id.firstYummyTextView);
+        secondYummyTextView = (TextView) findViewById(R.id.secondYummyTextView);
+        thirdYummyTextView = (TextView) findViewById(R.id.thirdYummyTextView);
+        forthYummyTextView = (TextView) findViewById(R.id.forthYummyTextView);
+        fifthYummyTextView = (TextView) findViewById(R.id.fifthYummyTextView);
+
+        List<PopularOrLatestRecipe> latestRecipes = localDatabaseSQLiteOpenHelper.getAllLatestRecipes();
+        String[] latestRecipeNames = new String[10];
+        if(latestRecipes != null) {
+            for (PopularOrLatestRecipe latestRecipe : latestRecipes) {
+                latestRecipeNames[latestRecipe.getIndex()] = latestRecipe.getRecipeName();
+            }
+        }
 
         //Embedded images to yummys buttons
         File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1.jpg");
         if(firstImageFile.exists()) {
             Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
             firstYummyImageButton.setImageBitmap(firstBitmap);
+            firstYummyTextView.setText("  " + latestRecipeNames[1]);
         } else {
             firstYummyImageButton.setImageResource(R.drawable.fkf_xs);
         }
@@ -111,6 +133,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         if(secondImageFile.exists()) {
             Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
             secondYummyImageButton.setImageBitmap(secondBitmap);
+            secondYummyTextView.setText("  " + latestRecipeNames[2]);
         } else {
             secondYummyImageButton.setImageResource(R.drawable.fkf_xs);
         }
@@ -120,6 +143,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         if(thirdImageFile.exists()) {
             Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
             thirdYummyImageButton.setImageBitmap(thirdBitmap);
+            thirdYummyTextView.setText(latestRecipeNames[3]);
         } else {
             thirdYummyImageButton.setImageResource(R.drawable.fkf_xs);
         }
@@ -129,6 +153,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         if(forthImageFile.exists()) {
             Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
             forthYummyImageButton.setImageBitmap(forthBitmap);
+            forthYummyTextView.setText("  " + latestRecipeNames[4]);
         } else {
             forthYummyImageButton.setImageResource(R.drawable.fkf_xs);
         }
@@ -138,6 +163,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         if(fifthImageFile.exists()) {
             Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
             fifthYummyImageButton.setImageBitmap(fifthBitmap);
+            fifthYummyTextView.setText("  " + latestRecipeNames[5]);
         } else {
             fifthYummyImageButton.setImageResource(R.drawable.fkf_xs);
         }

@@ -174,6 +174,9 @@
                                     android:id="@+id/firstYummyTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/dark_gray"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold|italic"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -192,6 +195,9 @@
                                     android:id="@+id/secondYummyTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/dark_gray"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold|italic"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -210,6 +216,9 @@
                                     android:id="@+id/thirdYummyTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/dark_gray"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold|italic"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -228,6 +237,9 @@
                                     android:id="@+id/forthYummyTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/dark_gray"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold|italic"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -246,6 +258,9 @@
                                     android:id="@+id/fifthYummyTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/dark_gray"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold|italic"
                                     android:text="Text View"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -267,7 +282,7 @@
                         android:id="@+id/firstPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
@@ -276,9 +291,6 @@
                             android:orientation="vertical"
                             android:layout_width="160dp"
                             android:layout_height="140dp">
-                        <TextView
-                                android:layout_width="160dp"
-                                android:layout_height="20dp"/>
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="20dp"/>
@@ -343,7 +355,7 @@
                         android:id="@+id/secondPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
@@ -351,9 +363,6 @@
                             android:orientation="vertical"
                             android:layout_width="160dp"
                             android:layout_height="140dp">
-                        <TextView
-                                android:layout_width="160dp"
-                                android:layout_height="20dp"/>
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="20dp"/>
@@ -417,7 +426,7 @@
                         android:id="@+id/thirdPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
@@ -425,9 +434,6 @@
                             android:orientation="vertical"
                             android:layout_width="160dp"
                             android:layout_height="140dp">
-                        <TextView
-                                android:layout_width="160dp"
-                                android:layout_height="20dp"/>
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="20dp"/>
@@ -491,7 +497,7 @@
                         android:id="@+id/forthPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
@@ -499,9 +505,6 @@
                             android:orientation="vertical"
                             android:layout_width="160dp"
                             android:layout_height="140dp">
-                        <TextView
-                                android:layout_width="160dp"
-                                android:layout_height="20dp"/>
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="20dp"/>
@@ -565,7 +568,7 @@
                         android:id="@+id/fifthPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
@@ -573,9 +576,6 @@
                             android:orientation="vertical"
                             android:layout_width="160dp"
                             android:layout_height="140dp">
-                        <TextView
-                                android:layout_width="160dp"
-                                android:layout_height="20dp"/>
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="20dp"/>
@@ -639,7 +639,7 @@
                         android:id="@+id/sixthPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
@@ -647,9 +647,6 @@
                             android:orientation="vertical"
                             android:layout_width="160dp"
                             android:layout_height="140dp">
-                        <TextView
-                                android:layout_width="160dp"
-                                android:layout_height="20dp"/>
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="20dp"/>
