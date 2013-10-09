@@ -110,6 +110,7 @@ public class ActivityUserPermissionServices {
         LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
         List<PopularOrLatestRecipe> popularRecipesList = connector.getPopularYummysFromServer();
 
+        localDatabaseSQLiteOpenHelper.deleteAllPopularRecipes();
         localDatabaseSQLiteOpenHelper.savePopularYummyRecipe(popularRecipesList);
 
         DownloadFileTask downloadFile = new DownloadFileTask();

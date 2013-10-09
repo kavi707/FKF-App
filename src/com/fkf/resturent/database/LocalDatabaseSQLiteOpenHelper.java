@@ -478,6 +478,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * get recipes from given category id
+     * @param categoryId
+     * @return
+     */
     public ArrayList<Recipe> getRecipesFromCategoryId(int categoryId) {
         ArrayList<Recipe> selectedRecipeList = new ArrayList<Recipe>();
         localFKFDatabase = this.getWritableDatabase();
@@ -536,6 +541,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return selectedRecipeList;
     }
 
+    /**
+     * get recipes from recipe id
+     * @param selectedRecipeId
+     * @return
+     */
     public ArrayList<Recipe> getRecipeFromRecipeId(int selectedRecipeId) {
         ArrayList<Recipe> selectedRecipeList = new ArrayList<Recipe>();
         localFKFDatabase = this.getWritableDatabase();
@@ -592,6 +602,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return selectedRecipeList;
     }
 
+    /**
+     * get recipes from given recipe product id
+     * @param selectedRecipeId
+     * @return
+     */
     public ArrayList<Recipe> getRecipeFromRecipeProductId(String selectedRecipeId) {
         ArrayList<Recipe> selectedRecipeList = new ArrayList<Recipe>();
         localFKFDatabase = this.getWritableDatabase();
@@ -648,6 +663,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return selectedRecipeList;
     }
 
+    /**
+     * search recipe from given part of the recipe name
+     * @param key
+     * @return
+     */
     public ArrayList<Recipe> searchRecipesFromGivenRecipeName(String key) {
         ArrayList<Recipe> selectedRecipeList = new ArrayList<Recipe>();
         localFKFDatabase = this.getWritableDatabase();
@@ -767,7 +787,6 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         int latestRecipeCount = 1;
         for (PopularOrLatestRecipe latestRecipe : latestRecipes) {
             values = new ContentValues();
-            Log.d("product id *****************************", latestRecipe.getProductId());
             values.put(LATEST_INDEX, latestRecipeCount);
             values.put(PRODUCT_ID, latestRecipe.getProductId());
             values.put(RECIPE_NAME, latestRecipe.getRecipeName());
@@ -786,6 +805,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * get latest recipeId from given latest index
+     * @param index
+     * @return
+     */
     public String getLatestRecipeFromIndex(int index) {
 
         String recipeProductId = "";
@@ -813,6 +837,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return recipeProductId;
     }
 
+    /**
+     * get all latest recipes list
+     * @return
+     */
     public List<PopularOrLatestRecipe> getAllLatestRecipes() {
 
         List<PopularOrLatestRecipe> latestRecipesList = new ArrayList<PopularOrLatestRecipe>();
@@ -855,6 +883,9 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * delete all latest recipes
+     */
     public void deleteAllLatestRecipes() {
         localFKFDatabase = this.getWritableDatabase();
         try {
@@ -899,6 +930,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * get popular recipe product id from given index
+     * @param index
+     * @return
+     */
     public String getPopularRecipeFromIndex(int index) {
 
         String recipeProductId = "";
@@ -926,6 +962,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return recipeProductId;
     }
 
+    /**
+     * get all popular recipes
+     * @return
+     */
     public List<PopularOrLatestRecipe> getAllPopularRecipes() {
 
         List<PopularOrLatestRecipe> popularRecipesList = new ArrayList<PopularOrLatestRecipe>();
@@ -966,14 +1006,24 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return popularRecipesList;
     }
 
-
+    /**
+     * delete all popular recipes
+     */
+    public void deleteAllPopularRecipes() {
+        localFKFDatabase = this.getWritableDatabase();
+        try {
+            localFKFDatabase.delete(POPULAR_YUMMY_TABLE_NAME, null, null);
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+    }
 
 
     /**********************************************************/
     /********* User favorite Recipes table methods ************/
     /**********************************************************/
     /**
-     *
+     * save recipe in my favorites
      * @param recipeProductId
      * @param userId
      */
@@ -1050,6 +1100,10 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return isFavorite;
     }
 
+    /**
+     * remove given recipe from user favorites
+     * @param recipeProductId
+     */
     public void removeFromUserFavorite(String recipeProductId) {
         localFKFDatabase = this.getWritableDatabase();
         try {
