@@ -314,13 +314,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/firstPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -328,12 +329,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/firstPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -385,13 +387,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/secondPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -399,12 +402,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/secondPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -456,13 +460,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/thirdPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -470,12 +475,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/thirdPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -527,13 +533,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/forthPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -541,12 +548,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/forthPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -598,13 +606,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/fifthPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -612,12 +621,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/fifthPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -669,13 +679,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/sixthPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -683,12 +694,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/sixthPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"

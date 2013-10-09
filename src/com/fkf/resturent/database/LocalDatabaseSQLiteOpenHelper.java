@@ -925,6 +925,46 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         return recipeProductId;
     }
 
+    public List<PopularOrLatestRecipe> getAllPopularRecipes() {
+
+        List<PopularOrLatestRecipe> popularRecipesList = new ArrayList<PopularOrLatestRecipe>();
+        localFKFDatabase = this.getWritableDatabase();
+
+        try {
+            String getAllPopularRecipeQry = "SELECT * FROM " + POPULAR_YUMMY_TABLE_NAME;
+            Cursor popularRecipesCursor = localFKFDatabase.rawQuery(getAllPopularRecipeQry, null);
+
+            popularRecipesCursor.moveToFirst();
+            if(!popularRecipesCursor.isAfterLast()) {
+                do {
+                    int index = popularRecipesCursor.getInt(1);
+                    String productId = popularRecipesCursor.getString(2);
+                    String recipeName = popularRecipesCursor.getString(3);
+                    String imageUrlXS = popularRecipesCursor.getString(4);
+                    String imageUrlS = popularRecipesCursor.getString(5);
+                    String imageUrlM = popularRecipesCursor.getString(6);
+                    String imageUrlL = popularRecipesCursor.getString(7);
+
+                    PopularOrLatestRecipe popularOrLatestRecipe = new PopularOrLatestRecipe();
+                    popularOrLatestRecipe.setIndex(index);
+                    popularOrLatestRecipe.setProductId(productId);
+                    popularOrLatestRecipe.setRecipeName(recipeName);
+                    popularOrLatestRecipe.setImageUrlXS(imageUrlXS);
+                    popularOrLatestRecipe.setImageUrlS(imageUrlS);
+                    popularOrLatestRecipe.setImageUrlM(imageUrlM);
+                    popularOrLatestRecipe.setImageUrlL(imageUrlL);
+
+                    popularRecipesList.add(popularOrLatestRecipe);
+                } while (popularRecipesCursor.moveToNext());
+            }
+            popularRecipesCursor.close();
+        } catch (SQLiteException ex) {
+            throw ex;
+        }
+
+        return popularRecipesList;
+    }
+
 
 
 

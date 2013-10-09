@@ -72,6 +72,31 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ImageView fifthPopularYummyImageView;
     ImageView sixthPopularYummyImageView;
 
+    //popular yummy name text views
+    TextView firstPopularRecipeNameTextView;
+    TextView secondPopularRecipeNameTextView;
+    TextView thirdPopularRecipeNameTextView;
+    TextView forthPopularRecipeNameTextView;
+    TextView fifthPopularRecipeNameTextView;
+    TextView sixthPopularRecipeNameTextView;
+
+    //popular yummy desc text views
+    TextView firstPopularRecipeDescTextView;
+    TextView secondPopularRecipeDescTextView;
+    TextView thirdPopularRecipeDescTextView;
+    TextView forthPopularRecipeDescTextView;
+    TextView fifthPopularRecipeDescTextView;
+    TextView sixthPopularRecipeDescTextView;
+
+    //popular yummy ratings bars
+    RatingBar firstPopularRecipeRatingBar;
+    RatingBar secondPopularRecipeRatingBar;
+    RatingBar thirdPopularRecipeRatingBar;
+    RatingBar forthPopularRecipeRatingBar;
+    RatingBar fifthPopularRecipeRatingBar;
+    RatingBar sixthPopularRecipeRatingBar;
+
+
     private RecipeCategoryListAdapter recipeCategoryListAdapter;
     private RecipeListAdapter recipeListAdapter;
     private ArrayList<Recipe> recipeList;
@@ -110,6 +135,28 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         forthYummyTextView = (TextView) findViewById(R.id.forthYummyTextView);
         fifthYummyTextView = (TextView) findViewById(R.id.fifthYummyTextView);
 
+        firstPopularRecipeNameTextView = (TextView) findViewById(R.id.firstPopularRecipeNameTextView);
+        secondPopularRecipeNameTextView = (TextView) findViewById(R.id.secondPopularRecipeNameTextView);
+        thirdPopularRecipeNameTextView = (TextView) findViewById(R.id.thirdPopularRecipeNameTextView);
+        forthPopularRecipeNameTextView = (TextView) findViewById(R.id.forthPopularRecipeNameTextView);
+        fifthPopularRecipeNameTextView = (TextView) findViewById(R.id.fifthPopularRecipeNameTextView);
+        sixthPopularRecipeNameTextView = (TextView) findViewById(R.id.sixthPopularRecipeNameTextView);
+
+        firstPopularRecipeDescTextView = (TextView) findViewById(R.id.firstPopularRecipeDescriptionTextView);
+        secondPopularRecipeDescTextView = (TextView) findViewById(R.id.secondPopularRecipeDescriptionTextView);
+        thirdPopularRecipeDescTextView = (TextView) findViewById(R.id.thirdPopularRecipeDescriptionTextView);
+        forthPopularRecipeDescTextView = (TextView) findViewById(R.id.forthPopularRecipeDescriptionTextView);
+        fifthPopularRecipeDescTextView = (TextView) findViewById(R.id.fifthPopularRecipeDescriptionTextView);
+        sixthPopularRecipeDescTextView = (TextView) findViewById(R.id.sixthPopularRecipeDescriptionTextView);
+
+        firstPopularRecipeRatingBar = (RatingBar) findViewById(R.id.firstPopularRecipeRatingBar);
+        secondPopularRecipeRatingBar = (RatingBar) findViewById(R.id.secondPopularRecipeRatingBar);
+        thirdPopularRecipeRatingBar = (RatingBar) findViewById(R.id.thirdPopularRecipeRatingBar);
+        forthPopularRecipeRatingBar = (RatingBar) findViewById(R.id.forthPopularRecipeRatingBar);
+        fifthPopularRecipeRatingBar = (RatingBar) findViewById(R.id.fifthPopularRecipeRatingBar);
+        sixthPopularRecipeRatingBar = (RatingBar) findViewById(R.id.sixthPopularRecipeRatingBar);
+
+
         List<PopularOrLatestRecipe> latestRecipes = localDatabaseSQLiteOpenHelper.getAllLatestRecipes();
         String[] latestRecipeNames = new String[10];
         if(latestRecipes != null) {
@@ -117,6 +164,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 latestRecipeNames[latestRecipe.getIndex()] = latestRecipe.getRecipeName();
             }
         }
+
+
+
+
+        /********************************************/
+        /********* Latest yummys buttons ************/
+        /********************************************/
 
         //Embedded images to yummys buttons
         File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1.jpg");
@@ -215,6 +269,14 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             }
         });
 
+
+
+
+
+
+        /***********************************************/
+        /********* Popular yummys row views ************/
+        /***********************************************/
 
         //popular yummys linear layout click events
         //first popular yummy
@@ -336,6 +398,106 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 startActivity(singleRecipeIntent);
             }
         });
+
+
+        List<PopularOrLatestRecipe> allPopularRecipeList = localDatabaseSQLiteOpenHelper.getAllPopularRecipes();
+        if (allPopularRecipeList != null && !allPopularRecipeList.isEmpty()) {
+            for (PopularOrLatestRecipe popularOrLatestRecipe : allPopularRecipeList) {
+
+                List<Recipe> tempRecipesList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(popularOrLatestRecipe.getProductId());
+                Recipe selectedRecipe = null;
+                if(tempRecipesList != null && !tempRecipesList.isEmpty()) {
+                    selectedRecipe = tempRecipesList.get(0);
+                }
+
+                switch (popularOrLatestRecipe.getIndex()) {
+                    case 1:
+                        firstPopularRecipeNameTextView.setText(popularOrLatestRecipe.getRecipeName());
+                        if(selectedRecipe != null) {
+                            String description = selectedRecipe.getDescription();
+                            String shortDesc = "";
+                            if(description.length() > 60) {
+                                shortDesc = description.substring(0, 60);
+                            } else {
+                                shortDesc = description;
+                            }
+                            firstPopularRecipeDescTextView.setText(shortDesc);
+                            firstPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
+                        }
+                        break;
+                    case 2:
+                        secondPopularRecipeNameTextView.setText(popularOrLatestRecipe.getRecipeName());
+                        if(selectedRecipe != null) {
+                            String description = selectedRecipe.getDescription();
+                            String shortDesc = "";
+                            if(description.length() > 60) {
+                                shortDesc = description.substring(0, 60);
+                            } else {
+                                shortDesc = description;
+                            }
+                            secondPopularRecipeDescTextView.setText(shortDesc);
+                            secondPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
+                        }
+                        break;
+                    case 3:
+                        thirdPopularRecipeNameTextView.setText(popularOrLatestRecipe.getRecipeName());
+                        if(selectedRecipe != null) {
+                            String description = selectedRecipe.getDescription();
+                            String shortDesc = "";
+                            if(description.length() > 60) {
+                                shortDesc = description.substring(0, 60);
+                            } else {
+                                shortDesc = description;
+                            }
+                            thirdPopularRecipeDescTextView.setText(shortDesc);
+                            thirdPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
+                        }
+                        break;
+                    case 4:
+                        forthPopularRecipeNameTextView.setText(popularOrLatestRecipe.getRecipeName());
+                        if(selectedRecipe != null) {
+                            String description = selectedRecipe.getDescription();
+                            String shortDesc = "";
+                            if(description.length() > 60) {
+                                shortDesc = description.substring(0, 60);
+                            } else {
+                                shortDesc = description;
+                            }
+                            forthPopularRecipeDescTextView.setText(shortDesc);
+                            forthPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
+                        }
+                        break;
+                    case 5:
+                        fifthPopularRecipeNameTextView.setText(popularOrLatestRecipe.getRecipeName());
+                        if(selectedRecipe != null) {
+                            String description = selectedRecipe.getDescription();
+                            String shortDesc = "";
+                            if(description.length() > 60) {
+                                shortDesc = description.substring(0, 60);
+                            } else {
+                                shortDesc = description;
+                            }
+                            fifthPopularRecipeDescTextView.setText(shortDesc);
+                            fifthPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
+                        }
+                        break;
+                    case 6:
+                        sixthPopularRecipeNameTextView.setText(popularOrLatestRecipe.getRecipeName());
+                        if(selectedRecipe != null) {
+                            String description = selectedRecipe.getDescription();
+                            String shortDesc = "";
+                            if(description.length() > 60) {
+                                shortDesc = description.substring(0, 60);
+                            } else {
+                                shortDesc = description;
+                            }
+                            sixthPopularRecipeDescTextView.setText(shortDesc);
+                            sixthPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
+                        }
+                        break;
+                }
+            }
+        }
 
         //Following items are always in menu list
         homeTextView = (TextView) findViewById(R.id.menuHomeTextView);
