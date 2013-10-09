@@ -904,6 +904,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         String recipeProductId = "";
         List<String> recipeProductIdList = new ArrayList<String>();
         localFKFDatabase = this.getWritableDatabase();
+
         try {
             String getPopularRecipeQry = "SELECT * FROM " + POPULAR_YUMMY_TABLE_NAME + " WHERE " + POPULAR_INDEX + " = " + index;
             Cursor popularRecipeCursor = localFKFDatabase.rawQuery(getPopularRecipeQry, null);
@@ -911,7 +912,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             popularRecipeCursor.moveToFirst();
             if(!popularRecipeCursor.isAfterLast()) {
                 do {
-                    recipeProductIdList.add(popularRecipeCursor.getString(1));
+                    recipeProductIdList.add(popularRecipeCursor.getString(2));
                 } while (popularRecipeCursor.moveToNext());
             }
 

@@ -67,7 +67,11 @@ public class SingleRecipeActivity extends Activity {
         int selectedRecipeId = extras.getInt("SELECTED_RECIPE_ID");
 
         if(selectedRecipeId < 0) {
+
+            Log.d("Selected Recipe >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..", String.valueOf(selectedRecipeId));
+
             switch (selectedRecipeId) {
+                //Latest recipe cases
                 case -1:
                     selectedRecipeProductId = localDatabaseSQLiteOpenHelper.getLatestRecipeFromIndex(1);
                     break;
@@ -82,6 +86,26 @@ public class SingleRecipeActivity extends Activity {
                     break;
                 case -5:
                     selectedRecipeProductId = localDatabaseSQLiteOpenHelper.getLatestRecipeFromIndex(5);
+                    break;
+
+                //Popular recipe cases
+                case -6:
+                    selectedRecipeProductId = localDatabaseSQLiteOpenHelper.getPopularRecipeFromIndex(1);
+                    break;
+                case -7:
+                    selectedRecipeProductId = localDatabaseSQLiteOpenHelper.getPopularRecipeFromIndex(2);
+                    break;
+                case -8:
+                    selectedRecipeProductId = localDatabaseSQLiteOpenHelper.getPopularRecipeFromIndex(3);
+                    break;
+                case -9:
+                    selectedRecipeProductId = localDatabaseSQLiteOpenHelper.getPopularRecipeFromIndex(4);
+                    break;
+                case -10:
+                    selectedRecipeProductId = localDatabaseSQLiteOpenHelper.getPopularRecipeFromIndex(5);
+                    break;
+                case -11:
+                    selectedRecipeProductId = localDatabaseSQLiteOpenHelper.getPopularRecipeFromIndex(6);
                     break;
             }
 
