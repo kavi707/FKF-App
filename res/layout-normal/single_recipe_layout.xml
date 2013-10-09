@@ -11,6 +11,7 @@
 
         <LinearLayout
                 android:orientation="vertical"
+                android:background="@color/white"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
@@ -38,6 +39,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Large Text"
+                        android:textColor="@color/dark_gray"
                         android:id="@+id/singleRecipeNameTextView"
                         android:layout_gravity="left|center_vertical"/>
 
@@ -69,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Large Text"
+                    android:textColor="@color/normal_gray"
                     android:id="@+id/singleRecipeDescriptionTextView"
                     android:layout_gravity="left"/>
 
@@ -77,11 +80,13 @@
                     android:layout_height="wrap_content"/>
 
             <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/singleRecipeContentLabel"
+                    android:background="@drawable/category_name_textview_background"
                     android:id="@+id/singleRecipeContentLabelTextView"
+                    android:gravity="center_vertical"
                     android:layout_gravity="left"/>
 
             <TextView
@@ -93,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Large Text"
+                    android:textColor="@color/normal_gray"
                     android:id="@+id/singleRecipeIngredientTextView"
                     android:layout_gravity="left"/>
 
@@ -106,6 +112,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/singleRecipeInstructionLabel"
                     android:id="@+id/singleRecipeInstructionLabelTextView"
+                    android:textColor="@color/dark_gray"
                     android:layout_gravity="left"/>
 
             <TextView
@@ -118,6 +125,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Large Text"
                     android:id="@+id/singleRecipeInstructionTextView"
+                    android:textColor="@color/normal_gray"
                     android:layout_gravity="left"/>
         </LinearLayout>
     </ScrollView>

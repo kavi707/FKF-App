@@ -68,8 +68,6 @@ public class SingleRecipeActivity extends Activity {
 
         if(selectedRecipeId < 0) {
 
-            Log.d("Selected Recipe >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..", String.valueOf(selectedRecipeId));
-
             switch (selectedRecipeId) {
                 //Latest recipe cases
                 case -1:
@@ -134,7 +132,7 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeInstructionTextView.setText(selectedRecipe.getInstructions());
         singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " Ingredients");
 
-        String imageUrl = selectedRecipe.getImageUrl();
+        String imageUrl = selectedRecipe.getImageUrl_m();
         int loader = R.drawable.default_recipe_image;
 
         try {
@@ -225,13 +223,8 @@ public class SingleRecipeActivity extends Activity {
         isOnline = userPermissionServices.isOnline(SingleRecipeActivity.this);
 
         boolean dbFovStatus = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
-        Log.d("Online >>>>>>>>>>>>>>>>>>>>>>>>...", String.valueOf(isOnline));
-        Log.d("DB Favorite >>>>>>>>>>>>>>>>>>>>>>>>... 1st", String.valueOf(dbFovStatus));
         if (isOnline) {
             boolean serverFovStatus = connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
-
-            Log.d("Server Favorite >>>>>>>>>>>>>>>>>>>>>>>>...", String.valueOf(serverFovStatus));
-            Log.d("DB Favorite >>>>>>>>>>>>>>>>>>>>>>>>...", String.valueOf(dbFovStatus));
 
             if (dbFovStatus && serverFovStatus) {
                 isFavorite = true;
@@ -259,10 +252,8 @@ public class SingleRecipeActivity extends Activity {
             public void onClick(View view) {
 
                 boolean dbFovStatusBtnClickTest = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
-                Log.d("button click db >>>>>>>>>>>>>>>>>>>>>...", String.valueOf(dbFovStatusBtnClickTest));
                 if (isOnline) {
                     boolean serverFovStatusBtnClickTest = connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
-                    Log.d("button click server >>>>>>>>>>>>>>>>>>>>>...", String.valueOf(serverFovStatusBtnClickTest));
 
                     if (dbFovStatusBtnClickTest && serverFovStatusBtnClickTest) {
                         isFavorite = true;
@@ -282,7 +273,6 @@ public class SingleRecipeActivity extends Activity {
                         }
                     }
 
-                    Log.d("button click IsFavorite >>>>>>>>>>>>>>>>>>>>>...", String.valueOf(isFavorite));
 
                     if (isFavorite) {
 
