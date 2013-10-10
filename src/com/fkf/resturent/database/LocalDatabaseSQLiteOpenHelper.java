@@ -45,6 +45,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String IMAGE_URL_S = "image_url_s";
     public static final String IMAGE_URL_M = "image_url_m";
     public static final String IMAGE_URL_L = "image_url_l";
+    public static final String LEGACY = "legacy";
+    public static final String BODY = "body";
 
     //popular yummy table
     public static final String POPULAR_YUMMY_TABLE_NAME = "popular_yummys";
@@ -125,7 +127,9 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 IMAGE_URL_XS + " text, " +
                 IMAGE_URL_S + " text, " +
                 IMAGE_URL_M + " text, " +
-                IMAGE_URL_L + " text " +
+                IMAGE_URL_L + " text, " +
+                LEGACY + " int, " +
+                BODY + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
@@ -470,6 +474,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(IMAGE_URL_S, recipe.getImageUrl_s());
         values.put(IMAGE_URL_M, recipe.getImageUrl_m());
         values.put(IMAGE_URL_L, recipe.getImageUrl_l());
+        values.put(LEGACY, recipe.getLegacy());
+        values.put(BODY, recipe.getBody());
 
         try {
             localFKFDatabase.insert(RECIPES_TABLE_NAME, null, values);
@@ -510,6 +516,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeImageUrl_s = recipeCursor.getString(11);
                     String recipeImageUrl_m = recipeCursor.getString(12);
                     String recipeImageUrl_l = recipeCursor.getString(13);
+                    int legacy = recipeCursor.getInt(14);
+                    String recipeBody = recipeCursor.getString(15);
 
                     recipe = new Recipe();
 
@@ -527,6 +535,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setImageUrl_s(recipeImageUrl_s);
                     recipe.setImageUrl_m(recipeImageUrl_m);
                     recipe.setImageUrl_l(recipeImageUrl_l);
+                    recipe.setLegacy(legacy);
+                    recipe.setBody(recipeBody);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -634,6 +644,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeImageUrl_s = recipeCursor.getString(11);
                     String recipeImageUrl_m = recipeCursor.getString(12);
                     String recipeImageUrl_l = recipeCursor.getString(13);
+                    int legacy = recipeCursor.getInt(14);
+                    String body = recipeCursor.getString(15);
 
                     recipe = new Recipe();
 
@@ -651,6 +663,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setImageUrl_s(recipeImageUrl_s);
                     recipe.setImageUrl_m(recipeImageUrl_m);
                     recipe.setImageUrl_l(recipeImageUrl_l);
+                    recipe.setLegacy(legacy);
+                    recipe.setBody(body);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -695,6 +709,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeImageUrl_s = recipeCursor.getString(11);
                     String recipeImageUrl_m = recipeCursor.getString(12);
                     String recipeImageUrl_l = recipeCursor.getString(13);
+                    int legacy = recipeCursor.getInt(14);
+                    String body = recipeCursor.getString(15);
 
                     recipe = new Recipe();
 
@@ -712,6 +728,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setImageUrl_s(recipeImageUrl_s);
                     recipe.setImageUrl_m(recipeImageUrl_m);
                     recipe.setImageUrl_l(recipeImageUrl_l);
+                    recipe.setLegacy(legacy);
+                    recipe.setBody(body);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());

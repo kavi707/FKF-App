@@ -21,6 +21,8 @@ public class Recipe {
     private String imageUrl_s;
     private String imageUrl_m;
     private String imageUrl_l;
+    private int legacy;
+    private String body;
 
     public int getId() {
         return id;
@@ -132,5 +134,21 @@ public class Recipe {
 
     public void setImageUrl_l(String imageUrl_l) {
         this.imageUrl_l = imageUrl_l;
+    }
+
+    public int getLegacy() {
+        return legacy;
+    }
+
+    public void setLegacy(int legacy) {
+        this.legacy = legacy;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 }

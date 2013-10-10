@@ -2,6 +2,7 @@ package com.fkf.resturent.services;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -62,6 +63,36 @@ public class ActivityUserPermissionServices {
                 ex.printStackTrace();
             }
         }
+    }
+
+    /**
+     * return the application running device screen size
+     * @param activity
+     * @return
+     */
+    public int getDeviceScreenSize(Activity activity) {
+
+        int screenSizeInt = 0;
+
+        int screenSize = activity.getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK;
+
+        switch(screenSize) {
+            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+                screenSizeInt = Configuration.SCREENLAYOUT_SIZE_XLARGE;
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_LARGE:
+                screenSizeInt = Configuration.SCREENLAYOUT_SIZE_LARGE;
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+                screenSizeInt = Configuration.SCREENLAYOUT_SIZE_NORMAL;
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_SMALL:
+                screenSizeInt = Configuration.SCREENLAYOUT_SIZE_SMALL;
+                break;
+        }
+
+        return screenSizeInt;
     }
 
     /**

@@ -2,6 +2,7 @@ package com.fkf.resturent.services.connections;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
 import org.json.JSONArray;
@@ -42,6 +43,7 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
                 for(int i = 0; i < jsonRecipeArray.length(); i++) {
                     jsonData = jsonRecipeArray.getJSONObject(i);
 
+                    int legacyEvent = jsonData.getInt("legacy");
                     Recipe getRecipe = new Recipe();
                     getRecipe.setProductId(jsonData.getString("id"));
                     getRecipe.setName(jsonData.getString("title"));
@@ -50,19 +52,27 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
                     getRecipe.setImageUrl_s(jsonData.getString("image_s"));
                     getRecipe.setImageUrl_m(jsonData.getString("image_m"));
                     getRecipe.setImageUrl_l(jsonData.getString("image_l"));
-
                     String description = jsonData.getString("desc").replace("[\"", "").replace("\"]", "");
                     getRecipe.setDescription(description);
-
-                    String instructions = jsonData.getString("instructions").replace("[\"", "").replace("\"]", "").replace("\",\"", ",");
-                    getRecipe.setInstructions(instructions);
-
-                    String ingredients = jsonData.getString("ingredients");
-                    getRecipe.setIngredients(ingredients);
-
                     getRecipe.setRatings(jsonData.getInt("rating"));
                     getRecipe.setCategoryId(jsonData.getInt("category"));
                     getRecipe.setAddedDate(jsonData.getString("created"));
+                    getRecipe.setLegacy(legacyEvent);
+
+                    if (legacyEvent == 0) {
+                        String instructions = jsonData.getString("instructions").replace("[\"", "").replace("\"]", "").replace("\",\"", ",");
+                        getRecipe.setInstructions(instructions);
+
+                        String ingredients = jsonData.getString("ingredients");
+                        getRecipe.setIngredients(ingredients);
+                    } else if(legacyEvent == 1) {
+                        JSONArray jsonRecipeDataArray = (JSONArray) jsonData.get("body");
+                        String bodyString = "";
+                        for (int j = 0; j < jsonRecipeDataArray.length(); j++) {
+                            bodyString = bodyString + "#" + jsonRecipeDataArray.getString(j);
+                        }
+                        getRecipe.setBody(bodyString);
+                    }
 
                     localDatabaseSQLiteOpenHelper.saveRecipe(getRecipe);
                 }
