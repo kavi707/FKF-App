@@ -35,11 +35,12 @@
                     android:layout_height="fill_parent">
 
                 <TextView
-                        android:layout_width="225dp"
+                        android:layout_width="220dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Large Text"
                         android:textColor="@color/dark_gray"
+                        android:layout_marginLeft="5dp"
                         android:id="@+id/singleRecipeNameTextView"
                         android:layout_gravity="left|center_vertical"/>
 
@@ -59,6 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="?android:attr/ratingBarStyleIndicator"
+                    android:layout_marginLeft="5dp"
                     android:id="@+id/singleRecipeRatingBar"
                     android:layout_gravity="left"/>
 
@@ -72,6 +74,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Large Text"
                     android:textColor="@color/normal_gray"
+                    android:layout_marginLeft="5dp"
                     android:id="@+id/singleRecipeDescriptionTextView"
                     android:layout_gravity="left"/>
 
@@ -79,15 +82,20 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"/>
 
-            <TextView
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/singleRecipeContentLabel"
-                    android:background="@drawable/category_name_textview_background"
-                    android:id="@+id/singleRecipeContentLabelTextView"
-                    android:gravity="center_vertical"
-                    android:layout_gravity="left"/>
+                    android:background="@drawable/category_name_textview_background">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/singleRecipeContentLabel"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/singleRecipeContentLabelTextView"
+                        android:gravity="center_vertical"/>
+            </LinearLayout>
 
             <TextView
                     android:layout_width="fill_parent"
@@ -99,6 +107,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Large Text"
                     android:textColor="@color/normal_gray"
+                    android:layout_marginLeft="5dp"
                     android:id="@+id/singleRecipeIngredientTextView"
                     android:layout_gravity="left"/>
 
@@ -113,6 +122,7 @@
                     android:text="@string/singleRecipeInstructionLabel"
                     android:id="@+id/singleRecipeInstructionLabelTextView"
                     android:textColor="@color/dark_gray"
+                    android:layout_marginLeft="5dp"
                     android:layout_gravity="left"/>
 
             <TextView
@@ -125,6 +135,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Large Text"
                     android:id="@+id/singleRecipeInstructionTextView"
+                    android:layout_marginLeft="5dp"
                     android:textColor="@color/normal_gray"
                     android:layout_gravity="left"/>
         </LinearLayout>
