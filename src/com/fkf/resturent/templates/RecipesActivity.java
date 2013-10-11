@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,6 +107,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     TranslateAnimation slide;
     int marginX, animateFromX, animateToX = 0;
     boolean menuOpen = false;
+
+    View selectedView, lastSelectedView;
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
 
@@ -536,6 +539,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
                 scrollParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 latestAndPopularScrollBar.setLayoutParams(scrollParams);
+                homeTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.selected_menu_item_background));
+                myFavoriteTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.category_list_background));
 
                 animateFromX = 0;
                 animateToX = -(menu.getLayoutParams().width);
@@ -553,6 +558,9 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             myFavoriteTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    myFavoriteTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.selected_menu_item_background));
+                    homeTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.category_list_background));
+
                     ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
 
                     scrollParams.height = 0;
@@ -591,9 +599,25 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         menuItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 RecipeCategory itemContent = (RecipeCategory) (menuItemList.getItemAtPosition(i));
 
                 if(itemContent != null) {
+
+                    /*if (lastSelectedView != null) {
+                        lastSelectedView.findViewById(R.id.recipeCategoryNameTextView).setBackgroundDrawable(getResources()
+                                .getDrawable(R.drawable.category_list_background));
+                    }
+
+                    TextView tempSelecting = (TextView) view.findViewById(R.id.recipeCategoryNameTextView);
+                    if(tempSelecting.getText().toString().equals(itemContent.getCategoryName())) {
+                        selectedView = tempSelecting;
+                        selectedView.setBackgroundDrawable(getResources().getDrawable(R.drawable.selected_menu_item_background));
+                        lastSelectedView = selectedView;
+                    }*/
+                    myFavoriteTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.category_list_background));
+                    homeTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.category_list_background));
+
                     ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
 
                     scrollParams.height = 0;

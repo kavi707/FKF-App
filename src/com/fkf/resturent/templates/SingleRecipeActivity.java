@@ -228,7 +228,21 @@ public class SingleRecipeActivity extends Activity {
             String[] recipeBodyStrings = recipeBody.split("#");
             String singleBodyString = "";
             for (String recipeBodyString : recipeBodyStrings) {
-                singleBodyString = singleBodyString + recipeBodyString + "\n";
+                if(recipeBodyString.length() > 11) {
+                    if(recipeBodyString.substring(0,11).equals("Ingredients")) {
+                        singleBodyString = singleBodyString + "\n\n" + recipeBodyString + "\n\n";
+                    }else if(recipeBodyString.substring(0,12).equals("INSTRUCTIONS")) {
+                        singleBodyString = singleBodyString + "\n\n" + recipeBodyString + "\n\n";
+                    } else {
+                        singleBodyString = singleBodyString + recipeBodyString + "\n";
+                    }
+                } else if (recipeBodyString.length() == 11) {
+                    if(recipeBodyString.equals("INGREDIENTS")) {
+                        singleBodyString = singleBodyString + "\n\n" + recipeBodyString + "\n\n";
+                    }
+                } else {
+                    singleBodyString = singleBodyString + recipeBodyString + "\n";
+                }
             }
 
             singleRecipeIngredientTextView.setText(singleBodyString);
