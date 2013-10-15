@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.fkf.resturent.services.connections.ApiConnector;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by kavi on 6/16/13.
@@ -138,15 +141,73 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                progress = ProgressDialog.show(LoginActivity.this, "Loading", "Loading the current recipes. Please wait ...");
+                handler = new Handler(context.getMainLooper());
 
-                LOGGED_STATUS = 0;
-                Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
-                startActivity(recipesIntent);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        /*try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }*/
+
+                        LOGGED_STATUS = 0;
+                        Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
+                        startActivity(recipesIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
+
+                /*AsyncTask<Void, Void, Void> updateTask = new AsyncTask<Void, Void, Void>(){
+                    ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
+                    @Override
+                    protected void onPreExecute() {
+                        // what to do before background task
+                        dialog.setTitle("Loading...");
+                        dialog.setMessage("Please wait.");
+                        dialog.setIndeterminate(true);
+                        dialog.setCancelable(false);
+                        dialog.show();
+                    }
+
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void result) {
+                        // what to do when background task is completed
+                        long delayInMillis = 10000;
+                        Timer timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                            }
+                        }, delayInMillis);
+
+                        LOGGED_STATUS = 0;
+                        Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
+                        startActivity(recipesIntent);
+                        dialog.dismiss();
+                    };
+
+                    @Override
+                    protected void onCancelled() {
+                        dialog.dismiss();
+                        super.onCancelled();
+                    }
+                };
+                updateTask.execute((Void[])null);*/
             }
         });
     }
