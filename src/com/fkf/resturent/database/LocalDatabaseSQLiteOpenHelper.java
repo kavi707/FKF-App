@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.util.Log;
 
 import com.fkf.resturent.templates.LoginActivity;
@@ -456,7 +457,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      * save the given recipe from caller function
      * @param recipe
      */
-    public void saveRecipe(Recipe recipe) {
+    public void saveRecipe(Recipe recipe, Context context) {
 
         localFKFDatabase = this.getWritableDatabase();
 
@@ -476,6 +477,9 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(IMAGE_URL_L, recipe.getImageUrl_l());
         values.put(LEGACY, recipe.getLegacy());
         values.put(BODY, recipe.getBody());
+
+        /*Uri contextUri = Uri.withAppendedPath(ContentProviderDb.CONTENT_URI, RECIPES_TABLE_NAME);
+        Uri resultUri = context.getContentResolver().insert(contextUri, values);*/
 
         try {
             localFKFDatabase.insert(RECIPES_TABLE_NAME, null, values);
