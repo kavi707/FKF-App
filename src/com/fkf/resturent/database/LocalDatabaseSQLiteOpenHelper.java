@@ -487,7 +487,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         //using content provider database access
         Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, RECIPES_TABLE_NAME);
         if(contextUri != null) {
-            Uri resultUri = context.getContentResolver().insert(contextUri, values);
+            context.getContentResolver().insert(contextUri, values);
         }
 
         //using direct database access
@@ -831,7 +831,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             //using content provider database access
             Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LATEST_YUMMY_TABLE_NAME);
             if(contextUri != null) {
-                Uri resultUri = context.getContentResolver().insert(contextUri, values);
+                context.getContentResolver().insert(contextUri, values);
             }
 
             //using direct database access
@@ -963,7 +963,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             //using content provider database access
             Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, POPULAR_YUMMY_TABLE_NAME);
             if(contextUri != null) {
-                Uri resultUri = context.getContentResolver().insert(contextUri, values);
+                context.getContentResolver().insert(contextUri, values);
             }
 
             //using direct access to database
