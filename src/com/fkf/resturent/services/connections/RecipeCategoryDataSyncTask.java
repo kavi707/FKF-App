@@ -17,8 +17,10 @@ public class RecipeCategoryDataSyncTask extends AsyncTask<String, Void, String> 
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper;
     private ApiConnector connector = new ApiConnector();
+    private Context context;
 
     public RecipeCategoryDataSyncTask(Context context) {
+        this.context = context;
         this.localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(context);
     }
 
@@ -35,7 +37,7 @@ public class RecipeCategoryDataSyncTask extends AsyncTask<String, Void, String> 
                 for(int i=0; i < jsonArray.length(); i++) {
                     jsonData = jsonArray.getJSONObject(i);
 
-                    this.localDatabaseSQLiteOpenHelper.addNewCategory(jsonData.getInt("id"), jsonData.getString("name"));
+                    this.localDatabaseSQLiteOpenHelper.addNewCategory(jsonData.getInt("id"), jsonData.getString("name"), context);
                 }
             }
         } catch (JSONException e) {

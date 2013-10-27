@@ -22,8 +22,10 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper;
     private ApiConnector connector = new ApiConnector();
+    private Context context;
 
     public RecipeDataSyncTask(Context context){
+        this.context = context;
         this.localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(context);
     }
 
@@ -74,7 +76,7 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
                         getRecipe.setBody(bodyString);
                     }
 
-                    localDatabaseSQLiteOpenHelper.saveRecipe(getRecipe);
+                    localDatabaseSQLiteOpenHelper.saveRecipe(getRecipe, context);
                 }
             }
         } catch (JSONException e) {

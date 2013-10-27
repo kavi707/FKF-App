@@ -1,5 +1,6 @@
 package com.fkf.resturent.database;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,8 +9,6 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.util.Log;
-
-import com.fkf.resturent.templates.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -383,7 +382,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param categoryProductId
      * @param categoryName
      */
-    public void addNewCategory(int categoryProductId, String categoryName) {
+    public void addNewCategory(int categoryProductId, String categoryName, Context context) {
 
         localFKFDatabase = this.getWritableDatabase();
 
@@ -391,11 +390,18 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(CATEGORY_PRODUCT_ID, categoryProductId);
         values.put(CATEGORY_NAME, categoryName);
 
-        try {
+        //using content provider database access
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, CATEGORY_TABLE_NAME);
+        if(contextUri != null) {
+            Uri resultUri = context.getContentResolver().insert(contextUri, values);
+        }
+
+        //using direct database access
+        /*try {
             localFKFDatabase.insert(CATEGORY_TABLE_NAME, null, values);
         } catch (SQLiteException ex) {
             throw ex;
-        }
+        }*/
     }
 
     /**
@@ -478,14 +484,18 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(LEGACY, recipe.getLegacy());
         values.put(BODY, recipe.getBody());
 
-        /*Uri contextUri = Uri.withAppendedPath(ContentProviderDb.CONTENT_URI, RECIPES_TABLE_NAME);
-        Uri resultUri = context.getContentResolver().insert(contextUri, values);*/
+        //using content provider database access
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, RECIPES_TABLE_NAME);
+        if(contextUri != null) {
+            Uri resultUri = context.getContentResolver().insert(contextUri, values);
+        }
 
-        try {
+        //using direct database access
+        /*try {
             localFKFDatabase.insert(RECIPES_TABLE_NAME, null, values);
         } catch (SQLiteException ex) {
             throw ex;
-        }
+        }*/
     }
 
     /**
@@ -801,8 +811,9 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      * save the given latest recipe from the caller function
      * @param latestRecipes
      */
-    public void saveLatestYummyRecipe(List<PopularOrLatestRecipe> latestRecipes) {
+    public void saveLatestYummyRecipe(List<PopularOrLatestRecipe> latestRecipes, Activity activity) {
 
+        Context context = activity.getApplicationContext();
         localFKFDatabase = this.getWritableDatabase();
         ContentValues values;
 
@@ -817,11 +828,18 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             values.put(IMAGE_URL_M, latestRecipe.getImageUrlM());
             values.put(IMAGE_URL_L, latestRecipe.getImageUrlL());
 
-            try {
+            //using content provider database access
+            Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LATEST_YUMMY_TABLE_NAME);
+            if(contextUri != null) {
+                Uri resultUri = context.getContentResolver().insert(contextUri, values);
+            }
+
+            //using direct database access
+            /*try {
                 localFKFDatabase.insert(LATEST_YUMMY_TABLE_NAME, null, values);
             } catch (SQLiteException ex) {
                 throw ex;
-            }
+            }*/
 
             latestRecipeCount++;
         }
@@ -925,8 +943,9 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      * save the given popular recipe from the caller function
      * @param popularRecipes
      */
-    public void savePopularYummyRecipe(List<PopularOrLatestRecipe> popularRecipes) {
+    public void savePopularYummyRecipe(List<PopularOrLatestRecipe> popularRecipes, Activity activity) {
 
+        Context context = activity.getApplicationContext();
         localFKFDatabase = this.getWritableDatabase();
         ContentValues values;
 
@@ -941,11 +960,18 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             values.put(IMAGE_URL_M, popularRecipe.getImageUrlM());
             values.put(IMAGE_URL_L, popularRecipe.getImageUrlL());
 
-            try {
+            //using content provider database access
+            Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, POPULAR_YUMMY_TABLE_NAME);
+            if(contextUri != null) {
+                Uri resultUri = context.getContentResolver().insert(contextUri, values);
+            }
+
+            //using direct access to database
+            /*try {
                 localFKFDatabase.insert(POPULAR_YUMMY_TABLE_NAME, null, values);
             } catch (SQLiteException ex) {
                 throw ex;
-            }
+            }*/
 
             popularRecipeCount++;
         }

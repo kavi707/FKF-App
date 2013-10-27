@@ -104,7 +104,7 @@ public class ActivityUserPermissionServices {
         List<PopularOrLatestRecipe> latestYummyList = connector.getLatestYummysFromServer();
 
         localDatabaseSQLiteOpenHelper.deleteAllLatestRecipes();
-        localDatabaseSQLiteOpenHelper.saveLatestYummyRecipe(latestYummyList);
+        localDatabaseSQLiteOpenHelper.saveLatestYummyRecipe(latestYummyList, activity);
 
         DownloadFileTask downloadFile = new DownloadFileTask();
         String path = Environment.getExternalStorageDirectory() + "/fauzias/latest_yummys/";
@@ -115,7 +115,7 @@ public class ActivityUserPermissionServices {
         if (latestYummyList != null) {
             for (PopularOrLatestRecipe latestRecipe : latestYummyList) {
 
-                String url = latestRecipe.getImageUrlS();
+                String url = latestRecipe.getImageUrlM();
                 String newName = "icon_" + recipeCount;
 
                 Map<String, String> downloadingDetails = new HashMap<String, String>();
@@ -142,7 +142,7 @@ public class ActivityUserPermissionServices {
         List<PopularOrLatestRecipe> popularRecipesList = connector.getPopularYummysFromServer();
 
         localDatabaseSQLiteOpenHelper.deleteAllPopularRecipes();
-        localDatabaseSQLiteOpenHelper.savePopularYummyRecipe(popularRecipesList);
+        localDatabaseSQLiteOpenHelper.savePopularYummyRecipe(popularRecipesList, activity);
 
         DownloadFileTask downloadFile = new DownloadFileTask();
         String path = Environment.getExternalStorageDirectory() + "/fauzias/popular_yummys/";
