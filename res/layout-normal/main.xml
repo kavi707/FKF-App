@@ -14,7 +14,34 @@
                 android:orientation="vertical"
                 android:layout_alignParentBottom="true"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" android:id="@+id/linearLayout">
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/browsRecipesTextView"
+                    android:layout_gravity="left|center_vertical"/>
+
+            <!--<ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="290dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/loadingProgressBar"/>-->
+            <ProgressBar
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/loadingProgressBar"
+                    android:layout_above="@+id/linearLayout" android:layout_alignParentLeft="true"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_gravity="center"/>
+
             <TextView
                     android:layout_width="290dp"
                     android:layout_height="wrap_content"
@@ -26,23 +53,10 @@
 
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/browsRecipesTextView"
-                    android:layout_gravity="left|center_vertical"/>
-
-            <ProgressBar
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="290dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:id="@+id/loadingProgressBar"/>
-
-            <TextView
-                    android:layout_width="fill_parent"
                     android:layout_height="30dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:layout_gravity="center"/>
+
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
