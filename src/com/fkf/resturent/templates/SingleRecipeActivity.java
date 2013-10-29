@@ -2,7 +2,6 @@ package com.fkf.resturent.templates;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -233,7 +232,9 @@ public class SingleRecipeActivity extends Activity {
                         singleBodyString = singleBodyString + "\n\n" + recipeBodyString + "\n\n";
                     }else if(recipeBodyString.substring(0,12).equals("INSTRUCTIONS")) {
                         singleBodyString = singleBodyString + "\n\n" + recipeBodyString + "\n\n";
-                    } else {
+                    } else if (recipeBodyString.substring(0,12).equals("Instructions")) {
+                        singleBodyString = singleBodyString + "\n\n" + recipeBodyString + "\n\n";
+                    }else {
                         singleBodyString = singleBodyString + recipeBodyString + "\n";
                     }
                 } else if (recipeBodyString.length() == 11) {
@@ -274,7 +275,7 @@ public class SingleRecipeActivity extends Activity {
         }
 
         if(isFavorite) {
-            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.remove_favorite);
+            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_remove);
         }
 
         singleRecipeMyFavoriteImageButton.setOnClickListener(new View.OnClickListener() {
@@ -308,7 +309,7 @@ public class SingleRecipeActivity extends Activity {
 
                         boolean removeFavoriteResult = connector.removeFromMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
                         if(removeFavoriteResult) {
-                            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.add_favorite);
+                            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_add);
                             localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
                             Toast.makeText(getApplicationContext(),
                                     "Removed this recipe from you favorite list", Toast.LENGTH_LONG).show();
@@ -320,7 +321,7 @@ public class SingleRecipeActivity extends Activity {
 
                         boolean addFavoriteResult = connector.addToMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
                         if(addFavoriteResult) {
-                            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.remove_favorite);
+                            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_remove);
                             localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
                             Toast.makeText(getApplicationContext(),
                                     "This recipe is added to your favorite list", Toast.LENGTH_LONG).show();

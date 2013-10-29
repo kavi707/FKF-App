@@ -59,8 +59,8 @@ public class RecipeListItem extends LinearLayout {
         }
 
         String shortDesc = "";
-        if(description.length() > 60) {
-            shortDesc = description.substring(0, 60);
+        if(description.length() > 40) {
+            shortDesc = description.substring(0, 40);
             shortDesc = shortDesc.replace("#", "");
         } else {
             shortDesc = description;
