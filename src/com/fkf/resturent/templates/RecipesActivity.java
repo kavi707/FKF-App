@@ -1,11 +1,15 @@
 package com.fkf.resturent.templates;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,6 +29,7 @@ import com.fkf.resturent.database.RecipeCategory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Handler;
 
 /**
  * Created by kavi on 6/22/13.
@@ -37,12 +42,17 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ImageButton menuButton, logoutButton, searchRecipeButton;
     LinearLayout content, menu;
 
+    private ProgressDialog progress;
+    private Handler handler;
+
     LinearLayout firstPopularYummyLinear;
     LinearLayout secondPopularYummyLinear;
     LinearLayout thirdPopularYummyLinear;
     LinearLayout forthPopularYummyLinear;
     LinearLayout fifthPopularYummyLinear;
     LinearLayout sixthPopularYummyLinear;
+
+    LinearLayout myFavoriteItemLinear;
 
     ListView menuItemList, recipeItemList;
     ScrollView latestAndPopularScrollBar;
@@ -102,13 +112,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     private RecipeListAdapter recipeListAdapter;
     private ArrayList<Recipe> recipeList;
     private Context context = this;
+    private AlertDialog messageBalloonAlertDialog;
+    private Recipe itemContent;
 
     LinearLayout.LayoutParams contentParams;
     TranslateAnimation slide;
     int marginX, animateFromX, animateToX = 0;
     boolean menuOpen = false;
-
-    View selectedView, lastSelectedView;
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
 
@@ -175,9 +185,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         /********* Latest yummys buttons ************/
         /********************************************/
 
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inSampleSize = 2;
+
         //Embedded images to yummys buttons
         File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1.jpg");
         if(firstImageFile.exists()) {
+//            Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath(), options);
             Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
             firstYummyImageButton.setImageBitmap(firstBitmap);
             firstYummyTextView.setText("  " + latestRecipeNames[1]);
@@ -188,6 +202,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         File secondImageFile = new File("/sdcard/fauzias/latest_yummys/icon_2.jpg");
         if(secondImageFile.exists()) {
+//            Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath(), options);
             Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
             secondYummyImageButton.setImageBitmap(secondBitmap);
             secondYummyTextView.setText("  " + latestRecipeNames[2]);
@@ -198,6 +213,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         File thirdImageFile = new File("/sdcard/fauzias/latest_yummys/icon_3.jpg");
         if(thirdImageFile.exists()) {
+//            Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath(), options);
             Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
             thirdYummyImageButton.setImageBitmap(thirdBitmap);
             thirdYummyTextView.setText(latestRecipeNames[3]);
@@ -208,6 +224,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         File forthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_4.jpg");
         if(forthImageFile.exists()) {
+//            Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath(), options);
             Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
             forthYummyImageButton.setImageBitmap(forthBitmap);
             forthYummyTextView.setText("  " + latestRecipeNames[4]);
@@ -218,6 +235,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         File fifthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_5.jpg");
         if(fifthImageFile.exists()) {
+
+//            Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath(), options);
             Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
             fifthYummyImageButton.setImageBitmap(fifthBitmap);
             fifthYummyTextView.setText("  " + latestRecipeNames[5]);
@@ -230,45 +249,130 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         firstYummyImageButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -1);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -1);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
         secondYummyImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -2);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -2);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
         thirdYummyImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -3);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -3);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
         forthYummyImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -4);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -4);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
         fifthYummyImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -5);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -5);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -296,9 +400,26 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         firstPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -6);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -6);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -316,9 +437,26 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         secondPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -7);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -7);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -336,9 +474,26 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         thirdPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -8);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -8);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -356,9 +511,26 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         forthPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -9);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -9);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -376,9 +548,26 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         fifthPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -10);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -10);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -396,9 +585,26 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         sixthPopularYummyLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -11);
-                startActivity(singleRecipeIntent);
+
+                progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the selected recipe details. Please wait...");
+                handler = new android.os.Handler(context.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                        singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -11);
+                        startActivity(singleRecipeIntent);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -419,8 +625,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 60) {
-                                shortDesc = description.substring(0, 60);
+                            if(description.length() > 40) {
+                                shortDesc = description.substring(0, 40);
                             } else {
                                 shortDesc = description;
                             }
@@ -433,8 +639,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 60) {
-                                shortDesc = description.substring(0, 60);
+                            if(description.length() > 40) {
+                                shortDesc = description.substring(0, 40);
                             } else {
                                 shortDesc = description;
                             }
@@ -447,8 +653,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 60) {
-                                shortDesc = description.substring(0, 60);
+                            if(description.length() > 40) {
+                                shortDesc = description.substring(0, 40);
                             } else {
                                 shortDesc = description;
                             }
@@ -461,8 +667,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 60) {
-                                shortDesc = description.substring(0, 60);
+                            if(description.length() > 40) {
+                                shortDesc = description.substring(0, 40);
                             } else {
                                 shortDesc = description;
                             }
@@ -475,8 +681,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 60) {
-                                shortDesc = description.substring(0, 60);
+                            if(description.length() > 40) {
+                                shortDesc = description.substring(0, 40);
                             } else {
                                 shortDesc = description;
                             }
@@ -489,8 +695,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 60) {
-                                shortDesc = description.substring(0, 60);
+                            if(description.length() > 40) {
+                                shortDesc = description.substring(0, 40);
                             } else {
                                 shortDesc = description;
                             }
@@ -505,6 +711,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //Following items are always in menu list
         homeTextView = (TextView) findViewById(R.id.menuHomeTextView);
         myFavoriteTextView = (TextView) findViewById(R.id.menuMyFavoriteTextView);
+        myFavoriteItemLinear = (LinearLayout) findViewById(R.id.menuMyFavoriteLinearLayout);
 
         //add items to category menu list
         menuItems = localDatabaseSQLiteOpenHelper.getAllCategories();
@@ -539,8 +746,6 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
                 scrollParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 latestAndPopularScrollBar.setLayoutParams(scrollParams);
-                homeTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.selected_menu_item_background));
-                myFavoriteTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.category_list_background));
 
                 animateFromX = 0;
                 animateToX = -(menu.getLayoutParams().width);
@@ -555,11 +760,9 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //If user logged in to application
         if (LoginActivity.LOGGED_STATUS == 1) {
 
-            myFavoriteTextView.setOnClickListener(new View.OnClickListener() {
+            myFavoriteItemLinear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    myFavoriteTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.selected_menu_item_background));
-                    homeTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.category_list_background));
 
                     ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
 
@@ -590,7 +793,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 }
             });
         } else {
-            ViewGroup.LayoutParams myFavoriteTextViewLayoutParams = myFavoriteTextView.getLayoutParams();
+            ViewGroup.LayoutParams myFavoriteTextViewLayoutParams = myFavoriteItemLinear.getLayoutParams();
             myFavoriteTextViewLayoutParams.height = 0;
         }
 
@@ -642,11 +845,30 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         recipeItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Recipe itemContent = (Recipe) (recipeItemList.getItemAtPosition(i));
-                if(itemContent != null) {
-                    Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                    singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(itemContent.getProductId()));
-                    startActivity(singleRecipeIntent);
+
+                Recipe selectedItemContent = (Recipe) (recipeItemList.getItemAtPosition(i));
+                if(selectedItemContent != null) {
+
+                    itemContent = selectedItemContent;
+
+                    progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the " + itemContent.getName() + " details. Please wait...");
+                    handler = new android.os.Handler(context.getMainLooper());
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                            singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(itemContent.getProductId()));
+                            startActivity(singleRecipeIntent);
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progress.dismiss();
+                                }
+                            });
+                        }
+                    });
                 }
             }
         });
@@ -665,13 +887,30 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             logoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    LoginActivity.LOGGED_STATUS = 0;
-                    LoginActivity.LOGGED_USER = null;
-                    LoginActivity.LOGGED_USER_PASSWORD = null;
-                    localDatabaseSQLiteOpenHelper.deleteLoginDetails();
-                    Intent loginIntent = new Intent(RecipesActivity.this, LoginActivity.class);
-                    startActivity(loginIntent);
-                    finish();
+
+                    messageBalloonAlertDialog = new AlertDialog.Builder(context)
+                            .setTitle(R.string.warning)
+                            .setMessage("Do you need to logout?")
+                            .setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    messageBalloonAlertDialog.show();
+                                    LoginActivity.LOGGED_STATUS = 0;
+                                    LoginActivity.LOGGED_USER = null;
+                                    LoginActivity.LOGGED_USER_PASSWORD = null;
+                                    localDatabaseSQLiteOpenHelper.deleteLoginDetails();
+                                    Intent loginIntent = new Intent(RecipesActivity.this, LoginActivity.class);
+                                    startActivity(loginIntent);
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton(R.string.no, new AlertDialog.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    messageBalloonAlertDialog.cancel();
+                                }
+                            }).create();
+                    messageBalloonAlertDialog.show();
                 }
             });
 
