@@ -50,6 +50,7 @@
             <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
+                    android:textSize="25dp"
                     android:hint="@string/emailLabel"
                     android:id="@+id/userEmailEditText"
                     android:layout_gravity="center"/>
@@ -105,7 +106,7 @@
                     android:layout_height="50dp"
                     android:text="@string/registerButtonLabel"
                     android:textColor="@color/white"
-                    android:background="@color/green"
+                    android:background="@drawable/login_btn_background"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:id="@+id/newRegisterButton"

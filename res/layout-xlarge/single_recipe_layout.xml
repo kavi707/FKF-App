@@ -40,7 +40,7 @@
                 <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/add_favorite"
+                        android:src="@drawable/fav_add"
                         android:id="@+id/myFavoriteImageButton"
                         android:layout_gravity="right|center_vertical"/>
             </FrameLayout>

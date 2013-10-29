@@ -7,14 +7,14 @@
     <LinearLayout
             android:id="@+id/menu"
             android:layout_height="fill_parent"
-            android:layout_width="225dp"
+            android:layout_width="275dp"
             android:background="#ff000000"
             android:orientation="vertical">
 
         <LinearLayout
                 android:id="@+id/logUserLayout"
                 android:layout_height="50dp"
-                android:layout_width="225dp"
+                android:layout_width="275dp"
                 android:orientation="horizontal"
                 >
 
@@ -26,14 +26,15 @@
 
             <TextView
                     android:layout_height="match_parent"
-                    android:layout_width="125dp"
+                    android:layout_width="175dp"
                     android:id="@+id/userNameTextView"
                     android:gravity="center"
                     android:text="Welcome"/>
 
             <ImageButton
                     android:id="@+id/logoutButton"
-                    android:src="@drawable/logout_icon"
+                    android:src="@drawable/logout_icon_1"
+                    android:background="@color/light_black"
                     android:layout_width="50dp"
                     android:layout_height="50dp"/>
         </LinearLayout>
@@ -45,7 +46,7 @@
 
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="40dip"
+                android:layout_height="50dip"
                 android:gravity="center_vertical"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="  Home"
@@ -53,15 +54,26 @@
                 android:id="@+id/menuHomeTextView"
                 android:background="@drawable/category_list_background"/>
 
-        <TextView
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dip"
-                android:gravity="center_vertical"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/normal_gray"
-                android:text="  My Favorite"
+                android:layout_height="50dp"
+                android:id="@+id/menuMyFavoriteLinearLayout"
                 android:background="@drawable/category_list_background"
-                android:id="@+id/menuMyFavoriteTextView"/>
+                android:orientation="horizontal">
+            <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/heart_icon"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:gravity="center_vertical"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/normal_gray"
+                    android:text="  My Favorite"
+                    android:id="@+id/menuMyFavoriteTextView"/>
+        </LinearLayout>
 
         <ListView
                 android:id="@+id/menu_item_list"
@@ -122,8 +134,9 @@
 
             <EditText
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:id="@+id/searchRecipeEditText"
+                    android:background="@drawable/rounded_edittext"
                     android:layout_marginTop="2dp"
                     android:hint="@string/search_recipe_label"/>
 
@@ -176,8 +189,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/dark_gray"
+                                    android:layout_gravity="center"
                                     android:textSize="18dp"
-                                    android:textStyle="bold|italic"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -197,8 +210,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/dark_gray"
+                                    android:layout_gravity="center"
                                     android:textSize="18dp"
-                                    android:textStyle="bold|italic"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -218,8 +231,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/dark_gray"
+                                    android:layout_gravity="center"
                                     android:textSize="18dp"
-                                    android:textStyle="bold|italic"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -239,8 +252,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/dark_gray"
+                                    android:layout_gravity="center"
                                     android:textSize="18dp"
-                                    android:textStyle="bold|italic"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -260,8 +273,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/dark_gray"
+                                    android:layout_gravity="center"
                                     android:textSize="18dp"
-                                    android:textStyle="bold|italic"
                                     android:text="Text View"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -269,13 +282,13 @@
 
                 <TextView
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="5dp"/>
 
                 <TextView
-                        android:layout_width="284dp"
+                        android:layout_width="310dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:background="@drawable/popular"
+                        android:background="@drawable/popular_title"
                         android:textStyle="bold"/>
 
                 <!--popular yummys : yummy 1-->
@@ -303,6 +316,9 @@
                                 android:id="@+id/firstPopularRecipeImageView"/>
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="5dp"
+                        android:layout_height="140dp"/>
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -377,6 +393,10 @@
                                 android:id="@+id/secondPopularRecipeImageView"/>
                     </LinearLayout>
 
+                    <TextView
+                            android:layout_width="5dp"
+                            android:layout_height="140dp"/>
+
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
@@ -449,6 +469,10 @@
                                 android:src="@drawable/fkf_m"
                                 android:id="@+id/thirdPopularRecipeImageView"/>
                     </LinearLayout>
+
+                    <TextView
+                            android:layout_width="5dp"
+                            android:layout_height="140dp"/>
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -523,6 +547,10 @@
                                 android:id="@+id/forthPopularRecipeImageView"/>
                     </LinearLayout>
 
+                    <TextView
+                            android:layout_width="5dp"
+                            android:layout_height="140dp"/>
+
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
@@ -596,6 +624,10 @@
                                 android:id="@+id/fifthPopularRecipeImageView"/>
                     </LinearLayout>
 
+                    <TextView
+                            android:layout_width="5dp"
+                            android:layout_height="140dp"/>
+
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
@@ -668,6 +700,10 @@
                                 android:src="@drawable/fkf_m"
                                 android:id="@+id/sixthPopularRecipeImageView"/>
                     </LinearLayout>
+
+                    <TextView
+                            android:layout_width="5dp"
+                            android:layout_height="140dp"/>
 
                     <LinearLayout
                             android:orientation="vertical"

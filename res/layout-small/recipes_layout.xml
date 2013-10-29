@@ -33,7 +33,7 @@
 
             <ImageButton
                     android:id="@+id/logoutButton"
-                    android:src="@drawable/logout_icon"
+                    android:src="@drawable/logout_icon_1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"/>
         </LinearLayout>

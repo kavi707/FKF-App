@@ -9,9 +9,11 @@
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="Test"
+            android:textColor="@color/normal_gray"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/recipeCategoryNameTextView"
-            android:gravity="left"
-            android:layout_gravity="left"/>
+            android:background="@drawable/category_list_background"
+            android:gravity="center_vertical"
+            android:id="@+id/recipeCategoryNameTextView"/>
 
 </com.fkf.resturent.views.RecipeCategoryListItem>

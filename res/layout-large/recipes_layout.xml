@@ -7,14 +7,14 @@
     <LinearLayout
             android:id="@+id/menu"
             android:layout_height="fill_parent"
-            android:layout_width="225dp"
+            android:layout_width="375dp"
             android:background="#ff000000"
             android:orientation="vertical">
 
         <LinearLayout
                 android:id="@+id/logUserLayout"
                 android:layout_height="50dp"
-                android:layout_width="225dp"
+                android:layout_width="375dp"
                 android:orientation="horizontal"
                 >
 
@@ -26,14 +26,15 @@
 
             <TextView
                     android:layout_height="match_parent"
-                    android:layout_width="125dp"
+                    android:layout_width="275dp"
                     android:id="@+id/userNameTextView"
                     android:gravity="center"
                     android:text="Welcome"/>
 
             <ImageButton
                     android:id="@+id/logoutButton"
-                    android:src="@drawable/logout_icon"
+                    android:src="@drawable/logout_icon_1"
+                    android:background="@color/light_black"
                     android:layout_width="50dp"
                     android:layout_height="50dp"/>
         </LinearLayout>
@@ -42,6 +43,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dip"
                 android:background="#ffffffff"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="  Home"
+                android:textColor="@color/normal_gray"
+                android:id="@+id/menuHomeTextView"
+                android:background="@drawable/category_list_background"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/menuMyFavoriteLinearLayout"
+                android:background="@drawable/category_list_background"
+                android:orientation="horizontal">
+            <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/heart_icon"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:gravity="center_vertical"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/normal_gray"
+                    android:text="  My Favorite"
+                    android:background="@drawable/category_list_background"
+                    android:id="@+id/menuMyFavoriteTextView"/>
+        </LinearLayout>
 
         <ListView
                 android:id="@+id/menu_item_list"
@@ -102,8 +135,9 @@
 
             <EditText
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:id="@+id/searchRecipeEditText"
+                    android:background="@drawable/rounded_edittext"
                     android:layout_marginTop="2dp"
                     android:hint="@string/search_recipe_label"/>
 
@@ -126,7 +160,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/latestYummyLabel"
+                    android:background="@drawable/latest_title"
                     android:textStyle="bold"/>
 
                 <HorizontalScrollView
@@ -149,12 +183,16 @@
                                     android:id="@+id/firstYummyImageButton"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/white"
                                     android:text="Button1"/>
 
                             <TextView
                                     android:id="@+id/firstYummyTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/dark_gray"
+                                    android:layout_gravity="center"
+                                    android:textSize="18dp"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -173,6 +211,9 @@
                                     android:id="@+id/secondYummyTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/dark_gray"
+                                    android:layout_gravity="center"
+                                    android:textSize="18dp"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -191,6 +232,9 @@
                                     android:id="@+id/thirdYummyTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/dark_gray"
+                                    android:layout_gravity="center"
+                                    android:textSize="18dp"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -209,6 +253,9 @@
                                     android:id="@+id/forthYummyTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/dark_gray"
+                                    android:layout_gravity="center"
+                                    android:textSize="18dp"
                                     android:text="Text View"/>
                         </LinearLayout>
 
@@ -227,6 +274,9 @@
                                     android:id="@+id/fifthYummyTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/dark_gray"
+                                    android:layout_gravity="center"
+                                    android:textSize="18dp"
                                     android:text="Text View"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -234,30 +284,40 @@
 
                 <TextView
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/popularYummyLabel"
-                        android:textStyle="bold"/>
+                        android:layout_height="5dp"/>
 
                 <TextView
-                        android:layout_width="fill_parent"
-                        android:background="@color/black"
-                        android:layout_height="1dp"/>
+                        android:layout_width="450dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="@drawable/popular_title"
+                        android:textStyle="bold"/>
 
                 <!--popular yummys : yummy 1-->
                 <LinearLayout
                         android:id="@+id/firstPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
-                    <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/fkf_m"
-                            android:id="@+id/firstPopularRecipeImageView"/>
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="140dp">
+                        <TextView
+                                android:layout_width="160dp"
+                                android:layout_height="20dp"/>
+                        <ImageView
+                                android:layout_width="160dp"
+                                android:layout_height="100dp"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/fkf_m"
+                                android:id="@+id/firstPopularRecipeImageView"/>
+                    </LinearLayout>
+
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -270,13 +330,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/firstPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -284,12 +345,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/firstPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -311,15 +373,24 @@
                         android:id="@+id/secondPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
-                    <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/fkf_m"
-                            android:id="@+id/secondPopularRecipeImageView"/>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="140dp">
+                        <TextView
+                                android:layout_width="160dp"
+                                android:layout_height="20dp"/>
+                        <ImageView
+                                android:layout_width="160dp"
+                                android:layout_height="100dp"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/fkf_m"
+                                android:id="@+id/secondPopularRecipeImageView"/>
+                    </LinearLayout>
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -332,13 +403,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/secondPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -346,12 +418,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/secondPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -373,15 +446,24 @@
                         android:id="@+id/thirdPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
-                    <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/fkf_m"
-                            android:id="@+id/thirdPopularRecipeImageView"/>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="140dp">
+                        <TextView
+                                android:layout_width="160dp"
+                                android:layout_height="20dp"/>
+                        <ImageView
+                                android:layout_width="160dp"
+                                android:layout_height="100dp"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/fkf_m"
+                                android:id="@+id/thirdPopularRecipeImageView"/>
+                    </LinearLayout>
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -394,13 +476,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/thirdPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -408,12 +491,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/thirdPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -435,15 +519,24 @@
                         android:id="@+id/forthPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
-                    <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/fkf_m"
-                            android:id="@+id/forthPopularRecipeImageView"/>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="140dp">
+                        <TextView
+                                android:layout_width="160dp"
+                                android:layout_height="20dp"/>
+                        <ImageView
+                                android:layout_width="160dp"
+                                android:layout_height="100dp"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/fkf_m"
+                                android:id="@+id/forthPopularRecipeImageView"/>
+                    </LinearLayout>
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -456,13 +549,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/forthPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -470,12 +564,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/forthPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -497,15 +592,24 @@
                         android:id="@+id/fifthPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
-                    <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/fkf_m"
-                            android:id="@+id/fifthPopularRecipeImageView"/>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="140dp">
+                        <TextView
+                                android:layout_width="160dp"
+                                android:layout_height="20dp"/>
+                        <ImageView
+                                android:layout_width="160dp"
+                                android:layout_height="100dp"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/fkf_m"
+                                android:id="@+id/fifthPopularRecipeImageView"/>
+                    </LinearLayout>
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -518,13 +622,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/fifthPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -532,12 +637,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/fifthPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -559,15 +665,24 @@
                         android:id="@+id/sixthPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
-                    <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/fkf_m"
-                            android:id="@+id/sixthPopularRecipeImageView"/>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="160dp"
+                            android:layout_height="140dp">
+                        <TextView
+                                android:layout_width="160dp"
+                                android:layout_height="20dp"/>
+                        <ImageView
+                                android:layout_width="160dp"
+                                android:layout_height="100dp"
+                                android:layout_marginLeft="5dp"
+                                android:src="@drawable/fkf_m"
+                                android:id="@+id/sixthPopularRecipeImageView"/>
+                    </LinearLayout>
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -580,13 +695,14 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
                                 android:id="@+id/sixthPopularRecipeNameTextView"
+                                android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -594,12 +710,13 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
                                 android:id="@+id/sixthPopularRecipeDescriptionTextView"
+                                android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <TextView
+                        <!--<TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"/>-->
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -625,9 +742,12 @@
                 android:orientation="vertical">
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="284dp"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:background="@drawable/category_name_textview_background"
+                android:textSize="18dip"
+                android:textStyle="italic|bold"
+                android:gravity="center_vertical"
                 android:id="@+id/yummyCategoryNameTextView"/>
 
             <ListView

@@ -18,12 +18,17 @@
 
             <ProgressBar
                     style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
                     android:id="@+id/loadingProgressBar"
                     android:layout_gravity="center"
-                    android:layout_above="@+id/linearLayout" android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="22dp"/>
+                    android:layout_above="@+id/linearLayout" android:layout_centerHorizontal="true"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_gravity="center"/>
 
             <TextView
                     android:layout_width="400dp"
