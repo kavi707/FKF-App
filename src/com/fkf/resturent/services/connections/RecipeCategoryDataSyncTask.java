@@ -31,7 +31,7 @@ public class RecipeCategoryDataSyncTask extends AsyncTask<String, Void, String> 
 
         try {
             if(jsonResult != null) {
-                this.localDatabaseSQLiteOpenHelper.deleteAllCategories();
+                this.localDatabaseSQLiteOpenHelper.deleteAllCategories(context);
                 JSONArray jsonArray = new JSONArray(jsonResult);
                 JSONObject jsonData = null;
                 for(int i=0; i < jsonArray.length(); i++) {

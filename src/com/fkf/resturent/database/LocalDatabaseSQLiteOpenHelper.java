@@ -384,7 +384,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public void addNewCategory(int categoryProductId, String categoryName, Context context) {
 
-        localFKFDatabase = this.getWritableDatabase();
+//        localFKFDatabase = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(CATEGORY_PRODUCT_ID, categoryProductId);
@@ -443,13 +443,20 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     /**
      * delete current categories from the local database
      */
-    public void deleteAllCategories() {
-        localFKFDatabase = this.getWritableDatabase();
+    public void deleteAllCategories(Context context) {
+
+        //using content provider database access
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, CATEGORY_TABLE_NAME);
+        if(contextUri != null) {
+            context.getContentResolver().delete(contextUri, null, null);
+        }
+
+        /*localFKFDatabase = this.getWritableDatabase();
         try {
             localFKFDatabase.delete(CATEGORY_TABLE_NAME, null, null);
         } catch (SQLiteException ex) {
             throw ex;
-        }
+        }*/
     }
 
 
@@ -465,7 +472,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public void saveRecipe(Recipe recipe, Context context) {
 
-        localFKFDatabase = this.getWritableDatabase();
+//        localFKFDatabase = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(PRODUCT_ID, recipe.getProductId());
@@ -814,7 +821,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public void saveLatestYummyRecipe(List<PopularOrLatestRecipe> latestRecipes, Activity activity) {
 
         Context context = activity.getApplicationContext();
-        localFKFDatabase = this.getWritableDatabase();
+//        localFKFDatabase = this.getWritableDatabase();
         ContentValues values;
 
         int latestRecipeCount = 1;
@@ -946,7 +953,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public void savePopularYummyRecipe(List<PopularOrLatestRecipe> popularRecipes, Activity activity) {
 
         Context context = activity.getApplicationContext();
-        localFKFDatabase = this.getWritableDatabase();
+//        localFKFDatabase = this.getWritableDatabase();
         ContentValues values;
 
         int popularRecipeCount = 1;

@@ -16,6 +16,7 @@ import android.net.Uri;
 public class DbContentProvider extends ContentProvider {
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper;
+    SQLiteDatabase recipeDatabase;
 
     private static final String AUTHORITY = "com.fkf.resturent.database.DbContentProvider";
 
@@ -46,14 +47,20 @@ public class DbContentProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
         String tableName = getTableName(uri);
-        SQLiteDatabase database = localDatabaseSQLiteOpenHelper.getWritableDatabase();
-        long value = database.insert(tableName, null, contentValues);
+        if(recipeDatabase == null) {
+            recipeDatabase = localDatabaseSQLiteOpenHelper.getWritableDatabase();
+        }
+        long value = recipeDatabase.insert(tableName, null, contentValues);
         return Uri.withAppendedPath(CONTENT_URI, String.valueOf(value));
     }
 
     @Override
     public int delete(Uri uri, String where, String[] args) {
-        return 0;
+        String tableName = getTableName(uri);
+        if(recipeDatabase == null) {
+            recipeDatabase = localDatabaseSQLiteOpenHelper.getWritableDatabase();
+        }
+        return recipeDatabase.delete(tableName, where, args);
     }
 
     @Override
