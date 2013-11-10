@@ -10,6 +10,7 @@ import android.util.Log;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.PopularOrLatestRecipe;
 import com.fkf.resturent.database.Recipe;
+import com.fkf.resturent.database.dbprovider.ContentProviderAccessor;
 import com.fkf.resturent.services.image.downloader.DownloadFileTask;
 import com.fkf.resturent.services.connections.ApiConnector;
 
@@ -100,11 +101,15 @@ public class ActivityUserPermissionServices {
      */
     public void populateLatestYummyDetails(Activity activity) {
 
-        LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
         List<PopularOrLatestRecipe> latestYummyList = connector.getLatestYummysFromServer();
 
+        /*LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
         localDatabaseSQLiteOpenHelper.deleteAllLatestRecipes();
-        localDatabaseSQLiteOpenHelper.saveLatestYummyRecipe(latestYummyList, activity);
+        localDatabaseSQLiteOpenHelper.saveLatestYummyRecipe(latestYummyList, activity);*/
+
+        ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
+        contentProviderAccessor.deleteAllLatestRecipes(activity);
+        contentProviderAccessor.saveLatestRecipes(latestYummyList, activity);
 
         DownloadFileTask downloadFile = new DownloadFileTask();
         String path = Environment.getExternalStorageDirectory() + "/fauzias/latest_yummys/";
@@ -138,11 +143,15 @@ public class ActivityUserPermissionServices {
      */
     public void populatePopularYummyDetails(Activity activity) {
 
-        LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
         List<PopularOrLatestRecipe> popularRecipesList = connector.getPopularYummysFromServer();
 
+        /*LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
         localDatabaseSQLiteOpenHelper.deleteAllPopularRecipes();
-        localDatabaseSQLiteOpenHelper.savePopularYummyRecipe(popularRecipesList, activity);
+        localDatabaseSQLiteOpenHelper.savePopularYummyRecipe(popularRecipesList, activity);*/
+
+        ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
+        contentProviderAccessor.deleteAllPopularRecipes(activity);
+        contentProviderAccessor.savePopularRecipes(popularRecipesList, activity);
 
         DownloadFileTask downloadFile = new DownloadFileTask();
         String path = Environment.getExternalStorageDirectory() + "/fauzias/popular_yummys/";

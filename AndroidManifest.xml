@@ -13,8 +13,8 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:icon="@drawable/app_icon">
         <provider
-                android:name=".database.DbContentProvider"
-                android:authorities="com.fkf.resturent.database.DbContentProvider" >
+                android:name=".database.dbprovider.DbContentProvider"
+                android:authorities="com.fkf.resturent.database.dbprovider.DbContentProvider" >
         </provider>
 
         <activity android:name="WelcomeActivity"

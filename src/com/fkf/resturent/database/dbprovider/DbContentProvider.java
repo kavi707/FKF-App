@@ -1,4 +1,4 @@
-package com.fkf.resturent.database;
+package com.fkf.resturent.database.dbprovider;
 
 import android.content.ContentProvider;
 import android.content.ContentResolver;
@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 
 /**
  * Created by kavi on 10/27/13.
@@ -18,7 +19,7 @@ public class DbContentProvider extends ContentProvider {
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper;
     SQLiteDatabase recipeDatabase;
 
-    private static final String AUTHORITY = "com.fkf.resturent.database.DbContentProvider";
+    private static final String AUTHORITY = "com.fkf.resturent.database.dbprovider.DbContentProvider";
 
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
@@ -36,7 +37,20 @@ public class DbContentProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        return null;
+
+        String tableName = getTableName(uri);
+        if(recipeDatabase == null) {
+            recipeDatabase = localDatabaseSQLiteOpenHelper.getWritableDatabase();
+        }
+
+        Cursor qryCursor = null;
+        try {
+            qryCursor = recipeDatabase.query(tableName, projection, selection, selectionArgs, null, null, sortOrder);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
+        return qryCursor;
     }
 
     @Override

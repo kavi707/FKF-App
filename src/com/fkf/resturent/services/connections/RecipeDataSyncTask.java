@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
+import com.fkf.resturent.database.dbprovider.ContentProviderAccessor;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,11 +23,13 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper;
     private ApiConnector connector = new ApiConnector();
+    private ContentProviderAccessor contentProviderAccessor;
     private Context context;
 
     public RecipeDataSyncTask(Context context){
         this.context = context;
         this.localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(context);
+        this.contentProviderAccessor = new ContentProviderAccessor();
     }
 
     @Override
@@ -76,7 +79,8 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
                         getRecipe.setBody(bodyString);
                     }
 
-                    localDatabaseSQLiteOpenHelper.saveRecipe(getRecipe, context);
+//                    localDatabaseSQLiteOpenHelper.saveRecipe(getRecipe, context);
+                    contentProviderAccessor.saveNewRecipe(getRecipe, context);
                 }
             }
         } catch (JSONException e) {

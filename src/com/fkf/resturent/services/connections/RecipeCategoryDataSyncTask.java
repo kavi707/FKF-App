@@ -3,6 +3,7 @@ package com.fkf.resturent.services.connections;
 import android.content.Context;
 import android.os.AsyncTask;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
+import com.fkf.resturent.database.dbprovider.ContentProviderAccessor;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,12 +17,14 @@ import org.json.JSONObject;
 public class RecipeCategoryDataSyncTask extends AsyncTask<String, Void, String> {
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper;
+    private ContentProviderAccessor contentProviderAccessor;
     private ApiConnector connector = new ApiConnector();
     private Context context;
 
     public RecipeCategoryDataSyncTask(Context context) {
         this.context = context;
         this.localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(context);
+        this.contentProviderAccessor = new ContentProviderAccessor();
     }
 
     @Override
@@ -31,13 +34,15 @@ public class RecipeCategoryDataSyncTask extends AsyncTask<String, Void, String> 
 
         try {
             if(jsonResult != null) {
-                this.localDatabaseSQLiteOpenHelper.deleteAllCategories(context);
+//                this.localDatabaseSQLiteOpenHelper.deleteAllCategories(context);
+                this.contentProviderAccessor.deleteAllCategories(context);
                 JSONArray jsonArray = new JSONArray(jsonResult);
                 JSONObject jsonData = null;
                 for(int i=0; i < jsonArray.length(); i++) {
                     jsonData = jsonArray.getJSONObject(i);
 
-                    this.localDatabaseSQLiteOpenHelper.addNewCategory(jsonData.getInt("id"), jsonData.getString("name"), context);
+//                    this.localDatabaseSQLiteOpenHelper.addNewCategory(jsonData.getInt("id"), jsonData.getString("name"), context);
+                    this.contentProviderAccessor.saveNewCategory(jsonData.getInt("id"), jsonData.getString("name"), context);
                 }
             }
         } catch (JSONException e) {
