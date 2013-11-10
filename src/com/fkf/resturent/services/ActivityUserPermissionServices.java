@@ -162,7 +162,7 @@ public class ActivityUserPermissionServices {
         if (popularRecipesList != null) {
             for (PopularOrLatestRecipe popularRecipe : popularRecipesList) {
 
-                String url = popularRecipe.getImageUrlS();
+                String url = popularRecipe.getImageUrlT();
                 String newName = "icon_" + recipeCount;
 
                 Map<String, String> downloadingDetails = new HashMap<String, String>();

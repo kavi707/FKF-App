@@ -72,7 +72,7 @@ public class RecipeListItem extends LinearLayout {
         int loader = R.drawable.fkf_m;
         try {
             ImageLoader imageLoader = new ImageLoader(context);
-            imageLoader.DisplayImage(recipe.getImageUrl(), loader, recipeImageView);
+            imageLoader.DisplayImage(recipe.getImageUrlT(), loader, recipeImageView);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

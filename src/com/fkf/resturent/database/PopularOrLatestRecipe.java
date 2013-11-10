@@ -14,6 +14,7 @@ public class PopularOrLatestRecipe {
     private String imageUrlS;
     private String imageUrlM;
     private String imageUrlL;
+    private String imageUrlT;
 
     public int getIndex() {
         return index;
@@ -69,5 +70,13 @@ public class PopularOrLatestRecipe {
 
     public void setImageUrlL(String imageUrlL) {
         this.imageUrlL = imageUrlL;
+    }
+
+    public String getImageUrlT() {
+        return imageUrlT;
+    }
+
+    public void setImageUrlT(String imageUrlT) {
+        this.imageUrlT = imageUrlT;
     }
 }

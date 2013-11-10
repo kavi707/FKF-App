@@ -17,6 +17,7 @@ public class Recipe {
     private String addedDate;
     private int ratings;
     private String imageUrl;
+    private String imageUrlT;
     private String imageUrl_xs;
     private String imageUrl_s;
     private String imageUrl_m;
@@ -102,6 +103,14 @@ public class Recipe {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrlT() {
+        return imageUrlT;
+    }
+
+    public void setImageUrlT(String imageUrlT) {
+        this.imageUrlT = imageUrlT;
     }
 
     public String getImageUrl_xs() {
