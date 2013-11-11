@@ -75,7 +75,6 @@
                     android:layout_marginLeft="10dp"
                     android:isIndicator="true"
                     android:max="5"
-                    android:numStars="5"
                     android:stepSize="0.1"
                     android:id="@+id/singleRecipeRatingBar"
                     android:progressDrawable="@drawable/rating_bar_gold"
@@ -91,7 +90,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Large Text"
                     android:textColor="@color/normal_gray"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:id="@+id/singleRecipeDescriptionTextView"
                     android:layout_gravity="left"/>
 
@@ -124,7 +124,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Large Text"
                     android:textColor="@color/normal_gray"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
                     android:id="@+id/singleRecipeIngredientTextView"
                     android:layout_gravity="left"/>
 
@@ -139,7 +140,7 @@
                     android:text="@string/singleRecipeInstructionLabel"
                     android:id="@+id/singleRecipeInstructionLabelTextView"
                     android:textColor="@color/dark_gray"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_gravity="left"/>
 
             <TextView
@@ -152,7 +153,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Large Text"
                     android:id="@+id/singleRecipeInstructionTextView"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
                     android:textColor="@color/normal_gray"
                     android:layout_gravity="left"/>
         </LinearLayout>

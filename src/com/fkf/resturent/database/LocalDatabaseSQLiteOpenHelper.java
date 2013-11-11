@@ -247,7 +247,6 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public void setLastModificationTimeStamp(String newModifiedTimeStamp) {
 
-        //TODO this insertion must move to content provider cases
         localFKFDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -341,7 +340,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return
      */
     public Map<String, String> getLoginDetails(){
-
+        //TODO this case must move to content provider method
         Map<String, String> detailsMap = new HashMap<String, String>();
         localFKFDatabase = this.getWritableDatabase();
         try {

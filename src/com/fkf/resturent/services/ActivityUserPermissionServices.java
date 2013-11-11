@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Display;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.PopularOrLatestRecipe;
 import com.fkf.resturent.database.Recipe;
@@ -94,6 +95,27 @@ public class ActivityUserPermissionServices {
         }
 
         return screenSizeInt;
+    }
+
+    /**
+     * return the device screen width and height
+     * @param activity
+     * @return
+     */
+    public Map<String, Integer> getDeviceWidthAndHeight(Activity activity) {
+        Map<String, Integer> deviceWidthHeight = new HashMap<String, Integer>();
+
+        Display mDisplay = activity.getWindowManager().getDefaultDisplay();
+        int width  = mDisplay.getWidth();
+        int height = mDisplay.getHeight();
+
+        deviceWidthHeight.put("width", width);
+        deviceWidthHeight.put("height", height);
+
+        Log.d("Device width : ", String.valueOf(width));
+        Log.d("Device height : ", String.valueOf(height));
+
+        return deviceWidthHeight;
     }
 
     /**
@@ -189,7 +211,7 @@ public class ActivityUserPermissionServices {
 
         LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
         String lastModifiedTimeStamp = localDatabaseSQLiteOpenHelper.getLastModificationTimeStamp();
-        localDatabaseSQLiteOpenHelper.deleteLastModifiedTimeStamp();
+//        localDatabaseSQLiteOpenHelper.deleteLastModifiedTimeStamp();
 
         //TODO this initialization is for temp
         if(lastModifiedTimeStamp == null)

@@ -16,6 +16,23 @@ import java.util.List;
  */
 public class ContentProviderAccessor {
 
+    public void saveLastModificationTimeStamp(String newModifiedTimeStamp, Context context) {
+        ContentValues values = new ContentValues();
+        values.put(LocalDatabaseSQLiteOpenHelper.MODIFIED_TIME_STAMP, newModifiedTimeStamp);
+
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.LAST_MODIFIED_DETAILS_TABLE_NAME);
+        if(contextUri != null) {
+            Uri resultUri = context.getContentResolver().insert(contextUri, values);
+        }
+    }
+
+    public void deleteLastModificationTimeStamp(Context context) {
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.LAST_MODIFIED_DETAILS_TABLE_NAME);
+        if(contextUri != null) {
+            context.getContentResolver().delete(contextUri, null, null);
+        }
+    }
+
     public void saveNewCategory(int categoryProductId, String categoryName, Context context) {
 
         ContentValues values = new ContentValues();

@@ -133,7 +133,7 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeInstructionTextView.setText(selectedRecipe.getInstructions());
         singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " Ingredients");
 
-        String imageUrl = selectedRecipe.getImageUrl_m();
+        String imageUrl = selectedRecipe.getImageUrl_l();
         int loader = R.drawable.default_recipe_image;
 
         try {

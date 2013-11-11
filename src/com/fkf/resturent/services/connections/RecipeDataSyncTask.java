@@ -41,7 +41,9 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
             if (jsonResult != null) {
                 JSONObject jsonData = new JSONObject(jsonResult);
                 String modificationTimeStamp = jsonData.getString("last_updated");
-                localDatabaseSQLiteOpenHelper.setLastModificationTimeStamp(modificationTimeStamp);
+//                localDatabaseSQLiteOpenHelper.setLastModificationTimeStamp(modificationTimeStamp);
+                contentProviderAccessor.deleteLastModificationTimeStamp(context);
+                contentProviderAccessor.saveLastModificationTimeStamp(modificationTimeStamp, context);
 
                 JSONArray jsonRecipeArray = (JSONArray) jsonData.get("data");
 
