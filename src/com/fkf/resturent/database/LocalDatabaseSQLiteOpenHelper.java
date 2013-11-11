@@ -247,6 +247,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public void setLastModificationTimeStamp(String newModifiedTimeStamp) {
 
+        //TODO this insertion must move to content provider cases
         localFKFDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 

@@ -69,10 +69,15 @@
 
             <RatingBar
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?android:attr/ratingBarStyleIndicator"
+                    android:layout_height="31dp"
+                    style="?android:attr/ratingBarStyleSmall"
                     android:layout_marginLeft="5dp"
+                    android:isIndicator="true"
+                    android:max="5"
+                    android:numStars="5"
+                    android:stepSize="0.1"
                     android:id="@+id/singleRecipeRatingBar"
+                    android:progressDrawable="@drawable/rating_bar_gold"
                     android:layout_gravity="left"/>
 
             <TextView
