@@ -243,7 +243,6 @@ public class ApiConnector {
      */
     public void getRecipesFromServer(String timeStamp, Activity activity) {
 
-        //TODO need to remove the following hardcoded timeStamp     value
         //this initialization is for testing
         RecipeDataSyncTask dataSyncTask = new RecipeDataSyncTask(activity);
         dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp);

@@ -3,12 +3,16 @@ package com.fkf.resturent.database.dbprovider;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.PopularOrLatestRecipe;
 import com.fkf.resturent.database.Recipe;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kavi on 10/31/13.
@@ -31,6 +35,40 @@ public class ContentProviderAccessor {
         if(contextUri != null) {
             context.getContentResolver().delete(contextUri, null, null);
         }
+    }
+
+    public Map<String, String> getLoginDetails(Context context) {
+        Map<String, String> loginDetails = new HashMap<String, String>();
+
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.LOGIN_DETAIL_TABLE_NAME);
+        if(contextUri != null) {
+            String[] selections = {
+                    LocalDatabaseSQLiteOpenHelper.LOGIN_ID,
+                    LocalDatabaseSQLiteOpenHelper.LOGIN_USER_ID,
+                    LocalDatabaseSQLiteOpenHelper.LOGIN_STATUS,
+                    LocalDatabaseSQLiteOpenHelper.LAST_LOGIN_USERNAME,
+                    LocalDatabaseSQLiteOpenHelper.LAST_LOGIN_PASSWORD
+            };
+
+            String where = LocalDatabaseSQLiteOpenHelper.LOGIN_ID + " = 1";
+
+            Cursor loginDetailsCursor = context.getContentResolver().query(contextUri,selections, where, null, null);
+            if (loginDetailsCursor != null) {
+                loginDetailsCursor.moveToFirst();
+                if(!loginDetailsCursor.isAfterLast()) {
+                    do {
+                        loginDetails.put("loginStatus", loginDetailsCursor.getString(1));
+                        loginDetails.put("userId", loginDetailsCursor.getString(2));
+                        loginDetails.put("username", loginDetailsCursor.getString(3));
+                        loginDetails.put("password", loginDetailsCursor.getString(4));
+                    } while (loginDetailsCursor.moveToNext());
+                }
+                loginDetailsCursor.close();
+            }
+
+        }
+
+        return loginDetails;
     }
 
     public void saveNewCategory(int categoryProductId, String categoryName, Context context) {

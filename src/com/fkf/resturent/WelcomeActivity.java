@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
+import com.fkf.resturent.database.dbprovider.ContentProviderAccessor;
 import com.fkf.resturent.services.ActivityUserPermissionServices;
 import com.fkf.resturent.templates.LoginActivity;
 import com.fkf.resturent.templates.RecipesActivity;
@@ -43,6 +44,7 @@ public class WelcomeActivity extends Activity {
 
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
+    private ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -187,7 +189,8 @@ public class WelcomeActivity extends Activity {
 
     private void onContinue() {
 
-        Map<String, String> lastLoginDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
+//        Map<String, String> lastLoginDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
+        Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
         if(!lastLoginDetails.isEmpty()) {
             LoginActivity.LOGGED_STATUS = 1;
             LoginActivity.LOGGED_USER_ID = lastLoginDetails.get("userId");
