@@ -5,7 +5,7 @@
         android:orientation="horizontal"
         android:background="@drawable/recipe_item_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="160dp">
 
     <LinearLayout
             android:orientation="vertical"
@@ -13,13 +13,21 @@
             android:layout_height="160dp">
         <TextView
                 android:layout_width="160dp"
-                android:layout_height="20dp"/>
-        <ImageView
-                android:layout_width="140dp"
-                android:layout_height="140dp"
+                android:layout_height="10dp"/>
+        <RelativeLayout
+                android:orientation="vertical"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/fkf_m"
-                android:id="@+id/recipeImageView"/>
+                android:gravity="center"
+                android:background="@drawable/thumb_image_bg"
+                android:layout_width="150dp"
+                android:layout_height="150dp">
+            <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/fkf_m"
+                    android:id="@+id/recipeImageView"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout

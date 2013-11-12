@@ -98,10 +98,11 @@
 
             <ImageButton
                     android:id="@+id/menu_button"
-                    android:layout_width="50dip"
+                    android:layout_width="60dip"
                     android:layout_height="50dip"
+                    android:layout_marginLeft="5dp"
                     android:background="@drawable/states"
-                    android:src="@drawable/options"
+                    android:src="@drawable/menu_btn"
                     android:contentDescription="@string/app_name"/>
 
             <TextView
@@ -310,12 +311,20 @@
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
-                        <ImageView
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
+                        <RelativeLayout
+                                android:orientation="vertical"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/fkf_m"
-                                android:id="@+id/firstPopularRecipeImageView"/>
+                                android:gravity="center"
+                                android:background="@drawable/thumb_image_bg"
+                                android:layout_width="130dp"
+                                android:layout_height="130dp">
+                            <ImageView
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:src="@drawable/fkf_m"
+                                    android:id="@+id/firstPopularRecipeImageView"/>
+                        </RelativeLayout>
                     </LinearLayout>
 
 
@@ -384,12 +393,20 @@
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
-                        <ImageView
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
+                        <RelativeLayout
+                                android:orientation="vertical"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/fkf_m"
-                                android:id="@+id/secondPopularRecipeImageView"/>
+                                android:gravity="center"
+                                android:background="@drawable/thumb_image_bg"
+                                android:layout_width="130dp"
+                                android:layout_height="130dp">
+                            <ImageView
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:src="@drawable/fkf_m"
+                                    android:id="@+id/secondPopularRecipeImageView"/>
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -457,12 +474,20 @@
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
-                        <ImageView
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
+                        <RelativeLayout
+                                android:orientation="vertical"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/fkf_m"
-                                android:id="@+id/thirdPopularRecipeImageView"/>
+                                android:gravity="center"
+                                android:background="@drawable/thumb_image_bg"
+                                android:layout_width="130dp"
+                                android:layout_height="130dp">
+                            <ImageView
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:src="@drawable/fkf_m"
+                                    android:id="@+id/thirdPopularRecipeImageView"/>
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -530,12 +555,20 @@
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
-                        <ImageView
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
+                        <RelativeLayout
+                                android:orientation="vertical"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/fkf_m"
-                                android:id="@+id/forthPopularRecipeImageView"/>
+                                android:gravity="center"
+                                android:background="@drawable/thumb_image_bg"
+                                android:layout_width="130dp"
+                                android:layout_height="130dp">
+                            <ImageView
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:src="@drawable/fkf_m"
+                                    android:id="@+id/forthPopularRecipeImageView"/>
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -603,12 +636,20 @@
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
-                        <ImageView
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
+                        <RelativeLayout
+                                android:orientation="vertical"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/fkf_m"
-                                android:id="@+id/fifthPopularRecipeImageView"/>
+                                android:gravity="center"
+                                android:background="@drawable/thumb_image_bg"
+                                android:layout_width="130dp"
+                                android:layout_height="130dp">
+                            <ImageView
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:src="@drawable/fkf_m"
+                                    android:id="@+id/fifthPopularRecipeImageView"/>
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -676,12 +717,20 @@
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
-                        <ImageView
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
+                        <RelativeLayout
+                                android:orientation="vertical"
                                 android:layout_marginLeft="10dp"
-                                android:src="@drawable/fkf_m"
-                                android:id="@+id/sixthPopularRecipeImageView"/>
+                                android:gravity="center"
+                                android:background="@drawable/thumb_image_bg"
+                                android:layout_width="130dp"
+                                android:layout_height="130dp">
+                            <ImageView
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:src="@drawable/fkf_m"
+                                    android:id="@+id/sixthPopularRecipeImageView"/>
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -746,7 +795,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/category_name_textview_background"
                 android:textSize="18dip"
-                android:textStyle="italic|bold"
+                android:textColor="@color/white"
                 android:gravity="center_vertical"
                 android:id="@+id/yummyCategoryNameTextView"/>
 

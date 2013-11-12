@@ -340,7 +340,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return
      */
     public Map<String, String> getLoginDetails(){
-        //TODO this case must move to content provider method
+
         Map<String, String> detailsMap = new HashMap<String, String>();
         localFKFDatabase = this.getWritableDatabase();
         try {
@@ -362,7 +362,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             throw ex;
         }
 
-        return detailsMap;
+        return detailsMap;  
     }
 
     /**
