@@ -15,11 +15,20 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Methods handler for content provider cases
  * Created by kavi on 10/31/13.
  * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class ContentProviderAccessor {
 
+    /********************************************************/
+    /********* Modified time stamp table methods ************/
+    /********************************************************/
+    /**
+     * save new updated time stamp in database
+     * @param newModifiedTimeStamp
+     * @param context
+     */
     public void saveLastModificationTimeStamp(String newModifiedTimeStamp, Context context) {
         ContentValues values = new ContentValues();
         values.put(LocalDatabaseSQLiteOpenHelper.MODIFIED_TIME_STAMP, newModifiedTimeStamp);
@@ -30,6 +39,10 @@ public class ContentProviderAccessor {
         }
     }
 
+    /**
+     * delete existing last time stamp from database
+     * @param context
+     */
     public void deleteLastModificationTimeStamp(Context context) {
         Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.LAST_MODIFIED_DETAILS_TABLE_NAME);
         if(contextUri != null) {
@@ -37,6 +50,14 @@ public class ContentProviderAccessor {
         }
     }
 
+    /**************************************************/
+    /********* Login details table methods ************/
+    /**************************************************/
+    /**
+     * retrieve saved login details in application
+     * @param context
+     * @return
+     */
     public Map<String, String> getLoginDetails(Context context) {
         Map<String, String> loginDetails = new HashMap<String, String>();
 
@@ -71,6 +92,16 @@ public class ContentProviderAccessor {
         return loginDetails;
     }
 
+
+    /****************************************************/
+    /********* Recipe Category table methods ************/
+    /****************************************************/
+    /**
+     * save new category
+     * @param categoryProductId
+     * @param categoryName
+     * @param context
+     */
     public void saveNewCategory(int categoryProductId, String categoryName, Context context) {
 
         ContentValues values = new ContentValues();
@@ -83,6 +114,10 @@ public class ContentProviderAccessor {
         }
     }
 
+    /**
+     * delete existing all categories from database
+     * @param context
+     */
     public void deleteAllCategories(Context context) {
         Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.CATEGORY_TABLE_NAME);
         if(contextUri != null) {
@@ -90,6 +125,14 @@ public class ContentProviderAccessor {
         }
     }
 
+    /********************************************/
+    /********* Recipes table methods ************/
+    /********************************************/
+    /**
+     * save new recipe
+     * @param recipe
+     * @param context
+     */
     public void saveNewRecipe(Recipe recipe, Context context) {
 
         ContentValues values = new ContentValues();
@@ -117,14 +160,14 @@ public class ContentProviderAccessor {
         }
     }
 
-    public void deleteAllLatestRecipes(Activity activity) {
-        Context context = activity.getApplicationContext();
-        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.LATEST_YUMMY_TABLE_NAME);
-        if(contextUri != null) {
-            context.getContentResolver().delete(contextUri, null, null);
-        }
-    }
-
+    /***************************************************/
+    /********* Latest Recipes table methods ************/
+    /***************************************************/
+    /**
+     * save latest recipes
+     * @param latestRecipes
+     * @param activity
+     */
     public void saveLatestRecipes(List<PopularOrLatestRecipe> latestRecipes, Activity activity) {
 
         ContentValues values;
@@ -152,14 +195,26 @@ public class ContentProviderAccessor {
         }
     }
 
-    public void deleteAllPopularRecipes(Activity activity) {
+    /**
+     * delete all existing latest recipes
+     * @param activity
+     */
+    public void deleteAllLatestRecipes(Activity activity) {
         Context context = activity.getApplicationContext();
-        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.POPULAR_YUMMY_TABLE_NAME);
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.LATEST_YUMMY_TABLE_NAME);
         if(contextUri != null) {
             context.getContentResolver().delete(contextUri, null, null);
         }
     }
 
+    /****************************************************/
+    /********* Popular Recipes table methods ************/
+    /****************************************************/
+    /**
+     * save popular recipes
+     * @param popularRecipes
+     * @param activity
+     */
     public void savePopularRecipes(List<PopularOrLatestRecipe> popularRecipes, Activity activity) {
 
         Context context = activity.getApplicationContext();
@@ -184,6 +239,18 @@ public class ContentProviderAccessor {
             }
 
             popularRecipeCount++;
+        }
+    }
+
+    /**
+     * delete all existing popular recipes
+     * @param activity
+     */
+    public void deleteAllPopularRecipes(Activity activity) {
+        Context context = activity.getApplicationContext();
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.POPULAR_YUMMY_TABLE_NAME);
+        if(contextUri != null) {
+            context.getContentResolver().delete(contextUri, null, null);
         }
     }
 }

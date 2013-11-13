@@ -1,6 +1,8 @@
 package com.fkf.resturent.templates;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -15,6 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,11 +142,21 @@ public class SingleRecipeActivity extends Activity {
         int loader = R.drawable.default_recipe_image;
 
         try {
+            URL url = new URL(imageUrl);
+            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            singleRecipeImageViewer.setImageBitmap(bmp);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*try {
             ImageLoader imageLoader = new ImageLoader(getApplicationContext());
             imageLoader.DisplayImage(imageUrl, loader, singleRecipeImageViewer);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         int legacy = selectedRecipe.getLegacy();
         if (legacy == 0) {

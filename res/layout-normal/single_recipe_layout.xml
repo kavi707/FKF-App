@@ -15,7 +15,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
-            <LinearLayout
+            <!--<LinearLayout
                     android:orientation="vertical"
                     android:background="@color/black"
                     android:layout_width="fill_parent"
@@ -34,7 +34,13 @@
                 <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"/>
-            </LinearLayout>
+            </LinearLayout>-->
+            <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/default_recipe_image"
+                    android:id="@+id/singleRecipeImageView"
+                    android:layout_gravity="center"/>
 
             <TextView
                     android:layout_width="fill_parent"

@@ -362,7 +362,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
             throw ex;
         }
 
-        return detailsMap;  
+        return detailsMap;
     }
 
     /**
