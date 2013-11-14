@@ -49,8 +49,6 @@ public class RecipeListItem extends LinearLayout {
         recipeNameTextView.setText(recipe.getName());
 
         int legacy = recipe.getLegacy();
-        Log.d("recipe product id >>>>>>>>>>>>>>>>>>>", recipe.getProductId());
-        Log.d("Legacy >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.", String.valueOf(legacy));
         String description = "";
         if(legacy == 0) {
             description = recipe.getDescription();

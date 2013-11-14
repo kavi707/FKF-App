@@ -678,7 +678,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeImageUrl_l = recipeCursor.getString(13);
                     int legacy = recipeCursor.getInt(14);
                     String body = recipeCursor.getString(15);
-                    String recipeImageUrl_t = recipeCursor.getString(15);
+                    String recipeImageUrl_t = recipeCursor.getString(16);
 
                     recipe = new Recipe();
 
