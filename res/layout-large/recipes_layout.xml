@@ -32,13 +32,13 @@
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_height="match_parent"
-                    android:layout_width="265dp">
+                    android:layout_width="264dp">
                 <TextView
                         android:layout_height="5dp"
-                        android:layout_width="265dp"/>
+                        android:layout_width="264dp"/>
                 <TextView
                         android:layout_height="wrap_content"
-                        android:layout_width="265dp"
+                        android:layout_width="264dp"
                         android:id="@+id/userTextView"
                         android:textSize="16dp"
                         android:textStyle="bold"
@@ -47,21 +47,26 @@
 
                 <TextView
                         android:layout_height="5dp"
-                        android:layout_width="265dp"/>
+                        android:layout_width="264dp"/>
 
                 <TextView
                         android:layout_height="wrap_content"
-                        android:layout_width="265dp"
+                        android:layout_width="264dp"
                         android:id="@+id/userNameTextView"
                         android:textSize="16dp"
                         android:gravity="left"
                         android:text="@string/userLabel"/>
             </LinearLayout>
 
+            <TextView
+                    android:id="@+id/logoutButtonSeparator"
+                    android:background="@color/black"
+                    android:layout_height="match_parent"
+                    android:layout_width="1dp"/>
+
             <ImageButton
                     android:id="@+id/logoutButton"
-                    android:src="@drawable/logout_icon_1"
-                    android:background="@color/light_black"
+                    android:src="@drawable/logout_icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"/>
         </LinearLayout>

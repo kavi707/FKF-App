@@ -55,7 +55,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ListView menuItemList, recipeItemList;
     ScrollView latestAndPopularScrollBar;
     HorizontalScrollView horizontalScroll;
-    TextView loggedUserTextView, loggedUserNameTextView, yummyCategoryNameTextView, homeTextView, myFavoriteTextView;
+    TextView loggedUserTextView, loggedOutButtonSeparatorTextView, loggedUserNameTextView, yummyCategoryNameTextView, homeTextView, myFavoriteTextView;
     ImageView profileImageView;
     EditText searchRecipeEditText;
 
@@ -874,8 +874,10 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //logout button & profile image
         logoutButton = (ImageButton) findViewById(R.id.logoutButton);
         profileImageView = (ImageView) findViewById(R.id.userIconImageView);
+        loggedOutButtonSeparatorTextView = (TextView) findViewById(R.id.logoutButtonSeparator);
         if(LoginActivity.LOGGED_STATUS == 0) {
             logoutButton.setVisibility(View.GONE);
+            loggedOutButtonSeparatorTextView.setVisibility(View.GONE);
         } else if(LoginActivity.LOGGED_STATUS == 1){
             //Embedded images to profile pic image view
             File profilePicImage = new File("/sdcard/fauzias/user/profile_pic.png");
