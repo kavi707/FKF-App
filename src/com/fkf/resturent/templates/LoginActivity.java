@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +48,7 @@ public class LoginActivity extends Activity {
     public static String LOGGED_USER_ID;
     public static String LOGGED_USER;
     public static String LOGGED_USER_PASSWORD;
+    public static String LOGGED_USER_NAME;
     public static int LOGGED_STATUS = 0;
 
     private Map<String, String> loginResult = new HashMap<String, String>();
@@ -102,6 +104,10 @@ public class LoginActivity extends Activity {
                                 LOGGED_USER_ID = loginResult.get("userId");
                                 LOGGED_USER = loginResult.get("username");
                                 LOGGED_USER_PASSWORD = loginResult.get("password");
+                                LOGGED_USER_NAME = loginResult.get("fName");
+
+                                Log.d("user's name : >>>>>>>>>>>>>> 2 ", loginResult.get("fName"));
+
                                 LOGGED_STATUS = 1;
 
                                 localDatabaseSQLiteOpenHelper.insertLoginDetails(loginResult);

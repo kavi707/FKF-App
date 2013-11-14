@@ -76,6 +76,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String LOGIN_STATUS = "login_status";
     public static final String LAST_LOGIN_USERNAME = "last_login_username";
     public static final String LAST_LOGIN_PASSWORD = "last_login_password";
+    public static final String LAST_LOGIN_NAME = "user_f_name";
 
     //logged user favorite recipes table columns
     public static final String USER_FAVORITE_RECIPES_TABLE_NAME = "user_favorite_recipes";
@@ -210,7 +211,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 LOGIN_STATUS + " int, " +
                 LOGIN_USER_ID + " text, " +
                 LAST_LOGIN_USERNAME + " text, " +
-                LAST_LOGIN_PASSWORD + " text " +
+                LAST_LOGIN_PASSWORD + " text, " +
+                LAST_LOGIN_NAME + " text " +
                 ");";
         sqLiteDatabase.execSQL(createLastLoginTableQuery);
     }
@@ -323,6 +325,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(LOGIN_USER_ID, data.get("userId"));
         values.put(LAST_LOGIN_USERNAME, data.get("username"));
         values.put(LAST_LOGIN_PASSWORD, data.get("password"));
+        values.put(LAST_LOGIN_NAME, data.get("fName"));
 
         try {
             localFKFDatabase.insert(LOGIN_DETAIL_TABLE_NAME, null, values);
@@ -354,6 +357,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     detailsMap.put("userId", loginDetailsCursor.getString(2));
                     detailsMap.put("username", loginDetailsCursor.getString(3));
                     detailsMap.put("password", loginDetailsCursor.getString(4));
+                    detailsMap.put("fName", loginDetailsCursor.getString(5));
                 } while (loginDetailsCursor.moveToNext());
             }
             loginDetailsCursor.close();

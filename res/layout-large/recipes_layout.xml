@@ -13,6 +13,7 @@
 
         <LinearLayout
                 android:id="@+id/logUserLayout"
+                android:background="@drawable/category_list_background"
                 android:layout_height="50dp"
                 android:layout_width="375dp"
                 android:orientation="horizontal"
@@ -26,10 +27,36 @@
 
             <TextView
                     android:layout_height="match_parent"
-                    android:layout_width="275dp"
-                    android:id="@+id/userNameTextView"
-                    android:gravity="center"
-                    android:text="Welcome"/>
+                    android:layout_width="10dp"/>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"
+                    android:layout_width="265dp">
+                <TextView
+                        android:layout_height="5dp"
+                        android:layout_width="265dp"/>
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="265dp"
+                        android:id="@+id/userTextView"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:text="Welcome"/>
+
+                <TextView
+                        android:layout_height="5dp"
+                        android:layout_width="265dp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="265dp"
+                        android:id="@+id/userNameTextView"
+                        android:textSize="16dp"
+                        android:gravity="left"
+                        android:text="@string/userLabel"/>
+            </LinearLayout>
 
             <ImageButton
                     android:id="@+id/logoutButton"

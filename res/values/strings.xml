@@ -19,6 +19,7 @@
     <string name="registerButtonLabel">Register</string>
     <string name="usernameLabel">Username</string>
     <string name="passwordLabel">Password</string>
+    <string name="userLabel">User</string>
 
     <!-- register view string resources -->
     <string name="firstNameLabel">First Name</string>

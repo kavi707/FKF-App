@@ -7,14 +7,15 @@
     <LinearLayout
             android:id="@+id/menu"
             android:layout_height="fill_parent"
-            android:layout_width="275dp"
+            android:layout_width="300dp"
             android:background="#ff000000"
             android:orientation="vertical">
 
         <LinearLayout
                 android:id="@+id/logUserLayout"
+                android:background="@drawable/category_list_background"
                 android:layout_height="50dp"
-                android:layout_width="275dp"
+                android:layout_width="300dp"
                 android:orientation="horizontal"
                 >
 
@@ -26,10 +27,36 @@
 
             <TextView
                     android:layout_height="match_parent"
-                    android:layout_width="175dp"
-                    android:id="@+id/userNameTextView"
-                    android:gravity="center"
-                    android:text="Welcome"/>
+                    android:layout_width="5dp"/>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"
+                    android:layout_width="195dp">
+                <TextView
+                        android:layout_height="5dp"
+                        android:layout_width="195dp"/>
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="195dp"
+                        android:id="@+id/userTextView"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:text="Welcome"/>
+
+                <TextView
+                        android:layout_height="5dp"
+                        android:layout_width="195dp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="195dp"
+                        android:id="@+id/userNameTextView"
+                        android:textSize="14dp"
+                        android:gravity="left"
+                        android:text="@string/userLabel"/>
+            </LinearLayout>
 
             <ImageButton
                     android:id="@+id/logoutButton"

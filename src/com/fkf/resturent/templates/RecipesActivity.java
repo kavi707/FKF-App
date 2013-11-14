@@ -9,8 +9,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +55,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ListView menuItemList, recipeItemList;
     ScrollView latestAndPopularScrollBar;
     HorizontalScrollView horizontalScroll;
-    TextView loggedUserTextView, yummyCategoryNameTextView, homeTextView, myFavoriteTextView;
+    TextView loggedUserTextView, loggedUserNameTextView, yummyCategoryNameTextView, homeTextView, myFavoriteTextView;
     ImageView profileImageView;
     EditText searchRecipeEditText;
 
@@ -881,8 +879,12 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         } else if(LoginActivity.LOGGED_STATUS == 1){
             //Embedded images to profile pic image view
             File profilePicImage = new File("/sdcard/fauzias/user/profile_pic.png");
-            Bitmap profilePicBitmap = BitmapFactory.decodeFile(profilePicImage.getAbsolutePath());
-            profileImageView.setImageBitmap(profilePicBitmap);
+            if(profilePicImage.exists()) {
+                Bitmap profilePicBitmap = BitmapFactory.decodeFile(profilePicImage.getAbsolutePath());
+                profileImageView.setImageBitmap(profilePicBitmap);
+            } else {
+                profileImageView.setImageResource(R.drawable.default_user_icon);
+            }
 
             logoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -915,8 +917,11 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             });
 
             //Logged user textView
+            loggedUserNameTextView = (TextView) findViewById(R.id.userTextView);
+            loggedUserNameTextView.setText("Welcome " + LoginActivity.LOGGED_USER_NAME);
+
             loggedUserTextView = (TextView) findViewById(R.id.userNameTextView);
-            loggedUserTextView.setText("Welcome " + LoginActivity.LOGGED_USER);
+            loggedUserTextView.setText(LoginActivity.LOGGED_USER);
         }
 
         //recipes search from given name

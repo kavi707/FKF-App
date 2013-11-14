@@ -22,6 +22,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kavi on 6/29/13.
@@ -299,51 +300,59 @@ public class SingleRecipeActivity extends Activity {
 
                 boolean dbFovStatusBtnClickTest = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
                 if (isOnline) {
-                    boolean serverFovStatusBtnClickTest = connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
 
-                    if (dbFovStatusBtnClickTest && serverFovStatusBtnClickTest) {
-                        isFavorite = true;
-                    } else {
-                        if (dbFovStatusBtnClickTest) {
-                            localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
-                            isFavorite = false;
-                        }
+                    Map<String, String> lastLoginDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
+                    if (!lastLoginDetails.isEmpty()) {
 
-                        if (serverFovStatusBtnClickTest) {
-                            localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                        boolean serverFovStatusBtnClickTest = connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
+
+                        if (dbFovStatusBtnClickTest && serverFovStatusBtnClickTest) {
                             isFavorite = true;
-                        }
-
-                        if(!dbFovStatusBtnClickTest && !serverFovStatusBtnClickTest) {
-                            isFavorite = false;
-                        }
-                    }
-
-
-                    if (isFavorite) {
-
-                        boolean removeFavoriteResult = connector.removeFromMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
-                        if(removeFavoriteResult) {
-                            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_add);
-                            localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
-                            Toast.makeText(getApplicationContext(),
-                                    "Removed this recipe from you favorite list", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(getApplicationContext(),
-                                    "Removing was failed", Toast.LENGTH_LONG).show();
+                            if (dbFovStatusBtnClickTest) {
+                                localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
+                                isFavorite = false;
+                            }
+
+                            if (serverFovStatusBtnClickTest) {
+                                localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                                isFavorite = true;
+                            }
+
+                            if (!dbFovStatusBtnClickTest && !serverFovStatusBtnClickTest) {
+                                isFavorite = false;
+                            }
+                        }
+
+
+                        if (isFavorite) {
+
+                            boolean removeFavoriteResult = connector.removeFromMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
+                            if (removeFavoriteResult) {
+                                singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_add);
+                                localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
+                                Toast.makeText(getApplicationContext(),
+                                        "Removed this recipe from you favorite list", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        "Removing was failed", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+
+                            boolean addFavoriteResult = connector.addToMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
+                            if (addFavoriteResult) {
+                                singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_remove);
+                                localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                                Toast.makeText(getApplicationContext(),
+                                        "This recipe is added to your favorite list", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        "Adding was failed", Toast.LENGTH_LONG).show();
+                            }
                         }
                     } else {
-
-                        boolean addFavoriteResult = connector.addToMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
-                        if(addFavoriteResult) {
-                            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_remove);
-                            localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
-                            Toast.makeText(getApplicationContext(),
-                                    "This recipe is added to your favorite list", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(),
-                                    "Adding was failed", Toast.LENGTH_LONG).show();
-                        }
+                        Toast.makeText(getApplicationContext(),
+                                "First you have to login to application. Then you can add favorite for your account.", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(),
