@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:background="@drawable/login_large"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -13,12 +14,19 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:focusableInTouchMode="true"
-                android:background="@drawable/login_480_800"
                 android:orientation="vertical">
 
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="100dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+            <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/logo"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="80dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             <EditText
