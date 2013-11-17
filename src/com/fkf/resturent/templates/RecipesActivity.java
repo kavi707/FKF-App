@@ -942,6 +942,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                 recipeListAdapter = new RecipeListAdapter(recipeList, context);
                 recipeItemList.setAdapter(recipeListAdapter);
+
+                yummyCategoryNameTextView.setText("   Search Results");
             }
         });
 
