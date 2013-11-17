@@ -83,7 +83,13 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
                     }
 
 //                    localDatabaseSQLiteOpenHelper.saveRecipe(getRecipe, context);
-                    contentProviderAccessor.saveNewRecipe(getRecipe, context);
+                    boolean recipeExistence = contentProviderAccessor.isRecipeExist(jsonData.getString("id"), context);
+                    if(!recipeExistence) {
+                        contentProviderAccessor.saveNewRecipe(getRecipe, context);
+                    } else {
+                        contentProviderAccessor.deleteRecipeFromProductId(jsonData.getString("id"), context);
+                        contentProviderAccessor.saveNewRecipe(getRecipe, context);
+                    }
                 }
             }
         } catch (JSONException e) {

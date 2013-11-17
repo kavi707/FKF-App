@@ -162,6 +162,51 @@ public class ContentProviderAccessor {
         }
     }
 
+    public boolean isRecipeExist(String recipeProductId, Context context) {
+        boolean status = false;
+
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.RECIPES_TABLE_NAME);
+        if(contextUri != null) {
+            String[] selections = {
+                    LocalDatabaseSQLiteOpenHelper.RECIPE_ID,
+                    LocalDatabaseSQLiteOpenHelper.PRODUCT_ID,
+            };
+            String where = LocalDatabaseSQLiteOpenHelper.PRODUCT_ID + " = " + recipeProductId;
+
+            Cursor recipeDetailsCursor = context.getContentResolver().query(contextUri,selections, where, null, null);
+            if(recipeDetailsCursor != null) {
+                int existCount = 0;
+                recipeDetailsCursor.moveToFirst();
+                if(!recipeDetailsCursor.isAfterLast()) {
+                    do {
+                        String productId = recipeDetailsCursor.getString(1);
+                        if(productId.equals(recipeProductId)) {
+                            existCount++;
+                        }
+                    } while (recipeDetailsCursor.moveToNext());
+                }
+
+                if(existCount != 0) {
+                    status = true;
+                } else {
+                    status = false;
+                }
+            } else {
+                status = false;
+            }
+        }
+
+        return status;
+    }
+
+    public void deleteRecipeFromProductId(String recipeProductId, Context context) {
+        String where = LocalDatabaseSQLiteOpenHelper.PRODUCT_ID + " = " + recipeProductId;
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.RECIPES_TABLE_NAME);
+        if(contextUri != null) {
+            context.getContentResolver().delete(contextUri, where, null);
+        }
+    }
+
     /***************************************************/
     /********* Latest Recipes table methods ************/
     /***************************************************/
