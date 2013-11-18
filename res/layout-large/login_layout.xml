@@ -13,12 +13,13 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:focusableInTouchMode="true"
+                android:layout_gravity="bottom"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent">
 
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
             <ImageView
                     android:layout_width="fill_parent"
@@ -26,7 +27,7 @@
                     android:src="@drawable/logo"/>
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <LinearLayout

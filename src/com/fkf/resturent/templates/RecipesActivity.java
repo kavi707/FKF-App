@@ -27,7 +27,10 @@ import com.fkf.resturent.database.RecipeCategory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import android.os.Handler;
+import com.fkf.resturent.services.ActivityUserPermissionServices;
 
 /**
  * Created by kavi on 6/22/13.
@@ -113,12 +116,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     private AlertDialog messageBalloonAlertDialog;
     private Recipe itemContent;
 
-    LinearLayout.LayoutParams contentParams;
+    LinearLayout.LayoutParams contentParams, menuParams;
     TranslateAnimation slide;
     int marginX, animateFromX, animateToX = 0;
     boolean menuOpen = false;
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
+    private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -715,6 +719,12 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         menuItems = localDatabaseSQLiteOpenHelper.getAllCategories();
 
         menu = (LinearLayout)findViewById(R.id.menu);
+        Map<String, Integer> layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(RecipesActivity.this);
+        int layoutWidth = layoutWidthAndHeight.get("width");
+        menuParams = (LinearLayout.LayoutParams)menu.getLayoutParams();
+        menuParams.width = (layoutWidth/10)*8;
+        menu.setLayoutParams(menuParams);
+
         menuItemList = (ListView) findViewById(R.id.menu_item_list);
         recipeCategoryListAdapter = new RecipeCategoryListAdapter(menuItems, context);
         menuItemList.setAdapter(recipeCategoryListAdapter);
