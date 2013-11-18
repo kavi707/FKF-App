@@ -36,7 +36,7 @@ public class DownloadFileTask extends AsyncTask<List<Map<String, String>>, Integ
                 int fileLength = connection.getContentLength();
 
                 InputStream inputStream = new BufferedInputStream(url.openStream());
-                OutputStream outputStream = new FileOutputStream(stringStringMap.get("path")+stringStringMap.get("name")+".jpg");
+                OutputStream outputStream = new FileOutputStream(stringStringMap.get("path")+stringStringMap.get("name")/*+".jpg"*/);
 
                 byte data[] = new byte[1024];
                 long total = 0;

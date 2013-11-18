@@ -187,7 +187,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 //        options.inSampleSize = 2;
 
         //Embedded images to yummys buttons
-        File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1.jpg");
+        File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1");
         if(firstImageFile.exists()) {
 //            Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath(), options);
             Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
@@ -198,7 +198,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         }
 
 
-        File secondImageFile = new File("/sdcard/fauzias/latest_yummys/icon_2.jpg");
+        File secondImageFile = new File("/sdcard/fauzias/latest_yummys/icon_2");
         if(secondImageFile.exists()) {
 //            Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath(), options);
             Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
@@ -209,7 +209,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         }
 
 
-        File thirdImageFile = new File("/sdcard/fauzias/latest_yummys/icon_3.jpg");
+        File thirdImageFile = new File("/sdcard/fauzias/latest_yummys/icon_3");
         if(thirdImageFile.exists()) {
 //            Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath(), options);
             Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
@@ -220,7 +220,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         }
 
 
-        File forthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_4.jpg");
+        File forthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_4");
         if(forthImageFile.exists()) {
 //            Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath(), options);
             Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
@@ -231,7 +231,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         }
 
 
-        File fifthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_5.jpg");
+        File fifthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_5");
         if(fifthImageFile.exists()) {
 
 //            Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath(), options);
@@ -386,7 +386,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         //popular yummys linear layout click events
         //first popular yummy
         firstPopularYummyImageView = (ImageView) findViewById(R.id.firstPopularRecipeImageView);
-        File firstPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_1.jpg");
+        File firstPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_1");
         if(firstPopularImageFile.exists()) {
             Bitmap firstPopularBitmap = BitmapFactory.decodeFile(firstPopularImageFile.getAbsolutePath());
             firstPopularYummyImageView.setImageBitmap(firstPopularBitmap);
@@ -423,7 +423,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         //second popular yummy
         secondPopularYummyImageView = (ImageView) findViewById(R.id.secondPopularRecipeImageView);
-        File secondPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_2.jpg");
+        File secondPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_2");
         if(secondPopularImageFile.exists()) {
             Bitmap secondPopularBitmap = BitmapFactory.decodeFile(secondPopularImageFile.getAbsolutePath());
             secondPopularYummyImageView.setImageBitmap(secondPopularBitmap);
@@ -460,7 +460,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         //third popular yummy
         thirdPopularYummyImageView = (ImageView) findViewById(R.id.thirdPopularRecipeImageView);
-        File thirdPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_3.jpg");
+        File thirdPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_3");
         if(thirdPopularImageFile.exists()) {
             Bitmap thirdPopularBitmap = BitmapFactory.decodeFile(thirdPopularImageFile.getAbsolutePath());
             thirdPopularYummyImageView.setImageBitmap(thirdPopularBitmap);
@@ -497,7 +497,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         //forth popular yummy
         forthPopularYummyImageView = (ImageView) findViewById(R.id.forthPopularRecipeImageView);
-        File forthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_4.jpg");
+        File forthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_4");
         if(forthPopularImageFile.exists()) {
             Bitmap forthPopularBitmap = BitmapFactory.decodeFile(forthPopularImageFile.getAbsolutePath());
             forthPopularYummyImageView.setImageBitmap(forthPopularBitmap);
@@ -534,7 +534,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         //fifth popular yummy
         fifthPopularYummyImageView = (ImageView) findViewById(R.id.fifthPopularRecipeImageView);
-        File fifthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_5.jpg");
+        File fifthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_5");
         if(fifthPopularImageFile.exists()) {
             Bitmap fifthPopularBitmap = BitmapFactory.decodeFile(fifthPopularImageFile.getAbsolutePath());
             fifthPopularYummyImageView.setImageBitmap(fifthPopularBitmap);
@@ -571,7 +571,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         //sixth popular yummy
         sixthPopularYummyImageView = (ImageView) findViewById(R.id.sixthPopularRecipeImageView);
-        File sixthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_6.jpg");
+        File sixthPopularImageFile = new File("/sdcard/fauzias/popular_yummys/icon_6");
         if(sixthPopularImageFile.exists()) {
             Bitmap sixthPopularBitmap = BitmapFactory.decodeFile(sixthPopularImageFile.getAbsolutePath());
             sixthPopularYummyImageView.setImageBitmap(sixthPopularBitmap);
