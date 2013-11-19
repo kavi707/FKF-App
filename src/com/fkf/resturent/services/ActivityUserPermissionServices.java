@@ -28,6 +28,7 @@ import java.util.*;
 public class ActivityUserPermissionServices {
 
     private ApiConnector connector = new ApiConnector();
+    private ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
 
     /**
      * check the internet connection in the device for running application
@@ -142,7 +143,7 @@ public class ActivityUserPermissionServices {
         if (latestYummyList != null) {
             for (PopularOrLatestRecipe latestRecipe : latestYummyList) {
 
-                String url = latestRecipe.getImageUrlM();
+                String url = latestRecipe.getImageUrlL();
                 String newName = "icon_" + recipeCount;
 
                 Map<String, String> downloadingDetails = new HashMap<String, String>();
@@ -209,9 +210,7 @@ public class ActivityUserPermissionServices {
      */
     public boolean updateLocalRecipesFromServerRecipes(Activity activity) {
 
-        LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(activity);
-        String lastModifiedTimeStamp = localDatabaseSQLiteOpenHelper.getLastModificationTimeStamp();
-//        localDatabaseSQLiteOpenHelper.deleteLastModifiedTimeStamp();
+        String lastModifiedTimeStamp = contentProviderAccessor.getLastModificationTimeStamp(activity.getApplicationContext());
 
         //TODO this initialization is for temp
         if(lastModifiedTimeStamp == null)

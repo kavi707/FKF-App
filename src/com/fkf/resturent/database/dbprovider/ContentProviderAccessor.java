@@ -50,6 +50,34 @@ public class ContentProviderAccessor {
         }
     }
 
+    /**
+     * return the last modification time stamp
+     * @param context
+     * @return
+     */
+    public String getLastModificationTimeStamp(Context context) {
+        String lastTimeStamp = "";
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.LAST_MODIFIED_DETAILS_TABLE_NAME);
+        if(contextUri != null) {
+            String[] selections = {
+                    LocalDatabaseSQLiteOpenHelper.MODIFICATION_ID,
+                    LocalDatabaseSQLiteOpenHelper.MODIFIED_TIME_STAMP
+            };
+
+            Cursor lastModificationDetailsCursor = context.getContentResolver().query(contextUri,selections, null, null, null);
+            if(lastModificationDetailsCursor != null) {
+                lastModificationDetailsCursor.moveToFirst();
+                if(!lastModificationDetailsCursor.isAfterLast()) {
+                    do {
+                        lastTimeStamp = lastModificationDetailsCursor.getString(1);
+                    } while (lastModificationDetailsCursor.moveToNext());
+                }
+            }
+        }
+
+        return lastTimeStamp;
+    }
+
     /**************************************************/
     /********* Login details table methods ************/
     /**************************************************/
