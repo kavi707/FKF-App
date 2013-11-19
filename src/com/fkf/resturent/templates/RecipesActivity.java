@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.fkf.resturent.database.RecipeCategory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -115,6 +117,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     private Context context = this;
     private AlertDialog messageBalloonAlertDialog;
     private Recipe itemContent;
+    private Map<String, Integer> layoutWidthAndHeight = new HashMap<String, Integer>();
 
     LinearLayout.LayoutParams contentParams, menuParams;
     TranslateAnimation slide;
@@ -190,12 +193,22 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 //        BitmapFactory.Options options = new BitmapFactory.Options();
 //        options.inSampleSize = 2;
 
+        //device layout width and height
+        layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(RecipesActivity.this);
+
         //Embedded images to yummys buttons
         File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1");
         if(firstImageFile.exists()) {
 //            Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath(), options);
             Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
             firstYummyImageButton.setImageBitmap(firstBitmap);
+            contentParams = (LinearLayout.LayoutParams)firstYummyImageButton.getLayoutParams();
+            Log.d(">>>>>>>>>>>>>>>....", String.valueOf(layoutWidthAndHeight.get("width")));
+            float heightOne = (450 * layoutWidthAndHeight.get("width"))/720;
+            Log.d(">>>>>>>>>>>>>>>....", String.valueOf(heightOne));
+            contentParams.height = Math.round(heightOne);
+            contentParams.width = layoutWidthAndHeight.get("width");
+            firstYummyImageButton.setLayoutParams(contentParams);
             firstYummyTextView.setText("  " + latestRecipeNames[1]);
         } else {
             firstYummyImageButton.setImageResource(R.drawable.fkf_xs);
@@ -207,6 +220,11 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 //            Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath(), options);
             Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
             secondYummyImageButton.setImageBitmap(secondBitmap);
+            contentParams = (LinearLayout.LayoutParams)secondYummyImageButton.getLayoutParams();
+            float heightTwo = (450 * layoutWidthAndHeight.get("width"))/720;
+            contentParams.height = Math.round(heightTwo);
+            contentParams.width = layoutWidthAndHeight.get("width");
+            secondYummyImageButton.setLayoutParams(contentParams);
             secondYummyTextView.setText("  " + latestRecipeNames[2]);
         } else {
             secondYummyImageButton.setImageResource(R.drawable.fkf_xs);
@@ -218,6 +236,11 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 //            Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath(), options);
             Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
             thirdYummyImageButton.setImageBitmap(thirdBitmap);
+            contentParams = (LinearLayout.LayoutParams)thirdYummyImageButton.getLayoutParams();
+            float heightThree = (450 * layoutWidthAndHeight.get("width"))/720;
+            contentParams.height = Math.round(heightThree);
+            contentParams.width = layoutWidthAndHeight.get("width");
+            thirdYummyImageButton.setLayoutParams(contentParams);
             thirdYummyTextView.setText(latestRecipeNames[3]);
         } else {
             thirdYummyImageButton.setImageResource(R.drawable.fkf_xs);
@@ -229,6 +252,11 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 //            Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath(), options);
             Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
             forthYummyImageButton.setImageBitmap(forthBitmap);
+            contentParams = (LinearLayout.LayoutParams)forthYummyImageButton.getLayoutParams();
+            float heightFour = (450 * layoutWidthAndHeight.get("width"))/720;
+            contentParams.height = Math.round(heightFour);
+            contentParams.width = layoutWidthAndHeight.get("width");
+            forthYummyImageButton.setLayoutParams(contentParams);
             forthYummyTextView.setText("  " + latestRecipeNames[4]);
         } else {
             forthYummyImageButton.setImageResource(R.drawable.fkf_xs);
@@ -241,6 +269,11 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 //            Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath(), options);
             Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
             fifthYummyImageButton.setImageBitmap(fifthBitmap);
+            contentParams = (LinearLayout.LayoutParams)fifthYummyImageButton.getLayoutParams();
+            float heightFive = (450 * layoutWidthAndHeight.get("width"))/720;
+            contentParams.height = Math.round(heightFive);
+            contentParams.width = layoutWidthAndHeight.get("width");
+            fifthYummyImageButton.setLayoutParams(contentParams);
             fifthYummyTextView.setText("  " + latestRecipeNames[5]);
         } else {
             fifthYummyImageButton.setImageResource(R.drawable.fkf_xs);
@@ -719,7 +752,6 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         menuItems = localDatabaseSQLiteOpenHelper.getAllCategories();
 
         menu = (LinearLayout)findViewById(R.id.menu);
-        Map<String, Integer> layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(RecipesActivity.this);
         int layoutWidth = layoutWidthAndHeight.get("width");
         menuParams = (LinearLayout.LayoutParams)menu.getLayoutParams();
         menuParams.width = (layoutWidth/10)*8;

@@ -27,7 +27,7 @@
                     android:src="@drawable/logo"/>
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="40dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <LinearLayout
@@ -94,9 +94,6 @@
             <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"/>
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -131,7 +128,7 @@
 
             <FrameLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/footer"
                     android:layout_gravity="left|center_vertical">
 

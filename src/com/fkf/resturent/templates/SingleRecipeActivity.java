@@ -42,6 +42,9 @@ public class SingleRecipeActivity extends Activity {
     private ImageView singleRecipeImageViewer;
     private ImageButton singleRecipeMyFavoriteImageButton;
 
+    private LinearLayout.LayoutParams contentParams;
+    private Map<String, Integer> layoutWidthAndHeight;
+
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
     private ApiConnector connector = new ApiConnector();
@@ -138,6 +141,14 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeDescriptionTextView.setText(selectedRecipe.getDescription());
         singleRecipeInstructionTextView.setText(selectedRecipe.getInstructions());
         singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " Ingredients");
+
+        //device layout width and height
+        layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(SingleRecipeActivity.this);
+        contentParams = (LinearLayout.LayoutParams)singleRecipeImageViewer.getLayoutParams();
+        float heightTwo = (450 * layoutWidthAndHeight.get("width"))/720;
+        contentParams.height = Math.round(heightTwo);
+        contentParams.width = layoutWidthAndHeight.get("width");
+        singleRecipeImageViewer.setLayoutParams(contentParams);
 
         String imageUrl = selectedRecipe.getImageUrl_l();
         int loader = R.drawable.default_recipe_image;
