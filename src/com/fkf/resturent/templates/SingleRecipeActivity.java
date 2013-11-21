@@ -145,8 +145,8 @@ public class SingleRecipeActivity extends Activity {
         //device layout width and height
         layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(SingleRecipeActivity.this);
         contentParams = (LinearLayout.LayoutParams)singleRecipeImageViewer.getLayoutParams();
-        float heightTwo = (450 * layoutWidthAndHeight.get("width"))/720;
-        contentParams.height = Math.round(heightTwo);
+        float height = (450 * layoutWidthAndHeight.get("width"))/720;
+        contentParams.height = Math.round(height);
         contentParams.width = layoutWidthAndHeight.get("width");
         singleRecipeImageViewer.setLayoutParams(contentParams);
 
