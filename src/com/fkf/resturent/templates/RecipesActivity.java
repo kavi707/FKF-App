@@ -43,7 +43,7 @@ import com.fkf.resturent.services.ActivityUserPermissionServices;
 public class RecipesActivity extends Activity implements View.OnClickListener{
 
     ImageButton menuButton, logoutButton, searchRecipeButton;
-    LinearLayout content, menu;
+    LinearLayout content, menu, loggedUserDetails;
 
     private ProgressDialog progress;
     private Handler handler;
@@ -119,7 +119,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     private Recipe itemContent;
     private Map<String, Integer> layoutWidthAndHeight = new HashMap<String, Integer>();
 
-    LinearLayout.LayoutParams contentParams, menuParams;
+    LinearLayout.LayoutParams contentParams, menuParams, userDetailsLayoutParams;
     TranslateAnimation slide;
     int marginX, animateFromX, animateToX = 0;
     boolean menuOpen = false;
@@ -756,6 +756,11 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         menuParams = (LinearLayout.LayoutParams)menu.getLayoutParams();
         menuParams.width = (layoutWidth/10)*8;
         menu.setLayoutParams(menuParams);
+
+        loggedUserDetails = (LinearLayout) findViewById(R.id.userDetailsLayout);
+        userDetailsLayoutParams = (LinearLayout.LayoutParams)loggedUserDetails.getLayoutParams();
+        userDetailsLayoutParams.width = ((layoutWidth/10)*8) - ((layoutWidth/10)*3);
+        loggedUserDetails.setLayoutParams(userDetailsLayoutParams);
 
         menuItemList = (ListView) findViewById(R.id.menu_item_list);
         recipeCategoryListAdapter = new RecipeCategoryListAdapter(menuItems, context);

@@ -15,7 +15,7 @@
                 android:id="@+id/logUserLayout"
                 android:background="@drawable/category_list_background"
                 android:layout_height="50dp"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:orientation="horizontal"
                 >
 
@@ -30,15 +30,16 @@
                     android:layout_width="5dp"/>
 
             <LinearLayout
+                    android:id="@+id/userDetailsLayout"
                     android:orientation="vertical"
                     android:layout_height="match_parent"
                     android:layout_width="194dp">
                 <TextView
                         android:layout_height="5dp"
-                        android:layout_width="194dp"/>
+                        android:layout_width="match_parent"/>
                 <TextView
                         android:layout_height="wrap_content"
-                        android:layout_width="194dp"
+                        android:layout_width="match_parent"
                         android:id="@+id/userTextView"
                         android:textSize="14dp"
                         android:textStyle="bold"
@@ -47,11 +48,11 @@
 
                 <TextView
                         android:layout_height="5dp"
-                        android:layout_width="194dp"/>
+                        android:layout_width="match_parent"/>
 
                 <TextView
                         android:layout_height="wrap_content"
-                        android:layout_width="194dp"
+                        android:layout_width="match_parent"
                         android:id="@+id/userNameTextView"
                         android:textSize="14dp"
                         android:gravity="left"
