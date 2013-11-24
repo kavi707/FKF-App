@@ -32,7 +32,7 @@
                     android:layout_height="20dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
@@ -85,22 +85,22 @@
                     android:textColor="@color/white"
                     android:background="@drawable/login_btn_background"
                     android:textSize="24dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"/>-->
 
             <!-- get ui space -->
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="100dp"/>
 
             <!-- get ui space -->
 
-            <TextView
+            <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/orTextLabel"
                     android:layout_gravity="center"
                     android:textSize="22dp"
-                    android:id="@+id/orTextView"/>
+                    android:id="@+id/orTextView"/>-->
 
             <TextView
                     android:layout_width="fill_parent"

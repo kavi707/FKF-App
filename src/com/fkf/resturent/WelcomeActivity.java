@@ -189,8 +189,7 @@ public class WelcomeActivity extends Activity {
 
     private void onContinue() {
 
-//        Map<String, String> lastLoginDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
-        Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
+        /*Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
         if(!lastLoginDetails.isEmpty()) {
             LoginActivity.LOGGED_STATUS = 1;
             LoginActivity.LOGGED_USER_ID = lastLoginDetails.get("userId");
@@ -205,6 +204,10 @@ public class WelcomeActivity extends Activity {
             Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(loginIntent);
             finish();
-        }
+        }*/
+
+        Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
+        startActivity(loginIntent);
+        finish();
     }
 }

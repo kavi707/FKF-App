@@ -83,7 +83,7 @@ public class LoginActivity extends Activity {
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        /*loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -141,7 +141,7 @@ public class LoginActivity extends Activity {
                             "Application is on offline mode. If need to login, please put your device to online", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
 
         browsRecipesTextView.setOnClickListener(new View.OnClickListener() {
             @Override
