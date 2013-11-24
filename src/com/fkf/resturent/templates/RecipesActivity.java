@@ -203,9 +203,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
             firstYummyImageButton.setImageBitmap(firstBitmap);
             contentParams = (LinearLayout.LayoutParams)firstYummyImageButton.getLayoutParams();
-            Log.d(">>>>>>>>>>>>>>>....", String.valueOf(layoutWidthAndHeight.get("width")));
             float heightOne = (450 * layoutWidthAndHeight.get("width"))/720;
-            Log.d(">>>>>>>>>>>>>>>....", String.valueOf(heightOne));
             contentParams.height = Math.round(heightOne);
             contentParams.width = layoutWidthAndHeight.get("width");
             firstYummyImageButton.setLayoutParams(contentParams);
