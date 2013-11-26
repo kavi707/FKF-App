@@ -11,6 +11,10 @@ import android.net.Uri;
 import android.util.Log;
 import com.fkf.resturent.database.dbprovider.DbContentProvider;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +33,9 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "local_fkf_db.sqlite";
     public static final int VERSION = 1;
+
+    public static final String DB_PATH = "/data/data/com.fkf.resturent/databases/";
+    private final Context dbContext;
 
     //recipes table and columns
     public static final String RECIPES_TABLE_NAME = "recipes";
@@ -85,17 +92,111 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public LocalDatabaseSQLiteOpenHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
+        this.dbContext = context;
+    }
+
+    /***********************************************************************************************/
+    /************************ Database creation from provided .sqlite file *************************/
+    /***********************************************************************************************/
+    /**
+     * create database from provided database file
+     * @throws IOException
+     */
+    public void createDatabase() throws IOException {
+        boolean dbExist = checkDataBase();
+
+        if(!dbExist){
+            this.getReadableDatabase();
+
+            try {
+                copyDataBase();
+            } catch (IOException e) {
+                throw new Error("Error copying database");
+            }
+        }
+    }
+
+    /**
+     * check the database availability
+     * @return
+     */
+    private boolean checkDataBase(){
+
+        SQLiteDatabase checkDB = null;
+
+        try{
+            String myPath = DB_PATH + DB_NAME;
+            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+
+        }catch(SQLiteException e){
+            //database does't exist yet.
+        }
+
+        if(checkDB != null){
+            checkDB.close();
+        }
+
+        return checkDB != null ? true : false;
+    }
+
+    /**
+     * copy the database from assets
+     * @throws IOException
+     */
+    private void copyDataBase() throws IOException{
+
+        //Open your local db as the input stream
+        InputStream myInput = dbContext.getAssets().open(DB_NAME);
+
+        // Path to the just created empty db
+        String outFileName = DB_PATH + DB_NAME;
+
+        //Open the empty db as the output stream
+        OutputStream myOutput = new FileOutputStream(outFileName);
+
+        //transfer bytes from the inputfile to the outputfile
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = myInput.read(buffer))>0){
+            myOutput.write(buffer, 0, length);
+        }
+
+        //Close the streams
+        myOutput.flush();
+        myOutput.close();
+        myInput.close();
+    }
+
+    /**
+     * open created database
+     * @throws SQLiteException
+     */
+    public void openDataBase() throws SQLiteException{
+        //Open the database
+        String myPath = DB_PATH + DB_NAME;
+        localFKFDatabase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
     }
 
     @Override
+    public synchronized void close() {
+
+        if(localFKFDatabase != null)
+            localFKFDatabase.close();
+
+        super.close();
+
+    }
+    /***********************************************************************************************/
+
+    @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        createRecipesTable(sqLiteDatabase);
+        /*createRecipesTable(sqLiteDatabase);
         createCategoriesTable(sqLiteDatabase);
         createLastDatabaseModificationDetailsTable(sqLiteDatabase);
         createLastLoginDetailsTable(sqLiteDatabase);
         createPopularYummysTable(sqLiteDatabase);
         createLatestYummysTable(sqLiteDatabase);
-        createUserFavoriteRecipesTable(sqLiteDatabase);
+        createUserFavoriteRecipesTable(sqLiteDatabase);*/
     }
 
     @Override

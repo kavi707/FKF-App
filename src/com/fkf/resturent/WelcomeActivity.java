@@ -18,6 +18,7 @@ import com.fkf.resturent.services.ActivityUserPermissionServices;
 import com.fkf.resturent.templates.LoginActivity;
 import com.fkf.resturent.templates.RecipesActivity;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -125,6 +126,13 @@ public class WelcomeActivity extends Activity {
                                                         }).create();
                                                 messageBalloonAlertDialog.show();
                                             } else {
+                                                //create database from given database file in assets
+                                                try {
+                                                    localDatabaseSQLiteOpenHelper.createDatabase();
+                                                    localDatabaseSQLiteOpenHelper.openDataBase();
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
                                                 //create app dir if not exists
                                                 userPermissionServices.createAppDirectories();
                                                 //update the database if server database is modified
