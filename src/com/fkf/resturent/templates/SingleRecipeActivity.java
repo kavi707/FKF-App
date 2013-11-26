@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -139,7 +140,6 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeNameTextView.setText(selectedRecipe.getName());
         singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
         singleRecipeDescriptionTextView.setText(selectedRecipe.getDescription());
-        singleRecipeInstructionTextView.setText(selectedRecipe.getInstructions());
         singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " Ingredients");
 
         //device layout width and height
@@ -172,6 +172,15 @@ public class SingleRecipeActivity extends Activity {
 
         int legacy = selectedRecipe.getLegacy();
         if (legacy == 0) {
+            String instructionString = selectedRecipe.getInstructions();
+            String[] instructionsArray = instructionString.split("#");
+            String finalInstructionString = "";
+            for (int instructCount = 0; instructCount < instructionsArray.length; instructCount++) {
+                finalInstructionString = finalInstructionString + instructionsArray[instructCount] + "\n";
+            }
+
+            singleRecipeInstructionTextView.setText(finalInstructionString);
+
             String ingredients = selectedRecipe.getIngredients();
             String ingredientString = "";
             try {
@@ -207,6 +216,7 @@ public class SingleRecipeActivity extends Activity {
                     }
 
                     singleRecipeIngredientTextView.setText(ingredientString);
+
                 } else {
                     for (int i = 0; i < ingredientJsonArray.length(); i++) {
                         ingredientJsonObj = ingredientJsonArray.getJSONObject(i);
