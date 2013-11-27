@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.fkf.resturent"
+          package="com.fkf.free"
           android:versionCode="1"
           android:versionName="1.0">
 
@@ -14,7 +14,7 @@
             android:icon="@drawable/app_icon">
         <provider
                 android:name=".database.dbprovider.DbContentProvider"
-                android:authorities="com.fkf.resturent.database.dbprovider.DbContentProvider" >
+                android:authorities="com.fkf.free.database.dbprovider.DbContentProvider" >
         </provider>
 
         <activity android:name="WelcomeActivity"
