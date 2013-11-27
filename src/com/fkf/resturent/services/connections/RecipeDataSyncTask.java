@@ -68,8 +68,15 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
                     getRecipe.setLegacy(legacyEvent);
 
                     if (legacyEvent == 0) {
-                        String instructions = jsonData.getString("instructions").replace("[\"", "").replace("\"]", "").replace("\",\"", "");
-                        getRecipe.setInstructions(instructions);
+                        JSONArray jsonInstructionArray = (JSONArray) jsonData.get("instructions");
+                        String instructionsString = "";
+                        for (int jsonCount = 0; jsonCount < jsonInstructionArray.length(); jsonCount++) {
+                            instructionsString = instructionsString + "#" + jsonInstructionArray.getString(jsonCount).replace("[\"", "").replace("\"]", "").replace("\",\"", "").replace("\\", "");
+                        }
+                        getRecipe.setInstructions(instructionsString);
+
+//                        String instructions = jsonData.getString("instructions").replace("[\"", "").replace("\"]", "").replace("\",\"", "").replace("\\", "");
+//                        getRecipe.setInstructions(instructions);
 
                         String ingredients = jsonData.getString("ingredients");
                         getRecipe.setIngredients(ingredients);
