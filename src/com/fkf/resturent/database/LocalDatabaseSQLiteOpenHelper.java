@@ -8,13 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import com.fkf.resturent.database.dbprovider.DbContentProvider;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -120,7 +118,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
      * check the database availability
      * @return
      */
-    private boolean checkDataBase(){
+    public boolean checkDataBase(){
 
         SQLiteDatabase checkDB = null;
 
@@ -175,6 +173,30 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         //Open the database
         String myPath = DB_PATH + DB_NAME;
         localFKFDatabase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+    }
+
+    /**
+     * backup the database (only for application dev usage)
+     * @throws IOException
+     */
+    public void backupDatabase() throws IOException {
+        String inFileName = DB_PATH + DB_NAME;
+        File dbFile = new File(inFileName);
+        FileInputStream fis = new FileInputStream(dbFile);
+
+        String outFileName = Environment.getExternalStorageDirectory()+"/MYDB";
+
+        OutputStream output = new FileOutputStream(outFileName);
+        //transfer bytes from the inputfile to the outputfile
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = fis.read(buffer))>0){
+            output.write(buffer, 0, length);
+        }
+        //Close the streams
+        output.flush();
+        output.close();
+        fis.close();
     }
 
     @Override

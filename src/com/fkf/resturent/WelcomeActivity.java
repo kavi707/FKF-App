@@ -99,6 +99,17 @@ public class WelcomeActivity extends Activity {
                                     mHandler.post(new Runnable() {
                                         @Override
                                         public void run() {
+
+                                            //create database from given database file in assets
+                                            try {
+                                                if(!localDatabaseSQLiteOpenHelper.checkDataBase()) {
+                                                    localDatabaseSQLiteOpenHelper.createDatabase();
+                                                    localDatabaseSQLiteOpenHelper.openDataBase();
+                                                }
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+
                                             if (!userPermissionServices.isOnline(WelcomeActivity.this)) {
                                                 mbActive = false;
                                                 messageBalloonAlertDialog = new AlertDialog.Builder(context)
@@ -126,13 +137,7 @@ public class WelcomeActivity extends Activity {
                                                         }).create();
                                                 messageBalloonAlertDialog.show();
                                             } else {
-                                                //create database from given database file in assets
-                                                try {
-                                                    localDatabaseSQLiteOpenHelper.createDatabase();
-                                                    localDatabaseSQLiteOpenHelper.openDataBase();
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                }
+
                                                 //create app dir if not exists
                                                 userPermissionServices.createAppDirectories();
                                                 //update the database if server database is modified

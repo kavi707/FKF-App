@@ -215,6 +215,7 @@ public class ActivityUserPermissionServices {
         //TODO this initialization is for temp
         if(lastModifiedTimeStamp == null)
             lastModifiedTimeStamp = "1376430210";
+            //lastModifiedTimeStamp = "0000000000";
         connector.getRecipesFromServer(lastModifiedTimeStamp, activity);
 
         return true;
