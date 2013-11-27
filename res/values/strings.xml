@@ -10,7 +10,7 @@
     <string name="ok">Ok</string>
 
     <!-- login_layout view string resources -->
-    <string name="app_name">Fauzia\'s Kitchen Fun</string>
+    <string name="app_name">Fauzia\'s Kitchen Fun Free</string>
     <string name="loadingMessage">Application is loading. Please wait ...</string>
     <string name="loginButtonLabel">Login</string>
     <string name="orTextLabel">or</string>
