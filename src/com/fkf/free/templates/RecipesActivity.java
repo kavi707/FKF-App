@@ -116,7 +116,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     private Context context = this;
     private AlertDialog messageBalloonAlertDialog;
     private Recipe itemContent;
-    private Map<String, Integer> layoutWidthAndHeight = new HashMap<String, Integer>();
+    public static Map<String, Integer> layoutWidthAndHeight = new HashMap<String, Integer>();
 
     LinearLayout.LayoutParams contentParams, menuParams, userDetailsLayoutParams;
     TranslateAnimation slide;
@@ -651,14 +651,27 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                     selectedRecipe = tempRecipesList.get(0);
                 }
 
+                int deviceWidth = layoutWidthAndHeight.get("width");
+                int shortDescLimit = 0;
                 switch (popularOrLatestRecipe.getIndex()) {
                     case 1:
                         firstPopularRecipeNameTextView.setText(popularOrLatestRecipe.getRecipeName());
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 40) {
-                                shortDesc = description.substring(0, 40);
+
+                            if(deviceWidth < 500) {
+                                shortDescLimit = 40;
+                                firstPopularRecipeNameTextView.setTextSize(16);
+                                firstPopularRecipeDescTextView.setTextSize(14);
+                            } else {
+                                shortDescLimit = 50;
+                                firstPopularRecipeNameTextView.setTextSize(20);
+                                firstPopularRecipeDescTextView.setTextSize(18);
+                            }
+
+                            if(description.length() > shortDescLimit) {
+                                shortDesc = description.substring(0, shortDescLimit);
                             } else {
                                 shortDesc = description;
                             }
@@ -671,8 +684,19 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 40) {
-                                shortDesc = description.substring(0, 40);
+
+                            if(deviceWidth < 500) {
+                                shortDescLimit = 40;
+                                secondPopularRecipeNameTextView.setTextSize(16);
+                                secondPopularRecipeDescTextView.setTextSize(14);
+                            } else {
+                                shortDescLimit = 50;
+                                firstPopularRecipeNameTextView.setTextSize(20);
+                                firstPopularRecipeDescTextView.setTextSize(18);
+                            }
+
+                            if(description.length() > shortDescLimit) {
+                                shortDesc = description.substring(0, shortDescLimit);
                             } else {
                                 shortDesc = description;
                             }
@@ -685,8 +709,19 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 40) {
-                                shortDesc = description.substring(0, 40);
+
+                            if(deviceWidth < 500) {
+                                shortDescLimit = 40;
+                                thirdPopularRecipeNameTextView.setTextSize(16);
+                                thirdPopularRecipeDescTextView.setTextSize(14);
+                            } else {
+                                shortDescLimit = 50;
+                                firstPopularRecipeNameTextView.setTextSize(20);
+                                firstPopularRecipeDescTextView.setTextSize(18);
+                            }
+
+                            if(description.length() > shortDescLimit) {
+                                shortDesc = description.substring(0, shortDescLimit);
                             } else {
                                 shortDesc = description;
                             }
@@ -699,8 +734,19 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 40) {
-                                shortDesc = description.substring(0, 40);
+
+                            if(deviceWidth < 500) {
+                                shortDescLimit = 40;
+                                forthPopularRecipeNameTextView.setTextSize(16);
+                                forthPopularRecipeDescTextView.setTextSize(14);
+                            } else {
+                                shortDescLimit = 50;
+                                firstPopularRecipeNameTextView.setTextSize(20);
+                                firstPopularRecipeDescTextView.setTextSize(18);
+                            }
+
+                            if(description.length() > shortDescLimit) {
+                                shortDesc = description.substring(0, shortDescLimit);
                             } else {
                                 shortDesc = description;
                             }
@@ -713,8 +759,19 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 40) {
-                                shortDesc = description.substring(0, 40);
+
+                            if(deviceWidth < 500) {
+                                shortDescLimit = 40;
+                                fifthPopularRecipeNameTextView.setTextSize(16);
+                                fifthPopularRecipeDescTextView.setTextSize(14);
+                            } else {
+                                shortDescLimit = 50;
+                                firstPopularRecipeNameTextView.setTextSize(20);
+                                firstPopularRecipeDescTextView.setTextSize(18);
+                            }
+
+                            if(description.length() > shortDescLimit) {
+                                shortDesc = description.substring(0, shortDescLimit);
                             } else {
                                 shortDesc = description;
                             }
@@ -727,8 +784,19 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                         if(selectedRecipe != null) {
                             String description = selectedRecipe.getDescription();
                             String shortDesc = "";
-                            if(description.length() > 40) {
-                                shortDesc = description.substring(0, 40);
+
+                            if(deviceWidth < 500) {
+                                shortDescLimit = 40;
+                                sixthPopularRecipeNameTextView.setTextSize(16);
+                                sixthPopularRecipeDescTextView.setTextSize(14);
+                            } else {
+                                shortDescLimit = 50;
+                                firstPopularRecipeNameTextView.setTextSize(20);
+                                firstPopularRecipeDescTextView.setTextSize(18);
+                            }
+
+                            if(description.length() > shortDescLimit) {
+                                shortDesc = description.substring(0, shortDescLimit);
                             } else {
                                 shortDesc = description;
                             }
