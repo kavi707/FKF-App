@@ -19,11 +19,11 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:background="@drawable/thumb_image_bg"
-                android:layout_width="150dp"
-                android:layout_height="150dp">
+                android:layout_width="130dp"
+                android:layout_height="130dp">
             <ImageView
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/fkf_m"
                     android:id="@+id/recipeImageView"/>
@@ -48,6 +48,7 @@
                 android:id="@+id/recipeNameTextView"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="5dp"
+                android:textStyle="bold"
                 android:layout_gravity="left"/>
         <TextView
                 android:layout_width="wrap_content"

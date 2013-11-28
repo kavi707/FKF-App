@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.fkf.resturent.R;
 import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.services.image.loader.ImageLoader;
+import com.fkf.resturent.templates.RecipesActivity;
 
 /**
  * Created by kavi on 6/26/13.
@@ -56,13 +57,24 @@ public class RecipeListItem extends LinearLayout {
             description = recipe.getBody();
         }
 
+        int deviceWidth = RecipesActivity.layoutWidthAndHeight.get("width");
         String shortDesc = "";
-        if(description.length() > 40) {
-            shortDesc = description.substring(0, 40);
-            shortDesc = shortDesc.replace("#", "");
+        int shortDescLimit = 0;
+        if(deviceWidth < 500) {
+            shortDescLimit = 40;
+            recipeNameTextView.setTextSize(16);
+            recipeDescriptionTextView.setTextSize(14);
+        } else {
+            shortDescLimit = 50;
+            recipeNameTextView.setTextSize(20);
+            recipeDescriptionTextView.setTextSize(18);
+        }
+        if(description.length() > shortDescLimit) {
+            shortDesc = description.substring(0, shortDescLimit);
+            shortDesc = shortDesc.replace("#", "").replace("\\","").replace("/", "");
         } else {
             shortDesc = description;
-            shortDesc = shortDesc.replace("#", "");
+            shortDesc = shortDesc.replace("#", "").replace("\\","").replace("/", "");
         }
         recipeDescriptionTextView.setText(shortDesc);
         recipeRatingBar.setRating(recipe.getRatings());
