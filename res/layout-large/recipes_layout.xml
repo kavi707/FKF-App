@@ -167,11 +167,17 @@
                     android:id="@+id/searchRecipeImageButton"
                     android:layout_marginLeft="1dp"/>
 
-            <EditText
+            <!--<EditText
                     android:layout_width="fill_parent"
                     android:layout_height="45dp"
                     android:id="@+id/searchRecipeEditText"
                     android:background="@drawable/rounded_edittext"
+                    android:layout_marginTop="2dp"
+                    android:hint="@string/search_recipe_label"/>-->
+            <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/searchRecipeEditText"
                     android:layout_marginTop="2dp"
                     android:hint="@string/search_recipe_label"/>
 

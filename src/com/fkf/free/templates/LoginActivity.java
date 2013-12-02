@@ -7,15 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
 
 import com.fkf.free.R;
 import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.free.services.ActivityUserPermissionServices;
 import com.fkf.free.services.connections.ApiConnector;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +34,12 @@ public class LoginActivity extends Activity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
+
+    private LinearLayout usernameLinearLayout;
+    private LinearLayout passwordLinearLayout;
+    private ImageView logoImageView;
+    private LinearLayout.LayoutParams logoViewParams, usernameParams, passwordParams, loginButtonParams;
+    private LinearLayout.LayoutParams usernameEditTextParams, passwordEditTextParams;
 
     private ProgressDialog progress;
 
@@ -70,6 +73,10 @@ public class LoginActivity extends Activity {
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
+//        usernameLinearLayout = (LinearLayout) findViewById(R.id.usernameLinearLayout);
+//        passwordLinearLayout = (LinearLayout) findViewById(R.id.passwordLinearLayout);
+        logoImageView = (ImageView) findViewById(R.id.logoImageView);
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +86,37 @@ public class LoginActivity extends Activity {
         });
 
         /*loginButton.setOnClickListener(new View.OnClickListener() {
+        Map<String, Integer> deviceWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(LoginActivity.this);
+        int width = deviceWidthAndHeight.get("width");
+
+        if (width <= 480) {
+            logoViewParams = (LinearLayout.LayoutParams)logoImageView.getLayoutParams();
+            logoViewParams.width = 350;
+            logoImageView.setLayoutParams(logoViewParams);
+
+            usernameParams = (LinearLayout.LayoutParams)usernameLinearLayout.getLayoutParams();
+            usernameParams.width = 350;
+            usernameLinearLayout.setLayoutParams(usernameParams);
+
+            usernameEditTextParams = (LinearLayout.LayoutParams)usernameEditText.getLayoutParams();
+            usernameEditTextParams.width = 285;
+            usernameEditText.setLayoutParams(usernameEditTextParams);
+
+            passwordParams = (LinearLayout.LayoutParams)passwordLinearLayout.getLayoutParams();
+            passwordParams.width = 350;
+            passwordLinearLayout.setLayoutParams(passwordParams);
+
+            passwordEditTextParams = (LinearLayout.LayoutParams)passwordEditText.getLayoutParams();
+            passwordEditTextParams.width = 285;
+            passwordEditText.setLayoutParams(passwordEditTextParams);
+
+            loginButtonParams = (LinearLayout.LayoutParams)loginButton.getLayoutParams();
+            loginButtonParams.width = 350;
+            loginButton.setLayoutParams(loginButtonParams);
+            loginButton.setTextSize(20);
+        }
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

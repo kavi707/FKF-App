@@ -24,16 +24,18 @@
             <ImageView
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
+                    android:id="@+id/logoImageView"
                     android:src="@drawable/logo"/>
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="20dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <!--<LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
+                android:id="@+id/usernameLinearLayout"
                 android:orientation="horizontal">
             <ImageView
                     android:layout_height="wrap_content"
@@ -57,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
+                android:id="@+id/passwordLinearLayout"
                 android:orientation="horizontal">
             <ImageView
                     android:layout_height="wrap_content"
@@ -75,10 +78,10 @@
 
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"/>-->
 
             <Button
-                    android:layout_width="390dp"
+                    android:layout_width="400dp"
                     android:layout_height="65dp"
                     android:layout_gravity="center"
                     android:text="@string/loginButtonLabel"
@@ -103,9 +106,6 @@
             <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"/>
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -116,6 +116,9 @@
                     android:textColor="@color/white"
                     android:id="@+id/browsRecipesTextView"/>
 
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
             <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"/>
