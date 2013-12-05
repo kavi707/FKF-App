@@ -65,7 +65,7 @@ public class RecipeListItem extends LinearLayout {
             recipeDescriptionTextView.setTextSize(12);
         } else {
             shortDescLimit = 60;
-            recipeNameTextView.setTextSize(20);
+            recipeNameTextView.setTextSize(18);
             recipeDescriptionTextView.setTextSize(16);
         }
         if(description.length() > shortDescLimit) {
