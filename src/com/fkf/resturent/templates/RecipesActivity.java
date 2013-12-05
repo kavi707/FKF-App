@@ -669,7 +669,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                                 firstPopularRecipeDescTextView.setTextSize(12);
                             } else {
                                 shortDescLimit = 60;
-                                firstPopularRecipeNameTextView.setTextSize(20);
+                                firstPopularRecipeNameTextView.setTextSize(18);
                                 firstPopularRecipeDescTextView.setTextSize(16);
                             }
 
@@ -694,8 +694,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                                 secondPopularRecipeDescTextView.setTextSize(12);
                             } else {
                                 shortDescLimit = 60;
-                                firstPopularRecipeNameTextView.setTextSize(20);
-                                firstPopularRecipeDescTextView.setTextSize(16);
+                                secondPopularRecipeNameTextView.setTextSize(18);
+                                secondPopularRecipeDescTextView.setTextSize(16);
                             }
 
                             if(description.length() > shortDescLimit) {
@@ -719,8 +719,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                                 thirdPopularRecipeDescTextView.setTextSize(12);
                             } else {
                                 shortDescLimit = 60;
-                                firstPopularRecipeNameTextView.setTextSize(20);
-                                firstPopularRecipeDescTextView.setTextSize(16);
+                                thirdPopularRecipeNameTextView.setTextSize(18);
+                                thirdPopularRecipeDescTextView.setTextSize(16);
                             }
 
                             if(description.length() > shortDescLimit) {
@@ -744,8 +744,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                                 forthPopularRecipeDescTextView.setTextSize(12);
                             } else {
                                 shortDescLimit = 60;
-                                firstPopularRecipeNameTextView.setTextSize(20);
-                                firstPopularRecipeDescTextView.setTextSize(16);
+                                forthPopularRecipeNameTextView.setTextSize(18);
+                                forthPopularRecipeDescTextView.setTextSize(16);
                             }
 
                             if(description.length() > shortDescLimit) {
@@ -769,8 +769,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                                 fifthPopularRecipeDescTextView.setTextSize(12);
                             } else {
                                 shortDescLimit = 60;
-                                firstPopularRecipeNameTextView.setTextSize(20);
-                                firstPopularRecipeDescTextView.setTextSize(16);
+                                fifthPopularRecipeNameTextView.setTextSize(18);
+                                fifthPopularRecipeDescTextView.setTextSize(16);
                             }
 
                             if(description.length() > shortDescLimit) {
@@ -794,8 +794,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                                 sixthPopularRecipeDescTextView.setTextSize(12);
                             } else {
                                 shortDescLimit = 60;
-                                firstPopularRecipeNameTextView.setTextSize(20);
-                                firstPopularRecipeDescTextView.setTextSize(16);
+                                sixthPopularRecipeNameTextView.setTextSize(18);
+                                sixthPopularRecipeDescTextView.setTextSize(16);
                             }
 
                             if(description.length() > shortDescLimit) {
