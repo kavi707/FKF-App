@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -955,30 +956,35 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         recipeItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i < 5) {
+                    Recipe selectedItemContent = (Recipe) (recipeItemList.getItemAtPosition(i));
+                    if (selectedItemContent != null) {
 
-                Recipe selectedItemContent = (Recipe) (recipeItemList.getItemAtPosition(i));
-                if(selectedItemContent != null) {
+                        itemContent = selectedItemContent;
 
-                    itemContent = selectedItemContent;
+                        progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the " + itemContent.getName() + " details. Please wait...");
+                        handler = new android.os.Handler(context.getMainLooper());
 
-                    progress = ProgressDialog.show(RecipesActivity.this, "Loading", "Loading the " + itemContent.getName() + " details. Please wait...");
-                    handler = new android.os.Handler(context.getMainLooper());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
+                                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(itemContent.getProductId()));
+                                startActivity(singleRecipeIntent);
 
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
-                            singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(itemContent.getProductId()));
-                            startActivity(singleRecipeIntent);
-
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progress.dismiss();
-                                }
-                            });
-                        }
-                    });
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progress.dismiss();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                } else if (i == 5) {
+                    //TODO this must be direct to separate view.
+                    Toast.makeText(getApplicationContext(),
+                            "Buy commercial version for view more", Toast.LENGTH_LONG).show();
                 }
             }
         });

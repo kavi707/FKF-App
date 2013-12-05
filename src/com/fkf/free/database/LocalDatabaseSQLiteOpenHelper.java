@@ -694,7 +694,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setImageUrlT(recipeImageUrl_t);
 
                     selectedRecipeList.add(recipe);
-                } while (recipeCursor.moveToNext() && selectedRecipeList.size() < 5);
+                } while (recipeCursor.moveToNext() && selectedRecipeList.size() < 6);
             }
             recipeCursor.close();
         } catch (SQLiteException ex) {

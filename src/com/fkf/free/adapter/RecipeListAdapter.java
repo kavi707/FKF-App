@@ -1,6 +1,7 @@
 package com.fkf.free.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import com.fkf.free.R;
 import com.fkf.free.database.Recipe;
 import com.fkf.free.views.RecipeListItem;
+import com.fkf.free.views.RecipeListViewMoreText;
 
 import java.util.ArrayList;
 
@@ -44,14 +46,21 @@ public class RecipeListAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        RecipeListItem recipeListItem;
-        if(view == null) {
-            recipeListItem = (RecipeListItem) View.inflate(context, R.layout.recipe_list_item, null);
-        } else {
-            recipeListItem = (RecipeListItem) view;
-        }
+        if (i != 5) {
+            RecipeListItem recipeListItem;
+            /*if (view == null) {*/
+                recipeListItem = (RecipeListItem) View.inflate(context, R.layout.recipe_list_item, null);
+            /*} else {
+                recipeListItem = (RecipeListItem) view;
+            }*/
 
-        recipeListItem.setRecipe(recipeList.get(i), this.context);
-        return  recipeListItem;
+            recipeListItem.setRecipe(recipeList.get(i), this.context);
+            return recipeListItem;
+        } else {
+            RecipeListViewMoreText recipeListViewMoreText;
+            recipeListViewMoreText = (RecipeListViewMoreText) View.inflate(context, R.layout.view_more_text_view, null);
+
+            return recipeListViewMoreText;
+        }
     }
 }
