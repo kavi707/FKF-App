@@ -61,11 +61,11 @@ public class RecipeListItem extends LinearLayout {
         String shortDesc = "";
         int shortDescLimit = 0;
         if(deviceWidth < 500) {
-            shortDescLimit = 50;
+            shortDescLimit = 60;
             recipeNameTextView.setTextSize(16);
             recipeDescriptionTextView.setTextSize(12);
         } else {
-            shortDescLimit = 60;
+            shortDescLimit = 70;
             recipeNameTextView.setTextSize(18);
             recipeDescriptionTextView.setTextSize(16);
         }

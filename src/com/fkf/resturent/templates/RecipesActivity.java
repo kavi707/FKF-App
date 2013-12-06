@@ -190,16 +190,12 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         /********* Latest yummys buttons ************/
         /********************************************/
 
-//        BitmapFactory.Options options = new BitmapFactory.Options();
-//        options.inSampleSize = 2;
-
         //device layout width and height
         layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(RecipesActivity.this);
 
         //Embedded images to yummys buttons
         File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1");
         if(firstImageFile.exists()) {
-//            Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath(), options);
             Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
             firstYummyImageButton.setImageBitmap(firstBitmap);
             contentParams = (LinearLayout.LayoutParams)firstYummyImageButton.getLayoutParams();
@@ -217,7 +213,6 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         File secondImageFile = new File("/sdcard/fauzias/latest_yummys/icon_2");
         if(secondImageFile.exists()) {
-//            Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath(), options);
             Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
             secondYummyImageButton.setImageBitmap(secondBitmap);
             contentParams = (LinearLayout.LayoutParams)secondYummyImageButton.getLayoutParams();
@@ -233,7 +228,6 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         File thirdImageFile = new File("/sdcard/fauzias/latest_yummys/icon_3");
         if(thirdImageFile.exists()) {
-//            Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath(), options);
             Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
             thirdYummyImageButton.setImageBitmap(thirdBitmap);
             contentParams = (LinearLayout.LayoutParams)thirdYummyImageButton.getLayoutParams();
@@ -249,7 +243,6 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         File forthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_4");
         if(forthImageFile.exists()) {
-//            Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath(), options);
             Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
             forthYummyImageButton.setImageBitmap(forthBitmap);
             contentParams = (LinearLayout.LayoutParams)forthYummyImageButton.getLayoutParams();
@@ -265,8 +258,6 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         File fifthImageFile = new File("/sdcard/fauzias/latest_yummys/icon_5");
         if(fifthImageFile.exists()) {
-
-//            Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath(), options);
             Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
             fifthYummyImageButton.setImageBitmap(fifthBitmap);
             contentParams = (LinearLayout.LayoutParams)fifthYummyImageButton.getLayoutParams();

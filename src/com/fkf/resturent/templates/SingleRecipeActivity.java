@@ -44,6 +44,7 @@ public class SingleRecipeActivity extends Activity {
     private ImageButton singleRecipeMyFavoriteImageButton;
 
     private LinearLayout.LayoutParams contentParams;
+    private FrameLayout.LayoutParams favoriteButtonParams;
     private Map<String, Integer> layoutWidthAndHeight;
 
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
@@ -149,6 +150,14 @@ public class SingleRecipeActivity extends Activity {
         contentParams.height = Math.round(height);
         contentParams.width = layoutWidthAndHeight.get("width");
         singleRecipeImageViewer.setLayoutParams(contentParams);
+
+        if(layoutWidthAndHeight.get("width") <= 480) {
+//            singleRecipeMyFavoriteImageButton.
+            favoriteButtonParams = (FrameLayout.LayoutParams)singleRecipeMyFavoriteImageButton.getLayoutParams();
+            favoriteButtonParams.height = 43;
+            favoriteButtonParams.width = 140;
+            singleRecipeMyFavoriteImageButton.setLayoutParams(favoriteButtonParams);
+        }
 
         String imageUrl = selectedRecipe.getImageUrl_l();
         int loader = R.drawable.default_recipe_image;
