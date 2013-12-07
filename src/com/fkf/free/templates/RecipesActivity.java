@@ -1043,16 +1043,21 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             public void onClick(View view) {
                 String searchKey = searchRecipeEditText.getText().toString();
 
-                recipeList = localDatabaseSQLiteOpenHelper.searchRecipesFromGivenRecipeName(searchKey);
+                if(searchKey.equals(null) || !searchKey.equals("")) {
+                    recipeList = localDatabaseSQLiteOpenHelper.searchRecipesFromGivenRecipeName(searchKey);
 
-                ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
-                scrollParams.height = 0;
-                latestAndPopularScrollBar.setLayoutParams(scrollParams);
+                    ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
+                    scrollParams.height = 0;
+                    latestAndPopularScrollBar.setLayoutParams(scrollParams);
 
-                recipeListAdapter = new RecipeListAdapter(recipeList, context);
-                recipeItemList.setAdapter(recipeListAdapter);
+                    recipeListAdapter = new RecipeListAdapter(recipeList, context);
+                    recipeItemList.setAdapter(recipeListAdapter);
 
-                yummyCategoryNameTextView.setText("   Search Results");
+                    yummyCategoryNameTextView.setText("   Search Results");
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Please enter key word for search", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
