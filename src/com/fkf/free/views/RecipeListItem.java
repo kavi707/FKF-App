@@ -78,7 +78,7 @@ public class RecipeListItem extends LinearLayout {
         recipeDescriptionTextView.setText(shortDesc);
         recipeRatingBar.setRating(recipe.getRatings());
 
-        int loader = R.drawable.fkf_m;
+        int loader = R.drawable.default_recipe_image_squre;
         try {
             ImageLoader imageLoader = new ImageLoader(context);
             imageLoader.DisplayImage(recipe.getImageUrlT(), loader, recipeImageView);
