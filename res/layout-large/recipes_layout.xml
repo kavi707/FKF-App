@@ -361,7 +361,7 @@
                                     android:layout_width="120dp"
                                     android:layout_height="120dp"
                                     android:layout_marginLeft="10dp"
-                                    android:src="@drawable/fkf_m"
+                                    android:src="@drawable/default_recipe_image_squre"
                                     android:id="@+id/firstPopularRecipeImageView"/>
                         </RelativeLayout>
                     </LinearLayout>
@@ -443,7 +443,7 @@
                                     android:layout_width="120dp"
                                     android:layout_height="120dp"
                                     android:layout_marginLeft="10dp"
-                                    android:src="@drawable/fkf_m"
+                                    android:src="@drawable/default_recipe_image_squre"
                                     android:id="@+id/secondPopularRecipeImageView"/>
                         </RelativeLayout>
                     </LinearLayout>
@@ -524,7 +524,7 @@
                                     android:layout_width="120dp"
                                     android:layout_height="120dp"
                                     android:layout_marginLeft="10dp"
-                                    android:src="@drawable/fkf_m"
+                                    android:src="@drawable/default_recipe_image_squre"
                                     android:id="@+id/thirdPopularRecipeImageView"/>
                         </RelativeLayout>
                     </LinearLayout>
@@ -605,7 +605,7 @@
                                     android:layout_width="120dp"
                                     android:layout_height="120dp"
                                     android:layout_marginLeft="10dp"
-                                    android:src="@drawable/fkf_m"
+                                    android:src="@drawable/default_recipe_image_squre"
                                     android:id="@+id/forthPopularRecipeImageView"/>
                         </RelativeLayout>
                     </LinearLayout>
@@ -686,7 +686,7 @@
                                     android:layout_width="120dp"
                                     android:layout_height="120dp"
                                     android:layout_marginLeft="10dp"
-                                    android:src="@drawable/fkf_m"
+                                    android:src="@drawable/default_recipe_image_squre"
                                     android:id="@+id/fifthPopularRecipeImageView"/>
                         </RelativeLayout>
                     </LinearLayout>
@@ -767,7 +767,7 @@
                                     android:layout_width="120dp"
                                     android:layout_height="120dp"
                                     android:layout_marginLeft="10dp"
-                                    android:src="@drawable/fkf_m"
+                                    android:src="@drawable/default_recipe_image_squre"
                                     android:id="@+id/sixthPopularRecipeImageView"/>
                         </RelativeLayout>
                     </LinearLayout>

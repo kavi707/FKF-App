@@ -25,7 +25,7 @@
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/fkf_m"
+                    android:src="@drawable/default_recipe_image_squre"
                     android:id="@+id/recipeImageView"/>
         </RelativeLayout>
     </LinearLayout>
