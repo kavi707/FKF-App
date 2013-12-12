@@ -66,15 +66,20 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-            <CheckBox
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/newsletterCheckBoxLabel"
                     android:id="@+id/newsletterCheckBox"
-                    android:layout_marginLeft="50dp"
                     android:layout_gravity="left|center_vertical"/>
 
-            <Button
+                <Button
                     android:layout_width="280dp"
                     android:layout_height="45dp"
                     android:text="@string/registerButtonLabel"
@@ -84,6 +89,8 @@
                     android:textStyle="bold"
                     android:id="@+id/newRegisterButton"
                     android:layout_gravity="center"/>
+            </LinearLayout>
+
 
             <TextView
                     android:layout_width="fill_parent"
