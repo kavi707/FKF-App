@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.fkf.resturent.R;
 import com.fkf.resturent.services.connections.ApiConnector;
 
@@ -113,7 +116,28 @@ public class RegisterActivity extends Activity {
                             userRegParams.put("newsAlert", "0");
                         }
 
-                        connector.userCreate(userRegParams);
+                        Map<String, String> resultMap = connector.userCreate(userRegParams);
+
+                        if (resultMap != null) {
+                            if (resultMap.get("status").equals("true")) {
+                                Toast.makeText(getApplicationContext(),
+                                        resultMap.get("msg"), Toast.LENGTH_LONG).show();
+                                firstNameEditText.setText(null);
+                                userEmailEditText.setText(null);
+                                usernameEditText.setText(null);
+                                passwordEditText.setText(null);
+                                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                startActivity(loginIntent);
+                                finish();
+                            } else if (resultMap.get("status").equals("false")) {
+                                Toast.makeText(getApplicationContext(),
+                                        resultMap.get("msg"), Toast.LENGTH_LONG).show();
+                                firstNameEditText.setText(null);
+                                userEmailEditText.setText(null);
+                                usernameEditText.setText(null);
+                                passwordEditText.setText(null);
+                            }
+                        }
 
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();

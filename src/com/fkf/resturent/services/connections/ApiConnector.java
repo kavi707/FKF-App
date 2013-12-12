@@ -53,24 +53,26 @@ public class ApiConnector {
 
         JSONObject reqParams = new JSONObject();
         try {
-//            reqParams.put("name", userRegParams.get("uName"));
-            reqParams.put("name", "iwa");
-//            reqParams.put("mail", userRegParams.get("email"));
-            reqParams.put("mail", "iwa@gmail.com");
-//            reqParams.put("pass", userRegParams.get("pass"));
-            reqParams.put("pass", "kavi");
-//            reqParams.put("field_fname[und][0][value]", userRegParams.get("fName"));
-//            reqParams.put("field_fname[und][0][value]", "kavi");
-            /*if(userRegParams.get("newsAlert").equals("1")) {
-                reqParams.put("newsletters[2]", 2);
-            }*/
-//            reqParams.put("hash", userRegParams.get("hash"));
-            reqParams.put("hash", "8d9dceaeffcf7dc14118b695fc7f70e8");
+            reqParams.put("name", userRegParams.get("fName"));
+            reqParams.put("mail", userRegParams.get("email"));
+            reqParams.put("password", userRegParams.get("pass"));
+            reqParams.put("username", userRegParams.get("uName"));
+            if(userRegParams.get("newsAlert").equals("1")) {
+                reqParams.put("newsletters", "true");
+            } else if(userRegParams.get("newsAlert").equals("0")) {
+                reqParams.put("newsletters", "false");
+            }
+            reqParams.put("hash", userRegParams.get("hash"));
 
             result = this.sendHTTPPost(reqParams, userRegUrl);
 
-            Log.d("User Reg >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.", result);
-            JSONObject jsonData = new JSONObject(result);
+            JSONObject resultJsonData = new JSONObject(result);
+
+            String resultStatus = resultJsonData.getString("status");
+            String resultMsg = resultJsonData.getString("msg");
+
+            statusMap.put("status", resultStatus);
+            statusMap.put("msg", resultMsg);
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
