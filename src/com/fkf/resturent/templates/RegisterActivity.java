@@ -126,8 +126,6 @@ public class RegisterActivity extends Activity {
                                 userEmailEditText.setText(null);
                                 usernameEditText.setText(null);
                                 passwordEditText.setText(null);
-                                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                startActivity(loginIntent);
                                 finish();
                             } else if (resultMap.get("status").equals("false")) {
                                 Toast.makeText(getApplicationContext(),
