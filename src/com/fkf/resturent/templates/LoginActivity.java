@@ -33,6 +33,7 @@ public class LoginActivity extends Activity {
     private Button registerButton;
     private Button loginButton;
     private TextView browsRecipesTextView;
+    private TextView upperTextView;
 
     private Context context = this;
     private Handler handler;
@@ -42,9 +43,11 @@ public class LoginActivity extends Activity {
 
     private LinearLayout usernameLinearLayout;
     private LinearLayout passwordLinearLayout;
+    private LinearLayout scrollLinearLayout;
     private ImageView logoImageView;
     private LinearLayout.LayoutParams logoViewParams, usernameParams, passwordParams, loginButtonParams;
     private LinearLayout.LayoutParams usernameEditTextParams, passwordEditTextParams;
+    private LinearLayout.LayoutParams upperTextViewParams;
 
     private ProgressDialog progress;
 
@@ -57,6 +60,7 @@ public class LoginActivity extends Activity {
     private Map<String, String> loginResult = new HashMap<String, String>();
     private boolean errorStatus = false;
     private String errorMsg = "";
+    private final int[] scrollLayoutHeightArray = new int[1];
 
     private ApiConnector connector = new ApiConnector();
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
@@ -118,6 +122,20 @@ public class LoginActivity extends Activity {
             loginButtonParams.width = 350;
             loginButton.setLayoutParams(loginButtonParams);
             loginButton.setTextSize(20);
+        }
+
+        int height = deviceWidthAndHeight.get("height");
+        upperTextView = (TextView) findViewById(R.id.upperTextView);
+        upperTextViewParams = (LinearLayout.LayoutParams)upperTextView.getLayoutParams();
+
+        scrollLinearLayout = (LinearLayout) findViewById(R.id.scrollLinearLayout);
+
+        if(height <= 800) {
+            int newHeight = 110;
+            upperTextViewParams.height = newHeight;
+            upperTextView.setLayoutParams(upperTextViewParams);
+        } else if(height > 800) {
+            upperTextView.setLayoutParams(upperTextViewParams);
         }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
