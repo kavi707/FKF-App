@@ -183,7 +183,7 @@ public class SingleRecipeActivity extends Activity {
             String[] instructionsArray = instructionString.split("#");
             String finalInstructionString = "";
             for (int instructCount = 0; instructCount < instructionsArray.length; instructCount++) {
-                finalInstructionString = finalInstructionString + instructionsArray[instructCount] + "\n";
+                finalInstructionString = finalInstructionString + instructionsArray[instructCount] + "\n\n";
             }
 
             singleRecipeInstructionTextView.setText(finalInstructionString);
