@@ -16,6 +16,7 @@ import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.services.ActivityUserPermissionServices;
 import com.fkf.resturent.services.connections.ApiConnector;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -89,6 +90,12 @@ public class LoginActivity extends Activity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //database backup called - this is for tempory usage
+                /*try {
+                    localDatabaseSQLiteOpenHelper.backupDatabase();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
             }
