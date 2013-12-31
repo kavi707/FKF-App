@@ -2,6 +2,7 @@ package com.fkf.free;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.free.database.dbprovider.ContentProviderAccessor;
 import com.fkf.free.services.ActivityUserPermissionServices;
 import com.fkf.free.templates.LoginActivity;
+import com.fkf.free.templates.RecipesActivity;
 
 import java.io.IOException;
 
@@ -28,7 +30,7 @@ public class WelcomeActivity extends Activity {
     /**
      * Called when the activity is first created.
      */
-    protected static final int TIMER_RUNTIME = 10000;
+    protected static final int TIMER_RUNTIME = 20000;
     protected boolean mbActive;
 
     private ProgressBar appLoadingProgressBar;
@@ -215,8 +217,13 @@ public class WelcomeActivity extends Activity {
             finish();
         }*/
 
-        Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
+        /*Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
         startActivity(loginIntent);
+        finish();*/
+
+        LoginActivity.LOGGED_STATUS = 0;
+        Intent recipesIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
+        startActivity(recipesIntent);
         finish();
     }
 }
