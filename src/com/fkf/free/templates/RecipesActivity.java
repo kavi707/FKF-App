@@ -1036,7 +1036,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         }
 
         //recipes search from given name
-        searchRecipeButton = (ImageButton) findViewById(R.id.searchRecipeImageButton);
+        /*searchRecipeButton = (ImageButton) findViewById(R.id.searchRecipeImageButton);
         searchRecipeEditText = (EditText) findViewById(R.id.searchRecipeEditText);
         searchRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1059,7 +1059,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             "Please enter key word for search", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
 
     }
 
