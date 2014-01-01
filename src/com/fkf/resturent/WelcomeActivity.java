@@ -32,7 +32,7 @@ public class WelcomeActivity extends Activity {
     /**
      * Called when the activity is first created.
      */
-    protected static final int TIMER_RUNTIME = 10000;
+    protected static final int TIMER_RUNTIME = 15000;
     protected boolean mbActive;
 
     private ProgressBar appLoadingProgressBar;
