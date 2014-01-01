@@ -7,7 +7,7 @@
     <LinearLayout
             android:id="@+id/menu"
             android:layout_height="fill_parent"
-            android:layout_width="300dp"
+            android:layout_width="100dp"
             android:background="#ff000000"
             android:orientation="vertical">
 
@@ -395,9 +395,9 @@
                                 android:textColor="@color/normal_gray"
                                 android:layout_gravity="left"/>
 
-                        <!--<TextView
+                        <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>-->
+                                android:layout_height="5dp"/>
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -483,9 +483,9 @@
                                 android:textColor="@color/normal_gray"
                                 android:layout_gravity="left"/>
 
-                        <!--<TextView
+                        <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>-->
+                                android:layout_height="5dp"/>
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -573,9 +573,9 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <!--<TextView
+                        <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>-->
+                                android:layout_height="5dp"/>
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -664,9 +664,9 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <!--<TextView
+                        <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>-->
+                                android:layout_height="5dp"/>
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -755,9 +755,9 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <!--<TextView
+                        <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>-->
+                                android:layout_height="5dp"/>
 
                         <RatingBar
                                 android:layout_width="wrap_content"
@@ -846,9 +846,9 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_gravity="left"/>
 
-                        <!--<TextView
+                        <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>-->
+                                android:layout_height="5dp"/>
 
                         <RatingBar
                                 android:layout_width="wrap_content"
