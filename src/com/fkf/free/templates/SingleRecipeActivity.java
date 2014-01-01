@@ -405,7 +405,7 @@ public class SingleRecipeActivity extends Activity {
                         }
                     } else {
                         Toast.makeText(getApplicationContext(),
-                                "First you have to login to application. Then you can add favorite for your account.", Toast.LENGTH_LONG).show();
+                                "Buy commercial version to create account and add your own favorite recipes.", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(),
