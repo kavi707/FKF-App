@@ -63,6 +63,24 @@ public class SingleRecipeActivity extends Activity {
         setUpView();
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        String imageUrl = selectedRecipe.getImageUrl_l();
+        int loader = R.drawable.default_recipe_image;
+
+        try {
+            URL url = new URL(imageUrl);
+            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            singleRecipeImageViewer.setImageBitmap(bmp);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void setUpView() {
 
         singleRecipeNameTextView = (TextView) findViewById(R.id.singleRecipeNameTextView);
@@ -159,10 +177,17 @@ public class SingleRecipeActivity extends Activity {
             singleRecipeMyFavoriteImageButton.setLayoutParams(favoriteButtonParams);
         }
 
-        String imageUrl = selectedRecipe.getImageUrl_l();
-        int loader = R.drawable.default_recipe_image;
+        /*String imageUrl = selectedRecipe.getImageUrl_l();
+        int loader = R.drawable.default_recipe_image;*/
 
-        try {
+        /*try {
+            ImageLoader imageLoader = new ImageLoader(getApplicationContext());
+            imageLoader.DisplayImage(imageUrl, loader, singleRecipeImageViewer);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }*/
+
+        /*try {
             URL url = new URL(imageUrl);
             Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             singleRecipeImageViewer.setImageBitmap(bmp);
@@ -170,7 +195,7 @@ public class SingleRecipeActivity extends Activity {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         /*try {
             ImageLoader imageLoader = new ImageLoader(getApplicationContext());
