@@ -36,8 +36,15 @@ public class SingleRecipeActivity extends Activity {
     private TextView singleRecipeDescriptionTextView;
     private TextView getSingleRecipeInstructionLabelTextView;
     private TextView singleRecipeInstructionTextView;
+
     private TextView singleRecipeContentLabelTextView;
+    private TextView secondItemIngredientTitleTextView;
+    private TextView thirdItemIngredientTitleTextView;
+
     private TextView singleRecipeIngredientTextView;
+    private TextView secondItemIngredientsTextView;
+    private TextView thirdItemIngredientsTextView;
+
     private ImageView singleRecipeImageViewer;
     private ImageButton singleRecipeMyFavoriteImageButton;
 
@@ -45,6 +52,8 @@ public class SingleRecipeActivity extends Activity {
     private FrameLayout.LayoutParams favoriteButtonParams;
     private LinearLayout instructionsLinearLayout;
     private Map<String, Integer> layoutWidthAndHeight;
+
+    private LinearLayout secondItemIngredients, thirdItemIngredients;
 
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
@@ -88,10 +97,20 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeDescriptionTextView = (TextView) findViewById(R.id.singleRecipeDescriptionTextView);
         singleRecipeInstructionTextView = (TextView) findViewById(R.id.singleRecipeInstructionTextView);
         getSingleRecipeInstructionLabelTextView = (TextView) findViewById(R.id.singleRecipeInstructionLabelTextView);
+
         singleRecipeContentLabelTextView = (TextView) findViewById(R.id.singleRecipeContentLabelTextView);
+        secondItemIngredientTitleTextView = (TextView) findViewById(R.id.secondItemIngredientTitleTextView);
+        thirdItemIngredientTitleTextView = (TextView) findViewById(R.id.thirdItemIngredientTitleTextView);
+
         singleRecipeIngredientTextView = (TextView) findViewById(R.id.singleRecipeIngredientTextView);
+        secondItemIngredientsTextView = (TextView) findViewById(R.id.secondItemIngredientsTextView);
+        thirdItemIngredientsTextView = (TextView) findViewById(R.id.thirdItemIngredientsTextView);
+
         singleRecipeImageViewer = (ImageView) findViewById(R.id.singleRecipeImageView);
         singleRecipeMyFavoriteImageButton = (ImageButton) findViewById(R.id.myFavoriteImageButton);
+
+        secondItemIngredients = (LinearLayout) findViewById(R.id.secondIngredient);
+        thirdItemIngredients = (LinearLayout) findViewById(R.id.thirdIngredient);
 
         Bundle extras = getIntent().getExtras();
         int selectedRecipeId = extras.getInt("SELECTED_RECIPE_ID");
@@ -206,6 +225,10 @@ public class SingleRecipeActivity extends Activity {
 
         int legacy = selectedRecipe.getLegacy();
         if (legacy == 0) {
+            //Hide two extra ingredient linear layouts
+            secondItemIngredients.setVisibility(View.GONE);
+            thirdItemIngredients.setVisibility(View.GONE);
+
             String instructionString = selectedRecipe.getInstructions();
             String[] instructionsArray = instructionString.split("#");
             String finalInstructionString = "";
@@ -254,7 +277,7 @@ public class SingleRecipeActivity extends Activity {
                 } else {
                     for (int i = 0; i < ingredientJsonArray.length(); i++) {
                         ingredientJsonObj = ingredientJsonArray.getJSONObject(i);
-                        if (i == 0) {
+                        /*if (i == 0) {
                             ingredientString = " * " + ingredientJsonObj.getString("title") + "\n";
                             itemsJsonArray = ingredientJsonObj.getJSONArray("items");
                             for (int k = 0; k < itemsJsonArray.length(); k++) {
@@ -285,10 +308,63 @@ public class SingleRecipeActivity extends Activity {
                                 }
                                 ingredientString = ingredientString + "\n";
                             }
+                        }*/
+                        if (i == 0) {
+                            singleRecipeContentLabelTextView.setText(ingredientJsonObj.getString("title"));
+                            itemsJsonArray = ingredientJsonObj.getJSONArray("items");
+                            for (int k = 0; k < itemsJsonArray.length(); k++) {
+                                itemJsonObj = itemsJsonArray.getJSONObject(k);
+
+                                ingredientString = ingredientString + itemJsonObj.getString("name");
+                                if (!itemJsonObj.getString("unit").equals("null")) {
+                                    ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                                }
+                                if (!itemJsonObj.getString("note").equals("null")) {
+                                    ingredientString = ingredientString + " " + itemJsonObj.getString("note");
+                                }
+                                ingredientString = ingredientString + "\n";
+                            }
+                            singleRecipeIngredientTextView.setText(ingredientString);
+                        } else if (i == 1) {
+                            secondItemIngredients.setVisibility(View.VISIBLE);
+                            secondItemIngredientTitleTextView.setText(ingredientJsonObj.getString("title"));
+                            ingredientString = "";
+                            itemsJsonArray = ingredientJsonObj.getJSONArray("items");
+                            for (int k = 0; k < itemsJsonArray.length(); k++) {
+                                itemJsonObj = itemsJsonArray.getJSONObject(k);
+
+                                ingredientString = ingredientString + itemJsonObj.getString("name");
+                                if (!itemJsonObj.getString("unit").equals("null")) {
+                                    ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                                }
+                                if (!itemJsonObj.getString("note").equals("null")) {
+                                    ingredientString = ingredientString + " " + itemJsonObj.getString("note");
+                                }
+                                ingredientString = ingredientString + "\n";
+                            }
+                            secondItemIngredientsTextView.setText(ingredientString);
+                        } else if (i == 2) {
+                            thirdItemIngredients.setVisibility(View.VISIBLE);
+                            thirdItemIngredientTitleTextView.setText(ingredientJsonObj.getString("title"));
+                            ingredientString = "";
+                            itemsJsonArray = ingredientJsonObj.getJSONArray("items");
+                            for (int k = 0; k < itemsJsonArray.length(); k++) {
+                                itemJsonObj = itemsJsonArray.getJSONObject(k);
+
+                                ingredientString = ingredientString + itemJsonObj.getString("name");
+                                if (!itemJsonObj.getString("unit").equals("null")) {
+                                    ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                                }
+                                if (!itemJsonObj.getString("note").equals("null")) {
+                                    ingredientString = ingredientString + " " + itemJsonObj.getString("note");
+                                }
+                                ingredientString = ingredientString + "\n";
+                            }
+                            thirdItemIngredientsTextView.setText(ingredientString);
                         }
                     }
 
-                    singleRecipeIngredientTextView.setText(ingredientString);
+//                    singleRecipeIngredientTextView.setText(ingredientString);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
