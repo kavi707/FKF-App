@@ -317,9 +317,9 @@ public class SingleRecipeActivity extends Activity {
                             for (int k = 0; k < itemsJsonArray.length(); k++) {
                                 itemJsonObj = itemsJsonArray.getJSONObject(k);
 
-                                ingredientString = ingredientString + itemJsonObj.getString("name");
+                                ingredientString = ingredientString + itemJsonObj.getString("unit");
                                 if (!itemJsonObj.getString("unit").equals("null")) {
-                                    ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                                    ingredientString = ingredientString + " " + itemJsonObj.getString("name");
                                 }
                                 if (!itemJsonObj.getString("note").equals("null")) {
                                     ingredientString = ingredientString + " " + itemJsonObj.getString("note");
@@ -335,9 +335,9 @@ public class SingleRecipeActivity extends Activity {
                             for (int k = 0; k < itemsJsonArray.length(); k++) {
                                 itemJsonObj = itemsJsonArray.getJSONObject(k);
 
-                                ingredientString = ingredientString + itemJsonObj.getString("name");
+                                ingredientString = ingredientString + itemJsonObj.getString("unit");
                                 if (!itemJsonObj.getString("unit").equals("null")) {
-                                    ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                                    ingredientString = ingredientString + " " + itemJsonObj.getString("name");
                                 }
                                 if (!itemJsonObj.getString("note").equals("null")) {
                                     ingredientString = ingredientString + " " + itemJsonObj.getString("note");
@@ -353,9 +353,9 @@ public class SingleRecipeActivity extends Activity {
                             for (int k = 0; k < itemsJsonArray.length(); k++) {
                                 itemJsonObj = itemsJsonArray.getJSONObject(k);
 
-                                ingredientString = ingredientString + itemJsonObj.getString("name");
+                                ingredientString = ingredientString + itemJsonObj.getString("unit");
                                 if (!itemJsonObj.getString("unit").equals("null")) {
-                                    ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                                    ingredientString = ingredientString + " " + itemJsonObj.getString("name");
                                 }
                                 if (!itemJsonObj.getString("note").equals("null")) {
                                     ingredientString = ingredientString + " " + itemJsonObj.getString("note");
