@@ -134,15 +134,20 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"/>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/instructionsLinearLayout"
+            android:background="@drawable/category_name_textview_background">
             <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/singleRecipeInstructionLabel"
                     android:id="@+id/singleRecipeInstructionLabelTextView"
-                    android:textColor="@color/dark_gray"
-                    android:layout_marginLeft="15dp"
-                    android:layout_gravity="left"/>
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"/>
+        </LinearLayout>
 
             <TextView
                     android:layout_width="fill_parent"
