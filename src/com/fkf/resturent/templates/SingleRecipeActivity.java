@@ -45,6 +45,7 @@ public class SingleRecipeActivity extends Activity {
 
     private LinearLayout.LayoutParams contentParams;
     private FrameLayout.LayoutParams favoriteButtonParams;
+    private LinearLayout instructionsLinearLayout;
     private Map<String, Integer> layoutWidthAndHeight;
 
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
@@ -83,6 +84,7 @@ public class SingleRecipeActivity extends Activity {
 
     private void setUpView() {
 
+        instructionsLinearLayout = (LinearLayout) findViewById(R.id.instructionsLinearLayout);
         singleRecipeNameTextView = (TextView) findViewById(R.id.singleRecipeNameTextView);
         singleRecipeRatingBar = (RatingBar) findViewById(R.id.singleRecipeRatingBar);
         singleRecipeDescriptionTextView = (TextView) findViewById(R.id.singleRecipeDescriptionTextView);
@@ -159,7 +161,7 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeNameTextView.setText(selectedRecipe.getName());
         singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
         singleRecipeDescriptionTextView.setText(selectedRecipe.getDescription());
-        singleRecipeContentLabelTextView.setText(selectedRecipe.getName() + " Ingredients");
+        singleRecipeContentLabelTextView.setText(/*selectedRecipe.getName() + */"Ingredients");
 
         //device layout width and height
         layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(SingleRecipeActivity.this);
@@ -320,6 +322,7 @@ public class SingleRecipeActivity extends Activity {
             singleRecipeIngredientTextView.setText(singleBodyString);
             singleRecipeInstructionTextView.setVisibility(View.GONE);
             getSingleRecipeInstructionLabelTextView.setVisibility(View.GONE);
+            instructionsLinearLayout.setVisibility(View.GONE);
         }
 
         isOnline = userPermissionServices.isOnline(SingleRecipeActivity.this);
