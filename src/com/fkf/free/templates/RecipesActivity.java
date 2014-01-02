@@ -64,6 +64,10 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ImageView profileImageView;
     EditText searchRecipeEditText;
 
+    TextView latestTitleTextView;
+    TextView popularTitleTextView;
+    LinearLayout.LayoutParams latestTitleParams, popularTitleParams;
+
     //yummy image buttons in the horizontal scroll
     ImageButton firstYummyImageButton;
     ImageButton secondYummyImageButton;
@@ -141,6 +145,9 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         horizontalScroll = (HorizontalScrollView) findViewById(R.id.horizontalScroll);
         latestAndPopularScrollBar = (ScrollView) findViewById(R.id.latestAndPopularScrollBar);
 
+        latestTitleTextView = (TextView) findViewById(R.id.latestTitleText);
+        popularTitleTextView = (TextView) findViewById(R.id.popularTitleText);
+
         firstYummyImageButton = (ImageButton) findViewById(R.id.firstYummyImageButton);
         secondYummyImageButton = (ImageButton) findViewById(R.id.secondYummyImageButton);
         thirdYummyImageButton = (ImageButton) findViewById(R.id.thirdYummyImageButton);
@@ -192,6 +199,20 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         //device layout width and height
         layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(RecipesActivity.this);
+
+        if(layoutWidthAndHeight.get("width") <= 480) {
+
+            latestTitleParams = (LinearLayout.LayoutParams)latestTitleTextView.getLayoutParams();
+            latestTitleParams.width = 400;
+//            latestTitleParams.height = ((layoutWidthAndHeight.get("height") * 300)/layoutWidthAndHeight.get("width"));
+            latestTitleTextView.setLayoutParams(latestTitleParams);
+
+            popularTitleParams = (LinearLayout.LayoutParams)popularTitleTextView.getLayoutParams();
+            popularTitleParams.width = 400;
+//            popularTitleParams.height = ((layoutWidthAndHeight.get("height") * 300)/layoutWidthAndHeight.get("width"));
+            popularTitleTextView.setLayoutParams(popularTitleParams);
+
+        }
 
         //Embedded images to yummys buttons
         File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1");
