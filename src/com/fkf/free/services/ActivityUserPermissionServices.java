@@ -65,6 +65,23 @@ public class ActivityUserPermissionServices {
         }
     }
 
+    public void createInternalAppDirectories(String appFilePath) {
+        File appDir = new File(appFilePath+"/fauzias");
+        if(!appDir.isDirectory()) {
+            File appDirLatestYummy = new File(appFilePath+"/fauzias/latest_yummys");
+            File appDirPopularYummy = new File(appFilePath+"/fauzias/popular_yummys");
+            File appDirUser = new File(appFilePath+"/fauzias/user");
+            try {
+                appDir.mkdir();
+                appDirLatestYummy.mkdir();
+                appDirPopularYummy.mkdir();
+                appDirUser.mkdir();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
     /**
      * return the application running device screen size
      * @param activity
@@ -119,7 +136,7 @@ public class ActivityUserPermissionServices {
     /**
      * download latest yummy icon images from urls and save them to SD card location
      */
-    public void populateLatestYummyDetails(Activity activity) {
+    public void populateLatestYummyDetails(Activity activity, String appFilePath) {
 
         List<PopularOrLatestRecipe> latestYummyList = connector.getLatestYummysFromServer();
 
@@ -132,7 +149,8 @@ public class ActivityUserPermissionServices {
         contentProviderAccessor.saveLatestRecipes(latestYummyList, activity);
 
         DownloadFileTask downloadFile = new DownloadFileTask();
-        String path = Environment.getExternalStorageDirectory() + "/fauzias/latest_yummys/";
+//        String path = Environment.getExternalStorageDirectory() + "/fauzias/latest_yummys/";
+        String path = appFilePath + "/fauzias/latest_yummys/";
 
         List<Map<String, String>> downloadDetailsList = new ArrayList<Map<String, String>>();
 
@@ -161,7 +179,7 @@ public class ActivityUserPermissionServices {
     /**
      * download popular yummy icon images from urls and save them to SD card location
      */
-    public void populatePopularYummyDetails(Activity activity) {
+    public void populatePopularYummyDetails(Activity activity, String appFilePath) {
 
         List<PopularOrLatestRecipe> popularRecipesList = connector.getPopularYummysFromServer();
 
@@ -174,7 +192,8 @@ public class ActivityUserPermissionServices {
         contentProviderAccessor.savePopularRecipes(popularRecipesList, activity);
 
         DownloadFileTask downloadFile = new DownloadFileTask();
-        String path = Environment.getExternalStorageDirectory() + "/fauzias/popular_yummys/";
+//        String path = Environment.getExternalStorageDirectory() + "/fauzias/popular_yummys/";
+        String path = appFilePath + "/fauzias/popular_yummys/";
 
         List<Map<String, String>> downloadDetailsList = new ArrayList<Map<String, String>>();
 

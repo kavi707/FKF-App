@@ -32,6 +32,7 @@ public class WelcomeActivity extends Activity {
      */
     protected static final int TIMER_RUNTIME = 20000;
     protected boolean mbActive;
+    private String appFilePath;
 
     private ProgressBar appLoadingProgressBar;
     private TextView appLoadingProgressTitleTextView;
@@ -54,6 +55,9 @@ public class WelcomeActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        //following content is for get the internal application files path
+        appFilePath = getFilesDir().getAbsolutePath();
 
         setUpViews();
     }
@@ -137,7 +141,10 @@ public class WelcomeActivity extends Activity {
                                             } else {
 
                                                 //create app dir if not exists
-                                                userPermissionServices.createAppDirectories();
+//                                                userPermissionServices.createAppDirectories();
+                                                //create internal app dir if not exists
+                                                userPermissionServices.createInternalAppDirectories(appFilePath);
+
                                                 //update the database if server database is modified
                                                 userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
                                                 //update the recipe categories from the server data
@@ -146,9 +153,9 @@ public class WelcomeActivity extends Activity {
                                                 userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
 
                                                 //populate latest yummy details and download images
-                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this);
+                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
                                                 //populate popular yummy details and download images
-                                                userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this);
+                                                userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
                                             }
                                         }
                                     });
