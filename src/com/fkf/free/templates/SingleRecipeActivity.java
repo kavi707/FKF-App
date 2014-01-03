@@ -315,8 +315,10 @@ public class SingleRecipeActivity extends Activity {
                             for (int k = 0; k < itemsJsonArray.length(); k++) {
                                 itemJsonObj = itemsJsonArray.getJSONObject(k);
 
-                                ingredientString = ingredientString + itemJsonObj.getString("unit");
                                 if (!itemJsonObj.getString("unit").equals("null")) {
+                                    ingredientString = ingredientString + itemJsonObj.getString("unit");
+                                }
+                                if (!itemJsonObj.getString("name").equals("null")) {
                                     ingredientString = ingredientString + " " + itemJsonObj.getString("name");
                                 }
                                 if (!itemJsonObj.getString("note").equals("null")) {
@@ -333,8 +335,10 @@ public class SingleRecipeActivity extends Activity {
                             for (int k = 0; k < itemsJsonArray.length(); k++) {
                                 itemJsonObj = itemsJsonArray.getJSONObject(k);
 
-                                ingredientString = ingredientString + itemJsonObj.getString("unit");
                                 if (!itemJsonObj.getString("unit").equals("null")) {
+                                    ingredientString = ingredientString + itemJsonObj.getString("unit");
+                                }
+                                if (!itemJsonObj.getString("name").equals("null")) {
                                     ingredientString = ingredientString + " " + itemJsonObj.getString("name");
                                 }
                                 if (!itemJsonObj.getString("note").equals("null")) {
@@ -351,8 +355,10 @@ public class SingleRecipeActivity extends Activity {
                             for (int k = 0; k < itemsJsonArray.length(); k++) {
                                 itemJsonObj = itemsJsonArray.getJSONObject(k);
 
-                                ingredientString = ingredientString + itemJsonObj.getString("unit");
                                 if (!itemJsonObj.getString("unit").equals("null")) {
+                                    ingredientString = ingredientString + itemJsonObj.getString("unit");
+                                }
+                                if (!itemJsonObj.getString("name").equals("null")) {
                                     ingredientString = ingredientString + " " + itemJsonObj.getString("name");
                                 }
                                 if (!itemJsonObj.getString("note").equals("null")) {
