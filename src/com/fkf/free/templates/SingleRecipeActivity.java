@@ -252,9 +252,11 @@ public class SingleRecipeActivity extends Activity {
                         itemJsonObj = itemsJsonArray.getJSONObject(j);
 
                         if (ingredientString.equals("")) {
-                            ingredientString = itemJsonObj.getString("name");
                             if (!itemJsonObj.getString("unit").equals("null")) {
                                 ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                            }
+                            if (!itemJsonObj.getString("name").equals("null")) {
+                                ingredientString = ingredientString + " " + itemJsonObj.getString("name");
                             }
                             if (!itemJsonObj.getString("note").equals("null")) {
                                 ingredientString = ingredientString + " " + itemJsonObj.getString("note");
@@ -264,6 +266,9 @@ public class SingleRecipeActivity extends Activity {
                             ingredientString = ingredientString + itemJsonObj.getString("name");
                             if (!itemJsonObj.getString("unit").equals("null")) {
                                 ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
+                            }
+                            if (!itemJsonObj.getString("name").equals("null")) {
+                                ingredientString = ingredientString + " " + itemJsonObj.getString("name");
                             }
                             if (!itemJsonObj.getString("note").equals("null")) {
                                 ingredientString = ingredientString + " " + itemJsonObj.getString("note");
