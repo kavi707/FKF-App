@@ -265,7 +265,6 @@ public class SingleRecipeActivity extends Activity {
                             }
                             ingredientString = ingredientString + "\n";
                         } else {
-                            ingredientString = ingredientString + itemJsonObj.getString("name");
                             if (!itemJsonObj.getString("unit").equals("null")) {
                                 ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
                             }
