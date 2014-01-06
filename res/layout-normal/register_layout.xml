@@ -35,6 +35,7 @@
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/firstNameLabel"
+                    android:typeface="normal"
                     android:id="@+id/firstNameEditText"
                     android:layout_gravity="center"/>
 
@@ -43,6 +44,7 @@
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/emailLabel"
+                    android:typeface="normal"
                     android:id="@+id/userEmailEditText"
                     android:layout_gravity="center"/>
 
@@ -50,6 +52,7 @@
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/usernameLabel"
+                    android:typeface="normal"
                     android:id="@+id/registerUserNameEditText"
                     android:layout_gravity="center"/>
 
@@ -57,6 +60,7 @@
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/passwordLabel"
+                    android:typeface="normal"
                     android:password="true"
                     android:id="@+id/registerPasswordEditText"
                     android:layout_gravity="center"/>
@@ -70,6 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/newsletterCheckBoxLabel"
+                    android:typeface="normal"
                     android:id="@+id/newsletterCheckBox"
                     android:layout_marginLeft="50dp"
                     android:layout_gravity="left|center_vertical"/>
@@ -78,6 +83,7 @@
                     android:layout_width="280dp"
                     android:layout_height="45dp"
                     android:text="@string/registerButtonLabel"
+                    android:typeface="normal"
                     android:textColor="@color/white"
                     android:background="@drawable/login_btn_background"
                     android:textSize="20dp"

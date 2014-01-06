@@ -44,7 +44,8 @@
                         android:textSize="16dp"
                         android:textStyle="bold"
                         android:gravity="left"
-                        android:text="Welcome"/>
+                        android:text="Welcome"
+                        android:typeface="normal"/>
 
                 <TextView
                         android:layout_height="5dp"
@@ -56,7 +57,8 @@
                         android:id="@+id/userNameTextView"
                         android:textSize="16dp"
                         android:gravity="left"
-                        android:text="@string/userLabel"/>
+                        android:text="@string/userLabel"
+                        android:typeface="normal"/>
             </LinearLayout>
 
             <TextView
@@ -83,6 +85,7 @@
                 android:gravity="center_vertical"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="  Home"
+                android:typeface="normal"
                 android:textColor="@color/normal_gray"
                 android:id="@+id/menuHomeTextView"
                 android:background="@drawable/category_list_background"/>
@@ -105,6 +108,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/normal_gray"
                     android:text="  My Favorite"
+                    android:typeface="normal"
                     android:background="@drawable/category_list_background"
                     android:id="@+id/menuMyFavoriteTextView"/>
         </LinearLayout>
@@ -140,6 +144,7 @@
 
             <TextView
                     android:text="@string/app_name"
+                    android:typeface="normal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -179,7 +184,8 @@
                     android:layout_height="50dp"
                     android:id="@+id/searchRecipeEditText"
                     android:layout_marginTop="2dp"
-                    android:hint="@string/search_recipe_label"/>
+                    android:hint="@string/search_recipe_label"
+                    android:typeface="normal"/>
 
         </LinearLayout>-->
 
@@ -235,7 +241,8 @@
                                     android:textColor="@color/dark_gray"
                                     android:layout_gravity="center"
                                     android:textSize="18dp"
-                                    android:text="Text View"/>
+                                    android:text="Text View"
+                                    android:typeface="normal"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -256,7 +263,8 @@
                                     android:textColor="@color/dark_gray"
                                     android:layout_gravity="center"
                                     android:textSize="18dp"
-                                    android:text="Text View"/>
+                                    android:text="Text View"
+                                    android:typeface="normal"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -277,7 +285,8 @@
                                     android:textColor="@color/dark_gray"
                                     android:layout_gravity="center"
                                     android:textSize="18dp"
-                                    android:text="Text View"/>
+                                    android:text="Text View"
+                                    android:typeface="normal"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -298,7 +307,8 @@
                                     android:textColor="@color/dark_gray"
                                     android:layout_gravity="center"
                                     android:textSize="18dp"
-                                    android:text="Text View"/>
+                                    android:text="Text View"
+                                    android:typeface="normal"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -319,7 +329,8 @@
                                     android:textColor="@color/dark_gray"
                                     android:layout_gravity="center"
                                     android:textSize="18dp"
-                                    android:text="Text View"/>
+                                    android:text="Text View"
+                                    android:typeface="normal"/>
                         </LinearLayout>
                     </LinearLayout>
                 </HorizontalScrollView>
@@ -381,6 +392,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
+                                android:typeface="normal"
                                 android:id="@+id/firstPopularRecipeNameTextView"
                                 android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
@@ -396,6 +408,7 @@
                                 android:layout_height="fill_parent"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
+                                android:typeface="normal"
                                 android:id="@+id/firstPopularRecipeDescriptionTextView"
                                 android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
@@ -463,6 +476,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
+                                android:typeface="normal"
                                 android:id="@+id/secondPopularRecipeNameTextView"
                                 android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
@@ -478,6 +492,7 @@
                                 android:layout_height="fill_parent"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
+                                android:typeface="normal"
                                 android:id="@+id/secondPopularRecipeDescriptionTextView"
                                 android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
@@ -545,6 +560,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
+                                android:typeface="normal"
                                 android:id="@+id/thirdPopularRecipeNameTextView"
                                 android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
@@ -560,6 +576,7 @@
                                 android:layout_height="fill_parent"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
+                                android:typeface="normal"
                                 android:id="@+id/thirdPopularRecipeDescriptionTextView"
                                 android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
@@ -627,6 +644,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
+                                android:typeface="normal"
                                 android:id="@+id/forthPopularRecipeNameTextView"
                                 android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
@@ -642,6 +660,7 @@
                                 android:layout_height="fill_parent"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
+                                android:typeface="normal"
                                 android:id="@+id/forthPopularRecipeDescriptionTextView"
                                 android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
@@ -709,6 +728,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
+                                android:typeface="normal"
                                 android:id="@+id/fifthPopularRecipeNameTextView"
                                 android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
@@ -724,6 +744,7 @@
                                 android:layout_height="fill_parent"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
+                                android:typeface="normal"
                                 android:id="@+id/fifthPopularRecipeDescriptionTextView"
                                 android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
@@ -791,6 +812,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="Large Text"
+                                android:typeface="normal"
                                 android:id="@+id/sixthPopularRecipeNameTextView"
                                 android:textColor="@color/dark_gray"
                                 android:layout_marginTop="8dp"
@@ -806,6 +828,7 @@
                                 android:layout_height="fill_parent"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Medium Text"
+                                android:typeface="normal"
                                 android:id="@+id/sixthPopularRecipeDescriptionTextView"
                                 android:textColor="@color/normal_gray"
                                 android:layout_marginLeft="5dp"
@@ -843,6 +866,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/category_name_textview_background"
                 android:textSize="18dip"
+                android:typeface="normal"
                 android:textColor="@color/white"
                 android:gravity="center_vertical"
                 android:id="@+id/yummyCategoryNameTextView"/>
