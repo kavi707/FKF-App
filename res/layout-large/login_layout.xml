@@ -48,6 +48,7 @@
                     android:textSize="25dp"
                     android:focusableInTouchMode="true"
                     android:hint="@string/usernameLabel"
+                    android:typeface="normal"
                     android:id="@+id/usernameEditText"/>
             </LinearLayout>
 
@@ -73,6 +74,7 @@
                     android:focusableInTouchMode="true"
                     android:password="true"
                     android:hint="@string/passwordLabel"
+                    android:typeface="normal"
                     android:id="@+id/passwordEditText"/>
             </LinearLayout>
 
@@ -85,6 +87,7 @@
                     android:layout_height="65dp"
                     android:layout_gravity="center"
                     android:text="@string/loginButtonLabel"
+                    android:typeface="normal"
                     android:id="@+id/loginButton"
                     android:textColor="@color/white"
                     android:background="@drawable/login_btn_background"
@@ -99,6 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/orTextLabel"
+                    android:typeface="normal"
                     android:layout_gravity="center"
                     android:textSize="26dp"
                     android:id="@+id/orTextView"/>
@@ -111,9 +115,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/recipesTextLabel"
+                    android:typeface="normal"
                     android:layout_gravity="center"
                     android:textSize="26dp"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/white"
                     android:id="@+id/browsRecipesTextView"/>
 
             <TextView
@@ -137,6 +142,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="@string/accountCreateTextLabel"
+                        android:typeface="normal"
                         android:layout_marginLeft="15dp"
                         android:layout_gravity="left|center_vertical"/>
 
@@ -145,6 +151,7 @@
                         android:layout_height="40dp"
                         android:layout_marginRight="15dp"
                         android:text="@string/registerButtonLabel"
+                        android:typeface="normal"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         android:textColor="@color/white"
