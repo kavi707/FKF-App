@@ -87,7 +87,7 @@ public class WelcomeActivity extends Activity {
                                     appLoadingProgressTitleTextView.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            appLoadingProgressTitleTextView.setText("Loading configurations ...");
+//                                            appLoadingProgressTitleTextView.setText("Loading configurations ...");
                                         }
                                     });
                                     break;
@@ -95,7 +95,7 @@ public class WelcomeActivity extends Activity {
                                     appLoadingProgressTitleTextView.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            appLoadingProgressTitleTextView.setText("Check the Internet connection ...");
+//                                            appLoadingProgressTitleTextView.setText("Check the Internet connection ...");
                                         }
                                     });
                                     mHandler.post(new Runnable() {
@@ -164,7 +164,7 @@ public class WelcomeActivity extends Activity {
                                     appLoadingProgressTitleTextView.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            appLoadingProgressTitleTextView.setText("Populating recipes from Fauzia's Kitchen ...");
+//                                            appLoadingProgressTitleTextView.setText("Populating recipes from Fauzia's Kitchen ...");
                                         }
                                     });
                                     break;
@@ -172,7 +172,7 @@ public class WelcomeActivity extends Activity {
                                     appLoadingProgressTitleTextView.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            appLoadingProgressTitleTextView.setText("Latest Yummys and Popular Yummys ...");
+//                                            appLoadingProgressTitleTextView.setText("Latest Yummys and Popular Yummys ...");
                                         }
                                     });
                                     break;
