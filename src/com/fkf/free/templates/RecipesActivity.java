@@ -699,7 +699,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            firstPopularRecipeDescTextView.setText(shortDesc);
+                            firstPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
                             firstPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
@@ -724,7 +724,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            secondPopularRecipeDescTextView.setText(shortDesc);
+                            secondPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
                             secondPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
@@ -749,7 +749,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            thirdPopularRecipeDescTextView.setText(shortDesc);
+                            thirdPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
                             thirdPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
@@ -774,7 +774,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            forthPopularRecipeDescTextView.setText(shortDesc);
+                            forthPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
                             forthPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
@@ -799,7 +799,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            fifthPopularRecipeDescTextView.setText(shortDesc);
+                            fifthPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
                             fifthPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
@@ -824,7 +824,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            sixthPopularRecipeDescTextView.setText(shortDesc);
+                            sixthPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
                             sixthPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
