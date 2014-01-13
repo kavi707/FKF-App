@@ -137,17 +137,17 @@ public class RegisterActivity extends Activity {
                                 finalUserName = username;
                                 finalPassword = password;
 
-                                firstNameEditText.setText(null);
-                                userEmailEditText.setText(null);
-                                usernameEditText.setText(null);
-                                passwordEditText.setText(null);
-
                                 progress = ProgressDialog.show(RegisterActivity.this, "Login", "Login from new user. Please wait ...");
                                 handler = new Handler(context.getMainLooper());
 
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
+                                        firstNameEditText.setText(null);
+                                        userEmailEditText.setText(null);
+                                        usernameEditText.setText(null);
+                                        passwordEditText.setText(null);
+
                                         loginResult = connector.userLogin(finalUserName, finalPassword);
 
                                         if(loginResult.get("loginStatus").equals("1")) {
