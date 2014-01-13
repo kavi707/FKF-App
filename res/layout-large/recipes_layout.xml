@@ -107,7 +107,7 @@
                     android:gravity="center_vertical"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/normal_gray"
-                    android:text="  My Favorite"
+                    android:text="  My Favourites"
                     android:typeface="normal"
                     android:background="@drawable/category_list_background"
                     android:id="@+id/menuMyFavoriteTextView"/>

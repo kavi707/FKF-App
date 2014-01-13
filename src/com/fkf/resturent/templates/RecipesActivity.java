@@ -905,7 +905,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                     scrollParams.height = 0;
                     latestAndPopularScrollBar.setLayoutParams(scrollParams);
 
-                    yummyCategoryNameTextView.setText("  My Favorite yummys");
+                    yummyCategoryNameTextView.setText("  My Favourites");
                     List<String> favoriteIds = localDatabaseSQLiteOpenHelper.getLoggedUserFavoriteRecipeIds();
                     List<Recipe> tempRecipeList;
                     recipeList = new ArrayList<Recipe>();
