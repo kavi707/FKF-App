@@ -179,7 +179,15 @@ public class SingleRecipeActivity extends Activity {
 
         singleRecipeNameTextView.setText(selectedRecipe.getName());
         singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
-        singleRecipeDescriptionTextView.setText(selectedRecipe.getDescription());
+
+        String descriptionString = selectedRecipe.getDescription();
+        String[] descriptionArray = descriptionString.split("#");
+        String finalDescriptionString = "";
+        for (int descriptionCount = 0; descriptionCount < descriptionArray.length; descriptionCount++) {
+            finalDescriptionString = finalDescriptionString + descriptionArray[descriptionCount].replace("#","") + "\n\n";
+        }
+
+        singleRecipeDescriptionTextView.setText(finalDescriptionString);
         singleRecipeContentLabelTextView.setText(/*selectedRecipe.getName() + */"Ingredients");
 
         //device layout width and height
