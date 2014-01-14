@@ -212,13 +212,13 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        /*createRecipesTable(sqLiteDatabase);
+        createRecipesTable(sqLiteDatabase);
         createCategoriesTable(sqLiteDatabase);
         createLastDatabaseModificationDetailsTable(sqLiteDatabase);
         createLastLoginDetailsTable(sqLiteDatabase);
         createPopularYummysTable(sqLiteDatabase);
         createLatestYummysTable(sqLiteDatabase);
-        createUserFavoriteRecipesTable(sqLiteDatabase);*/
+        createUserFavoriteRecipesTable(sqLiteDatabase);
     }
 
     @Override

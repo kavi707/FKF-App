@@ -37,6 +37,8 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
 
         String jsonResult = connector.callWebService(strings[0]);
 
+        Log.d(" ********************** JSON RESULTS : ", jsonResult);
+
         try {
             if (jsonResult != null) {
                 JSONObject jsonData = new JSONObject(jsonResult);
@@ -51,6 +53,9 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
                     jsonData = jsonRecipeArray.getJSONObject(i);
 
                     int legacyEvent = jsonData.getInt("legacy");
+
+                    Log.d(">>>>>>>>>>>>>>>>>>>>>> Recipe ID: ", jsonData.getString("id"));
+
                     Recipe getRecipe = new Recipe();
                     getRecipe.setProductId(jsonData.getString("id"));
                     getRecipe.setName(jsonData.getString("title"));

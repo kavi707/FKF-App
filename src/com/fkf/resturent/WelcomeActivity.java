@@ -105,14 +105,14 @@ public class WelcomeActivity extends Activity {
                                         public void run() {
 
                                             //create database from given database file in assets
-                                            try {
+                                            /*try {
                                                 if(!localDatabaseSQLiteOpenHelper.checkDataBase()) {
                                                     localDatabaseSQLiteOpenHelper.createDatabase();
                                                     localDatabaseSQLiteOpenHelper.openDataBase();
                                                 }
                                             } catch (IOException e) {
                                                 e.printStackTrace();
-                                            }
+                                            }*/
 
                                             if (!userPermissionServices.isOnline(WelcomeActivity.this)) {
                                                 mbActive = false;

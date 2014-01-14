@@ -91,11 +91,11 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //database backup called - this is for tempory usage
-                /*try {
+                try {
                     localDatabaseSQLiteOpenHelper.backupDatabase();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }*/
+                }
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
                 finish();

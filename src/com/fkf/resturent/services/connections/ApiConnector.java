@@ -251,6 +251,7 @@ public class ApiConnector {
     public void getRecipesFromServer(String timeStamp, Activity activity) {
 
         //this initialization is for testing
+        Log.d(" *********************** LAST TIME STAMP : ", timeStamp);
         RecipeDataSyncTask dataSyncTask = new RecipeDataSyncTask(activity);
         dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp);
     }

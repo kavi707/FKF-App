@@ -229,7 +229,8 @@ public class ActivityUserPermissionServices {
      */
     public boolean updateLocalRecipesFromServerRecipes(Activity activity) {
 
-        String lastModifiedTimeStamp = contentProviderAccessor.getLastModificationTimeStamp(activity.getApplicationContext());
+//        String lastModifiedTimeStamp = contentProviderAccessor.getLastModificationTimeStamp(activity.getApplicationContext());
+        String lastModifiedTimeStamp = null;
 
         //TODO this initialization is for temp
         if(lastModifiedTimeStamp == null)
