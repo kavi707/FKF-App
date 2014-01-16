@@ -3,8 +3,8 @@ package com.fkf.resturent.templates;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -13,7 +13,7 @@ import com.fkf.resturent.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.resturent.database.Recipe;
 import com.fkf.resturent.services.ActivityUserPermissionServices;
 import com.fkf.resturent.services.connections.ApiConnector;
-import com.fkf.resturent.services.image.loader.ImageLoader;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,17 +77,9 @@ public class SingleRecipeActivity extends Activity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        String imageUrl = selectedRecipe.getImageUrl_l();
-        int loader = R.drawable.default_recipe_image;
-
-        try {
-            URL url = new URL(imageUrl);
-            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            singleRecipeImageViewer.setImageBitmap(bmp);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        //calling recipe image loading in background
+        if(userPermissionServices.isOnline(SingleRecipeActivity.this)) {
+            this.loadRecipeImage();
         }
     }
 
@@ -206,31 +198,14 @@ public class SingleRecipeActivity extends Activity {
             singleRecipeMyFavoriteImageButton.setLayoutParams(favoriteButtonParams);
         }
 
-        /*String imageUrl = selectedRecipe.getImageUrl_l();
-        int loader = R.drawable.default_recipe_image;*/
+       /*String imageUrl = selectedRecipe.getImageUrl_l();
+        int loader = R.drawable.default_recipe_image;
 
-        /*try {
+        try {
             ImageLoader imageLoader = new ImageLoader(getApplicationContext());
             imageLoader.DisplayImage(imageUrl, loader, singleRecipeImageViewer);
         } catch (Exception ex) {
             ex.printStackTrace();
-        }*/
-
-        /*try {
-            URL url = new URL(imageUrl);
-            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            singleRecipeImageViewer.setImageBitmap(bmp);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        /*try {
-            ImageLoader imageLoader = new ImageLoader(getApplicationContext());
-            imageLoader.DisplayImage(imageUrl, loader, singleRecipeImageViewer);
-        } catch (Exception e) {
-            e.printStackTrace();
         }*/
 
         int legacy = selectedRecipe.getLegacy();
@@ -512,5 +487,41 @@ public class SingleRecipeActivity extends Activity {
                 }
             }
         });
+    }
+
+    /**
+     * AsyncTask loadImageTask calling method
+     */
+    private void loadRecipeImage() {
+        new loadImageTask().execute();
+    }
+
+    /**
+     * AsyncTask loadImageTask
+     * This load the image recipe from given url in background
+     */
+    private class loadImageTask extends AsyncTask<Void, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            String imageUrl = selectedRecipe.getImageUrl_l();
+            Bitmap bmp = null;
+            try {
+                URL url = new URL(imageUrl);
+                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return bmp;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            singleRecipeImageViewer.setImageBitmap(bitmap);
+        }
     }
 }
