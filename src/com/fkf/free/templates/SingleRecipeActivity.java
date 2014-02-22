@@ -13,6 +13,9 @@ import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.free.database.Recipe;
 import com.fkf.free.services.ActivityUserPermissionServices;
 import com.fkf.free.services.connections.ApiConnector;
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +51,8 @@ public class SingleRecipeActivity extends Activity {
 
     private ImageView singleRecipeImageViewer;
     private ImageButton singleRecipeMyFavoriteImageButton;
+
+    private AdView googleAdView;
 
     private LinearLayout.LayoutParams contentParams;
     private FrameLayout.LayoutParams favoriteButtonParams;
@@ -101,6 +106,8 @@ public class SingleRecipeActivity extends Activity {
 
         singleRecipeImageViewer = (ImageView) findViewById(R.id.singleRecipeImageView);
         singleRecipeMyFavoriteImageButton = (ImageButton) findViewById(R.id.myFavoriteImageButton);
+
+        googleAdView = (AdView) findViewById(R.id.ad);
 
         secondItemIngredients = (LinearLayout) findViewById(R.id.secondIngredient);
         thirdItemIngredients = (LinearLayout) findViewById(R.id.thirdIngredient);
@@ -167,6 +174,11 @@ public class SingleRecipeActivity extends Activity {
     }
 
     private void setUiContents() {
+
+        //set Google Ads bannerx
+        AdRequest re = new AdRequest();
+        re.setGender(AdRequest.Gender.FEMALE);
+        googleAdView.loadAd(re);
 
         singleRecipeNameTextView.setText(selectedRecipe.getName());
         singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
