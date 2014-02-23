@@ -246,13 +246,14 @@ public class ApiConnector {
     /**
      * get the updated recipes from the server using given time stamp
      * @param timeStamp
+     * @param key
      * @param activity
      */
-    public void getRecipesFromServer(String timeStamp, Activity activity) {
+    public void getRecipesFromServer(String timeStamp, String key, Activity activity) {
 
         //this initialization is for testing
         RecipeDataSyncTask dataSyncTask = new RecipeDataSyncTask(activity);
-        dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp);
+        dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp + "&key=" + key);
     }
 
     /**
