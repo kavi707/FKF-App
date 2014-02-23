@@ -14,6 +14,8 @@ import com.fkf.free.services.image.downloader.DownloadFileTask;
 import com.fkf.free.services.connections.ApiConnector;
 
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
@@ -26,6 +28,8 @@ public class ActivityUserPermissionServices {
 
     private ApiConnector connector = new ApiConnector();
     private ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
+
+    private String salt = "ae26dde136fc01876b1ec2ba3adc47b7";
 
     /**
      * check the internet connection in the device for running application
@@ -227,14 +231,41 @@ public class ActivityUserPermissionServices {
     public boolean updateLocalRecipesFromServerRecipes(Activity activity) {
 
         String lastModifiedTimeStamp = contentProviderAccessor.getLastModificationTimeStamp(activity.getApplicationContext());
-
+        String concatenateString = "";
+        String key = "";
         //TODO this initialization is for temp
-        if(lastModifiedTimeStamp == null)
-            lastModifiedTimeStamp = "1376430210";
-            //lastModifiedTimeStamp = "0000000000";
-        connector.getRecipesFromServer(lastModifiedTimeStamp, activity);
+        try {
+            if (lastModifiedTimeStamp == null) {
+//            lastModifiedTimeStamp = "1376430210";
+//            lastModifiedTimeStamp = "0000000000";
+                lastModifiedTimeStamp = "111";
+                key = "b2eb532e2cc34302106acfddd5fe29c6";
+            } else {
+                concatenateString = lastModifiedTimeStamp + salt;
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(concatenateString.getBytes());
+                byte[] digest = md.digest();
+                StringBuffer sb = new StringBuffer();
+                        /*for (byte b : digest) {
+                            sb.append(Integer.toHexString((b & 0xff)));
+                        }*/
+                for (int i = 0; i < digest.length; i++) {
+                    String h = Integer.toHexString(0xFF & digest[i]);
+                    while (h.length() < 2)
+                        h = "0" + h;
+                    sb.append(h);
+                }
 
-        return true;
+                key = sb.toString();
+            }
+
+            connector.getRecipesFromServer(lastModifiedTimeStamp, key, activity);
+            return true;
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return true;
+        }
     }
 
     /**
