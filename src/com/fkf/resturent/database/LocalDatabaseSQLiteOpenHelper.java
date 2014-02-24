@@ -52,6 +52,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String IMAGE_URL_S = "image_url_s";
     public static final String IMAGE_URL_M = "image_url_m";
     public static final String IMAGE_URL_L = "image_url_l";
+    public static final String LINKED_IMAGES = "linked_images";
+    public static final String LINKED_RECIPE_IDS = "linked_recipes";
     public static final String LEGACY = "legacy";
     public static final String BODY = "body";
 
@@ -254,6 +256,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 IMAGE_URL_S + " text, " +
                 IMAGE_URL_M + " text, " +
                 IMAGE_URL_L + " text, " +
+                LINKED_IMAGES + " text, " +
+                LINKED_RECIPE_IDS + " text, " +
                 LEGACY + " int, " +
                 BODY + " text, " +
                 IMAGE_URL_T + " text " +
@@ -620,6 +624,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(IMAGE_URL_S, recipe.getImageUrl_s());
         values.put(IMAGE_URL_M, recipe.getImageUrl_m());
         values.put(IMAGE_URL_L, recipe.getImageUrl_l());
+        values.put(LINKED_IMAGES, recipe.getLinkImages());
+        values.put(LINKED_RECIPE_IDS, recipe.getLinkRecipeIds());
         values.put(LEGACY, recipe.getLegacy());
         values.put(BODY, recipe.getBody());
 
@@ -669,9 +675,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeImageUrl_s = recipeCursor.getString(11);
                     String recipeImageUrl_m = recipeCursor.getString(12);
                     String recipeImageUrl_l = recipeCursor.getString(13);
-                    int legacy = recipeCursor.getInt(14);
-                    String recipeBody = recipeCursor.getString(15);
-                    String recipeImageUrl_t = recipeCursor.getString(16);
+                    String linkedImages = recipeCursor.getString(14);
+                    String linkedRecipes = recipeCursor.getString(15);
+                    int legacy = recipeCursor.getInt(16);
+                    String recipeBody = recipeCursor.getString(17);
+                    String recipeImageUrl_t = recipeCursor.getString(18);
 
                     recipe = new Recipe();
 
@@ -689,6 +697,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setImageUrl_s(recipeImageUrl_s);
                     recipe.setImageUrl_m(recipeImageUrl_m);
                     recipe.setImageUrl_l(recipeImageUrl_l);
+                    recipe.setLinkImages(linkedImages);
+                    recipe.setLinkRecipeIds(linkedRecipes);
                     recipe.setLegacy(legacy);
                     recipe.setBody(recipeBody);
                     recipe.setImageUrlT(recipeImageUrl_t);
@@ -799,9 +809,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeImageUrl_s = recipeCursor.getString(11);
                     String recipeImageUrl_m = recipeCursor.getString(12);
                     String recipeImageUrl_l = recipeCursor.getString(13);
-                    int legacy = recipeCursor.getInt(14);
-                    String body = recipeCursor.getString(15);
-                    String recipeImageUrl_t = recipeCursor.getString(16);
+                    String linkedImages = recipeCursor.getString(14);
+                    String linkedRecipes = recipeCursor.getString(15);
+                    int legacy = recipeCursor.getInt(16);
+                    String body = recipeCursor.getString(17);
+                    String recipeImageUrl_t = recipeCursor.getString(18);
 
                     recipe = new Recipe();
 
@@ -819,6 +831,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setImageUrl_s(recipeImageUrl_s);
                     recipe.setImageUrl_m(recipeImageUrl_m);
                     recipe.setImageUrl_l(recipeImageUrl_l);
+                    recipe.setLinkImages(linkedImages);
+                    recipe.setLinkRecipeIds(linkedRecipes);
                     recipe.setLegacy(legacy);
                     recipe.setBody(body);
                     recipe.setImageUrlT(recipeImageUrl_t);
@@ -866,9 +880,11 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeImageUrl_s = recipeCursor.getString(11);
                     String recipeImageUrl_m = recipeCursor.getString(12);
                     String recipeImageUrl_l = recipeCursor.getString(13);
-                    int legacy = recipeCursor.getInt(14);
-                    String body = recipeCursor.getString(15);
-                    String recipeImageUrl_t = recipeCursor.getString(16);
+                    String linkedImages = recipeCursor.getString(14);
+                    String linkedRecipes = recipeCursor.getString(15);
+                    int legacy = recipeCursor.getInt(16);
+                    String body = recipeCursor.getString(17);
+                    String recipeImageUrl_t = recipeCursor.getString(18);
 
                     recipe = new Recipe();
 
@@ -886,6 +902,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setImageUrl_s(recipeImageUrl_s);
                     recipe.setImageUrl_m(recipeImageUrl_m);
                     recipe.setImageUrl_l(recipeImageUrl_l);
+                    recipe.setLinkImages(linkedImages);
+                    recipe.setLinkRecipeIds(linkedRecipes);
                     recipe.setLegacy(legacy);
                     recipe.setBody(body);
                     recipe.setImageUrlT(recipeImageUrl_t);
