@@ -1,5 +1,7 @@
 package com.fkf.free.database;
 
+import java.util.List;
+
 /**
  * Created by kavi on 6/26/13.
  * Recipe object for recipes table in sqlite database
@@ -22,6 +24,8 @@ public class Recipe {
     private String imageUrl_s;
     private String imageUrl_m;
     private String imageUrl_l;
+    private String linkImages;
+    private String linkRecipeIds;
     private int legacy;
     private String body;
 
@@ -143,6 +147,22 @@ public class Recipe {
 
     public void setImageUrl_l(String imageUrl_l) {
         this.imageUrl_l = imageUrl_l;
+    }
+
+    public String getLinkImages() {
+        return linkImages;
+    }
+
+    public void setLinkImages(String linkImages) {
+        this.linkImages = linkImages;
+    }
+
+    public String getLinkRecipeIds() {
+        return linkRecipeIds;
+    }
+
+    public void setLinkRecipeIds(String linkRecipeIds) {
+        this.linkRecipeIds = linkRecipeIds;
     }
 
     public int getLegacy() {

@@ -178,6 +178,8 @@ public class ContentProviderAccessor {
         values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_S, recipe.getImageUrl_s());
         values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_M, recipe.getImageUrl_m());
         values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_L, recipe.getImageUrl_l());
+        values.put(LocalDatabaseSQLiteOpenHelper.LINKED_IMAGES, recipe.getLinkImages());
+        values.put(LocalDatabaseSQLiteOpenHelper.LINKED_RECIPE_IDS, recipe.getLinkRecipeIds());
         values.put(LocalDatabaseSQLiteOpenHelper.LEGACY, recipe.getLegacy());
         values.put(LocalDatabaseSQLiteOpenHelper.BODY, recipe.getBody());
         values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_T, recipe.getImageUrlT());
