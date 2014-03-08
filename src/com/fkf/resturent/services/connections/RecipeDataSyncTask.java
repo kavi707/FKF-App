@@ -64,7 +64,8 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
 //                    String description = jsonData.getString("desc").replace("[\"", "").replace("\"]", "").replace("\\","").replace("\",\"",",");
                     String  descriptionString = "";
                     if (!jsonData.getString("desc").equals("null")) {
-                        try {
+                        descriptionString = jsonData.getString("desc");
+                        /*try {
                             JSONArray jsonDescriptionArray = (JSONArray) jsonData.get("desc");
                             for (int descJsonCount = 0; descJsonCount < jsonDescriptionArray.length(); descJsonCount++) {
                                 descriptionString = descriptionString + "#" +
@@ -76,7 +77,7 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
                             descriptionString = jsonData.getString("desc");
                         } catch (Exception ex) {
 
-                        }
+                        }*/
 //                        getRecipe.setDescription(description);
                         getRecipe.setDescription(descriptionString);
                     }
@@ -95,13 +96,13 @@ public class RecipeDataSyncTask extends AsyncTask<String, Void, String> {
                     getRecipe.setLegacy(legacyEvent);
 
                     if (legacyEvent == 0) {
-                        JSONArray jsonInstructionArray = (JSONArray) jsonData.get("instructions");
-                        String instructionsString = "";
-                        for (int jsonCount = 0; jsonCount < jsonInstructionArray.length(); jsonCount++) {
+//                        JSONArray jsonInstructionArray = (JSONArray) jsonData.get("instructions");
+                        String instructionsString = jsonData.getString("instructions");
+                        /*for (int jsonCount = 0; jsonCount < jsonInstructionArray.length(); jsonCount++) {
                             instructionsString = instructionsString + "#" +
                                     jsonInstructionArray.getString(jsonCount).
                                             replace("[\"", "").replace("\"]", "").replace("\",\"", "").replace("\\", "");
-                        }
+                        }*/
                         getRecipe.setInstructions(instructionsString);
 
 //                        String instructions = jsonData.getString("instructions").replace("[\"", "").replace("\"]", "").replace("\",\"", "").replace("\\", "");

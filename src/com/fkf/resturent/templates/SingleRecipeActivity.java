@@ -184,11 +184,21 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
 
         String descriptionString = selectedRecipe.getDescription();
-        String[] descriptionArray = descriptionString.split("#");
+//        String[] descriptionArray = descriptionString.split("#");
         String finalDescriptionString = "";
-        for (int descriptionCount = 0; descriptionCount < descriptionArray.length; descriptionCount++) {
-            finalDescriptionString = finalDescriptionString + descriptionArray[descriptionCount].replace("#","") + "\n\n";
+        if (!descriptionString.equals("") && !descriptionString.equals(null)) {
+            try {
+                JSONArray descriptionJsonArray = new JSONArray(descriptionString);
+                for (int descStringCount = 0; descStringCount < descriptionJsonArray.length(); descStringCount++) {
+                    finalDescriptionString = finalDescriptionString + descriptionJsonArray.getString(descStringCount).replace("#","") + "\n\n";
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
+        /*for (int descriptionCount = 0; descriptionCount < descriptionArray.length; descriptionCount++) {
+            finalDescriptionString = finalDescriptionString + descriptionArray[descriptionCount].replace("#","") + "\n\n";
+        }*/
 
         singleRecipeDescriptionTextView.setText(finalDescriptionString);
         singleRecipeContentLabelTextView.setText(/*selectedRecipe.getName() + */"Ingredients");
@@ -216,11 +226,21 @@ public class SingleRecipeActivity extends Activity {
             thirdItemIngredients.setVisibility(View.GONE);
 
             String instructionString = selectedRecipe.getInstructions();
-            String[] instructionsArray = instructionString.split("#");
+//            String[] instructionsArray = instructionString.split("#");
             String finalInstructionString = "";
-            for (int instructCount = 0; instructCount < instructionsArray.length; instructCount++) {
-                finalInstructionString = finalInstructionString + instructionsArray[instructCount] + "\n\n";
+            if (!instructionString.equals("") && !instructionString.equals(null)){
+                try {
+                    JSONArray instructionJsonArray = new JSONArray(instructionString);
+                    for (int instructionStringCount = 0; instructionStringCount < instructionJsonArray.length(); instructionStringCount++) {
+                        finalInstructionString = finalInstructionString + instructionJsonArray.getString(instructionStringCount)+ "\n\n";
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+            /*for (int instructCount = 0; instructCount < instructionsArray.length; instructCount++) {
+                finalInstructionString = finalInstructionString + instructionsArray[instructCount] + "\n\n";
+            }*/
 
             singleRecipeInstructionTextView.setText(finalInstructionString);
 
