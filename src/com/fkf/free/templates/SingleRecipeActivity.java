@@ -195,7 +195,6 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
 
         String descriptionString = selectedRecipe.getDescription();
-//        String[] descriptionArray = descriptionString.split("#");
         String finalDescriptionString = "";
         if (!descriptionString.equals("") && !descriptionString.equals(null)) {
             try {
@@ -207,9 +206,6 @@ public class SingleRecipeActivity extends Activity {
                 e.printStackTrace();
             }
         }
-        /*for (int descriptionCount = 0; descriptionCount < descriptionArray.length; descriptionCount++) {
-            finalDescriptionString = finalDescriptionString + descriptionArray[descriptionCount].replace("#","") + "\n\n";
-        }*/
 
         singleRecipeDescriptionTextView.setText(finalDescriptionString);
         singleRecipeContentLabelTextView.setText(/*selectedRecipe.getName() + */"Ingredients");
@@ -237,7 +233,6 @@ public class SingleRecipeActivity extends Activity {
             thirdItemIngredients.setVisibility(View.GONE);
 
             String instructionString = selectedRecipe.getInstructions();
-//            String[] instructionsArray = instructionString.split("#");
             String finalInstructionString = "";
             if (!instructionString.equals("") && !instructionString.equals(null)){
                 try {
@@ -249,9 +244,6 @@ public class SingleRecipeActivity extends Activity {
                     e.printStackTrace();
                 }
             }
-            /*for (int instructCount = 0; instructCount < instructionsArray.length; instructCount++) {
-                finalInstructionString = finalInstructionString + instructionsArray[instructCount] + "\n\n";
-            }*/
 
             singleRecipeInstructionTextView.setText(finalInstructionString);
 
