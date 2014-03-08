@@ -1,10 +1,14 @@
 package com.fkf.resturent.templates;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -24,6 +28,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by kavi on 6/29/13.
@@ -56,14 +61,17 @@ public class SingleRecipeActivity extends Activity {
     private Map<String, Integer> layoutWidthAndHeight;
 
     private LinearLayout secondItemIngredients, thirdItemIngredients;
+    private LinearLayout linkedImagesLinearLayout, linkedRecipesLinearLayout;
 
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
     private ApiConnector connector = new ApiConnector();
     private Recipe selectedRecipe;
+    private Recipe linkedRecipe;
     private String selectedRecipeProductId = null;
     private boolean isFavorite = false;
     private boolean isOnline = false;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +113,9 @@ public class SingleRecipeActivity extends Activity {
 
         secondItemIngredients = (LinearLayout) findViewById(R.id.secondIngredient);
         thirdItemIngredients = (LinearLayout) findViewById(R.id.thirdIngredient);
+
+        linkedImagesLinearLayout = (LinearLayout) findViewById(R.id.linkedImagesLinearLayout);
+        linkedRecipesLinearLayout = (LinearLayout) findViewById(R.id.linkedRecipesLinearLayout);
 
         Bundle extras = getIntent().getExtras();
         int selectedRecipeId = extras.getInt("SELECTED_RECIPE_ID");
@@ -173,10 +184,16 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
 
         String descriptionString = selectedRecipe.getDescription();
-        String[] descriptionArray = descriptionString.split("#");
         String finalDescriptionString = "";
-        for (int descriptionCount = 0; descriptionCount < descriptionArray.length; descriptionCount++) {
-            finalDescriptionString = finalDescriptionString + descriptionArray[descriptionCount].replace("#","") + "\n\n";
+        if (!descriptionString.equals("") && !descriptionString.equals(null)) {
+            try {
+                JSONArray descriptionJsonArray = new JSONArray(descriptionString);
+                for (int descStringCount = 0; descStringCount < descriptionJsonArray.length(); descStringCount++) {
+                    finalDescriptionString = finalDescriptionString + descriptionJsonArray.getString(descStringCount).replace("#","") + "\n\n";
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         singleRecipeDescriptionTextView.setText(finalDescriptionString);
@@ -185,10 +202,10 @@ public class SingleRecipeActivity extends Activity {
         //device layout width and height
         layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(SingleRecipeActivity.this);
         contentParams = (LinearLayout.LayoutParams)singleRecipeImageViewer.getLayoutParams();
-        float height = (450 * layoutWidthAndHeight.get("width"))/720;
-        contentParams.height = Math.round(height);
-        contentParams.width = layoutWidthAndHeight.get("width");
-        singleRecipeImageViewer.setLayoutParams(contentParams);
+//        float height = (450 * layoutWidthAndHeight.get("width"))/720;
+//        contentParams.height = Math.round(height);
+//        contentParams.width = layoutWidthAndHeight.get("width");
+//        singleRecipeImageViewer.setLayoutParams(contentParams);
 
         if(layoutWidthAndHeight.get("width") <= 480) {
 //            singleRecipeMyFavoriteImageButton.
@@ -198,16 +215,6 @@ public class SingleRecipeActivity extends Activity {
             singleRecipeMyFavoriteImageButton.setLayoutParams(favoriteButtonParams);
         }
 
-       /*String imageUrl = selectedRecipe.getImageUrl_l();
-        int loader = R.drawable.default_recipe_image;
-
-        try {
-            ImageLoader imageLoader = new ImageLoader(getApplicationContext());
-            imageLoader.DisplayImage(imageUrl, loader, singleRecipeImageViewer);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }*/
-
         int legacy = selectedRecipe.getLegacy();
         if (legacy == 0) {
             //Hide two extra ingredient linear layouts
@@ -215,10 +222,16 @@ public class SingleRecipeActivity extends Activity {
             thirdItemIngredients.setVisibility(View.GONE);
 
             String instructionString = selectedRecipe.getInstructions();
-            String[] instructionsArray = instructionString.split("#");
             String finalInstructionString = "";
-            for (int instructCount = 0; instructCount < instructionsArray.length; instructCount++) {
-                finalInstructionString = finalInstructionString + instructionsArray[instructCount] + "\n\n";
+            if (!instructionString.equals("") && !instructionString.equals(null)){
+                try {
+                    JSONArray instructionJsonArray = new JSONArray(instructionString);
+                    for (int instructionStringCount = 0; instructionStringCount < instructionJsonArray.length(); instructionStringCount++) {
+                        finalInstructionString = finalInstructionString + instructionJsonArray.getString(instructionStringCount)+ "\n\n";
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             singleRecipeInstructionTextView.setText(finalInstructionString);
@@ -266,38 +279,7 @@ public class SingleRecipeActivity extends Activity {
                 } else {
                     for (int i = 0; i < ingredientJsonArray.length(); i++) {
                         ingredientJsonObj = ingredientJsonArray.getJSONObject(i);
-                        /*if (i == 0) {
-                            ingredientString = " * " + ingredientJsonObj.getString("title") + "\n";
-                            itemsJsonArray = ingredientJsonObj.getJSONArray("items");
-                            for (int k = 0; k < itemsJsonArray.length(); k++) {
-                                itemJsonObj = itemsJsonArray.getJSONObject(k);
 
-                                ingredientString = ingredientString + itemJsonObj.getString("name");
-                                if (!itemJsonObj.getString("unit").equals("null")) {
-                                    ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
-                                }
-                                if (!itemJsonObj.getString("note").equals("null")) {
-                                    ingredientString = ingredientString + " " + itemJsonObj.getString("note");
-                                }
-                                ingredientString = ingredientString + "\n";
-                            }
-                        } else {
-                            ingredientString = ingredientString + "\n";
-                            ingredientString = ingredientString + " * " + ingredientJsonObj.getString("title") + "\n";
-                            itemsJsonArray = ingredientJsonObj.getJSONArray("items");
-                            for (int m = 0; m < itemsJsonArray.length(); m++) {
-                                itemJsonObj = itemsJsonArray.getJSONObject(m);
-
-                                ingredientString = ingredientString + itemJsonObj.getString("name");
-                                if (!itemJsonObj.getString("unit").equals("null")) {
-                                    ingredientString = ingredientString + " " + itemJsonObj.getString("unit");
-                                }
-                                if (!itemJsonObj.getString("note").equals("null")) {
-                                    ingredientString = ingredientString + " " + itemJsonObj.getString("note");
-                                }
-                                ingredientString = ingredientString + "\n";
-                            }
-                        }*/
                         if (i == 0) {
                             singleRecipeContentLabelTextView.setText(ingredientJsonObj.getString("title"));
                             itemsJsonArray = ingredientJsonObj.getJSONArray("items");
@@ -487,6 +469,13 @@ public class SingleRecipeActivity extends Activity {
                 }
             }
         });
+
+        //Load linked images if device is in online
+        if (isOnline) {
+            loadLinkedImages();
+        }
+
+        loadLinkedRecipes();
     }
 
     /**
@@ -494,6 +483,113 @@ public class SingleRecipeActivity extends Activity {
      */
     private void loadRecipeImage() {
         new loadImageTask().execute();
+    }
+
+    /**
+     *
+     */
+    private void loadLinkedRecipes() {
+
+        String jsonLinkedRecipes = selectedRecipe.getLinkRecipeIds();
+        Log.d("linked recipes string >>>>>>>>>>>>>>>. ", jsonLinkedRecipes);
+        if (!jsonLinkedRecipes.equals("0")) {
+            Log.d("Come to here ", "..... +++++++++++++++++ ");
+            try {
+                JSONArray linkedRecipesJson = new JSONArray(jsonLinkedRecipes);
+                for (int recipeCount = 0; recipeCount < linkedRecipesJson.length(); recipeCount++) {
+                    Log.d("Recipe Count : ", String.valueOf(recipeCount));
+                    Log.d("Recipe ID : ", linkedRecipesJson.getString(recipeCount));
+                    setRecipeLinkedTextView(linkedRecipesJson.getString(recipeCount), recipeCount + 1);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void setRecipeLinkedTextView(String linkedRecipeId, int recipeCount) {
+
+        TextView textView = new TextView(context);
+        LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        textView.setLayoutParams(lParams);
+
+        List<Recipe> linkedRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(linkedRecipeId);
+        if (linkedRecipeList.size() == 1) {
+            linkedRecipe = linkedRecipeList.get(0);
+
+            textView.setText(recipeCount + ". " + linkedRecipe.getName());
+            textView.setTextColor(Color.BLUE);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent linkedRecipeIntent = new Intent(SingleRecipeActivity.this, SingleRecipeActivity.class);
+                    linkedRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(linkedRecipe.getProductId()));
+                    startActivity(linkedRecipeIntent);
+                    finish();
+                }
+            });
+
+            linkedRecipesLinearLayout.addView(textView);
+        } else {
+            Log.d("List Count : >>>>>>>>>>>>>>>>>>>> ", String.valueOf(linkedRecipeList.size()));
+        }
+    }
+
+    /**
+     *
+     */
+    private void loadLinkedImages() {
+
+        String jsonLinkedImages = selectedRecipe.getLinkImages();
+        List<String> imageUrls = new ArrayList<String>();
+        if (!jsonLinkedImages.equals("0")) {
+            try {
+                JSONArray linkedImagesJson = new JSONArray(jsonLinkedImages);
+                for (int imageCount = 0; imageCount < linkedImagesJson.length(); imageCount++) {
+                    imageUrls.add("http://www.fauziaskitchenfun.com"+linkedImagesJson.getString(imageCount));
+                    setImageViewsToMainView("http://www.fauziaskitchenfun.com"+linkedImagesJson.getString(imageCount));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
+    /**
+     * Set the downloaded image bitmap object to dynamically created ImageView
+     * Load the created ImageView to LinearLayout
+     * @param imageUrl
+     */
+    private void setImageViewsToMainView(String imageUrl) {
+
+        TextView textView = new TextView(context);
+        LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        textView.setLayoutParams(lParams);
+
+        ImageView imageView = new ImageView(context);
+//        float height = (450 * layoutWidthAndHeight.get("width"))/720;
+//        contentParams.height = Math.round(height);
+//        contentParams.width = layoutWidthAndHeight.get("width");
+//        imageView.setLayoutParams(contentParams);
+        imageView.setLayoutParams(lParams);
+
+        loadLinkedImageTask linkedImageTask = new loadLinkedImageTask();
+        try {
+            Bitmap bitmap = linkedImageTask.execute(imageUrl).get();
+            imageView.setImageBitmap(bitmap);
+
+            linkedImagesLinearLayout.addView(imageView);
+//            linkedImagesLinearLayout.addView(textView);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -522,6 +618,29 @@ public class SingleRecipeActivity extends Activity {
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             singleRecipeImageViewer.setImageBitmap(bitmap);
+        }
+    }
+
+    /**
+     * Download the linked image from given url and set as a bitmap object.
+     * Do this as an asyncTask
+     */
+    private class loadLinkedImageTask extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            String imageUrl = strings[0];
+            Bitmap bmp = null;
+            try {
+                URL url = new URL(imageUrl);
+                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return bmp;
         }
     }
 }

@@ -701,7 +701,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            firstPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
+                            firstPopularRecipeDescTextView.setText(shortDesc.
+                                    replace("#","").replace("[","").replace("]","").replace("\"",""));
                             firstPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
@@ -726,7 +727,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            secondPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
+                            secondPopularRecipeDescTextView.setText(shortDesc.
+                                    replace("#","").replace("[","").replace("]","").replace("\"",""));
                             secondPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
@@ -751,7 +753,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            thirdPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
+                            thirdPopularRecipeDescTextView.setText(shortDesc.
+                                    replace("#","").replace("[","").replace("]","").replace("\"",""));
                             thirdPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
@@ -776,7 +779,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            forthPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
+                            forthPopularRecipeDescTextView.setText(shortDesc.
+                                    replace("#","").replace("[","").replace("]","").replace("\"",""));
                             forthPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
@@ -801,7 +805,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            fifthPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
+                            fifthPopularRecipeDescTextView.setText(shortDesc.
+                                    replace("#","").replace("[","").replace("]","").replace("\"",""));
                             fifthPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;
@@ -826,7 +831,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             } else {
                                 shortDesc = description;
                             }
-                            sixthPopularRecipeDescTextView.setText(shortDesc.replace("#",""));
+                            sixthPopularRecipeDescTextView.setText(shortDesc.
+                                    replace("#","").replace("[","").replace("]","").replace("\"",""));
                             sixthPopularRecipeRatingBar.setRating(selectedRecipe.getRatings());
                         }
                         break;

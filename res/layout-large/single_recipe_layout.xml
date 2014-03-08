@@ -260,6 +260,21 @@
                 android:layout_marginRight="10dp"
                 android:textColor="@color/normal_gray"
                 android:layout_gravity="left" />
+
+            <LinearLayout
+                android:id="@+id/linkedRecipesLinearLayout"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linkedImagesLinearLayout"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
