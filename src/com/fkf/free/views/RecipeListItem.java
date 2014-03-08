@@ -70,10 +70,10 @@ public class RecipeListItem extends LinearLayout {
         }
         if(description.length() > shortDescLimit) {
             shortDesc = description.substring(0, shortDescLimit);
-            shortDesc = shortDesc.replace("#", "").replace("\\","").replace("/", "");
+            shortDesc = shortDesc.replace("#", "").replace("\\","").replace("/", "").replace("[","").replace("]","").replace("\"","");
         } else {
             shortDesc = description;
-            shortDesc = shortDesc.replace("#", "").replace("\\","").replace("/", "");
+            shortDesc = shortDesc.replace("#", "").replace("\\","").replace("/", "").replace("[","").replace("]","").replace("\"","");
         }
         recipeDescriptionTextView.setText(shortDesc);
         recipeRatingBar.setRating(recipe.getRatings());
