@@ -265,6 +265,16 @@
                 android:textColor="@color/normal_gray"
                 android:layout_gravity="left" />
 
+            <TextView
+                android:id="@+id/relatedRecipeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/normal_gray"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/related_recipe_heading"/>
+
             <LinearLayout
                 android:id="@+id/linkedRecipesLinearLayout"
                 android:orientation="vertical"
