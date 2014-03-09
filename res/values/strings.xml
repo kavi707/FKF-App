@@ -35,7 +35,9 @@
     <!-- single recipe layout string resources -->
     <string name="singleRecipeContentLabel">Recipe Content</string>
     <string name="singleRecipeInstructionLabel">Instructions</string>
+    <string name="related_recipe_heading">Related Recipes</string>
 
     <!-- Google Ads Unit ID -->
     <string name="admob_id">ca-app-pub-5523232753553387/5791410379</string>
+
 </resources>
