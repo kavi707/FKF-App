@@ -352,7 +352,7 @@
                         android:id="@+id/firstPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="140dp"
+                        android:layout_height="150dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
@@ -360,7 +360,7 @@
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="160dp"
-                            android:layout_height="140dp">
+                            android:layout_height="150dp">
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
@@ -438,14 +438,14 @@
                         android:id="@+id/secondPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="140dp"
+                        android:layout_height="150dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="160dp"
-                            android:layout_height="140dp">
+                            android:layout_height="150dp">
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
@@ -522,14 +522,14 @@
                         android:id="@+id/thirdPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="140dp"
+                        android:layout_height="150dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="160dp"
-                            android:layout_height="140dp">
+                            android:layout_height="150dp">
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
@@ -606,14 +606,14 @@
                         android:id="@+id/forthPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="140dp"
+                        android:layout_height="150dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="160dp"
-                            android:layout_height="140dp">
+                            android:layout_height="150dp">
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
@@ -690,14 +690,14 @@
                         android:id="@+id/fifthPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="140dp"
+                        android:layout_height="150dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="160dp"
-                            android:layout_height="140dp">
+                            android:layout_height="150dp">
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
@@ -774,14 +774,14 @@
                         android:id="@+id/sixthPopularYummyLinear"
                         android:duplicateParentState="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="140dp"
+                        android:layout_height="150dp"
                         android:background="@drawable/recipe_item_background"
                         android:orientation="horizontal">
 
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="160dp"
-                            android:layout_height="140dp">
+                            android:layout_height="150dp">
                         <TextView
                                 android:layout_width="160dp"
                                 android:layout_height="10dp"/>
