@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.AndroidCharacter;
+import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -22,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.awt.font.TextAttribute;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.jar.Attributes;
 
 /**
  * Created by kavi on 6/29/13.
@@ -51,6 +55,8 @@ public class SingleRecipeActivity extends Activity {
     private TextView singleRecipeIngredientTextView;
     private TextView secondItemIngredientsTextView;
     private TextView thirdItemIngredientsTextView;
+
+    private TextView relatedRecipeLabel;
 
     private ImageView singleRecipeImageViewer;
     private ImageButton singleRecipeMyFavoriteImageButton;
@@ -107,6 +113,8 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeIngredientTextView = (TextView) findViewById(R.id.singleRecipeIngredientTextView);
         secondItemIngredientsTextView = (TextView) findViewById(R.id.secondItemIngredientsTextView);
         thirdItemIngredientsTextView = (TextView) findViewById(R.id.thirdItemIngredientsTextView);
+
+        relatedRecipeLabel = (TextView) findViewById(R.id.relatedRecipeLabel);
 
         singleRecipeImageViewer = (ImageView) findViewById(R.id.singleRecipeImageView);
         singleRecipeMyFavoriteImageButton = (ImageButton) findViewById(R.id.myFavoriteImageButton);
@@ -180,6 +188,7 @@ public class SingleRecipeActivity extends Activity {
 
     private void setUiContents() {
 
+        relatedRecipeLabel.setVisibility(View.GONE);
         singleRecipeNameTextView.setText(selectedRecipe.getName());
         singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
 
@@ -491,10 +500,9 @@ public class SingleRecipeActivity extends Activity {
     private void loadLinkedRecipes() {
 
         String jsonLinkedRecipes = selectedRecipe.getLinkRecipeIds();
-        Log.d("linked recipes string >>>>>>>>>>>>>>>. ", jsonLinkedRecipes);
         if (!jsonLinkedRecipes.equals("0")) {
-            Log.d("Come to here ", "..... +++++++++++++++++ ");
             try {
+                relatedRecipeLabel.setVisibility(View.VISIBLE);
                 JSONArray linkedRecipesJson = new JSONArray(jsonLinkedRecipes);
                 for (int recipeCount = 0; recipeCount < linkedRecipesJson.length(); recipeCount++) {
                     Log.d("Recipe Count : ", String.valueOf(recipeCount));
@@ -513,6 +521,7 @@ public class SingleRecipeActivity extends Activity {
         TextView textView = new TextView(context);
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
+        lParams.setMargins(20,0,0,0);
         textView.setLayoutParams(lParams);
 
         List<Recipe> linkedRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(linkedRecipeId);
@@ -521,6 +530,7 @@ public class SingleRecipeActivity extends Activity {
 
             textView.setText(recipeCount + ". " + linkedRecipe.getName());
             textView.setTextColor(Color.BLUE);
+            textView.setTextSize(18);
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -533,7 +543,7 @@ public class SingleRecipeActivity extends Activity {
 
             linkedRecipesLinearLayout.addView(textView);
         } else {
-            Log.d("List Count : >>>>>>>>>>>>>>>>>>>> ", String.valueOf(linkedRecipeList.size()));
+            Log.d("List Count : ", String.valueOf(linkedRecipeList.size()));
         }
     }
 

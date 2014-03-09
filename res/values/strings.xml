@@ -35,4 +35,5 @@
     <!-- single recipe layout string resources -->
     <string name="singleRecipeContentLabel">Recipe Content</string>
     <string name="singleRecipeInstructionLabel">Instructions</string>
+    <string name="related_recipe_heading">Related Recipes</string>
 </resources>
