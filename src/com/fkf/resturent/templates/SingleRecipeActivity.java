@@ -74,6 +74,7 @@ public class SingleRecipeActivity extends Activity {
     private ApiConnector connector = new ApiConnector();
     private Recipe selectedRecipe;
     private Recipe linkedRecipe;
+    private List<String> linkedRecipesIdList = new ArrayList<String>();
     private String selectedRecipeProductId = null;
     private boolean isFavorite = false;
     private boolean isOnline = false;
@@ -507,7 +508,8 @@ public class SingleRecipeActivity extends Activity {
                 for (int recipeCount = 0; recipeCount < linkedRecipesJson.length(); recipeCount++) {
                     Log.d("Recipe Count : ", String.valueOf(recipeCount));
                     Log.d("Recipe ID : ", linkedRecipesJson.getString(recipeCount));
-                    setRecipeLinkedTextView(linkedRecipesJson.getString(recipeCount), recipeCount + 1);
+                    linkedRecipesIdList.add(linkedRecipesJson.getString(recipeCount));
+                    setRecipeLinkedTextView(linkedRecipesJson.getString(recipeCount), recipeCount);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -528,14 +530,15 @@ public class SingleRecipeActivity extends Activity {
         if (linkedRecipeList.size() == 1) {
             linkedRecipe = linkedRecipeList.get(0);
 
-            textView.setText(recipeCount + ". " + linkedRecipe.getName());
-            textView.setTextColor(Color.BLUE);
+            textView.setText((recipeCount + 1) + ". " + linkedRecipe.getName());
+            textView.setTextColor(Color.GRAY);
             textView.setTextSize(18);
+            textView.setId(recipeCount);
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent linkedRecipeIntent = new Intent(SingleRecipeActivity.this, SingleRecipeActivity.class);
-                    linkedRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(linkedRecipe.getProductId()));
+                    linkedRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(linkedRecipesIdList.get(v.getId())));
                     startActivity(linkedRecipeIntent);
                     finish();
                 }
