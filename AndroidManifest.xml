@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.fkf.free"
+          package="com.fkf.commercial"
           android:versionCode="1"
           android:versionName="1.0">
 
@@ -13,11 +13,11 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:icon="@drawable/app_icon_free">
         <provider
-                android:name=".database.dbprovider.DbContentProvider"
-                android:authorities="com.fkf.free.database.dbprovider.DbContentProvider" >
+                android:name="com.fkf.commercial.database.dbprovider.DbContentProvider"
+                android:authorities="com.fkf.commercial.database.dbprovider.DbContentProvider" >
         </provider>
 
-        <activity android:name="WelcomeActivity"
+        <activity android:name="com.fkf.commercial.WelcomeActivity"
                   android:label="@string/app_name"
                   android:screenOrientation="portrait">
             <intent-filter>
@@ -27,13 +27,13 @@
         </activity>
         <activity android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
-        <activity android:name=".templates.LoginActivity"
+        <activity android:name="com.fkf.commercial.templates.LoginActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".templates.RegisterActivity"
+        <activity android:name="com.fkf.commercial.templates.RegisterActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".templates.RecipesActivity"
+        <activity android:name="com.fkf.commercial.templates.RecipesActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".templates.SingleRecipeActivity"
+        <activity android:name="com.fkf.commercial.templates.SingleRecipeActivity"
                   android:screenOrientation="portrait"/>
     </application>
 </manifest> 

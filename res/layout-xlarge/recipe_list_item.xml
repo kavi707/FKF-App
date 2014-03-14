@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.fkf.free.views.RecipeListItem
+<com.fkf.commercial.views.RecipeListItem
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -50,4 +50,4 @@
                 android:layout_marginLeft="5dp"
                 android:layout_gravity="left|center_vertical"/>
     </LinearLayout>
-</com.fkf.free.views.RecipeListItem>
+</com.fkf.commercial.views.RecipeListItem>
