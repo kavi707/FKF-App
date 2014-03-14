@@ -11,7 +11,7 @@
     <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="15"/>
     <application android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:icon="@drawable/app_icon_free">
+            android:icon="@drawable/app_icon">
         <provider
                 android:name="com.fkf.commercial.database.dbprovider.DbContentProvider"
                 android:authorities="com.fkf.commercial.database.dbprovider.DbContentProvider" >
