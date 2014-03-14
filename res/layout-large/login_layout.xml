@@ -31,7 +31,7 @@
                     android:layout_height="20dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-        <!--<LinearLayout
+        <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
@@ -80,7 +80,7 @@
 
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>-->
+                    android:layout_height="wrap_content"/>
 
             <Button
                     android:layout_width="400dp"
@@ -92,20 +92,20 @@
                     android:textColor="@color/white"
                     android:background="@drawable/login_btn_background"
                     android:textSize="30dp"
-                    android:textStyle="bold"/>-->
+                    android:textStyle="bold"/>
 
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="150dp"/>
+                    android:layout_height="wrap_content"/>
 
-            <!--<TextView
+            <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/orTextLabel"
                     android:typeface="normal"
                     android:layout_gravity="center"
                     android:textSize="26dp"
-                    android:id="@+id/orTextView"/>-->
+                    android:id="@+id/orTextView"/>
 
             <TextView
                     android:layout_width="fill_parent"

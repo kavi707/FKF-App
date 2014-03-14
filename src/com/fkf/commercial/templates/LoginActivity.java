@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -73,8 +74,8 @@ public class LoginActivity extends Activity {
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
-//        usernameLinearLayout = (LinearLayout) findViewById(R.id.usernameLinearLayout);
-//        passwordLinearLayout = (LinearLayout) findViewById(R.id.passwordLinearLayout);
+        usernameLinearLayout = (LinearLayout) findViewById(R.id.usernameLinearLayout);
+        passwordLinearLayout = (LinearLayout) findViewById(R.id.passwordLinearLayout);
         logoImageView = (ImageView) findViewById(R.id.logoImageView);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +86,6 @@ public class LoginActivity extends Activity {
             }
         });
 
-        /*loginButton.setOnClickListener(new View.OnClickListener() {
         Map<String, Integer> deviceWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(LoginActivity.this);
         int width = deviceWidthAndHeight.get("width");
 
@@ -174,7 +174,7 @@ public class LoginActivity extends Activity {
                             "Application is on offline mode. If need to login, please put your device to online", Toast.LENGTH_LONG).show();
                 }
             }
-        });*/
+        });
 
         browsRecipesTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,11 +186,6 @@ public class LoginActivity extends Activity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        /*try {
-                            Thread.sleep(5000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }*/
 
                         LOGGED_STATUS = 0;
                         Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
@@ -205,49 +200,6 @@ public class LoginActivity extends Activity {
                         });
                     }
                 });
-
-                /*AsyncTask<Void, Void, Void> updateTask = new AsyncTask<Void, Void, Void>(){
-                    ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
-                    @Override
-                    protected void onPreExecute() {
-                        // what to do before background task
-                        dialog.setTitle("Loading...");
-                        dialog.setMessage("Please wait.");
-                        dialog.setIndeterminate(true);
-                        dialog.setCancelable(false);
-                        dialog.show();
-                    }
-
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void result) {
-                        // what to do when background task is completed
-                        long delayInMillis = 10000;
-                        Timer timer = new Timer();
-                        timer.schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                dialog.dismiss();
-                            }
-                        }, delayInMillis);
-
-                        LOGGED_STATUS = 0;
-                        Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
-                        startActivity(recipesIntent);
-                        dialog.dismiss();
-                    };
-
-                    @Override
-                    protected void onCancelled() {
-                        dialog.dismiss();
-                        super.onCancelled();
-                    }
-                };
-                updateTask.execute((Void[])null);*/
             }
         });
     }
