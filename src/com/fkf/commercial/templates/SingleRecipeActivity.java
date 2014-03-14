@@ -59,8 +59,6 @@ public class SingleRecipeActivity extends Activity {
     private ImageView singleRecipeImageViewer;
     private ImageButton singleRecipeMyFavoriteImageButton;
 
-    private AdView googleAdView;
-
     private LinearLayout.LayoutParams contentParams;
     private FrameLayout.LayoutParams favoriteButtonParams;
     private LinearLayout instructionsLinearLayout;
@@ -122,8 +120,6 @@ public class SingleRecipeActivity extends Activity {
 
         singleRecipeImageViewer = (ImageView) findViewById(R.id.singleRecipeImageView);
         singleRecipeMyFavoriteImageButton = (ImageButton) findViewById(R.id.myFavoriteImageButton);
-
-        googleAdView = (AdView) findViewById(R.id.ad);
 
         secondItemIngredients = (LinearLayout) findViewById(R.id.secondIngredient);
         thirdItemIngredients = (LinearLayout) findViewById(R.id.thirdIngredient);
@@ -193,11 +189,6 @@ public class SingleRecipeActivity extends Activity {
     }
 
     private void setUiContents() {
-
-        //set Google Ads bannerx
-        AdRequest re = new AdRequest();
-        re.setGender(AdRequest.Gender.FEMALE);
-        googleAdView.loadAd(re);
 
         relatedRecipeLabel.setVisibility(View.GONE);
         relatedRecipeLinearLayout.setVisibility(View.GONE);
