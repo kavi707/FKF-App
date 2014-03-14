@@ -46,21 +46,21 @@ public class RecipeListAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        if (i != 5) {
+//        if (i != 5) {
             RecipeListItem recipeListItem;
-            /*if (view == null) {*/
+            if (view == null) {
                 recipeListItem = (RecipeListItem) View.inflate(context, R.layout.recipe_list_item, null);
-            /*} else {
+            } else {
                 recipeListItem = (RecipeListItem) view;
-            }*/
+            }
 
             recipeListItem.setRecipe(recipeList.get(i), this.context);
             return recipeListItem;
-        } else {
+        /*} else {
             RecipeListViewMoreText recipeListViewMoreText;
             recipeListViewMoreText = (RecipeListViewMoreText) View.inflate(context, R.layout.view_more_text_view, null);
 
             return recipeListViewMoreText;
-        }
+        }*/
     }
 }

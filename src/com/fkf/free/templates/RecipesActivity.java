@@ -985,7 +985,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         recipeItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i < 5) {
+//                if (i < 5) {
                     Recipe selectedItemContent = (Recipe) (recipeItemList.getItemAtPosition(i));
                     if (selectedItemContent != null) {
 
@@ -1010,11 +1010,11 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             }
                         });
                     }
-                } else if (i == 5) {
+                /*} else if (i == 5) {
                     //TODO this must be direct to separate view.
                     Toast.makeText(getApplicationContext(),
                             "Buy commercial version for view more", Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
         });
 
