@@ -68,6 +68,7 @@ public class SingleRecipeActivity extends Activity {
     private LinearLayout.LayoutParams contentParams;
     private FrameLayout.LayoutParams favoriteButtonParams;
     private LinearLayout instructionsLinearLayout;
+    private LinearLayout relatedRecipeLinearLayout;
     private Map<String, Integer> layoutWidthAndHeight;
 
     private LinearLayout secondItemIngredients, thirdItemIngredients;
@@ -105,6 +106,8 @@ public class SingleRecipeActivity extends Activity {
     private void setUpView() {
 
         instructionsLinearLayout = (LinearLayout) findViewById(R.id.instructionsLinearLayout);
+        relatedRecipeLinearLayout = (LinearLayout) findViewById(R.id.relatedRecipeLinearLayout);
+
         singleRecipeNameTextView = (TextView) findViewById(R.id.singleRecipeNameTextView);
         singleRecipeRatingBar = (RatingBar) findViewById(R.id.singleRecipeRatingBar);
         singleRecipeDescriptionTextView = (TextView) findViewById(R.id.singleRecipeDescriptionTextView);
@@ -201,6 +204,8 @@ public class SingleRecipeActivity extends Activity {
         googleAdView.loadAd(re);
 
         relatedRecipeLabel.setVisibility(View.GONE);
+        relatedRecipeLinearLayout.setVisibility(View.GONE);
+
         singleRecipeNameTextView.setText(selectedRecipe.getName());
         singleRecipeRatingBar.setRating(selectedRecipe.getRatings());
 
@@ -515,6 +520,7 @@ public class SingleRecipeActivity extends Activity {
         if (!jsonLinkedRecipes.equals("0")) {
             try {
                 relatedRecipeLabel.setVisibility(View.VISIBLE);
+                relatedRecipeLinearLayout.setVisibility(View.VISIBLE);
                 JSONArray linkedRecipesJson = new JSONArray(jsonLinkedRecipes);
                 for (int recipeCount = 0; recipeCount < linkedRecipesJson.length(); recipeCount++) {
                     Log.d("Recipe Count : ", String.valueOf(recipeCount));

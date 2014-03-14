@@ -233,6 +233,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/relatedRecipeLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/category_name_textview_background">
