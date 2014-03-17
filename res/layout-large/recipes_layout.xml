@@ -107,7 +107,7 @@
                     android:gravity="center_vertical"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/normal_gray"
-                    android:text="  My Favorite"
+                    android:text="  My Favourites"
                     android:typeface="normal"
                     android:background="@drawable/category_list_background"
                     android:id="@+id/menuMyFavoriteTextView"/>
@@ -159,7 +159,7 @@
                 android:layout_height="2dip"
                 android:background="#ffffffff"/>
 
-        <!--<LinearLayout
+        <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/gray"
@@ -172,22 +172,15 @@
                     android:id="@+id/searchRecipeImageButton"
                     android:layout_marginLeft="1dp"/>
 
-            &lt;!&ndash;<EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="45dp"
-                    android:id="@+id/searchRecipeEditText"
-                    android:background="@drawable/rounded_edittext"
-                    android:layout_marginTop="2dp"
-                    android:hint="@string/search_recipe_label"/>&ndash;&gt;
             <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:id="@+id/searchRecipeEditText"
-                    android:layout_marginTop="2dp"
-                    android:hint="@string/search_recipe_label"
-                    android:typeface="normal"/>
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:id="@+id/searchRecipeEditText"
+                android:layout_marginTop="2dp"
+                android:hint="@string/search_recipe_label"
+                android:typeface="normal"/>
 
-        </LinearLayout>-->
+        </LinearLayout>
 
         <ScrollView
                 android:id="@+id/latestAndPopularScrollBar"
