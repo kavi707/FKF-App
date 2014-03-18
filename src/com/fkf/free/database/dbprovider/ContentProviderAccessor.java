@@ -8,6 +8,7 @@ import android.net.Uri;
 import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.free.database.PopularOrLatestRecipe;
 import com.fkf.free.database.Recipe;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -328,5 +329,47 @@ public class ContentProviderAccessor {
         if(contextUri != null) {
             context.getContentResolver().delete(contextUri, null, null);
         }
+    }
+
+
+    /**********************************************************/
+    /********* User favorite Recipes table methods ************/
+    /**********************************************************/
+
+    /**
+     * check given recipe is favorite recipe of the logged user
+     * @param context
+     * @param recipeProductId
+     * @param userId
+     * @return
+     */
+    public boolean isUserFavoriteRecipe(Context context, String recipeProductId, String userId) {
+        boolean isFavorite = false;
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.USER_FAVORITE_RECIPES_TABLE_NAME);
+        if(contextUri != null) {
+            String[] selections = {
+                    LocalDatabaseSQLiteOpenHelper.ID,
+                    LocalDatabaseSQLiteOpenHelper.PRODUCT_ID,
+                    LocalDatabaseSQLiteOpenHelper.LOGIN_USER_ID
+            };
+
+            String where =
+                    LocalDatabaseSQLiteOpenHelper.PRODUCT_ID + " = " + recipeProductId;
+
+            Cursor isFavoriteDetailCursor = context.getContentResolver().query(contextUri,selections, where, null, null);
+            if(isFavoriteDetailCursor != null) {
+                isFavoriteDetailCursor.moveToFirst();
+                if(!isFavoriteDetailCursor.isAfterLast()) {
+                    do {
+                        String getUserId = isFavoriteDetailCursor.getString(2);
+                        if (getUserId.equals(userId)) {
+                            isFavorite = true;
+                        }
+                    } while (isFavoriteDetailCursor.moveToNext());
+                }
+            }
+        }
+
+        return  isFavorite;
     }
 }

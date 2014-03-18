@@ -17,8 +17,10 @@ import android.widget.*;
 import com.fkf.free.R;
 import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.free.database.Recipe;
+import com.fkf.free.database.dbprovider.ContentProviderAccessor;
 import com.fkf.free.services.ActivityUserPermissionServices;
 import com.fkf.free.services.connections.ApiConnector;
+
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 
@@ -76,6 +78,8 @@ public class SingleRecipeActivity extends Activity {
 
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
+    private ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
+
     private ApiConnector connector = new ApiConnector();
     private Recipe selectedRecipe;
     private Recipe linkedRecipe;
@@ -96,10 +100,14 @@ public class SingleRecipeActivity extends Activity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
-        //calling recipe image loading in background
+        Log.d("onPost Create Override : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", "onPostCreate executing");
         if(userPermissionServices.isOnline(SingleRecipeActivity.this)) {
+            //calling recipe image loading in background
             this.loadRecipeImage();
+            //Load linked images if device is in online
+            this.loadLinkedImages();
+            //Set favorite button image
+            this.setFavoriteButtonImage();
         }
     }
 
@@ -404,36 +412,12 @@ public class SingleRecipeActivity extends Activity {
 
         isOnline = userPermissionServices.isOnline(SingleRecipeActivity.this);
 
-        boolean dbFovStatus = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
-        if (isOnline) {
-            boolean serverFovStatus = connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
-
-            if (dbFovStatus && serverFovStatus) {
-                isFavorite = true;
-            } else {
-                if (dbFovStatus) {
-                    localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
-                    isFavorite = false;
-                }
-
-                if (serverFovStatus) {
-                    localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
-                    isFavorite = true;
-                }
-            }
-        } else {
-            isFavorite = dbFovStatus;
-        }
-
-        if(isFavorite) {
-            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_remove);
-        }
-
         singleRecipeMyFavoriteImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                boolean dbFovStatusBtnClickTest = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+//                boolean dbFovStatusBtnClickTest = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                boolean dbFovStatusBtnClickTest = contentProviderAccessor.isUserFavoriteRecipe(context, selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
                 if (isOnline) {
 
                     Map<String, String> lastLoginDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
@@ -496,11 +480,6 @@ public class SingleRecipeActivity extends Activity {
             }
         });
 
-        //Load linked images if device is in online
-        if (isOnline) {
-            loadLinkedImages();
-        }
-
         loadLinkedRecipes();
     }
 
@@ -512,7 +491,7 @@ public class SingleRecipeActivity extends Activity {
     }
 
     /**
-     *
+     * Load linked recipes to view calling method
      */
     private void loadLinkedRecipes() {
 
@@ -535,6 +514,11 @@ public class SingleRecipeActivity extends Activity {
     }
 
 
+    /**
+     * Create TextView to each liked recipe and load it to view
+     * @param linkedRecipeId
+     * @param recipeCount
+     */
     public void setRecipeLinkedTextView(String linkedRecipeId, int recipeCount) {
 
         TextView textView = new TextView(context);
@@ -568,7 +552,7 @@ public class SingleRecipeActivity extends Activity {
     }
 
     /**
-     *
+     * Create linked images url list and call linked image loading method
      */
     private void loadLinkedImages() {
 
@@ -585,8 +569,6 @@ public class SingleRecipeActivity extends Activity {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     /**
@@ -601,24 +583,76 @@ public class SingleRecipeActivity extends Activity {
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         textView.setLayoutParams(lParams);
 
-        ImageView imageView = new ImageView(context);
-//        float height = (450 * layoutWidthAndHeight.get("width"))/720;
-//        contentParams.height = Math.round(height);
-//        contentParams.width = layoutWidthAndHeight.get("width");
-//        imageView.setLayoutParams(contentParams);
-        imageView.setLayoutParams(lParams);
-
         loadLinkedImageTask linkedImageTask = new loadLinkedImageTask();
         try {
-            Bitmap bitmap = linkedImageTask.execute(imageUrl).get();
-            imageView.setImageBitmap(bitmap);
-
-            linkedImagesLinearLayout.addView(imageView);
-//            linkedImagesLinearLayout.addView(textView);
+            linkedImageTask.execute(imageUrl).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setFavoriteButtonImage() {
+
+        boolean dbFovStatus = contentProviderAccessor.isUserFavoriteRecipe(context, selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+        isFavorite = dbFovStatus;
+        /*if (isOnline) {
+            isFavoriteCheckTask isFavoriteCheckTask = new isFavoriteCheckTask();
+            boolean serverFovStatus = false;
+            try {
+                serverFovStatus = isFavoriteCheckTask.execute().get();
+                serverFovStatus = false;
+                if (dbFovStatus && serverFovStatus) {
+                    isFavorite = true;
+                } else {
+                    if (dbFovStatus) {
+                        localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
+                        isFavorite = false;
+                    }
+
+                    if (serverFovStatus) {
+                        localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                        isFavorite = true;
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        } else {
+            isFavorite = dbFovStatus;
+        }*/
+
+        if(isFavorite) {
+            singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_remove);
+        }
+    }
+
+    /**
+     * AsyncTask isFavoriteCheckTask
+     * This check recipe is favorite or not
+     */
+    private class isFavoriteCheckTask extends AsyncTask<Void, Void, Boolean> {
+
+        /**
+         * Override this method to perform a computation on a background thread. The
+         * specified parameters are the parameters passed to {@link #execute}
+         * by the caller of this task.
+         * <p/>
+         * This method can call {@link #publishProgress} to publish updates
+         * on the UI thread.
+         *
+         * @param params The parameters of the task.
+         * @return A result, defined by the subclass of this task.
+         * @see #onPreExecute()
+         * @see #onPostExecute
+         * @see #publishProgress
+         */
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
         }
     }
 
@@ -671,6 +705,19 @@ public class SingleRecipeActivity extends Activity {
             }
 
             return bmp;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+
+            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            ImageView imageView = new ImageView(context);
+            imageView.setLayoutParams(lParams);
+
+            imageView.setImageBitmap(bitmap);
+
+            linkedImagesLinearLayout.addView(imageView);
         }
     }
 }
