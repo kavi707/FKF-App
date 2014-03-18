@@ -125,24 +125,18 @@
             </LinearLayout>
 
             <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
                 android:id="@+id/singleRecipeIngredientTextView"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
                 android:text="Large Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/normal_gray"
                 android:typeface="normal" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:id="@+id/secondIngredient"
@@ -168,24 +162,18 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
                     android:id="@+id/secondItemIngredientsTextView"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/normal_gray"
                     android:typeface="normal" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -212,24 +200,18 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
                     android:id="@+id/thirdItemIngredientsTextView"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/normal_gray"
                     android:typeface="normal" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -250,19 +232,13 @@
                     android:typeface="normal" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
             <LinearLayout
                 android:id="@+id/linkedRecipesLinearLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
                 android:orientation="vertical"></LinearLayout>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:id="@+id/instructionsLinearLayout"
