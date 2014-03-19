@@ -53,6 +53,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String IMAGE_URL_S = "image_url_s";
     public static final String IMAGE_URL_M = "image_url_m";
     public static final String IMAGE_URL_L = "image_url_l";
+    public static final String IMAGE_URL_XL = "image_url_xl";
     public static final String LINKED_IMAGES = "linked_images";
     public static final String LINKED_RECIPE_IDS = "linked_recipes";
     public static final String LEGACY = "legacy";
@@ -263,7 +264,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 LINKED_RECIPE_IDS + " text, " +
                 LEGACY + " int, " +
                 BODY + " text, " +
-                IMAGE_URL_T + " text " +
+                IMAGE_URL_T + " text, " +
+                IMAGE_URL_XL + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
@@ -282,7 +284,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 IMAGE_URL_S + " text, " +
                 IMAGE_URL_M + " text, " +
                 IMAGE_URL_L + " text, " +
-                IMAGE_URL_T + " text " +
+                IMAGE_URL_T + " text, " +
+                IMAGE_URL_XL + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
@@ -301,7 +304,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 IMAGE_URL_S + " text, " +
                 IMAGE_URL_M + " text, " +
                 IMAGE_URL_L + " text, " +
-                IMAGE_URL_T + " text " +
+                IMAGE_URL_T + " text, " +
+                IMAGE_URL_XL + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
@@ -683,6 +687,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     int legacy = recipeCursor.getInt(16);
                     String recipeBody = recipeCursor.getString(17);
                     String recipeImageUrl_t = recipeCursor.getString(18);
+                    String recipeImageUrl_xl = recipeCursor.getString(19);
 
                     recipe = new Recipe();
 
@@ -705,6 +710,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setLegacy(legacy);
                     recipe.setBody(recipeBody);
                     recipe.setImageUrlT(recipeImageUrl_t);
+                    recipe.setImageUrl_xl(recipeImageUrl_xl);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -817,6 +823,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     int legacy = recipeCursor.getInt(16);
                     String body = recipeCursor.getString(17);
                     String recipeImageUrl_t = recipeCursor.getString(18);
+                    String recipeImageUrl_xl = recipeCursor.getString(19);
 
                     recipe = new Recipe();
 
@@ -839,6 +846,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setLegacy(legacy);
                     recipe.setBody(body);
                     recipe.setImageUrlT(recipeImageUrl_t);
+                    recipe.setImageUrl_xl(recipeImageUrl_xl);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -888,6 +896,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     int legacy = recipeCursor.getInt(16);
                     String body = recipeCursor.getString(17);
                     String recipeImageUrl_t = recipeCursor.getString(18);
+                    String recipeImageUrl_xl = recipeCursor.getString(19);
 
                     recipe = new Recipe();
 
@@ -910,6 +919,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setLegacy(legacy);
                     recipe.setBody(body);
                     recipe.setImageUrlT(recipeImageUrl_t);
+                    recipe.setImageUrl_xl(recipeImageUrl_xl);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -1066,6 +1076,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String imageUrlS = latestRecipeCursor.getString(5);
                     String imageUrlM = latestRecipeCursor.getString(6);
                     String imageUrlL = latestRecipeCursor.getString(7);
+                    String imageUrlXL = latestRecipeCursor.getString(8);
 
                     PopularOrLatestRecipe popularOrLatestRecipe = new PopularOrLatestRecipe();
                     popularOrLatestRecipe.setIndex(index);
@@ -1075,6 +1086,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     popularOrLatestRecipe.setImageUrlS(imageUrlS);
                     popularOrLatestRecipe.setImageUrlM(imageUrlM);
                     popularOrLatestRecipe.setImageUrlL(imageUrlL);
+                    popularOrLatestRecipe.setImageUrlXL(imageUrlXL);
 
                     latestRecipesList.add(popularOrLatestRecipe);
                 } while (latestRecipeCursor.moveToNext());
@@ -1199,6 +1211,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String imageUrlS = popularRecipesCursor.getString(5);
                     String imageUrlM = popularRecipesCursor.getString(6);
                     String imageUrlL = popularRecipesCursor.getString(7);
+                    String imageUrlXL = popularRecipesCursor.getString(8);
 
                     PopularOrLatestRecipe popularOrLatestRecipe = new PopularOrLatestRecipe();
                     popularOrLatestRecipe.setIndex(index);
@@ -1208,6 +1221,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     popularOrLatestRecipe.setImageUrlS(imageUrlS);
                     popularOrLatestRecipe.setImageUrlM(imageUrlM);
                     popularOrLatestRecipe.setImageUrlL(imageUrlL);
+                    popularOrLatestRecipe.setImageUrlXL(imageUrlXL);
 
                     popularRecipesList.add(popularOrLatestRecipe);
                 } while (popularRecipesCursor.moveToNext());

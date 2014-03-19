@@ -185,6 +185,7 @@ public class ContentProviderAccessor {
         values.put(LocalDatabaseSQLiteOpenHelper.LEGACY, recipe.getLegacy());
         values.put(LocalDatabaseSQLiteOpenHelper.BODY, recipe.getBody());
         values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_T, recipe.getImageUrlT());
+        values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_XL, recipe.getImageUrl_xl());
 
         //using content provider database access
         Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.RECIPES_TABLE_NAME);
@@ -262,6 +263,7 @@ public class ContentProviderAccessor {
             values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_M, latestRecipe.getImageUrlM());
             values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_L, latestRecipe.getImageUrlL());
             values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_T, latestRecipe.getImageUrlT());
+            values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_XL, latestRecipe.getImageUrlXL());
 
             //using content provider database access
             Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.LATEST_YUMMY_TABLE_NAME);
@@ -309,6 +311,7 @@ public class ContentProviderAccessor {
             values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_M, popularRecipe.getImageUrlM());
             values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_L, popularRecipe.getImageUrlL());
             values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_T, popularRecipe.getImageUrlT());
+            values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_XL, popularRecipe.getImageUrlXL());
 
             //using content provider database access
             Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.POPULAR_YUMMY_TABLE_NAME);
