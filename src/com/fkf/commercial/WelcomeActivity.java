@@ -18,6 +18,7 @@ import com.fkf.commercial.templates.LoginActivity;
 import com.fkf.commercial.templates.RecipesActivity;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -30,7 +31,7 @@ public class WelcomeActivity extends Activity {
     /**
      * Called when the activity is first created.
      */
-    protected static final int TIMER_RUNTIME = 20000;
+    protected static final int TIMER_RUNTIME = 30000;
     protected boolean mbActive;
     private String appFilePath;
 
@@ -45,6 +46,7 @@ public class WelcomeActivity extends Activity {
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
     private ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
+    public static Map<String, Integer> widthAndHeight = new HashMap<String, Integer>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class WelcomeActivity extends Activity {
 
     private void setUpViews() {
 
+        widthAndHeight = userPermissionServices.getDeviceWidthAndHeight(WelcomeActivity.this);
         appLoadingProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
         appLoadingProgressTitleTextView = (TextView) findViewById(R.id.progressBarTitleTextView);
         mHandler = new Handler();

@@ -8,6 +8,8 @@ import android.net.NetworkInfo;
 import android.os.Environment;
 import android.util.Log;
 import android.view.Display;
+
+import com.fkf.commercial.WelcomeActivity;
 import com.fkf.commercial.database.PopularOrLatestRecipe;
 import com.fkf.commercial.database.dbprovider.ContentProviderAccessor;
 import com.fkf.commercial.services.image.downloader.DownloadFileTask;
@@ -162,7 +164,14 @@ public class ActivityUserPermissionServices {
         if (latestYummyList != null) {
             for (PopularOrLatestRecipe latestRecipe : latestYummyList) {
 
-                String url = latestRecipe.getImageUrlL();
+                String url;
+                if (WelcomeActivity.widthAndHeight.get("width") == 480) {
+                    url = latestRecipe.getImageUrlM();
+                } else if (WelcomeActivity.widthAndHeight.get("width") == 720){
+                    url = latestRecipe.getImageUrlL();
+                } else {
+                    url = latestRecipe.getImageUrlXL();
+                }
                 String newName = "icon_" + recipeCount;
 
                 Map<String, String> downloadingDetails = new HashMap<String, String>();
