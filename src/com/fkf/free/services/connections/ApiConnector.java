@@ -284,6 +284,7 @@ public class ApiConnector {
                     popularOrLatestRecipe.setImageUrlM(jsonData.getString("image_m"));
                     popularOrLatestRecipe.setImageUrlL(jsonData.getString("image_l"));
                     popularOrLatestRecipe.setImageUrlT(jsonData.getString("image_t"));
+                    popularOrLatestRecipe.setImageUrlXL(jsonData.getString("image_xl"));
 
                     latestRecipeList.add(popularOrLatestRecipe);
                 }
@@ -317,6 +318,7 @@ public class ApiConnector {
                     popularOrLatestRecipe.setImageUrlM(jsonData.getString("image_m"));
                     popularOrLatestRecipe.setImageUrlL(jsonData.getString("image_l"));
                     popularOrLatestRecipe.setImageUrlT(jsonData.getString("image_t"));
+                    popularOrLatestRecipe.setImageUrlXL(jsonData.getString("image_xl"));
 
                     popularRecipeList.add(popularOrLatestRecipe);
                 }
