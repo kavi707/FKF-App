@@ -24,6 +24,7 @@ public class Recipe {
     private String imageUrl_s;
     private String imageUrl_m;
     private String imageUrl_l;
+    private String imageUrl_xl;
     private String linkImages;
     private String linkRecipeIds;
     private int legacy;
@@ -147,6 +148,14 @@ public class Recipe {
 
     public void setImageUrl_l(String imageUrl_l) {
         this.imageUrl_l = imageUrl_l;
+    }
+
+    public String getImageUrl_xl() {
+        return imageUrl_xl;
+    }
+
+    public void setImageUrl_xl(String imageUrl_xl) {
+        this.imageUrl_xl = imageUrl_xl;
     }
 
     public String getLinkImages() {
