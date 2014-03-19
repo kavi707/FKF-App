@@ -104,8 +104,6 @@ public class SingleRecipeActivity extends Activity {
         if(userPermissionServices.isOnline(SingleRecipeActivity.this)) {
             //calling recipe image loading in background
             this.loadRecipeImage();
-            //Load linked images if device is in online
-            this.loadLinkedImages();
             //Set favorite button image
             this.setFavoriteButtonImage();
         }
@@ -491,6 +489,38 @@ public class SingleRecipeActivity extends Activity {
     }
 
     /**
+     * AsyncTask loadImageTask
+     * This load the image recipe from given url in background
+     */
+    private class loadImageTask extends AsyncTask<Void, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            String imageUrl = selectedRecipe.getImageUrl_l();
+            Bitmap bmp = null;
+            try {
+                URL url = new URL(imageUrl);
+                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return bmp;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            singleRecipeImageViewer.setImageBitmap(bitmap);
+
+            //Load linked images if device is in online
+            loadLinkedImages();
+        }
+    }
+
+    /**
      * Load linked recipes to view calling method
      */
     private void loadLinkedRecipes() {
@@ -505,7 +535,7 @@ public class SingleRecipeActivity extends Activity {
                     Log.d("Recipe Count : ", String.valueOf(recipeCount));
                     Log.d("Recipe ID : ", linkedRecipesJson.getString(recipeCount));
                     linkedRecipesIdList.add(linkedRecipesJson.getString(recipeCount));
-                    setRecipeLinkedTextView(linkedRecipesJson.getString(recipeCount), recipeCount);
+                    setLinkedRecipeTextView(linkedRecipesJson.getString(recipeCount), recipeCount);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -513,13 +543,12 @@ public class SingleRecipeActivity extends Activity {
         }
     }
 
-
     /**
      * Create TextView to each liked recipe and load it to view
      * @param linkedRecipeId
      * @param recipeCount
      */
-    public void setRecipeLinkedTextView(String linkedRecipeId, int recipeCount) {
+    public void setLinkedRecipeTextView(String linkedRecipeId, int recipeCount) {
 
         TextView textView = new TextView(context);
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -593,6 +622,46 @@ public class SingleRecipeActivity extends Activity {
         }
     }
 
+    /**
+     * Download the linked image from given url and set as a bitmap object.
+     * Do this as an asyncTask
+     */
+    private class loadLinkedImageTask extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            String imageUrl = strings[0];
+            Bitmap bmp = null;
+            try {
+                URL url = new URL(imageUrl);
+                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return bmp;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+
+            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            ImageView imageView = new ImageView(context);
+            imageView.setLayoutParams(lParams);
+
+            imageView.setImageBitmap(bitmap);
+
+            linkedImagesLinearLayout.addView(imageView);
+        }
+    }
+
+    /**
+     * This method is for set the favorite button image.
+     * Because if recipe is favorite then it must be red heart, if not it must be white heart
+     */
     private void setFavoriteButtonImage() {
 
         boolean dbFovStatus = contentProviderAccessor.isUserFavoriteRecipe(context, selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
@@ -653,71 +722,6 @@ public class SingleRecipeActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... params) {
             return connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
-        }
-    }
-
-    /**
-     * AsyncTask loadImageTask
-     * This load the image recipe from given url in background
-     */
-    private class loadImageTask extends AsyncTask<Void, Void, Bitmap> {
-
-        @Override
-        protected Bitmap doInBackground(Void... voids) {
-            String imageUrl = selectedRecipe.getImageUrl_l();
-            Bitmap bmp = null;
-            try {
-                URL url = new URL(imageUrl);
-                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return bmp;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            singleRecipeImageViewer.setImageBitmap(bitmap);
-        }
-    }
-
-    /**
-     * Download the linked image from given url and set as a bitmap object.
-     * Do this as an asyncTask
-     */
-    private class loadLinkedImageTask extends AsyncTask<String, Void, Bitmap> {
-
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-            String imageUrl = strings[0];
-            Bitmap bmp = null;
-            try {
-                URL url = new URL(imageUrl);
-                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return bmp;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-
-            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            ImageView imageView = new ImageView(context);
-            imageView.setLayoutParams(lParams);
-
-            imageView.setImageBitmap(bitmap);
-
-            linkedImagesLinearLayout.addView(imageView);
         }
     }
 }
