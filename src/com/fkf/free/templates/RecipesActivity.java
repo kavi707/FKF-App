@@ -215,14 +215,22 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         }
 
         //Embedded images to yummys buttons
+        int deviceWidth = layoutWidthAndHeight.get("width");
+        float getHeight;
+        if (deviceWidth == 480) {
+            getHeight = (480 * layoutWidthAndHeight.get("width"))/640;
+        } else if (deviceWidth == 720){
+            getHeight = (540 * layoutWidthAndHeight.get("width"))/720;
+        } else {
+            getHeight = (810 * layoutWidthAndHeight.get("width"))/1080;
+        }
 //        File firstImageFile = new File("/sdcard/fauzias/latest_yummys/icon_1");
         File firstImageFile = new File(getFilesDir()+"/fauzias/latest_yummys/icon_1");
         if(firstImageFile.exists()) {
             Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
             firstYummyImageButton.setImageBitmap(firstBitmap);
             contentParams = (LinearLayout.LayoutParams)firstYummyImageButton.getLayoutParams();
-            float heightOne = (450 * layoutWidthAndHeight.get("width"))/720;
-            contentParams.height = Math.round(heightOne);
+            contentParams.height = Math.round(getHeight);
             contentParams.width = layoutWidthAndHeight.get("width");
             firstYummyImageButton.setLayoutParams(contentParams);
             firstYummyTextView.setText("  " + latestRecipeNames[1]);
@@ -237,8 +245,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
             secondYummyImageButton.setImageBitmap(secondBitmap);
             contentParams = (LinearLayout.LayoutParams)secondYummyImageButton.getLayoutParams();
-            float heightTwo = (450 * layoutWidthAndHeight.get("width"))/720;
-            contentParams.height = Math.round(heightTwo);
+            contentParams.height = Math.round(getHeight);
             contentParams.width = layoutWidthAndHeight.get("width");
             secondYummyImageButton.setLayoutParams(contentParams);
             secondYummyTextView.setText("  " + latestRecipeNames[2]);
@@ -253,8 +260,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
             thirdYummyImageButton.setImageBitmap(thirdBitmap);
             contentParams = (LinearLayout.LayoutParams)thirdYummyImageButton.getLayoutParams();
-            float heightThree = (450 * layoutWidthAndHeight.get("width"))/720;
-            contentParams.height = Math.round(heightThree);
+            contentParams.height = Math.round(getHeight);
             contentParams.width = layoutWidthAndHeight.get("width");
             thirdYummyImageButton.setLayoutParams(contentParams);
             thirdYummyTextView.setText(latestRecipeNames[3]);
@@ -269,8 +275,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
             forthYummyImageButton.setImageBitmap(forthBitmap);
             contentParams = (LinearLayout.LayoutParams)forthYummyImageButton.getLayoutParams();
-            float heightFour = (450 * layoutWidthAndHeight.get("width"))/720;
-            contentParams.height = Math.round(heightFour);
+            contentParams.height = Math.round(getHeight);
             contentParams.width = layoutWidthAndHeight.get("width");
             forthYummyImageButton.setLayoutParams(contentParams);
             forthYummyTextView.setText("  " + latestRecipeNames[4]);
@@ -285,8 +290,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
             fifthYummyImageButton.setImageBitmap(fifthBitmap);
             contentParams = (LinearLayout.LayoutParams)fifthYummyImageButton.getLayoutParams();
-            float heightFive = (450 * layoutWidthAndHeight.get("width"))/720;
-            contentParams.height = Math.round(heightFive);
+            contentParams.height = Math.round(getHeight);
             contentParams.width = layoutWidthAndHeight.get("width");
             fifthYummyImageButton.setLayoutParams(contentParams);
             fifthYummyTextView.setText("  " + latestRecipeNames[5]);
@@ -675,7 +679,6 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                     selectedRecipe = tempRecipesList.get(0);
                 }
 
-                int deviceWidth = layoutWidthAndHeight.get("width");
                 int shortDescLimit = 0;
                 switch (popularOrLatestRecipe.getIndex()) {
                     case 1:

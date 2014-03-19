@@ -234,10 +234,10 @@ public class SingleRecipeActivity extends Activity {
         //device layout width and height
         layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(SingleRecipeActivity.this);
         contentParams = (LinearLayout.LayoutParams)singleRecipeImageViewer.getLayoutParams();
-//        float height = (450 * layoutWidthAndHeight.get("width"))/720;
-//        contentParams.height = Math.round(height);
-//        contentParams.width = layoutWidthAndHeight.get("width");
-//        singleRecipeImageViewer.setLayoutParams(contentParams);
+        float height = (810 * layoutWidthAndHeight.get("width"))/1080;
+        contentParams.height = Math.round(height);
+        contentParams.width = layoutWidthAndHeight.get("width");
+        singleRecipeImageViewer.setLayoutParams(contentParams);
 
         if(layoutWidthAndHeight.get("width") <= 480) {
 //            singleRecipeMyFavoriteImageButton.
@@ -496,7 +496,8 @@ public class SingleRecipeActivity extends Activity {
 
         @Override
         protected Bitmap doInBackground(Void... voids) {
-            String imageUrl = selectedRecipe.getImageUrl_l();
+//            String imageUrl = selectedRecipe.getImageUrl_l();
+            String imageUrl = selectedRecipe.getImageUrl_xl();
             Bitmap bmp = null;
             try {
                 URL url = new URL(imageUrl);
