@@ -416,9 +416,13 @@
 
                         <RatingBar
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="16dp"
                                 style="?android:attr/ratingBarStyleSmall"
                                 android:id="@+id/firstPopularRecipeRatingBar"
+                                android:progressDrawable="@drawable/rating_bar_gold"
+                                android:stepSize="0.1"
+                                android:isIndicator="true"
+                                android:max="5"
                                 android:layout_gravity="left|center_vertical"/>
                         <TextView
                             android:layout_width="fill_parent"
@@ -509,9 +513,13 @@
 
                         <RatingBar
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="16dp"
                                 style="?android:attr/ratingBarStyleSmall"
                                 android:id="@+id/secondPopularRecipeRatingBar"
+                                android:progressDrawable="@drawable/rating_bar_gold"
+                                android:stepSize="0.1"
+                                android:isIndicator="true"
+                                android:max="5"
                                 android:layout_gravity="left|center_vertical"/>
                         <TextView
                             android:layout_width="fill_parent"
@@ -604,10 +612,14 @@
 
                         <RatingBar
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="16dp"
                                 style="?android:attr/ratingBarStyleSmall"
                                 android:id="@+id/thirdPopularRecipeRatingBar"
                                 android:layout_marginLeft="5dp"
+                                android:progressDrawable="@drawable/rating_bar_gold"
+                                android:stepSize="0.1"
+                                android:isIndicator="true"
+                                android:max="5"
                                 android:layout_gravity="left|center_vertical"/>
                         <TextView
                             android:layout_width="fill_parent"
@@ -700,10 +712,14 @@
 
                         <RatingBar
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="16dp"
                                 style="?android:attr/ratingBarStyleSmall"
                                 android:id="@+id/forthPopularRecipeRatingBar"
                                 android:layout_marginLeft="5dp"
+                                android:progressDrawable="@drawable/rating_bar_gold"
+                                android:stepSize="0.1"
+                                android:isIndicator="true"
+                                android:max="5"
                                 android:layout_gravity="left|center_vertical"/>
                         <TextView
                             android:layout_width="fill_parent"
@@ -796,10 +812,14 @@
 
                         <RatingBar
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="16dp"
                                 style="?android:attr/ratingBarStyleSmall"
                                 android:id="@+id/fifthPopularRecipeRatingBar"
                                 android:layout_marginLeft="5dp"
+                                android:progressDrawable="@drawable/rating_bar_gold"
+                                android:stepSize="0.1"
+                                android:isIndicator="true"
+                                android:max="5"
                                 android:layout_gravity="left|center_vertical"/>
                         <TextView
                             android:layout_width="fill_parent"
@@ -892,10 +912,14 @@
 
                         <RatingBar
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="16dp"
                                 style="?android:attr/ratingBarStyleSmall"
                                 android:id="@+id/sixthPopularRecipeRatingBar"
                                 android:layout_marginLeft="5dp"
+                                android:progressDrawable="@drawable/rating_bar_gold"
+                                android:stepSize="0.1"
+                                android:isIndicator="true"
+                                android:max="5"
                                 android:layout_gravity="left|center_vertical"/>
                         <TextView
                             android:layout_width="fill_parent"
