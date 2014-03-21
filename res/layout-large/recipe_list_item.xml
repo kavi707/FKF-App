@@ -67,11 +67,15 @@
 
         <RatingBar
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="16dp"
                 style="?android:attr/ratingBarStyleSmall"
                 android:id="@+id/recipeRatingBar"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="10dp"
+                android:progressDrawable="@drawable/rating_bar_gold"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                android:max="5"
                 android:layout_gravity="left|center_vertical"/>
     </LinearLayout>
 </com.fkf.commercial.views.RecipeListItem>
