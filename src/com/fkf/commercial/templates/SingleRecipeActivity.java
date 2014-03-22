@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -537,21 +540,34 @@ public class SingleRecipeActivity extends Activity {
      */
     public void setLinkedRecipeTextView(String linkedRecipeId, int recipeCount) {
 
-        TextView textView = new TextView(context);
+        LinearLayout holdingLinearLayout = new LinearLayout(context);
+        TextView recipeCountTextView = new TextView(context);
+        TextView recipeNameTextView = new TextView(context);
+
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         lParams.setMargins(20, 0, 0, 0);
-        textView.setLayoutParams(lParams);
+
+        holdingLinearLayout.setLayoutParams(lParams);
+        recipeCountTextView.setLayoutParams(lParams);
+        recipeNameTextView.setLayoutParams(lParams);
 
         List<Recipe> linkedRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(linkedRecipeId);
         if (linkedRecipeList.size() == 1) {
             linkedRecipe = linkedRecipeList.get(0);
 
-            textView.setText((recipeCount + 1) + ". " + linkedRecipe.getName());
-            textView.setTextColor(Color.GRAY);
-            textView.setTextSize(18);
-            textView.setId(recipeCount);
-            textView.setOnClickListener(new View.OnClickListener() {
+            recipeCountTextView.setText(recipeCount + 1 + ". ");
+            recipeCountTextView.setTextColor(Color.GRAY);
+            recipeCountTextView.setTextSize(18);
+
+            SpannableString recipeNameStringContent = new SpannableString(linkedRecipe.getName());
+            recipeNameStringContent.setSpan(new UnderlineSpan(), 0, linkedRecipe.getName().length(), 0);
+            recipeNameTextView.setText(recipeNameStringContent);
+            recipeNameTextView.setTextColor(Color.GRAY);
+            recipeNameTextView.setTextSize(18);
+            recipeNameTextView.setTypeface(null, Typeface.BOLD);
+            recipeNameTextView.setId(recipeCount);
+            recipeNameTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent linkedRecipeIntent = new Intent(SingleRecipeActivity.this, SingleRecipeActivity.class);
@@ -561,7 +577,11 @@ public class SingleRecipeActivity extends Activity {
                 }
             });
 
-            linkedRecipesLinearLayout.addView(textView);
+            holdingLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            holdingLinearLayout.addView(recipeCountTextView);
+            holdingLinearLayout.addView(recipeNameTextView);
+
+            linkedRecipesLinearLayout.addView(holdingLinearLayout);
         } else {
             Log.d("List Count : ", String.valueOf(linkedRecipeList.size()));
         }
