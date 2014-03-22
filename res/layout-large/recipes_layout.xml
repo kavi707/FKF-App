@@ -162,30 +162,26 @@
         <!--<LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:background="@color/gray"
                 android:orientation="horizontal">
 
-            <ImageButton
-                    android:layout_height="50dp"
-                    android:layout_width="50dp"
-                    android:src="@drawable/search"
-                    android:id="@+id/searchRecipeImageButton"
-                    android:layout_marginLeft="1dp"/>
-
-            &lt;!&ndash;<EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="45dp"
-                    android:id="@+id/searchRecipeEditText"
-                    android:background="@drawable/rounded_edittext"
-                    android:layout_marginTop="2dp"
-                    android:hint="@string/search_recipe_label"/>&ndash;&gt;
             <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:id="@+id/searchRecipeEditText"
-                    android:layout_marginTop="2dp"
-                    android:hint="@string/search_recipe_label"
-                    android:typeface="normal"/>
+                android:layout_width="0dip"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:id="@+id/searchRecipeEditText"
+                android:layout_marginTop="2dp"
+                android:hint="@string/search_recipe_label"
+                android:typeface="normal"/>
+
+            <ImageButton
+                android:layout_height="50dp"
+                android:layout_width="50dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/search"
+                android:id="@+id/searchRecipeImageButton"
+                android:layout_marginLeft="1dp"/>
 
         </LinearLayout>-->
 

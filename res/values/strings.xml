@@ -29,7 +29,7 @@
     <string name="newsletterCheckBoxLabel">Sign up for Newsletter</string>
 
     <!-- recipes layout string resources -->
-    <string name="search_recipe_label">  search your recipe</string>
+    <string name="search_recipe_label">  Please enter a keyword to search</string>
     <string name="latestYummyLabel">Latest Yummys</string>
     <string name="popularYummyLabel">Popular Yummys</string>
 
