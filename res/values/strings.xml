@@ -8,6 +8,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 
     <!-- login_layout view string resources -->
     <string name="app_name">Fauzia\'s Kitchen Fun</string>
@@ -36,6 +37,9 @@
     <string name="singleRecipeContentLabel">Recipe Content</string>
     <string name="singleRecipeInstructionLabel">Instructions</string>
     <string name="related_recipe_heading">Related Recipes</string>
+    <string name="pro_version_label">Pro Version</string>
+    <string name="buy_pro_message">This feature is available in the Pro version. Would you like to buy the Pro version ?</string>
+    <string name="buy_label">Buy</string>
 
     <!-- Google Ads Unit ID -->
     <string name="admob_id">ca-app-pub-5523232753553387/5791410379</string>

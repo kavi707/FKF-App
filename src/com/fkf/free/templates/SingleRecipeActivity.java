@@ -1,7 +1,9 @@
 package com.fkf.free.templates;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -75,6 +77,8 @@ public class SingleRecipeActivity extends Activity {
 
     private LinearLayout secondItemIngredients, thirdItemIngredients;
     private LinearLayout linkedImagesLinearLayout, linkedRecipesLinearLayout;
+
+    private AlertDialog messageBalloonAlertDialog;
 
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
@@ -468,8 +472,38 @@ public class SingleRecipeActivity extends Activity {
                             }
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(),
-                                "Buy commercial version to create account and add your own favorite recipes.", Toast.LENGTH_LONG).show();
+                        messageBalloonAlertDialog = new AlertDialog.Builder(context)
+                                .setTitle(getString(R.string.pro_version_label))
+                                .setMessage(getString(R.string.buy_pro_message))
+                                .setPositiveButton(getString(R.string.buy_label), new AlertDialog.OnClickListener() {
+                                    /**
+                                     * This method will be invoked when a button in the dialog is clicked.
+                                     *
+                                     * @param dialog The dialog that received the click.
+                                     * @param which  The button that was clicked (e.g.
+                                     *               {@link android.content.DialogInterface#BUTTON1}) or the position
+                                     */
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //TODO need to link this to pro-version in Play Store
+                                        Toast.makeText(getApplicationContext(),
+                                                "Buy commercial version", Toast.LENGTH_LONG).show();
+                                    }
+                                })
+                                .setNegativeButton(getString(R.string.cancel), new AlertDialog.OnClickListener() {
+                                    /**
+                                     * This method will be invoked when a button in the dialog is clicked.
+                                     *
+                                     * @param dialog The dialog that received the click.
+                                     * @param which  The button that was clicked (e.g.
+                                     *               {@link android.content.DialogInterface#BUTTON1}) or the position
+                                     */
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        messageBalloonAlertDialog.cancel();
+                                    }
+                                }).create();
+                        messageBalloonAlertDialog.show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(),
