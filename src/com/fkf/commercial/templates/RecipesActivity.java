@@ -313,6 +313,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -1);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -339,6 +340,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -2);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -365,6 +367,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -3);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -391,6 +394,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -4);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -417,6 +421,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -5);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -465,6 +470,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -6);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -503,6 +509,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -7);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -541,6 +548,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -8);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -579,6 +587,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -9);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -617,6 +626,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -10);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -655,6 +665,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
                         Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                         singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", -11);
+                        singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                         startActivity(singleRecipeIntent);
 
                         runOnUiThread(new Runnable() {
@@ -1001,6 +1012,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                             public void run() {
                                 Intent singleRecipeIntent = new Intent(RecipesActivity.this, SingleRecipeActivity.class);
                                 singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(itemContent.getProductId()));
+                                singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
                                 startActivity(singleRecipeIntent);
 
                                 runOnUiThread(new Runnable() {

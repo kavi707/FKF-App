@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
 
@@ -78,6 +79,7 @@ public class SingleRecipeActivity extends Activity {
     private Recipe linkedRecipe;
     private List<String> linkedRecipesIdList = new ArrayList<String>();
     private String selectedRecipeProductId = null;
+    private int oldRecipeProductId = -1;
     private boolean isFavorite = false;
     private boolean isOnline = false;
     private Map<String, String> lastLoginDetails = new HashMap<String, String>();
@@ -101,6 +103,48 @@ public class SingleRecipeActivity extends Activity {
             //Set favorite button image
             this.setFavoriteButtonImage();
         }
+    }
+
+    /**
+     * Called when a key was pressed down and not handled by any of the views
+     * inside of the activity. So, for example, key presses while the cursor
+     * is inside a TextView will not trigger the event (unless it is a navigation
+     * to another object) because TextView handles its own key presses.
+     * <p/>
+     * <p>If the focused view didn't want this event, this method is called.
+     * <p/>
+     * <p>The default implementation takes care of {@link android.view.KeyEvent#KEYCODE_BACK}
+     * by calling {@link #onBackPressed()}, though the behavior varies based
+     * on the application compatibility mode: for
+     * {@link android.os.Build.VERSION_CODES#ECLAIR} or later applications,
+     * it will set up the dispatch to call {@link #onKeyUp} where the action
+     * will be performed; for earlier applications, it will perform the
+     * action immediately in on-down, as those versions of the platform
+     * behaved.
+     * <p/>
+     * <p>Other additional default key handling may be performed
+     * if configured with {@link #setDefaultKeyMode}.
+     *
+     * @param keyCode
+     * @param event
+     * @return Return <code>true</code> to prevent this event from being propagated
+     * further, or <code>false</code> to indicate that you have not handled
+     * this event and it should continue to be propagated.
+     * @see #onKeyUp
+     * @see android.view.KeyEvent
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (oldRecipeProductId != -1) {
+                Intent linkedRecipeIntent = new Intent(SingleRecipeActivity.this, SingleRecipeActivity.class);
+                linkedRecipeIntent.putExtra("SELECTED_RECIPE_ID", oldRecipeProductId);
+                linkedRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
+                startActivity(linkedRecipeIntent);
+                finish();
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void setUpView() {
@@ -135,6 +179,7 @@ public class SingleRecipeActivity extends Activity {
 
         Bundle extras = getIntent().getExtras();
         int selectedRecipeId = extras.getInt("SELECTED_RECIPE_ID");
+        oldRecipeProductId = extras.getInt("OLD_RECIPE_ID");
 
         if (selectedRecipeId < 0) {
 
@@ -532,6 +577,7 @@ public class SingleRecipeActivity extends Activity {
                 public void onClick(View v) {
                     Intent linkedRecipeIntent = new Intent(SingleRecipeActivity.this, SingleRecipeActivity.class);
                     linkedRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(linkedRecipesIdList.get(v.getId())));
+                    linkedRecipeIntent.putExtra("OLD_RECIPE_ID", Integer.parseInt(selectedRecipe.getProductId()));
                     startActivity(linkedRecipeIntent);
                     finish();
                 }
