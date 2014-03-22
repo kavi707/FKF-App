@@ -280,6 +280,7 @@ public class SingleRecipeActivity extends Activity {
                 JSONObject itemJsonObj = null;
                 if (ingredientJsonArray.length() == 1) {
                     ingredientJsonObj = ingredientJsonArray.getJSONObject(0);
+                    singleRecipeContentLabelTextView.setText(ingredientJsonObj.getString("title"));
                     itemsJsonArray = ingredientJsonObj.getJSONArray("items");
                     for (int j = 0; j < itemsJsonArray.length(); j++) {
                         itemJsonObj = itemsJsonArray.getJSONObject(j);
@@ -466,7 +467,7 @@ public class SingleRecipeActivity extends Activity {
                 ingredientLinearLayout.addView(ingredientNoteTextView);
             }
 
-            separatorLineTextView.setText("- - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+            separatorLineTextView.setText("- - - - - - - - - - - - - - - - - - - - - - - - - - -");
             separatorLineTextView.setTextColor(getResources().getColor(R.color.line_color));
             ingredientLinearLayout.addView(separatorLineTextView);
         } catch (JSONException ex) {
