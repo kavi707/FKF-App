@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -35,6 +36,7 @@ import java.util.concurrent.ExecutionException;
  * Created by kavi on 6/29/13.
  * Hold the new single recipe view functionalities.
  * single_recipe_layout.xml Activity class
+ *
  * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class SingleRecipeActivity extends Activity {
@@ -78,6 +80,7 @@ public class SingleRecipeActivity extends Activity {
     private String selectedRecipeProductId = null;
     private boolean isFavorite = false;
     private boolean isOnline = false;
+    private Map<String, String> lastLoginDetails = new HashMap<String, String>();
     private Context context = this;
 
     @Override
@@ -92,7 +95,7 @@ public class SingleRecipeActivity extends Activity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         Log.d("onPost Create Override : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", "onPostCreate executing");
-        if(userPermissionServices.isOnline(SingleRecipeActivity.this)) {
+        if (userPermissionServices.isOnline(SingleRecipeActivity.this)) {
             //calling recipe image loading in background
             this.loadRecipeImage();
             //Set favorite button image
@@ -133,7 +136,7 @@ public class SingleRecipeActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         int selectedRecipeId = extras.getInt("SELECTED_RECIPE_ID");
 
-        if(selectedRecipeId < 0) {
+        if (selectedRecipeId < 0) {
 
             switch (selectedRecipeId) {
                 //Latest recipe cases
@@ -175,14 +178,14 @@ public class SingleRecipeActivity extends Activity {
             }
 
             List<Recipe> tempRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(selectedRecipeProductId);
-            if(!tempRecipeList.isEmpty()) {
+            if (!tempRecipeList.isEmpty()) {
                 selectedRecipe = tempRecipeList.get(0);
                 setUiContents();
             }
 
         } else {
             ArrayList<Recipe> selectedRecipes = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(String.valueOf(selectedRecipeId));
-            if(selectedRecipes.size() != 1) {
+            if (selectedRecipes.size() != 1) {
                 // Error message abt data querying
             } else {
                 selectedRecipe = selectedRecipes.get(0);
@@ -205,7 +208,7 @@ public class SingleRecipeActivity extends Activity {
             try {
                 JSONArray descriptionJsonArray = new JSONArray(descriptionString);
                 for (int descStringCount = 0; descStringCount < descriptionJsonArray.length(); descStringCount++) {
-                    finalDescriptionString = finalDescriptionString + descriptionJsonArray.getString(descStringCount).replace("#","") + "\n\n";
+                    finalDescriptionString = finalDescriptionString + descriptionJsonArray.getString(descStringCount).replace("#", "") + "\n\n";
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -217,15 +220,15 @@ public class SingleRecipeActivity extends Activity {
 
         //device layout width and height
         layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(SingleRecipeActivity.this);
-        contentParams = (LinearLayout.LayoutParams)singleRecipeImageViewer.getLayoutParams();
-        float height = (810 * layoutWidthAndHeight.get("width"))/1080;
+        contentParams = (LinearLayout.LayoutParams) singleRecipeImageViewer.getLayoutParams();
+        float height = (810 * layoutWidthAndHeight.get("width")) / 1080;
         contentParams.height = Math.round(height);
         contentParams.width = layoutWidthAndHeight.get("width");
         singleRecipeImageViewer.setLayoutParams(contentParams);
 
-        if(layoutWidthAndHeight.get("width") <= 480) {
+        if (layoutWidthAndHeight.get("width") <= 480) {
 //            singleRecipeMyFavoriteImageButton.
-            favoriteButtonParams = (FrameLayout.LayoutParams)singleRecipeMyFavoriteImageButton.getLayoutParams();
+            favoriteButtonParams = (FrameLayout.LayoutParams) singleRecipeMyFavoriteImageButton.getLayoutParams();
             favoriteButtonParams.height = 43;
             favoriteButtonParams.width = 140;
             singleRecipeMyFavoriteImageButton.setLayoutParams(favoriteButtonParams);
@@ -239,11 +242,11 @@ public class SingleRecipeActivity extends Activity {
 
             String instructionString = selectedRecipe.getInstructions();
             String finalInstructionString = "";
-            if (!instructionString.equals("") && !instructionString.equals(null)){
+            if (!instructionString.equals("") && !instructionString.equals(null)) {
                 try {
                     JSONArray instructionJsonArray = new JSONArray(instructionString);
                     for (int instructionStringCount = 0; instructionStringCount < instructionJsonArray.length(); instructionStringCount++) {
-                        finalInstructionString = finalInstructionString + instructionJsonArray.getString(instructionStringCount)+ "\n\n";
+                        finalInstructionString = finalInstructionString + instructionJsonArray.getString(instructionStringCount) + "\n\n";
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -367,18 +370,18 @@ public class SingleRecipeActivity extends Activity {
             String[] recipeBodyStrings = recipeBody.split("#");
             String singleBodyString = "";
             for (String recipeBodyString : recipeBodyStrings) {
-                if(recipeBodyString.length() > 11) {
-                    if(recipeBodyString.substring(0,11).equals("Ingredients")) {
+                if (recipeBodyString.length() > 11) {
+                    if (recipeBodyString.substring(0, 11).equals("Ingredients")) {
                         singleBodyString = singleBodyString + "\n\n" + recipeBodyString + "\n\n";
-                    }else if(recipeBodyString.substring(0,12).equals("INSTRUCTIONS")) {
+                    } else if (recipeBodyString.substring(0, 12).equals("INSTRUCTIONS")) {
                         singleBodyString = singleBodyString + "\n\n" + recipeBodyString + "\n\n";
-                    } else if (recipeBodyString.substring(0,12).equals("Instructions")) {
+                    } else if (recipeBodyString.substring(0, 12).equals("Instructions")) {
                         singleBodyString = singleBodyString + "\n\n" + recipeBodyString + "\n\n";
-                    }else {
+                    } else {
                         singleBodyString = singleBodyString + recipeBodyString + "\n";
                     }
                 } else if (recipeBodyString.length() == 11) {
-                    if(recipeBodyString.equals("INGREDIENTS")) {
+                    if (recipeBodyString.equals("INGREDIENTS")) {
                         singleBodyString = singleBodyString + "\n\n" + recipeBodyString + "\n\n";
                     }
                 } else {
@@ -393,18 +396,16 @@ public class SingleRecipeActivity extends Activity {
         }
 
         isOnline = userPermissionServices.isOnline(SingleRecipeActivity.this);
+        lastLoginDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
 
-        singleRecipeMyFavoriteImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (!lastLoginDetails.isEmpty()) {
+            singleRecipeMyFavoriteImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
 //                boolean dbFovStatusBtnClickTest = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
-                boolean dbFovStatusBtnClickTest = contentProviderAccessor.isUserFavoriteRecipe(context, selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
-                if (isOnline) {
-
-                    Map<String, String> lastLoginDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
-                    if (!lastLoginDetails.isEmpty()) {
-
+                    boolean dbFovStatusBtnClickTest = contentProviderAccessor.isUserFavoriteRecipe(context, selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
+                    if (isOnline) {
                         boolean serverFovStatusBtnClickTest = connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
 
                         if (dbFovStatusBtnClickTest && serverFovStatusBtnClickTest) {
@@ -451,16 +452,16 @@ public class SingleRecipeActivity extends Activity {
                                         "Adding was failed", Toast.LENGTH_LONG).show();
                             }
                         }
+
                     } else {
                         Toast.makeText(getApplicationContext(),
-                                "First you have to login to application. Then you can add favorite for your account.", Toast.LENGTH_LONG).show();
+                                "Application is in offline mode. Please on your mobile data", Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Application is in offline mode. Please on your mobile data", Toast.LENGTH_LONG).show();
                 }
-            }
-        });
+            });
+        } else {
+            singleRecipeMyFavoriteImageButton.setVisibility(View.GONE);
+        }
 
         loadLinkedRecipes();
     }
@@ -530,6 +531,7 @@ public class SingleRecipeActivity extends Activity {
 
     /**
      * Create TextView to each liked recipe and load it to view
+     *
      * @param linkedRecipeId
      * @param recipeCount
      */
@@ -538,7 +540,7 @@ public class SingleRecipeActivity extends Activity {
         TextView textView = new TextView(context);
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        lParams.setMargins(20,0,0,0);
+        lParams.setMargins(20, 0, 0, 0);
         textView.setLayoutParams(lParams);
 
         List<Recipe> linkedRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(linkedRecipeId);
@@ -576,8 +578,8 @@ public class SingleRecipeActivity extends Activity {
             try {
                 JSONArray linkedImagesJson = new JSONArray(jsonLinkedImages);
                 for (int imageCount = 0; imageCount < linkedImagesJson.length(); imageCount++) {
-                    imageUrls.add("http://www.fauziaskitchenfun.com"+linkedImagesJson.getString(imageCount));
-                    setImageViewsToMainView("http://www.fauziaskitchenfun.com"+linkedImagesJson.getString(imageCount));
+                    imageUrls.add("http://www.fauziaskitchenfun.com" + linkedImagesJson.getString(imageCount));
+                    setImageViewsToMainView("http://www.fauziaskitchenfun.com" + linkedImagesJson.getString(imageCount));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -588,6 +590,7 @@ public class SingleRecipeActivity extends Activity {
     /**
      * Set the downloaded image bitmap object to dynamically created ImageView
      * Load the created ImageView to LinearLayout
+     *
      * @param imageUrl
      */
     private void setImageViewsToMainView(String imageUrl) {
@@ -679,7 +682,7 @@ public class SingleRecipeActivity extends Activity {
             isFavorite = dbFovStatus;
         }*/
 
-        if(isFavorite) {
+        if (isFavorite) {
             singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_remove);
         }
     }
