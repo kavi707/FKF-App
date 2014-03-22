@@ -9,4 +9,7 @@
     <color name="light_blue">#ff41fdff</color>
     <color name="green">#ff16a519</color>
     <color name="brown">#ff750810</color>
+    <color name="ingredient_color">#666666</color>
+    <color name="note_color">#ababab</color>
+    <color name="line_color">#e1e1e1</color>
 </resources>
