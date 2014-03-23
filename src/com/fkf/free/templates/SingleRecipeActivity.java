@@ -599,7 +599,7 @@ public class SingleRecipeActivity extends Activity {
 
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        lParams.setMargins(20, 0, 0, 0);
+        lParams.setMargins(10, 0, 0, 0);
 
         holdingLinearLayout.setLayoutParams(lParams);
         recipeCountTextView.setLayoutParams(lParams);
