@@ -2,14 +2,22 @@ package com.fkf.commercial.templates;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.fkf.commercial.R;
+import com.fkf.commercial.database.LocalDatabaseSQLiteOpenHelper;
+import com.fkf.commercial.services.ActivityUserPermissionServices;
 import com.fkf.commercial.services.connections.ApiConnector;
 
 import java.security.MessageDigest;
@@ -34,6 +42,8 @@ public class RegisterActivity extends Activity {
     private CheckBox newsAlertCheckBox;
     private Button userRegisterButton;
 
+    private ProgressDialog progress;
+    private Handler handler;
 
     final Context context = this;
     private AlertDialog messageBalloonAlertDialog;
@@ -41,6 +51,10 @@ public class RegisterActivity extends Activity {
     private String saltString = "ae26dde136fc01876b1ec2ba3adc47b7";
 
     private ApiConnector connector = new ApiConnector();
+    private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
+    private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
+    private Map<String, String> loginResult = new HashMap<String, String>();
+    private String finalUserName, finalPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +126,69 @@ public class RegisterActivity extends Activity {
                             userRegParams.put("newsAlert", "0");
                         }
 
-                        connector.userCreate(userRegParams);
+                        Map<String, String> resultMap = connector.userCreate(userRegParams);
+
+                        if (resultMap != null) {
+                            if (resultMap.get("status").equals("true")) {
+                                /*Toast.makeText(getApplicationContext(),
+                                        resultMap.get("msg"), Toast.LENGTH_LONG).show();*/
+
+                                finalUserName = username;
+                                finalPassword = password;
+
+                                progress = ProgressDialog.show(RegisterActivity.this, "Login", "Login from new user. Please wait ...");
+                                handler = new Handler(context.getMainLooper());
+
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        firstNameEditText.setText(null);
+                                        userEmailEditText.setText(null);
+                                        usernameEditText.setText(null);
+                                        passwordEditText.setText(null);
+
+                                        loginResult = connector.userLogin(finalUserName, finalPassword);
+
+                                        if(loginResult.get("loginStatus").equals("1")) {
+                                            LoginActivity.LOGGED_USER_ID = loginResult.get("userId");
+                                            LoginActivity.LOGGED_USER = loginResult.get("username");
+                                            LoginActivity.LOGGED_USER_PASSWORD = loginResult.get("password");
+                                            LoginActivity.LOGGED_USER_NAME = loginResult.get("fName");
+
+                                            LoginActivity.LOGGED_STATUS = 1;
+
+                                            localDatabaseSQLiteOpenHelper.insertLoginDetails(loginResult);
+                                            //update the logged user's favorite recipes
+                                            userPermissionServices.updateUserFavoriteRecipesFromServer(RegisterActivity.this);
+
+                                            Intent recipesIntent = new Intent(RegisterActivity.this, RecipesActivity.class);
+                                            startActivity(recipesIntent);
+                                            finish();
+
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    progress.dismiss();
+                                                }
+                                            });
+                                        } else if (loginResult.get("loginStatus").equals("2")) {
+                                            progress.dismiss();
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Login failed. Because of " + loginResult.get("msg"), Toast.LENGTH_LONG).show();
+                                            openLoginActivity();
+                                        }
+                                    }
+                                });
+
+                            } else if (resultMap.get("status").equals("false")) {
+                                Toast.makeText(getApplicationContext(),
+                                        resultMap.get("msg"), Toast.LENGTH_LONG).show();
+                                firstNameEditText.setText(null);
+                                userEmailEditText.setText(null);
+                                usernameEditText.setText(null);
+                                passwordEditText.setText(null);
+                            }
+                        }
 
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
@@ -133,5 +209,19 @@ public class RegisterActivity extends Activity {
                     }
                 }).create();
         messageBalloonAlertDialog.show();
+    }
+
+    private void openLoginActivity() {
+        Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(loginIntent);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            this.openLoginActivity();
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
