@@ -98,8 +98,9 @@
                 android:orientation="horizontal">
             <ImageView
                     android:layout_marginLeft="5dp"
-                    android:layout_width="30dp"
-                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="20dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/heart_icon"/>
             <TextView
                     android:layout_width="match_parent"
@@ -197,137 +198,144 @@
                     android:background="@color/gray"
                     android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/latest_title"
-                    android:id="@+id/latestTitleText"
-                    android:textStyle="bold"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <HorizontalScrollView
-                        android:id="@+id/horizontalScroll"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp">
-
-                    <LinearLayout
+                    <HorizontalScrollView
+                            android:id="@+id/horizontalScroll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_marginTop="35dp">
 
                         <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:orientation="horizontal">
 
-                            <ImageButton
-                                    android:id="@+id/firstYummyImageButton"
+                            <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Button1"/>
+                                    android:orientation="vertical">
 
-                            <TextView
-                                    android:id="@+id/firstYummyTextView"
+                                <ImageButton
+                                        android:id="@+id/firstYummyImageButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Button1"/>
+
+                                <TextView
+                                        android:id="@+id/firstYummyTextView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/dark_gray"
+                                        android:layout_gravity="center"
+                                        android:textSize="18dp"
+                                        android:typeface="normal"
+                                        android:text="Text View"/>
+                            </LinearLayout>
+
+                            <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/dark_gray"
-                                    android:layout_gravity="center"
-                                    android:textSize="18dp"
-                                    android:typeface="normal"
-                                    android:text="Text View"/>
+                                    android:orientation="vertical">
+
+                                <ImageButton
+                                        android:id="@+id/secondYummyImageButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Button2"/>
+
+                                <TextView
+                                        android:id="@+id/secondYummyTextView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/dark_gray"
+                                        android:layout_gravity="center"
+                                        android:textSize="18dp"
+                                        android:typeface="normal"
+                                        android:text="Text View"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                <ImageButton
+                                        android:id="@+id/thirdYummyImageButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Button3"/>
+
+                                <TextView
+                                        android:id="@+id/thirdYummyTextView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/dark_gray"
+                                        android:layout_gravity="center"
+                                        android:textSize="18dp"
+                                        android:typeface="normal"
+                                        android:text="Text View"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                <ImageButton
+                                        android:id="@+id/forthYummyImageButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Button4"/>
+
+                                <TextView
+                                        android:id="@+id/forthYummyTextView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/dark_gray"
+                                        android:layout_gravity="center"
+                                        android:textSize="18dp"
+                                        android:typeface="normal"
+                                        android:text="Text View"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                <ImageButton
+                                        android:id="@+id/fifthYummyImageButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Button5"/>
+
+                                <TextView
+                                        android:id="@+id/fifthYummyTextView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/dark_gray"
+                                        android:layout_gravity="center"
+                                        android:textSize="18dp"
+                                        android:typeface="normal"
+                                        android:text="Text View"/>
+                            </LinearLayout>
                         </LinearLayout>
+                    </HorizontalScrollView>
 
-                        <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                            <ImageButton
-                                    android:id="@+id/secondYummyImageButton"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Button2"/>
-
-                            <TextView
-                                    android:id="@+id/secondYummyTextView"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/dark_gray"
-                                    android:layout_gravity="center"
-                                    android:textSize="18dp"
-                                    android:typeface="normal"
-                                    android:text="Text View"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                            <ImageButton
-                                    android:id="@+id/thirdYummyImageButton"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Button3"/>
-
-                            <TextView
-                                    android:id="@+id/thirdYummyTextView"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/dark_gray"
-                                    android:layout_gravity="center"
-                                    android:textSize="18dp"
-                                    android:typeface="normal"
-                                    android:text="Text View"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                            <ImageButton
-                                    android:id="@+id/forthYummyImageButton"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Button4"/>
-
-                            <TextView
-                                    android:id="@+id/forthYummyTextView"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/dark_gray"
-                                    android:layout_gravity="center"
-                                    android:textSize="18dp"
-                                    android:typeface="normal"
-                                    android:text="Text View"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                            <ImageButton
-                                    android:id="@+id/fifthYummyImageButton"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Button5"/>
-
-                            <TextView
-                                    android:id="@+id/fifthYummyTextView"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/dark_gray"
-                                    android:layout_gravity="center"
-                                    android:textSize="18dp"
-                                    android:typeface="normal"
-                                    android:text="Text View"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </HorizontalScrollView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/latest_title"
+                        android:id="@+id/latestTitleText"
+                        android:textStyle="bold"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
 
                 <TextView
                         android:layout_width="fill_parent"
