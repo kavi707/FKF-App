@@ -38,6 +38,7 @@ public class RegisterActivity extends Activity {
     private EditText userEmailEditText;
     private EditText usernameEditText;
     private EditText passwordEditText;
+    private EditText verifyPasswordEditText;
 
     private CheckBox newsAlertCheckBox;
     private Button userRegisterButton;
@@ -70,129 +71,144 @@ public class RegisterActivity extends Activity {
         userEmailEditText = (EditText) findViewById(R.id.userEmailEditText);
         usernameEditText = (EditText) findViewById(R.id.registerUserNameEditText);
         passwordEditText = (EditText) findViewById(R.id.registerPasswordEditText);
+        verifyPasswordEditText = (EditText) findViewById(R.id.verifyPasswordEditText);
 
         newsAlertCheckBox = (CheckBox) findViewById(R.id.newsletterCheckBox);
+        newsAlertCheckBox.setChecked(true);
         userRegisterButton = (Button) findViewById(R.id.newRegisterButton);
 
         userRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String firstName = firstNameEditText.getText().toString();
-                String email = userEmailEditText.getText().toString();
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                String hashCode = "";
 
-                Map<String, String> userRegParams = new HashMap<String, String>();
+                if (userPermissionServices.isOnline(RegisterActivity.this)) {
+                    String firstName = firstNameEditText.getText().toString();
+                    String email = userEmailEditText.getText().toString();
+                    String username = usernameEditText.getText().toString();
+                    String password = passwordEditText.getText().toString();
+                    String verifyPassword = verifyPasswordEditText.getText().toString();
+                    String hashCode = "";
 
-                if (firstName == null || firstName == "") {
-                    showMessageBalloon("First name is required");
-                } else if (email == null || email == "") {
-                    showMessageBalloon("Email is required");
-                } else if (username == null || username == "") {
-                    showMessageBalloon("username is required");
-                } else if (password == null || password == "") {
-                    showMessageBalloon("password is required");
-                } else {
+                    Map<String, String> userRegParams = new HashMap<String, String>();
 
-                    boolean isChecked = newsAlertCheckBox.isChecked();
+                    if (firstName == null || firstName.equals("")) {
+                        showMessageBalloon("First name is required");
+                    } else if (email == null || email.equals("")) {
+                        showMessageBalloon("Email is required");
+                    } else if (username == null || username.equals("")) {
+                        showMessageBalloon("username is required");
+                    } else if (password == null || password.equals("")) {
+                        showMessageBalloon("password is required");
+                    } else if (verifyPassword == null || verifyPassword.equals("")) {
+                        showMessageBalloon("password verification is required");
+                    } else if (!password.equals(verifyPassword)) {
+                        showMessageBalloon("password verification is failed");
+                    } else {
 
-                    String md5String = email + username + saltString;
-                    try {
-                        MessageDigest md = MessageDigest.getInstance("MD5");
-                        md.update(md5String.getBytes());
-                        byte[] digest = md.digest();
-                        StringBuffer sb = new StringBuffer();
+                        boolean isChecked = newsAlertCheckBox.isChecked();
+
+                        String md5String = email + username + saltString;
+                        try {
+                            MessageDigest md = MessageDigest.getInstance("MD5");
+                            md.update(md5String.getBytes());
+                            byte[] digest = md.digest();
+                            StringBuffer sb = new StringBuffer();
                         /*for (byte b : digest) {
                             sb.append(Integer.toHexString((b & 0xff)));
                         }*/
-                        for (int i = 0; i < digest.length; i++) {
-                            String h = Integer.toHexString(0xFF & digest[i]);
-                            while (h.length() < 2)
-                                h = "0" + h;
-                            sb.append(h);
-                        }
+                            for (int i = 0; i < digest.length; i++) {
+                                String h = Integer.toHexString(0xFF & digest[i]);
+                                while (h.length() < 2)
+                                    h = "0" + h;
+                                sb.append(h);
+                            }
 
-                        hashCode = sb.toString();
+                            hashCode = sb.toString();
 
-                        userRegParams.put("fName", firstName);
-                        userRegParams.put("email", email);
-                        userRegParams.put("uName", username);
-                        userRegParams.put("pass", password);
-                        userRegParams.put("hash", hashCode);
-                        if(isChecked) {
-                            userRegParams.put("newsAlert", "1");
-                        } else {
-                            userRegParams.put("newsAlert", "0");
-                        }
+                            userRegParams.put("fName", firstName);
+                            userRegParams.put("email", email);
+                            userRegParams.put("uName", username);
+                            userRegParams.put("pass", password);
+                            userRegParams.put("hash", hashCode);
+                            if (isChecked) {
+                                userRegParams.put("newsAlert", "1");
+                            } else {
+                                userRegParams.put("newsAlert", "0");
+                            }
 
-                        Map<String, String> resultMap = connector.userCreate(userRegParams);
+                            Map<String, String> resultMap = connector.userCreate(userRegParams);
 
-                        if (resultMap != null) {
-                            if (resultMap.get("status").equals("true")) {
+                            if (resultMap != null) {
+                                if (resultMap.get("status").equals("true")) {
                                 /*Toast.makeText(getApplicationContext(),
                                         resultMap.get("msg"), Toast.LENGTH_LONG).show();*/
 
-                                finalUserName = username;
-                                finalPassword = password;
+                                    finalUserName = username;
+                                    finalPassword = password;
 
-                                progress = ProgressDialog.show(RegisterActivity.this, "Login", "Login from new user. Please wait ...");
-                                handler = new Handler(context.getMainLooper());
+                                    progress = ProgressDialog.show(RegisterActivity.this, "Sign In", "Signing in with the new account");
+                                    handler = new Handler(context.getMainLooper());
 
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        firstNameEditText.setText(null);
-                                        userEmailEditText.setText(null);
-                                        usernameEditText.setText(null);
-                                        passwordEditText.setText(null);
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            firstNameEditText.setText(null);
+                                            userEmailEditText.setText(null);
+                                            usernameEditText.setText(null);
+                                            passwordEditText.setText(null);
+                                            verifyPasswordEditText.setText(null);
 
-                                        loginResult = connector.userLogin(finalUserName, finalPassword);
+                                            loginResult = connector.userLogin(finalUserName, finalPassword);
 
-                                        if(loginResult.get("loginStatus").equals("1")) {
-                                            LoginActivity.LOGGED_USER_ID = loginResult.get("userId");
-                                            LoginActivity.LOGGED_USER = loginResult.get("username");
-                                            LoginActivity.LOGGED_USER_PASSWORD = loginResult.get("password");
-                                            LoginActivity.LOGGED_USER_NAME = loginResult.get("fName");
+                                            if (loginResult.get("loginStatus").equals("1")) {
+                                                LoginActivity.LOGGED_USER_ID = loginResult.get("userId");
+                                                LoginActivity.LOGGED_USER = loginResult.get("username");
+                                                LoginActivity.LOGGED_USER_PASSWORD = loginResult.get("password");
+                                                LoginActivity.LOGGED_USER_NAME = loginResult.get("fName");
 
-                                            LoginActivity.LOGGED_STATUS = 1;
+                                                LoginActivity.LOGGED_STATUS = 1;
 
-                                            localDatabaseSQLiteOpenHelper.insertLoginDetails(loginResult);
-                                            //update the logged user's favorite recipes
-                                            userPermissionServices.updateUserFavoriteRecipesFromServer(RegisterActivity.this);
+                                                localDatabaseSQLiteOpenHelper.insertLoginDetails(loginResult);
+                                                //update the logged user's favorite recipes
+                                                userPermissionServices.updateUserFavoriteRecipesFromServer(RegisterActivity.this);
 
-                                            Intent recipesIntent = new Intent(RegisterActivity.this, RecipesActivity.class);
-                                            startActivity(recipesIntent);
-                                            finish();
+                                                Intent recipesIntent = new Intent(RegisterActivity.this, RecipesActivity.class);
+                                                startActivity(recipesIntent);
+                                                finish();
 
-                                            runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    progress.dismiss();
-                                                }
-                                            });
-                                        } else if (loginResult.get("loginStatus").equals("2")) {
-                                            progress.dismiss();
-                                            Toast.makeText(getApplicationContext(),
-                                                    "Login failed. Because of " + loginResult.get("msg"), Toast.LENGTH_LONG).show();
-                                            openLoginActivity();
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        progress.dismiss();
+                                                    }
+                                                });
+                                            } else if (loginResult.get("loginStatus").equals("2")) {
+                                                progress.dismiss();
+                                                Toast.makeText(getApplicationContext(),
+                                                        "Login failed. Because of " + loginResult.get("msg"), Toast.LENGTH_LONG).show();
+                                                openLoginActivity();
+                                            }
                                         }
-                                    }
-                                });
+                                    });
 
-                            } else if (resultMap.get("status").equals("false")) {
-                                Toast.makeText(getApplicationContext(),
-                                        resultMap.get("msg"), Toast.LENGTH_LONG).show();
-                                firstNameEditText.setText(null);
-                                userEmailEditText.setText(null);
-                                usernameEditText.setText(null);
-                                passwordEditText.setText(null);
+                                } else if (resultMap.get("status").equals("false")) {
+                                    Toast.makeText(getApplicationContext(),
+                                            resultMap.get("msg"), Toast.LENGTH_LONG).show();
+                                    firstNameEditText.setText(null);
+                                    userEmailEditText.setText(null);
+                                    usernameEditText.setText(null);
+                                    passwordEditText.setText(null);
+                                    verifyPasswordEditText.setText(null);
+                                }
                             }
-                        }
 
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
+                        } catch (NoSuchAlgorithmException e) {
+                            e.printStackTrace();
+                        }
                     }
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Application is in offline mode. Please on your mobile data", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -214,6 +230,7 @@ public class RegisterActivity extends Activity {
     private void openLoginActivity() {
         Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(loginIntent);
+        finish();
     }
 
     @Override

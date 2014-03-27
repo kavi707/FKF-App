@@ -1,134 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:background="@drawable/login_large"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_large"
+    android:orientation="vertical">
 
     <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
         <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:focusableInTouchMode="true"
+                android:layout_height="100dp"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:orientation="vertical">
 
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="100dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
-            <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/logo"/>
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="80dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-            <EditText
-                    android:layout_width="400dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:hint="@string/firstNameLabel"
-                    android:typeface="normal"
+                <EditText
                     android:id="@+id/firstNameEditText"
-                    android:layout_gravity="center"/>
-
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-            <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:hint="@string/firstNameLabel"
                     android:textSize="25dp"
-                    android:hint="@string/lastNameLabel"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="5dp"/>
+
+                <EditText
                     android:id="@+id/lastNameEditText"
-                    android:layout_gravity="center"/>
-
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-            <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:hint="@string/emailLabel"
-                    android:typeface="normal"
+                    android:layout_gravity="left"
+                    android:hint="@string/lastNameLabel"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="5dp"/>
+
+                <EditText
                     android:id="@+id/userEmailEditText"
-                    android:layout_gravity="center"/>
-
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-            <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:hint="@string/emailLabel"
                     android:textSize="25dp"
-                    android:hint="@string/usernameLabel"
-                    android:typeface="normal"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="5dp"/>
+
+                <EditText
                     android:id="@+id/registerUserNameEditText"
-                    android:layout_gravity="center"/>
-
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-            <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:hint="@string/usernameLabel"
                     android:textSize="25dp"
-                    android:hint="@string/passwordLabel"
-                    android:typeface="normal"
-                    android:password="true"
-                    android:id="@+id/registerPasswordEditText"
-                    android:layout_gravity="center"/>
+                    android:typeface="normal" />
 
-            <TextView
+                <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:layout_height="5dp"/>
 
-            <CheckBox
+                <EditText
+                    android:id="@+id/registerPasswordEditText"
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:hint="@string/passwordLabel"
+                    android:password="true"
+                    android:textSize="25dp"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="5dp"/>
+
+                <EditText
+                    android:id="@+id/verifyPasswordEditText"
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:hint="@string/verifyPasswordLabel"
+                    android:password="true"
+                    android:textSize="25dp"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="5dp"/>
+
+                <CheckBox
+                    android:id="@+id/newsletterCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:layout_gravity="left|center_vertical"
                     android:text="@string/newsletterCheckBoxLabel"
-                    android:typeface="normal"
-                    android:id="@+id/newsletterCheckBox"
-                    android:layout_marginLeft="35dp"
-                    android:layout_gravity="left|center_vertical"/>
+                    android:textSize="20dp"
+                    android:typeface="normal" />
 
-            <TextView
+                <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:layout_height="5dp" />
 
-            <Button
+                <Button
+                    android:id="@+id/newRegisterButton"
                     android:layout_width="400dp"
                     android:layout_height="50dp"
-                    android:text="@string/registerButtonLabel"
-                    android:typeface="normal"
-                    android:textColor="@color/white"
+                    android:layout_gravity="left"
                     android:background="@drawable/login_btn_background"
+                    android:text="@string/registerButtonLabel"
+                    android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
-                    android:id="@+id/newRegisterButton"
-                    android:layout_gravity="center"/>
+                    android:typeface="normal" />
+            </LinearLayout>
+
             <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
