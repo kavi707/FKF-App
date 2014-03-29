@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -1031,9 +1032,20 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         logoutButton = (ImageButton) findViewById(R.id.logoutButton);
         profileImageView = (ImageView) findViewById(R.id.userIconImageView);
         loggedOutButtonSeparatorTextView = (TextView) findViewById(R.id.logoutButtonSeparator);
+        loggedUserNameTextView = (TextView) findViewById(R.id.userTextView);
+        loggedUserTextView = (TextView) findViewById(R.id.userNameTextView);
         if(LoginActivity.LOGGED_STATUS == 0) {
             logoutButton.setVisibility(View.GONE);
             loggedOutButtonSeparatorTextView.setVisibility(View.GONE);
+            profileImageView.setImageResource(R.drawable.login_icon);
+            loggedUserTextView.setVisibility(View.GONE);
+
+            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            lParams.setMargins(0, 20, 0, 0);
+            loggedUserNameTextView.setText(" Login");
+            loggedUserNameTextView.setTextSize(18);
+            loggedUserNameTextView.setLayoutParams(lParams);
         } else if(LoginActivity.LOGGED_STATUS == 1){
             //Embedded images to profile pic image view
             File profilePicImage = new File("/sdcard/fauzias/user/profile_pic.png");
@@ -1075,10 +1087,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             });
 
             //Logged user textView
-            loggedUserNameTextView = (TextView) findViewById(R.id.userTextView);
             loggedUserNameTextView.setText("Welcome " + LoginActivity.LOGGED_USER_NAME);
-
-            loggedUserTextView = (TextView) findViewById(R.id.userNameTextView);
             loggedUserTextView.setText(LoginActivity.LOGGED_USER);
         }
 
