@@ -40,7 +40,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:src="@drawable/default_recipe_image" />
+                android:src="@drawable/default_recipe_image_720" />
 
             <TextView
                 android:layout_width="fill_parent"
