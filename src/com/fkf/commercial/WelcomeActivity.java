@@ -35,6 +35,7 @@ public class WelcomeActivity extends Activity {
     protected static final int TIMER_RUNTIME = 40000;
     protected boolean mbActive;
     private String appFilePath;
+    private int onContinueCount = 0;
 
     private ProgressBar appLoadingProgressBar;
     private TextView appLoadingProgressTitleTextView;
@@ -61,7 +62,6 @@ public class WelcomeActivity extends Activity {
 
         //following content is for get the internal application files path
         appFilePath = getFilesDir().getAbsolutePath();
-
         setUpViews();
     }
 
@@ -219,21 +219,28 @@ public class WelcomeActivity extends Activity {
 
     private void onContinue() {
 
-        Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
-        if(!lastLoginDetails.isEmpty()) {
-            LoginActivity.LOGGED_STATUS = 1;
-            LoginActivity.LOGGED_USER_ID = lastLoginDetails.get("userId");
-            LoginActivity.LOGGED_USER = lastLoginDetails.get("username");
-            LoginActivity.LOGGED_USER_NAME = lastLoginDetails.get("fName");
-            LoginActivity.LOGGED_USER_PASSWORD = lastLoginDetails.get("password");
+        //TODO need to fix this dual calling on this method from above switch
+        if (onContinueCount == 0) {
+            Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
+            if (!lastLoginDetails.isEmpty()) {
+                LoginActivity.LOGGED_STATUS = 1;
+                LoginActivity.LOGGED_USER_ID = lastLoginDetails.get("userId");
+                LoginActivity.LOGGED_USER = lastLoginDetails.get("username");
+                LoginActivity.LOGGED_USER_NAME = lastLoginDetails.get("fName");
+                LoginActivity.LOGGED_USER_PASSWORD = lastLoginDetails.get("password");
 
-            Intent recipeIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
-            startActivity(recipeIntent);
-            finish();
+                Intent recipeIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
+                startActivity(recipeIntent);
+                finish();
+            } else {
+                Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
+                finish();
+            }
+
+            onContinueCount++;
         } else {
-            Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
-            startActivity(loginIntent);
-            finish();
+            Log.d("Tag", "This happens one time this is " + onContinueCount + " calling");
         }
     }
 }
