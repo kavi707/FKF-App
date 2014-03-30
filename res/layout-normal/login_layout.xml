@@ -131,13 +131,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="35dp"
+                        android:textSize="14dp"
                         android:text="@string/accountCreateTextLabel"
                         android:typeface="normal"
                         android:layout_gravity="left|center_vertical"/>
 
                 <Button
-                        android:layout_width="80dp"
+                        android:layout_width="70dp"
                         android:layout_height="30dp"
                         android:text="@string/registerButtonLabel"
                         android:typeface="normal"
@@ -145,7 +146,8 @@
                         android:textColor="@color/white"
                         android:background="@drawable/register_btn_background"
                         android:id="@+id/registerButton"
-                        android:layout_marginRight="5dp"
+                        android:textSize="13dp"
+                        android:layout_marginRight="35dp"
                         android:layout_gravity="right|center_vertical"/>
             </FrameLayout>
         </LinearLayout>
