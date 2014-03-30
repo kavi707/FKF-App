@@ -1,4 +1,4 @@
-package com.fkf.commercial.services.connections;
+package com.fkf.free.services.connections;
 
 import android.os.AsyncTask;
 
