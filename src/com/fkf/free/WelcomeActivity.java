@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
@@ -149,17 +150,25 @@ public class WelcomeActivity extends Activity {
                                                 //create internal app dir if not exists
                                                 userPermissionServices.createInternalAppDirectories(appFilePath);
 
-                                                //update the database if server database is modified
-                                                userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
-                                                //update the recipe categories from the server data
+                                                //check the server db is updated or not
+                                                boolean isDbUpdate = userPermissionServices.isDbUpdate(WelcomeActivity.this);
+                                                Log.d("Server Database Status : ", "Updated : " + isDbUpdate);
 
-                                                //TODO following cases must happen if recipes are updated only. This case must be handle
-                                                userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+                                                if (isDbUpdate) {
+                                                    //update the database if server database is modified
+                                                    userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
 
-                                                //populate latest yummy details and download images
-                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
-                                                //populate popular yummy details and download images
-                                                userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
+                                                    //update the recipe categories from the server data
+                                                    userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+
+                                                    //populate latest yummy details and download images
+                                                    userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
+                                                    //populate popular yummy details and download images
+                                                    userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
+                                                } else {
+                                                    appLoadingProgressBar.setProgress(100);
+                                                    onContinue();
+                                                }
                                             }
                                         }
                                     });
