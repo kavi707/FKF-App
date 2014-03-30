@@ -219,7 +219,7 @@
 
             <LinearLayout
                 android:id="@+id/relatedRecipeLinearLayout"
-                android:layout_width="wrap_content"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/category_name_textview_background">
 
@@ -245,7 +245,7 @@
 
             <LinearLayout
                 android:id="@+id/instructionsLinearLayout"
-                android:layout_width="wrap_content"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/category_name_textview_background">
 
