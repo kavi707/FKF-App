@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -891,6 +892,13 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         //selected yummy's category name textView
         yummyCategoryNameTextView = (TextView) findViewById(R.id.yummyCategoryNameTextView);
+        yummyCategoryNameTextView.setEnabled(false);
+        yummyCategoryNameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Status : ", "Category Title Clicked");
+            }
+        });
 
         //Home list item for get back to latest and popular yummys
         homeTextView.setOnClickListener(new View.OnClickListener() {
