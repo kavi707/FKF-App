@@ -219,6 +219,7 @@ public class LoginActivity extends Activity {
                         LOGGED_STATUS = 0;
                         Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
                         startActivity(recipesIntent);
+                        finish();
 
                         runOnUiThread(new Runnable() {
                             @Override

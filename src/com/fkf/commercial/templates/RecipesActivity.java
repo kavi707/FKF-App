@@ -1055,6 +1055,15 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             loggedUserNameTextView.setText(" Login");
             loggedUserNameTextView.setTextSize(18);
             loggedUserNameTextView.setLayoutParams(lParams);
+
+            profileImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent loginIntent = new Intent(RecipesActivity.this, LoginActivity.class);
+                    startActivity(loginIntent);
+                    finish();
+                }
+            });
         } else if(LoginActivity.LOGGED_STATUS == 1){
             //Embedded images to profile pic image view
             File profilePicImage = new File("/sdcard/fauzias/user/profile_pic.png");
