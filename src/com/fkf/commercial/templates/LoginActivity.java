@@ -66,6 +66,32 @@ public class LoginActivity extends Activity {
         setUpView();
     }
 
+    /**
+     * Called after {@link #onRestoreInstanceState}, {@link #onRestart}, or
+     * {@link #onPause}, for your activity to start interacting with the user.
+     * This is a good place to begin animations, open exclusive-access devices
+     * (such as the camera), etc.
+     * <p/>
+     * <p>Keep in mind that onResume is not the best indicator that your activity
+     * is visible to the user; a system window such as the keyguard may be in
+     * front.  Use {@link #onWindowFocusChanged} to know for certain that your
+     * activity is visible to the user (for example, to resume a game).
+     * <p/>
+     * <p><em>Derived classes must call through to the super class's
+     * implementation of this method.  If they do not, an exception will be
+     * thrown.</em></p>
+     *
+     * @see #onRestoreInstanceState
+     * @see #onRestart
+     * @see #onPostResume
+     * @see #onPause
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.register_btn_background));
+    }
+
     private void setUpView() {
         registerButton = (Button) findViewById(R.id.registerButton);
         loginButton = (Button) findViewById(R.id.loginButton);
@@ -81,6 +107,7 @@ public class LoginActivity extends Activity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                registerButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.register_btn_pressed_background));
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
             }
@@ -121,6 +148,7 @@ public class LoginActivity extends Activity {
             public void onClick(View view) {
 
                 if (userPermissionServices.isOnline(LoginActivity.this)) {
+                    loginButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_btn_pressed_background));
                     progress = ProgressDialog.show(LoginActivity.this, "Login", "Check user and login to the systems. Please wait ...");
 
                     handler = new Handler(context.getMainLooper());
@@ -161,6 +189,7 @@ public class LoginActivity extends Activity {
                                 });
 
                             } else if (loginResult.get("loginStatus").equals("2")) {
+                                loginButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_btn_background));
                                 progress.dismiss();
                                 errorStatus = true;
                                 errorMsg = loginResult.get("msg");

@@ -82,6 +82,9 @@ public class RegisterActivity extends Activity {
             public void onClick(View view) {
 
                 if (userPermissionServices.isOnline(RegisterActivity.this)) {
+
+                    userRegisterButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_btn_pressed_background));
+
                     String firstName = firstNameEditText.getText().toString();
                     String email = userEmailEditText.getText().toString();
                     String username = usernameEditText.getText().toString();
@@ -199,6 +202,8 @@ public class RegisterActivity extends Activity {
                                     usernameEditText.setText(null);
                                     passwordEditText.setText(null);
                                     verifyPasswordEditText.setText(null);
+
+                                    userRegisterButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_btn_background));
                                 }
                             }
 
@@ -222,12 +227,14 @@ public class RegisterActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         messageBalloonAlertDialog.cancel();
+                        userRegisterButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_btn_background));
                     }
                 }).create();
         messageBalloonAlertDialog.show();
     }
 
     private void openLoginActivity() {
+        userRegisterButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_btn_background));
         Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(loginIntent);
         finish();
