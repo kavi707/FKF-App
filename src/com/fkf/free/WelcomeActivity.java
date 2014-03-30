@@ -36,6 +36,7 @@ public class WelcomeActivity extends Activity {
     protected static final int TIMER_RUNTIME = 40000;
     protected boolean mbActive;
     private String appFilePath;
+    private int onContinueCount = 0;
 
     private ProgressBar appLoadingProgressBar;
     private TextView appLoadingProgressTitleTextView;
@@ -62,7 +63,6 @@ public class WelcomeActivity extends Activity {
 
         //following content is for get the internal application files path
         appFilePath = getFilesDir().getAbsolutePath();
-
         setUpViews();
     }
 
@@ -241,9 +241,16 @@ public class WelcomeActivity extends Activity {
         startActivity(loginIntent);
         finish();*/
 
-        LoginActivity.LOGGED_STATUS = 0;
-        Intent recipesIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
-        startActivity(recipesIntent);
-        finish();
+        //TODO need to fix this dual calling on this method from above switch
+        if (onContinueCount == 0) {
+            LoginActivity.LOGGED_STATUS = 0;
+            Intent recipesIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
+            startActivity(recipesIntent);
+            finish();
+
+            onContinueCount ++;
+        } else {
+            Log.d("Tag", "This happens one time this is " + onContinueCount + " calling");
+        }
     }
 }
