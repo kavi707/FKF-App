@@ -66,7 +66,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
     TextView latestTitleTextView;
     TextView popularTitleTextView;
-    LinearLayout.LayoutParams latestTitleParams, popularTitleParams;
+    LinearLayout.LayoutParams popularTitleParams;
+    RelativeLayout.LayoutParams latestTitleParams;
 
     //yummy image buttons in the horizontal scroll
     ImageButton firstYummyImageButton;
@@ -202,7 +203,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
         if(layoutWidthAndHeight.get("width") <= 480) {
 
-            latestTitleParams = (LinearLayout.LayoutParams)latestTitleTextView.getLayoutParams();
+            latestTitleParams = (RelativeLayout.LayoutParams)latestTitleTextView.getLayoutParams();
             latestTitleParams.width = 400;
 //            latestTitleParams.height = ((layoutWidthAndHeight.get("height") * 300)/layoutWidthAndHeight.get("width"));
             latestTitleTextView.setLayoutParams(latestTitleParams);

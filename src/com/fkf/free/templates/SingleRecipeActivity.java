@@ -106,8 +106,8 @@ public class SingleRecipeActivity extends Activity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        Log.d("onPost Create Override : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", "onPostCreate executing");
-        if(userPermissionServices.isOnline(SingleRecipeActivity.this)) {
+        Log.d("onPost Create Override : ", "onPostCreate executing");
+        if (userPermissionServices.isOnline(SingleRecipeActivity.this)) {
             //calling recipe image loading in background
             this.loadRecipeImage();
             //Set favorite button image
@@ -512,7 +512,7 @@ public class SingleRecipeActivity extends Activity {
                 ingredientLinearLayout.addView(ingredientNoteTextView);
             }
 
-            separatorLineTextView.setText("- - - - - - - - - - - - - - - - - - - - - - - - - - -");
+            separatorLineTextView.setText("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
             separatorLineTextView.setTextColor(getResources().getColor(R.color.line_color));
             ingredientLinearLayout.addView(separatorLineTextView);
         } catch (JSONException ex) {
