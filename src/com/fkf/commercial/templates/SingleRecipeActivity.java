@@ -463,7 +463,7 @@ public class SingleRecipeActivity extends Activity {
                 ingredientLinearLayout.addView(ingredientNoteTextView);
             }
 
-            separatorLineTextView.setText("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+            separatorLineTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.ingredient_separator));
             separatorLineTextView.setTextColor(getResources().getColor(R.color.line_color));
             ingredientLinearLayout.addView(separatorLineTextView);
         } catch (JSONException ex) {
