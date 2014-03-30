@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * setup and communicate with the server connections
@@ -256,6 +257,26 @@ public class ApiConnector {
         //this initialization is for testing
         RecipeDataSyncTask dataSyncTask = new RecipeDataSyncTask(activity);
         dataSyncTask.execute("http://www.fauziaskitchenfun.com/api/recipe/retrieve?timestamp=" + timeStamp + "&key=" + key);
+    }
+
+    /**
+     * check is there any server database update is available or not
+     * @param timeStamp
+     * @return
+     */
+    public boolean isServerDbUpdated(String timeStamp) {
+        boolean isDbUpdated = false;
+        CheckDbUpdateTask checkDbUpdateTask = new CheckDbUpdateTask();
+
+        try {
+            isDbUpdated = checkDbUpdateTask.execute("http://www.fauziaskitchenfun.com/api/check_update?timestamp=" + timeStamp).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return isDbUpdated;
     }
 
     /**

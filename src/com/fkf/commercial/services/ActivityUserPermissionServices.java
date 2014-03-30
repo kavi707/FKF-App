@@ -233,6 +233,18 @@ public class ActivityUserPermissionServices {
     }
 
     /**
+     * check is there any server database update is available or not
+     * @param activity
+     * @return
+     */
+    public boolean isDbUpdate(Activity activity) {
+        boolean status = false;
+        String lastModifiedTimeStamp = contentProviderAccessor.getLastModificationTimeStamp(activity.getApplicationContext());
+        status = connector.isServerDbUpdated(lastModifiedTimeStamp);
+        return status;
+    }
+
+    /**
      * update the local database from latest server data recipes
      * @param activity
      * @return
