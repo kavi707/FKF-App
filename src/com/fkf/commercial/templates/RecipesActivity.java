@@ -1061,6 +1061,15 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             loggedUserNameTextView.setTextSize(18);
             loggedUserNameTextView.setLayoutParams(lParams);
 
+            loggedUserNameTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent loginIntent = new Intent(RecipesActivity.this, LoginActivity.class);
+                    startActivity(loginIntent);
+                    finish();
+                }
+            });
+
             profileImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
