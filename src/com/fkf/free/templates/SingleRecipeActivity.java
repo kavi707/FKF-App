@@ -489,7 +489,11 @@ public class SingleRecipeActivity extends Activity {
 
         ingredientNameTextView.setLayoutParams(lParams);
         ingredientNoteTextView.setLayoutParams(lParams);
-        separatorLineTextView.setLayoutParams(lParams);
+
+        LinearLayout.LayoutParams separatorLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 2);
+        separatorLParams.setMargins(0, 10, 0, 15);
+
+        separatorLineTextView.setLayoutParams(separatorLParams);
 
         String ingredientTitleString = "";
         try {
