@@ -490,8 +490,8 @@ public class SingleRecipeActivity extends Activity {
         ingredientNameTextView.setLayoutParams(lParams);
         ingredientNoteTextView.setLayoutParams(lParams);
 
-        LinearLayout.LayoutParams separatorLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 2);
-        separatorLParams.setMargins(0, 10, 0, 15);
+        LinearLayout.LayoutParams separatorLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+        separatorLParams.setMargins(0, 15, 0, 20);
 
         separatorLineTextView.setLayoutParams(separatorLParams);
 
@@ -563,7 +563,10 @@ public class SingleRecipeActivity extends Activity {
             singleRecipeImageViewer.setImageBitmap(bitmap);
 
             //Load linked images if device is in online
-            loadLinkedImages();
+            String jsonLinkedImages = selectedRecipe.getLinkImages();
+            if (!jsonLinkedImages.equals("0")) {
+                loadLinkedImages(jsonLinkedImages);
+            }
         }
     }
 
@@ -648,20 +651,18 @@ public class SingleRecipeActivity extends Activity {
     /**
      * Create linked images url list and call linked image loading method
      */
-    private void loadLinkedImages() {
+    private void loadLinkedImages(String jsonLinkedImages) {
 
-        String jsonLinkedImages = selectedRecipe.getLinkImages();
+//        String jsonLinkedImages = selectedRecipe.getLinkImages();
         List<String> imageUrls = new ArrayList<String>();
-        if (!jsonLinkedImages.equals("0")) {
-            try {
-                JSONArray linkedImagesJson = new JSONArray(jsonLinkedImages);
-                for (int imageCount = 0; imageCount < linkedImagesJson.length(); imageCount++) {
-                    imageUrls.add("http://www.fauziaskitchenfun.com"+linkedImagesJson.getString(imageCount));
-                    setImageViewsToMainView("http://www.fauziaskitchenfun.com"+linkedImagesJson.getString(imageCount));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+        try {
+            JSONArray linkedImagesJson = new JSONArray(jsonLinkedImages);
+            for (int imageCount = 0; imageCount < linkedImagesJson.length(); imageCount++) {
+                imageUrls.add("http://www.fauziaskitchenfun.com" + linkedImagesJson.getString(imageCount));
+                setImageViewsToMainView("http://www.fauziaskitchenfun.com" + linkedImagesJson.getString(imageCount));
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

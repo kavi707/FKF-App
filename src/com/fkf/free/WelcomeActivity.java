@@ -33,7 +33,7 @@ public class WelcomeActivity extends Activity {
     /**
      * Called when the activity is first created.
      */
-    protected static final int TIMER_RUNTIME = 40000;
+    protected static final int TIMER_RUNTIME = 30000;
     protected boolean mbActive;
     private String appFilePath;
     private int onContinueCount = 0;
