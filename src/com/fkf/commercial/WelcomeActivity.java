@@ -32,10 +32,10 @@ public class WelcomeActivity extends Activity {
     /**
      * Called when the activity is first created.
      */
-    protected static final int TIMER_RUNTIME = 30000;
+    protected static final int TIMER_RUNTIME = 35000;
     protected boolean mbActive;
     private String appFilePath;
-    private int onContinueCount = 0;
+//    private int onContinueCount = 0;
 
     private ProgressBar appLoadingProgressBar;
     private TextView appLoadingProgressTitleTextView;
@@ -150,10 +150,10 @@ public class WelcomeActivity extends Activity {
                                                 userPermissionServices.createInternalAppDirectories(appFilePath);
 
                                                 //check the server db is updated or not
-                                                boolean isDbUpdate = userPermissionServices.isDbUpdate(WelcomeActivity.this);
-                                                Log.d("Server Database Status : ", "Updated : " + isDbUpdate);
+                                                /*boolean isDbUpdate = userPermissionServices.isDbUpdate(WelcomeActivity.this);
+                                                Log.d("Server Database Status : ", "Updated : " + isDbUpdate);*/
 
-                                                if (isDbUpdate) {
+                                                /*if (isDbUpdate) {*/
                                                     //update the database if server database is modified
                                                     userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
 
@@ -164,10 +164,10 @@ public class WelcomeActivity extends Activity {
                                                     userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
                                                     //populate popular yummy details and download images
                                                     userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
-                                                } else {
+                                                /*} else {
                                                     appLoadingProgressBar.setProgress(100);
                                                     onContinue();
-                                                }
+                                                }*/
                                             }
                                         }
                                     });
@@ -220,7 +220,7 @@ public class WelcomeActivity extends Activity {
     private void onContinue() {
 
         //TODO need to fix this dual calling on this method from above switch
-        if (onContinueCount == 0) {
+        /*if (onContinueCount == 0) {*/
             Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
             if (!lastLoginDetails.isEmpty()) {
                 LoginActivity.LOGGED_STATUS = 1;
@@ -238,9 +238,9 @@ public class WelcomeActivity extends Activity {
                 finish();
             }
 
-            onContinueCount++;
-        } else {
+//            onContinueCount++;
+        /*} else {
             Log.d("Tag", "This happens one time this is " + onContinueCount + " calling");
-        }
+        }*/
     }
 }
