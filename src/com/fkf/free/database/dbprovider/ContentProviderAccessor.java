@@ -404,6 +404,11 @@ public class ContentProviderAccessor {
         }
     }
 
+    /**
+     * Get updated date in the database
+     * @param context
+     * @return
+     */
     public Map<String, Integer> getUpdatedDate(Context context) {
         Map<String, Integer> updatedDate = new HashMap<String, Integer>();
 
@@ -434,5 +439,17 @@ public class ContentProviderAccessor {
         }
 
         return updatedDate;
+    }
+
+    /**
+     * Delete updated date
+     * @param activity
+     */
+    public void deleteUpdatedDate(Activity activity) {
+        Context context = activity.getApplicationContext();
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.UPDATED_DATE_TABLE_NAME);
+        if(contextUri != null) {
+            context.getContentResolver().delete(contextUri, null, null);
+        }
     }
 }

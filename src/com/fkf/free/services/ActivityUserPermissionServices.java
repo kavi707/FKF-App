@@ -292,6 +292,7 @@ public class ActivityUserPermissionServices {
             int month = Integer.parseInt(dateStringArray[1]);
             int day = Integer.parseInt(dateStringArray[2]);
 
+            contentProviderAccessor.deleteUpdatedDate(activity);
             contentProviderAccessor.saveUpdateDate(day, month, year, activity);
 
             return true;
