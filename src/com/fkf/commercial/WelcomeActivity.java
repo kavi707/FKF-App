@@ -61,6 +61,9 @@ public class WelcomeActivity extends Activity {
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        //get device height and width (resolution)
+        widthAndHeight = userPermissionServices.getDeviceWidthAndHeight(WelcomeActivity.this);
+
         //following content is for get the internal application files path
         appFilePath = getFilesDir().getAbsolutePath();
         setUpViews();
@@ -111,7 +114,6 @@ public class WelcomeActivity extends Activity {
 
     private void setUpViews() {
 
-        widthAndHeight = userPermissionServices.getDeviceWidthAndHeight(WelcomeActivity.this);
         appLoadingProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
         appLoadingProgressTitleTextView = (TextView) findViewById(R.id.progressBarTitleTextView);
         mHandler = new Handler();
@@ -289,5 +291,12 @@ public class WelcomeActivity extends Activity {
         /*} else {
             Log.d("Tag", "This happens one time this is " + onContinueCount + " calling");
         }*/
+    }
+
+    private boolean isApplicationUpdatedForToday() {
+        boolean status = false;
+
+        Map<String, Integer> updatedDate = contentProviderAccessor.getUpdatedDate(context);
+        return status;
     }
 }
