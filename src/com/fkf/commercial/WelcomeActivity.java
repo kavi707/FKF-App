@@ -66,6 +66,9 @@ public class WelcomeActivity extends Activity {
 
         //following content is for get the internal application files path
         appFilePath = getFilesDir().getAbsolutePath();
+
+        isApplicationUpdatedForToday();
+
         setUpViews();
     }
 
@@ -297,6 +300,10 @@ public class WelcomeActivity extends Activity {
         boolean status = false;
 
         Map<String, Integer> updatedDate = contentProviderAccessor.getUpdatedDate(context);
+        Log.d("Year >>>>>>>>>>>>>>>>>", String.valueOf(updatedDate.get("updatedYear")));
+        Log.d("Month >>>>>>>>>>>>>>>>>", String.valueOf(updatedDate.get("updatedMonth")));
+        Log.d("Day >>>>>>>>>>>>>>>>>", String.valueOf(updatedDate.get("updatedDay")));
+
         return status;
     }
 }
