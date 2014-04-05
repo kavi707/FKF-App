@@ -169,8 +169,6 @@ public class LoginActivity extends Activity {
                                 LOGGED_USER_NAME = loginResult.get("fName");
                                 LOGGED_USER_PIC_URL = loginResult.get("picUrl");
 
-                                Log.d("user's name : >>>>>>>>>>>>>> 2 ", loginResult.get("fName"));
-
                                 LOGGED_STATUS = 1;
 
                                 localDatabaseSQLiteOpenHelper.insertLoginDetails(loginResult);
