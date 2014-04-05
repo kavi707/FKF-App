@@ -234,4 +234,11 @@ public class WelcomeActivity extends Activity {
             Log.d("Tag", "This happens one time this is " + onContinueCount + " calling");
         }*/
     }
+
+    private boolean isApplicationUpdatedForToday() {
+        boolean status = false;
+
+        Map<String, Integer> updatedDate = contentProviderAccessor.getUpdatedDate(context);
+        return status;
+    }
 }
