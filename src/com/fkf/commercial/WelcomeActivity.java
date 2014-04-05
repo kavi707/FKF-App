@@ -274,6 +274,7 @@ public class WelcomeActivity extends Activity {
                 LoginActivity.LOGGED_USER = lastLoginDetails.get("username");
                 LoginActivity.LOGGED_USER_NAME = lastLoginDetails.get("fName");
                 LoginActivity.LOGGED_USER_PASSWORD = lastLoginDetails.get("password");
+                LoginActivity.LOGGED_USER_PIC_URL = lastLoginDetails.get("picUrl");
 
                 Intent recipeIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
                 startActivity(recipeIntent);
