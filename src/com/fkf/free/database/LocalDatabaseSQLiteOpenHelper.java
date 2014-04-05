@@ -91,6 +91,13 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String ID = "id";
     // other columns are get from the recipes table column names
 
+    //Database updated date table columns
+    public static final String UPDATED_DATE_TABLE_NAME = "updated_date";
+    public static final String UPDATED_ID = "updated_id";
+    public static final String UPDATED_YEAR = "updated_year";
+    public static final String UPDATED_MONTH = "updated_month";
+    public static final String UPDATED_DAY = "updated_day";
+
     public LocalDatabaseSQLiteOpenHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
         this.dbContext = context;
@@ -221,7 +228,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         createLastLoginDetailsTable(sqLiteDatabase);
         createPopularYummysTable(sqLiteDatabase);
         createLatestYummysTable(sqLiteDatabase);
-        createUserFavoriteRecipesTable(sqLiteDatabase);*/
+        createUserFavoriteRecipesTable(sqLiteDatabase);
+        createUpdatedDateTable(sqLiteDatabase)*/
     }
 
     @Override
@@ -359,6 +367,16 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 LOGIN_USER_ID + " text " +
                 ");";
         sqLiteDatabase.execSQL(createUserFavoriteRecipesTableQuery);
+    }
+
+    private void createUpdatedDateTable(SQLiteDatabase sqLiteDatabase) {
+        String createUpdatedDateTableQry = "create table " + UPDATED_DATE_TABLE_NAME + " ( " +
+                UPDATED_ID + " int not null, " +
+                UPDATED_YEAR + " int, " +
+                UPDATED_MONTH + " int, " +
+                UPDATED_DAY + " int " +
+                ");";
+        sqLiteDatabase.execSQL(createUpdatedDateTableQry);
     }
 
 

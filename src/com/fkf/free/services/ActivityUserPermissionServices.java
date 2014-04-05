@@ -18,6 +18,8 @@ import com.fkf.free.services.connections.ApiConnector;
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -281,6 +283,17 @@ public class ActivityUserPermissionServices {
             }
 
             connector.getRecipesFromServer(lastModifiedTimeStamp, key, activity);
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            String[] dateStringArray = dateFormat.format(date).split("-");
+
+            int year = Integer.parseInt(dateStringArray[0]);
+            int month = Integer.parseInt(dateStringArray[1]);
+            int day = Integer.parseInt(dateStringArray[2]);
+
+            contentProviderAccessor.saveUpdateDate(day, month, year, activity);
+
             return true;
 
         } catch (NoSuchAlgorithmException e) {
