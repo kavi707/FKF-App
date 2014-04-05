@@ -35,6 +35,7 @@ public class WelcomeActivity extends Activity {
     protected static final int TIMER_RUNTIME = 40000;
     protected boolean mbActive;
     private String appFilePath;
+    private boolean isActivityActivated = false;
 //    private int onContinueCount = 0;
 
     private ProgressBar appLoadingProgressBar;
@@ -63,6 +64,49 @@ public class WelcomeActivity extends Activity {
         //following content is for get the internal application files path
         appFilePath = getFilesDir().getAbsolutePath();
         setUpViews();
+    }
+
+    /**
+     * Called after {@link #onCreate} &mdash; or after {@link #onRestart} when
+     * the activity had been stopped, but is now again being displayed to the
+     * user.  It will be followed by {@link #onResume}.
+     * <p/>
+     * <p><em>Derived classes must call through to the super class's
+     * implementation of this method.  If they do not, an exception will be
+     * thrown.</em></p>
+     *
+     * @see #onCreate
+     * @see #onStop
+     * @see #onResume
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isActivityActivated = true;
+    }
+
+    /**
+     * Called when you are no longer visible to the user.  You will next
+     * receive either {@link #onRestart}, {@link #onDestroy}, or nothing,
+     * depending on later user activity.
+     * <p/>
+     * <p>Note that this method may never be called, in low memory situations
+     * where the system does not have enough memory to keep your activity's
+     * process running after its {@link #onPause} method is called.
+     * <p/>
+     * <p><em>Derived classes must call through to the super class's
+     * implementation of this method.  If they do not, an exception will be
+     * thrown.</em></p>
+     *
+     * @see #onRestart
+     * @see #onResume
+     * @see #onSaveInstanceState
+     * @see #onDestroy
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isActivityActivated = false;
     }
 
     private void setUpViews() {
@@ -141,7 +185,9 @@ public class WelcomeActivity extends Activity {
                                                                 finish();
                                                             }
                                                         }).create();
-                                                messageBalloonAlertDialog.show();
+                                                if (isActivityActivated) {
+                                                    messageBalloonAlertDialog.show();
+                                                }
                                             } else {
 
                                                 //create app dir if not exists
