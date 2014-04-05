@@ -35,6 +35,7 @@ import java.util.Map;
 
 import android.os.Handler;
 import com.fkf.commercial.services.ActivityUserPermissionServices;
+import com.fkf.commercial.services.image.loader.ImageLoader;
 
 /**
  * Created by kavi on 6/22/13.
@@ -1080,13 +1081,10 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             });
         } else if(LoginActivity.LOGGED_STATUS == 1){
             //Embedded images to profile pic image view
-            File profilePicImage = new File("/sdcard/fauzias/user/profile_pic.png");
-            if(profilePicImage.exists()) {
-                Bitmap profilePicBitmap = BitmapFactory.decodeFile(profilePicImage.getAbsolutePath());
-                profileImageView.setImageBitmap(profilePicBitmap);
-            } else {
-                profileImageView.setImageResource(R.drawable.default_user_icon);
-            }
+            int loader = R.drawable.default_recipe_image_squre;
+            ImageLoader imageLoader = new ImageLoader(context);
+            imageLoader.DisplayImage(LoginActivity.LOGGED_USER_PIC_URL, loader, profileImageView);
+
 
             logoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
