@@ -19,6 +19,9 @@ import com.fkf.commercial.templates.LoginActivity;
 import com.fkf.commercial.templates.RecipesActivity;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,9 +70,16 @@ public class WelcomeActivity extends Activity {
         //following content is for get the internal application files path
         appFilePath = getFilesDir().getAbsolutePath();
 
-        isApplicationUpdatedForToday();
+        if (localDatabaseSQLiteOpenHelper.checkDataBase()) {
+            if (isApplicationUpdatedForToday()) {
+                onContinue();
+            } else {
+                setUpViews();
+            }
+        } else {
+            setUpViews();
+        }
 
-        setUpViews();
     }
 
     /**
@@ -299,10 +309,23 @@ public class WelcomeActivity extends Activity {
     private boolean isApplicationUpdatedForToday() {
         boolean status = false;
 
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String[] dateStringArray = dateFormat.format(date).split("-");
+
+        int year = Integer.parseInt(dateStringArray[0]);
+        int month = Integer.parseInt(dateStringArray[1]);
+        int day = Integer.parseInt(dateStringArray[2]);
+
         Map<String, Integer> updatedDate = contentProviderAccessor.getUpdatedDate(context);
-        Log.d("Year >>>>>>>>>>>>>>>>>", String.valueOf(updatedDate.get("updatedYear")));
-        Log.d("Month >>>>>>>>>>>>>>>>>", String.valueOf(updatedDate.get("updatedMonth")));
-        Log.d("Day >>>>>>>>>>>>>>>>>", String.valueOf(updatedDate.get("updatedDay")));
+
+
+        if (year == updatedDate.get("updatedYear") &&
+                month == updatedDate.get("updatedMonth") && day == updatedDate.get("updatedDay")) {
+            status = true;
+        } else {
+            status = false;
+        }
 
         return status;
     }
