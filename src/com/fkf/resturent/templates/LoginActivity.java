@@ -56,6 +56,7 @@ public class LoginActivity extends Activity {
     public static String LOGGED_USER;
     public static String LOGGED_USER_PASSWORD;
     public static String LOGGED_USER_NAME;
+    public static String LOGGED_USER_PIC_URL;
     public static int LOGGED_STATUS = 0;
 
     private Map<String, String> loginResult = new HashMap<String, String>();
@@ -168,6 +169,7 @@ public class LoginActivity extends Activity {
                                 LOGGED_USER = loginResult.get("username");
                                 LOGGED_USER_PASSWORD = loginResult.get("password");
                                 LOGGED_USER_NAME = loginResult.get("fName");
+                                LOGGED_USER_PIC_URL = loginResult.get("picUrl");
 
                                 Log.d("user's name : >>>>>>>>>>>>>> 2 ", loginResult.get("fName"));
 

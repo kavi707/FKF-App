@@ -209,22 +209,29 @@ public class WelcomeActivity extends Activity {
 
     private void onContinue() {
 
-//        Map<String, String> lastLoginDetails = localDatabaseSQLiteOpenHelper.getLoginDetails();
-        Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
-        if(!lastLoginDetails.isEmpty()) {
-            LoginActivity.LOGGED_STATUS = 1;
-            LoginActivity.LOGGED_USER_ID = lastLoginDetails.get("userId");
-            LoginActivity.LOGGED_USER = lastLoginDetails.get("username");
-            LoginActivity.LOGGED_USER_NAME = lastLoginDetails.get("fName");
-            LoginActivity.LOGGED_USER_PASSWORD = lastLoginDetails.get("password");
+        //TODO need to fix this dual calling on this method from above switch
+        /*if (onContinueCount == 0) {*/
+            Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
+            if (!lastLoginDetails.isEmpty()) {
+                LoginActivity.LOGGED_STATUS = 1;
+                LoginActivity.LOGGED_USER_ID = lastLoginDetails.get("userId");
+                LoginActivity.LOGGED_USER = lastLoginDetails.get("username");
+                LoginActivity.LOGGED_USER_NAME = lastLoginDetails.get("fName");
+                LoginActivity.LOGGED_USER_PASSWORD = lastLoginDetails.get("password");
+                LoginActivity.LOGGED_USER_PIC_URL = lastLoginDetails.get("picUrl");
 
-            Intent recipeIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
-            startActivity(recipeIntent);
-            finish();
-        } else {
-            Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
-            startActivity(loginIntent);
-            finish();
-        }
+                Intent recipeIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
+                startActivity(recipeIntent);
+                finish();
+            } else {
+                Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
+                finish();
+            }
+
+//            onContinueCount++;
+        /*} else {
+            Log.d("Tag", "This happens one time this is " + onContinueCount + " calling");
+        }*/
     }
 }

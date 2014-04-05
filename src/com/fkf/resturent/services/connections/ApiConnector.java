@@ -105,6 +105,7 @@ public class ApiConnector {
                 if(jsonUserData != null) {
                     String userId = jsonUserData.getString("uid");
                     String fName = jsonUserData.getString("fname");
+                    String pictureUrl = jsonUserData.getString("picture");
 
                     Log.d("user's name : >>>>>>>>>>>>>> 1 ", fName);
 
@@ -113,6 +114,7 @@ public class ApiConnector {
                     statusMap.put("username", username);
                     statusMap.put("password", password);
                     statusMap.put("fName", fName);
+                    statusMap.put("picUrl", pictureUrl);
                 }
             } else if(loginStatus.equals("false")) {
                 statusMap.put("loginStatus", "2");

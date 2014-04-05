@@ -97,7 +97,8 @@ public class ContentProviderAccessor {
                     LocalDatabaseSQLiteOpenHelper.LOGIN_STATUS,
                     LocalDatabaseSQLiteOpenHelper.LAST_LOGIN_USERNAME,
                     LocalDatabaseSQLiteOpenHelper.LAST_LOGIN_PASSWORD,
-                    LocalDatabaseSQLiteOpenHelper.LAST_LOGIN_NAME
+                    LocalDatabaseSQLiteOpenHelper.LAST_LOGIN_NAME,
+                    LocalDatabaseSQLiteOpenHelper.LOGIN_USER_PIC_URL
             };
 
             String where = LocalDatabaseSQLiteOpenHelper.LOGIN_ID + " = 1";
@@ -112,6 +113,7 @@ public class ContentProviderAccessor {
                         loginDetails.put("username", loginDetailsCursor.getString(3));
                         loginDetails.put("password", loginDetailsCursor.getString(4));
                         loginDetails.put("fName", loginDetailsCursor.getString(5));
+                        loginDetails.put("picUrl", loginDetailsCursor.getString(6));
                     } while (loginDetailsCursor.moveToNext());
                 }
                 loginDetailsCursor.close();
