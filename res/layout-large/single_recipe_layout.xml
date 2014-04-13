@@ -224,6 +224,7 @@
                 android:id="@+id/relatedRecipeLinearLayout"
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/category_name_textview_background">
 
                 <TextView
@@ -250,6 +251,7 @@
                 android:id="@+id/instructionsLinearLayout"
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/category_name_textview_background">
 
                 <TextView
