@@ -122,7 +122,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="340dp"
+                    android:layout_width="310dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/category_name_textview_background">
 
@@ -160,7 +160,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="340dp"
+                    android:layout_width="310dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/category_name_textview_background">
 
@@ -198,7 +198,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="340dp"
+                    android:layout_width="310dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/category_name_textview_background">
 
@@ -229,7 +229,7 @@
 
             <LinearLayout
                 android:id="@+id/relatedRecipeLinearLayout"
-                android:layout_width="340dp"
+                android:layout_width="310dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/category_name_textview_background">
 
@@ -239,7 +239,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:text="@string/related_recipe_heading"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -256,7 +255,7 @@
 
             <LinearLayout
                 android:id="@+id/instructionsLinearLayout"
-                android:layout_width="340dp"
+                android:layout_width="310dp"
                 android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/category_name_textview_background">
