@@ -422,6 +422,17 @@ public class SingleRecipeActivity extends Activity {
             singleRecipeMyFavoriteImageButton.setVisibility(View.GONE);
         }
 
+        //Set font size according to device screen size
+        if (layoutWidthAndHeight.get("width") <= 480) {
+            singleRecipeDescriptionTextView.setTextSize(14);
+            singleRecipeContentLabelTextView.setTextSize(14);
+            singleRecipeInstructionTextView.setTextSize(14);
+            singleRecipeContentLabelTextView.setTextSize(14);
+            secondItemIngredientTitleTextView.setTextSize(14);
+            thirdItemIngredientTitleTextView.setTextSize(14);
+            getSingleRecipeInstructionLabelTextView.setTextSize(14);
+        }
+
         loadLinkedRecipes();
     }
 
@@ -469,6 +480,12 @@ public class SingleRecipeActivity extends Activity {
 
             separatorLineTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.ingredient_separator));
             separatorLineTextView.setTextColor(getResources().getColor(R.color.line_color));
+
+            if (layoutWidthAndHeight.get("width") <= 480) {
+                ingredientNameTextView.setTextSize(14);
+                ingredientNoteTextView.setTextSize(13);
+            }
+
             ingredientLinearLayout.addView(separatorLineTextView);
         } catch (JSONException ex) {
             ex.printStackTrace();
@@ -530,6 +547,9 @@ public class SingleRecipeActivity extends Activity {
         if (!jsonLinkedRecipes.equals("0")) {
             try {
                 relatedRecipeLabel.setVisibility(View.VISIBLE);
+                if (layoutWidthAndHeight.get("width") <= 480) {
+                    relatedRecipeLabel.setTextSize(14);
+                }
                 relatedRecipeLinearLayout.setVisibility(View.VISIBLE);
                 JSONArray linkedRecipesJson = new JSONArray(jsonLinkedRecipes);
                 for (int recipeCount = 0; recipeCount < linkedRecipesJson.length(); recipeCount++) {
@@ -591,6 +611,10 @@ public class SingleRecipeActivity extends Activity {
             });
 
             holdingLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            if (layoutWidthAndHeight.get("width") <= 480) {
+                recipeCountTextView.setTextSize(14);
+                recipeNameTextView.setTextSize(14);
+            }
             holdingLinearLayout.addView(recipeCountTextView);
             holdingLinearLayout.addView(recipeNameTextView);
 
