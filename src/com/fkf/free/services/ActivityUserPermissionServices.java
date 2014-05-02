@@ -172,7 +172,7 @@ public class ActivityUserPermissionServices {
                 } else if (WelcomeActivity.widthAndHeight.get("width") == 720){
                     url = latestRecipe.getImageUrlL();
                 } else {
-                    url = latestRecipe.getImageUrlXL();
+                    url = latestRecipe.getImageUrlL();
                 }
                 String newName = "icon_" + recipeCount;
 
