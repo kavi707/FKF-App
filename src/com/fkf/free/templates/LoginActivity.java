@@ -1,11 +1,15 @@
 package com.fkf.free.templates;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
 
@@ -42,6 +46,8 @@ public class LoginActivity extends Activity {
     private LinearLayout.LayoutParams usernameEditTextParams, passwordEditTextParams;
 
     private ProgressDialog progress;
+
+    private AlertDialog messageBalloonAlertDialog;
 
     public static String LOGGED_USER_ID;
     public static String LOGGED_USER;
@@ -177,7 +183,7 @@ public class LoginActivity extends Activity {
 
                                 Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
                                 startActivity(recipesIntent);
-                                finish();
+                                LoginActivity.this.finish();
 
                                 errorStatus = false;
 
@@ -279,5 +285,28 @@ public class LoginActivity extends Activity {
                 updateTask.execute((Void[])null);*/
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == event.KEYCODE_BACK) {
+            messageBalloonAlertDialog = new AlertDialog.Builder(context)
+                    .setTitle(R.string.warning)
+                    .setMessage("Do you want to close Fauzia's Kitchen Fun ?")
+                    .setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            LoginActivity.this.finish();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new AlertDialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            messageBalloonAlertDialog.cancel();
+                        }
+                    }).create();
+            messageBalloonAlertDialog.show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

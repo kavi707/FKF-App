@@ -1137,6 +1137,23 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
                 slideMenuIn(0, -(menu.getLayoutParams().width), -(menu.getLayoutParams().width)); 	// Pass slide in paramters
                 menuOpen = false;
                 return true;
+            } else {
+                messageBalloonAlertDialog = new AlertDialog.Builder(context)
+                        .setTitle(R.string.warning)
+                        .setMessage("Do you want to close Fauzia's Kitchen Fun ?")
+                        .setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                RecipesActivity.this.finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, new AlertDialog.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                messageBalloonAlertDialog.cancel();
+                            }
+                        }).create();
+                messageBalloonAlertDialog.show();
             }
         }
         return super.onKeyDown(keyCode, keyEvent);
