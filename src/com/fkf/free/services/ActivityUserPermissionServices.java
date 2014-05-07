@@ -21,6 +21,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 /**
  * holding the service use by the templates
@@ -144,7 +145,9 @@ public class ActivityUserPermissionServices {
     /**
      * download latest yummy icon images from urls and save them to SD card location
      */
-    public void populateLatestYummyDetails(Activity activity, String appFilePath) {
+    public boolean populateLatestYummyDetails(Activity activity, String appFilePath) {
+
+        boolean imageDownloadStatus = false;
 
         List<PopularOrLatestRecipe> latestYummyList = connector.getLatestYummysFromServer();
 
@@ -187,8 +190,19 @@ public class ActivityUserPermissionServices {
             }
         }
 
-        downloadFile.execute(downloadDetailsList);
+        try {
+            String returnStatus = downloadFile.execute(downloadDetailsList).get();
 
+            if (returnStatus.equals("true")) {
+                imageDownloadStatus = true;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return imageDownloadStatus;
     }
 
     /**
