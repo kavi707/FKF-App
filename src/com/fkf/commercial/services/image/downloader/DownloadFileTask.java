@@ -22,6 +22,7 @@ public class DownloadFileTask extends AsyncTask<List<Map<String, String>>, Integ
     protected String doInBackground(List<Map<String, String>>... downloadFilesDetails) {
 
         List<Map<String, String>> downloadFile = downloadFilesDetails[0];
+        String returnText = "false";
 
         for (Map<String, String> stringStringMap : downloadFile) {
 
@@ -48,11 +49,13 @@ public class DownloadFileTask extends AsyncTask<List<Map<String, String>>, Integ
                 outputStream.flush();
                 outputStream.close();
                 inputStream.close();
+
+                returnText = "true";
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
 
-        return null;
+        return returnText;
     }
 }

@@ -12,6 +12,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fkf.commercial.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.commercial.database.dbprovider.ContentProviderAccessor;
@@ -36,11 +37,9 @@ public class WelcomeActivity extends Activity {
     /**
      * Called when the activity is first created.
      */
-    protected static final int TIMER_RUNTIME = 40000;
     protected boolean mbActive;
     private String appFilePath;
     private boolean isActivityActivated = false;
-//    private int onContinueCount = 0;
 
     private ProgressBar appLoadingProgressBar;
     private TextView appLoadingProgressTitleTextView;
@@ -138,103 +137,76 @@ public class WelcomeActivity extends Activity {
                 mbActive = true;
                 int progress = 0;
 
+                //create database from given database file in assets
                 try {
-                    int waited = 0;
-                    while (mbActive && (waited < TIMER_RUNTIME)) {
-                        sleep(200);
-                        if (mbActive) {
-                            waited += 200;
-                            progress = updateProgress(waited);
-
-                            switch (progress) {
-                                case 0:
-                                    //Do nothing @ progress in 20
-                                    break;
-                                case 20:
-                                    /*appLoadingProgressTitleTextView.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            appLoadingProgressTitleTextView.setText("Check the Internet connection ...");
-                                        }
-                                    });*/
-                                    mHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-
-                                            //create database from given database file in assets
-                                            try {
-                                                if (!localDatabaseSQLiteOpenHelper.checkDataBase()) {
-                                                    localDatabaseSQLiteOpenHelper.createDatabase();
-                                                    localDatabaseSQLiteOpenHelper.openDataBase();
-                                                }
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            if (!userPermissionServices.isOnline(WelcomeActivity.this)) {
-                                                mbActive = false;
-                                                messageBalloonAlertDialog = new AlertDialog.Builder(context)
-                                                        .setTitle(R.string.warning)
-                                                        .setMessage("Internet connection is not available. Do you need to continue offline?")
-                                                        .setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                                appLoadingProgressBar.setProgress(100);
-                                                                onContinue();
-                                                            }
-                                                        })
-                                                        .setNeutralButton("settings", new AlertDialog.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                                context.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-                                                                finish();
-                                                            }
-                                                        })
-                                                        .setNegativeButton(R.string.no, new AlertDialog.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                                finish();
-                                                            }
-                                                        }).create();
-                                                if (isActivityActivated) {
-                                                    messageBalloonAlertDialog.show();
-                                                }
-                                            } else {
-
-                                                //create internal app dir if not exists
-                                                userPermissionServices.createInternalAppDirectories(appFilePath);
-
-                                                //update the database if server database is modified
-                                                userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
-
-                                                //update the recipe categories from the server data
-                                                userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
-
-                                                //populate latest yummy details and download images
-                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
-                                                //populate popular yummy details and download images
-                                                userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
-
-                                            }
-                                        }
-                                    });
-                                    break;
-                                case 50:
-                                    //Do nothing @ progress in 20
-                                    break;
-                                case 80:
-                                    //Do nothing @ progress in 20
-                                    break;
-                                case 100:
-                                    onContinue();
-                                    break;
-                            }
-                            appLoadingProgressBar.setProgress(progress);
-                        }
+                    if (!localDatabaseSQLiteOpenHelper.checkDataBase()) {
+                        localDatabaseSQLiteOpenHelper.createDatabase();
+                        localDatabaseSQLiteOpenHelper.openDataBase();
                     }
-                } catch (InterruptedException e) {
-                    // do nothing
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+
+                if (!userPermissionServices.isOnline(WelcomeActivity.this)) {
+                    mbActive = false;
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            messageBalloonAlertDialog = new AlertDialog.Builder(context)
+                                    .setTitle(R.string.warning)
+                                    .setMessage("Internet connection is not available. Do you need to continue offline?")
+                                    .setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            appLoadingProgressBar.setProgress(100);
+                                            onContinue();
+                                        }
+                                    })
+                                    .setNeutralButton("settings", new AlertDialog.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            context.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+                                            finish();
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.no, new AlertDialog.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            finish();
+                                        }
+                                    }).create();
+                            if (isActivityActivated) {
+                                messageBalloonAlertDialog.show();
+                            }
+                        }
+                    });
+                } else {
+
+                    //create internal app dir if not exists
+                    userPermissionServices.createInternalAppDirectories(appFilePath);
+
+                    //update the database if server database is modified
+                    userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
+
+                    //update the recipe categories from the server data
+                    userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+
+                    //populate popular yummy details and download images
+                    userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
+                    //populate latest yummy details and download images
+                    boolean status = userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
+
+                    if (status) {
+                        Log.d("Process State", "TRUE");
+                        onContinue();
+                    } else {
+                        Log.d("Process State", "FALSE");
+                        Toast.makeText(context, "Process not successfully completed", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+
+                }
+
             }
         };
         timerThread.start();
@@ -245,19 +217,9 @@ public class WelcomeActivity extends Activity {
         super.onDestroy();
     }
 
-    private int updateProgress(final int timePassed) {
-        if (null != appLoadingProgressBar) {
-            // Ignore rounding error here
-            final int progress = appLoadingProgressBar.getMax() * timePassed / TIMER_RUNTIME;
-            return progress;
-        }
-        return 0;
-    }
-
     private void onContinue() {
 
         //TODO need to fix this dual calling on this method from above switch
-        /*if (onContinueCount == 0) {*/
         Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
         if (!lastLoginDetails.isEmpty()) {
             LoginActivity.LOGGED_STATUS = 1;
@@ -275,11 +237,6 @@ public class WelcomeActivity extends Activity {
             startActivity(loginIntent);
             finish();
         }
-
-//            onContinueCount++;
-        /*} else {
-            Log.d("Tag", "This happens one time this is " + onContinueCount + " calling");
-        }*/
     }
 
     private boolean isApplicationUpdatedForToday() {
