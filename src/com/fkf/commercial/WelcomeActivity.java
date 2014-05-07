@@ -12,6 +12,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.fkf.commercial.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.commercial.database.dbprovider.ContentProviderAccessor;
 import com.fkf.commercial.services.ActivityUserPermissionServices;
@@ -147,27 +148,22 @@ public class WelcomeActivity extends Activity {
 
                             switch (progress) {
                                 case 0:
-                                    appLoadingProgressTitleTextView.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-//                                            appLoadingProgressTitleTextView.setText("Loading configurations ...");
-                                        }
-                                    });
+                                    //Do nothing @ progress in 20
                                     break;
                                 case 20:
-                                    appLoadingProgressTitleTextView.post(new Runnable() {
+                                    /*appLoadingProgressTitleTextView.post(new Runnable() {
                                         @Override
                                         public void run() {
-//                                            appLoadingProgressTitleTextView.setText("Check the Internet connection ...");
+                                            appLoadingProgressTitleTextView.setText("Check the Internet connection ...");
                                         }
-                                    });
+                                    });*/
                                     mHandler.post(new Runnable() {
                                         @Override
                                         public void run() {
 
                                             //create database from given database file in assets
                                             try {
-                                                if(!localDatabaseSQLiteOpenHelper.checkDataBase()) {
+                                                if (!localDatabaseSQLiteOpenHelper.checkDataBase()) {
                                                     localDatabaseSQLiteOpenHelper.createDatabase();
                                                     localDatabaseSQLiteOpenHelper.openDataBase();
                                                 }
@@ -205,49 +201,29 @@ public class WelcomeActivity extends Activity {
                                                 }
                                             } else {
 
-                                                //create app dir if not exists
-//                                                userPermissionServices.createAppDirectories();
                                                 //create internal app dir if not exists
                                                 userPermissionServices.createInternalAppDirectories(appFilePath);
 
-                                                //check the server db is updated or not
-                                                /*boolean isDbUpdate = userPermissionServices.isDbUpdate(WelcomeActivity.this);
-                                                Log.d("Server Database Status : ", "Updated : " + isDbUpdate);*/
+                                                //update the database if server database is modified
+                                                userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
 
-                                                /*if (isDbUpdate) {*/
-                                                    //update the database if server database is modified
-                                                    userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
+                                                //update the recipe categories from the server data
+                                                userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
 
-                                                    //update the recipe categories from the server data
-                                                    userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+                                                //populate latest yummy details and download images
+                                                userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
+                                                //populate popular yummy details and download images
+                                                userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
 
-                                                    //populate latest yummy details and download images
-                                                    userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
-                                                    //populate popular yummy details and download images
-                                                    userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
-                                                /*} else {
-                                                    appLoadingProgressBar.setProgress(100);
-                                                    onContinue();
-                                                }*/
                                             }
                                         }
                                     });
                                     break;
                                 case 50:
-                                    appLoadingProgressTitleTextView.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-//                                            appLoadingProgressTitleTextView.setText("Populating recipes from Fauzia's Kitchen ...");
-                                        }
-                                    });
+                                    //Do nothing @ progress in 20
                                     break;
                                 case 80:
-                                    appLoadingProgressTitleTextView.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-//                                            appLoadingProgressTitleTextView.setText("Latest Yummys and Popular Yummys ...");
-                                        }
-                                    });
+                                    //Do nothing @ progress in 20
                                     break;
                                 case 100:
                                     onContinue();
@@ -282,23 +258,23 @@ public class WelcomeActivity extends Activity {
 
         //TODO need to fix this dual calling on this method from above switch
         /*if (onContinueCount == 0) {*/
-            Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
-            if (!lastLoginDetails.isEmpty()) {
-                LoginActivity.LOGGED_STATUS = 1;
-                LoginActivity.LOGGED_USER_ID = lastLoginDetails.get("userId");
-                LoginActivity.LOGGED_USER = lastLoginDetails.get("username");
-                LoginActivity.LOGGED_USER_NAME = lastLoginDetails.get("fName");
-                LoginActivity.LOGGED_USER_PASSWORD = lastLoginDetails.get("password");
-                LoginActivity.LOGGED_USER_PIC_URL = lastLoginDetails.get("picUrl");
+        Map<String, String> lastLoginDetails = contentProviderAccessor.getLoginDetails(WelcomeActivity.this);
+        if (!lastLoginDetails.isEmpty()) {
+            LoginActivity.LOGGED_STATUS = 1;
+            LoginActivity.LOGGED_USER_ID = lastLoginDetails.get("userId");
+            LoginActivity.LOGGED_USER = lastLoginDetails.get("username");
+            LoginActivity.LOGGED_USER_NAME = lastLoginDetails.get("fName");
+            LoginActivity.LOGGED_USER_PASSWORD = lastLoginDetails.get("password");
+            LoginActivity.LOGGED_USER_PIC_URL = lastLoginDetails.get("picUrl");
 
-                Intent recipeIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
-                startActivity(recipeIntent);
-                finish();
-            } else {
-                Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
-                startActivity(loginIntent);
-                finish();
-            }
+            Intent recipeIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
+            startActivity(recipeIntent);
+            finish();
+        } else {
+            Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+            finish();
+        }
 
 //            onContinueCount++;
         /*} else {
