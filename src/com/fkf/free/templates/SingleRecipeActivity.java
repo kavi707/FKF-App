@@ -473,6 +473,7 @@ public class SingleRecipeActivity extends Activity {
 
         //Set font size according to device screen size
         if (layoutWidthAndHeight.get("width") <= 480) {
+
             singleRecipeDescriptionTextView.setTextSize(14);
             singleRecipeContentLabelTextView.setTextSize(14);
             singleRecipeInstructionTextView.setTextSize(14);
@@ -480,6 +481,26 @@ public class SingleRecipeActivity extends Activity {
             secondItemIngredientTitleTextView.setTextSize(14);
             thirdItemIngredientTitleTextView.setTextSize(14);
             getSingleRecipeInstructionLabelTextView.setTextSize(14);
+
+        } else if (layoutWidthAndHeight.get("width") <= 720) {
+
+            singleRecipeDescriptionTextView.setTextSize(15);
+            singleRecipeContentLabelTextView.setTextSize(15);
+            singleRecipeInstructionTextView.setTextSize(15);
+            singleRecipeContentLabelTextView.setTextSize(15);
+            secondItemIngredientTitleTextView.setTextSize(15);
+            thirdItemIngredientTitleTextView.setTextSize(15);
+            getSingleRecipeInstructionLabelTextView.setTextSize(15);
+
+        } else if (layoutWidthAndHeight.get("width") <= 1080) {
+
+            singleRecipeDescriptionTextView.setTextSize(16);
+            singleRecipeContentLabelTextView.setTextSize(16);
+            singleRecipeInstructionTextView.setTextSize(16);
+            singleRecipeContentLabelTextView.setTextSize(16);
+            secondItemIngredientTitleTextView.setTextSize(16);
+            thirdItemIngredientTitleTextView.setTextSize(16);
+            getSingleRecipeInstructionLabelTextView.setTextSize(16);
         }
 
         loadLinkedRecipes();
@@ -533,6 +554,12 @@ public class SingleRecipeActivity extends Activity {
             if (layoutWidthAndHeight.get("width") <= 480) {
                 ingredientNameTextView.setTextSize(14);
                 ingredientNoteTextView.setTextSize(13);
+            } else if (layoutWidthAndHeight.get("width") <= 720) {
+                ingredientNameTextView.setTextSize(15);
+                ingredientNoteTextView.setTextSize(14);
+            } else if (layoutWidthAndHeight.get("width") <= 1080) {
+                ingredientNameTextView.setTextSize(16);
+                ingredientNoteTextView.setTextSize(15);
             }
 
             ingredientLinearLayout.addView(separatorLineTextView);
@@ -598,6 +625,10 @@ public class SingleRecipeActivity extends Activity {
                 relatedRecipeLabel.setVisibility(View.VISIBLE);
                 if (layoutWidthAndHeight.get("width") <= 480) {
                     relatedRecipeLabel.setTextSize(14);
+                } else if (layoutWidthAndHeight.get("width") <= 720) {
+                    relatedRecipeLabel.setTextSize(15);
+                } else if (layoutWidthAndHeight.get("width") <= 720) {
+                    relatedRecipeLabel.setTextSize(16);
                 }
                 relatedRecipeLinearLayout.setVisibility(View.VISIBLE);
                 JSONArray linkedRecipesJson = new JSONArray(jsonLinkedRecipes);
@@ -662,6 +693,12 @@ public class SingleRecipeActivity extends Activity {
             if (layoutWidthAndHeight.get("width") <= 480) {
                 recipeCountTextView.setTextSize(14);
                 recipeNameTextView.setTextSize(14);
+            } else if (layoutWidthAndHeight.get("width") <= 720) {
+                recipeCountTextView.setTextSize(15);
+                recipeNameTextView.setTextSize(15);
+            } else if (layoutWidthAndHeight.get("width") <= 1080) {
+                recipeCountTextView.setTextSize(16);
+                recipeNameTextView.setTextSize(16);
             }
             holdingLinearLayout.addView(recipeCountTextView);
             holdingLinearLayout.addView(recipeNameTextView);
