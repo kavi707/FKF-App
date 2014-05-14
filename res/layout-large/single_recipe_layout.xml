@@ -110,7 +110,7 @@
             <!-- First ingredient -->
             <LinearLayout
                 android:id="@+id/firstIngredient"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -147,7 +147,7 @@
             <!-- Second ingredient -->
             <LinearLayout
                 android:id="@+id/secondIngredient"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
@@ -185,7 +185,7 @@
             <!-- Third ingredient -->
             <LinearLayout
                 android:id="@+id/thirdIngredient"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">

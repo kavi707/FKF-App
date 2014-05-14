@@ -66,7 +66,7 @@ public class SingleRecipeActivity extends Activity {
     private LinearLayout relatedRecipeLinearLayout;
     private Map<String, Integer> layoutWidthAndHeight;
 
-    private LinearLayout secondItemIngredients, thirdItemIngredients;
+    private LinearLayout firstItemIngredients, secondItemIngredients, thirdItemIngredients;
     private LinearLayout firstRecipeIngredientLinearLayout, secondRecipeIngredientLinearLayout, thirdRecipeIngredientLinearLayout;
     private LinearLayout linkedImagesLinearLayout, linkedRecipesLinearLayout;
 
@@ -167,6 +167,7 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeImageViewer = (ImageView) findViewById(R.id.singleRecipeImageView);
         singleRecipeMyFavoriteImageButton = (ImageButton) findViewById(R.id.myFavoriteImageButton);
 
+        firstItemIngredients = (LinearLayout) findViewById(R.id.firstIngredient);
         secondItemIngredients = (LinearLayout) findViewById(R.id.secondIngredient);
         thirdItemIngredients = (LinearLayout) findViewById(R.id.thirdIngredient);
 
@@ -282,6 +283,7 @@ public class SingleRecipeActivity extends Activity {
         int legacy = selectedRecipe.getLegacy();
         if (legacy == 0) {
             //Hide two extra ingredient linear layouts
+            firstItemIngredients.setVisibility(View.GONE);
             secondItemIngredients.setVisibility(View.GONE);
             thirdItemIngredients.setVisibility(View.GONE);
 
@@ -306,8 +308,10 @@ public class SingleRecipeActivity extends Activity {
                 JSONObject ingredientJsonObj = null;
                 JSONArray itemsJsonArray = null;
                 JSONObject itemJsonObj = null;
+
                 if (ingredientJsonArray.length() == 1) {
                     ingredientJsonObj = ingredientJsonArray.getJSONObject(0);
+                    firstItemIngredients.setVisibility(View.VISIBLE);
                     singleRecipeContentLabelTextView.setText(ingredientJsonObj.getString("title"));
                     itemsJsonArray = ingredientJsonObj.getJSONArray("items");
                     for (int j = 0; j < itemsJsonArray.length(); j++) {
@@ -321,6 +325,7 @@ public class SingleRecipeActivity extends Activity {
                         ingredientJsonObj = ingredientJsonArray.getJSONObject(i);
 
                         if (i == 0) {
+                            firstItemIngredients.setVisibility(View.VISIBLE);
                             singleRecipeContentLabelTextView.setText(ingredientJsonObj.getString("title"));
                             itemsJsonArray = ingredientJsonObj.getJSONArray("items");
                             for (int k = 0; k < itemsJsonArray.length(); k++) {
@@ -578,7 +583,7 @@ public class SingleRecipeActivity extends Activity {
                     relatedRecipeLabel.setTextSize(14);
                 } else if (layoutWidthAndHeight.get("width") <= 720) {
                     relatedRecipeLabel.setTextSize(15);
-                } else if (layoutWidthAndHeight.get("width") <= 720) {
+                } else if (layoutWidthAndHeight.get("width") <= 1080) {
                     relatedRecipeLabel.setTextSize(16);
                 }
                 relatedRecipeLinearLayout.setVisibility(View.VISIBLE);
