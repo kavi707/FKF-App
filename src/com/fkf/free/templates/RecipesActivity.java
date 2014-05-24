@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -42,7 +43,7 @@ import com.fkf.free.services.ActivityUserPermissionServices;
  */
 public class RecipesActivity extends Activity implements View.OnClickListener{
 
-    ImageButton menuButton, logoutButton, searchRecipeButton;
+    ImageButton menuButton, fullVersionBtn;
     LinearLayout content, menu, loggedUserDetails;
 
     private ProgressDialog progress;
@@ -60,9 +61,7 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
     ListView menuItemList, recipeItemList;
     ScrollView latestAndPopularScrollBar;
     HorizontalScrollView horizontalScroll;
-    TextView loggedUserTextView, loggedOutButtonSeparatorTextView, loggedUserNameTextView, yummyCategoryNameTextView, homeTextView, myFavoriteTextView;
-    ImageView profileImageView;
-    EditText searchRecipeEditText;
+    TextView yummyCategoryNameTextView, homeTextView, myFavoriteTextView;
 
     TextView latestTitleTextView;
     TextView popularTitleTextView;
@@ -1040,95 +1039,20 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
             }
         });
 
-        //logout button & profile image
-        logoutButton = (ImageButton) findViewById(R.id.logoutButton);
-        profileImageView = (ImageView) findViewById(R.id.userIconImageView);
-        loggedOutButtonSeparatorTextView = (TextView) findViewById(R.id.logoutButtonSeparator);
-        loggedUserNameTextView = (TextView) findViewById(R.id.userTextView);
-        loggedUserTextView = (TextView) findViewById(R.id.userNameTextView);
-        if(LoginActivity.LOGGED_STATUS == 0) {
-            logoutButton.setVisibility(View.GONE);
-            loggedOutButtonSeparatorTextView.setVisibility(View.GONE);
-            profileImageView.setImageResource(R.drawable.login_icon);
-            loggedUserTextView.setVisibility(View.GONE);
-
-            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            lParams.setMargins(0, 20, 0, 0);
-            loggedUserNameTextView.setText(" Login");
-            loggedUserNameTextView.setTextSize(18);
-            loggedUserNameTextView.setLayoutParams(lParams);
-        } else if(LoginActivity.LOGGED_STATUS == 1){
-            //Embedded images to profile pic image view
-            File profilePicImage = new File("/sdcard/fauzias/user/profile_pic.png");
-            if(profilePicImage.exists()) {
-                Bitmap profilePicBitmap = BitmapFactory.decodeFile(profilePicImage.getAbsolutePath());
-                profileImageView.setImageBitmap(profilePicBitmap);
-            } else {
-                profileImageView.setImageResource(R.drawable.default_user_icon);
-            }
-
-            logoutButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    messageBalloonAlertDialog = new AlertDialog.Builder(context)
-                            .setTitle(R.string.warning)
-                            .setMessage("Do you need to logout?")
-                            .setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    messageBalloonAlertDialog.show();
-                                    LoginActivity.LOGGED_STATUS = 0;
-                                    LoginActivity.LOGGED_USER = null;
-                                    LoginActivity.LOGGED_USER_PASSWORD = null;
-                                    localDatabaseSQLiteOpenHelper.deleteLoginDetails();
-                                    Intent loginIntent = new Intent(RecipesActivity.this, LoginActivity.class);
-                                    startActivity(loginIntent);
-                                    finish();
-                                }
-                            })
-                            .setNegativeButton(R.string.no, new AlertDialog.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    messageBalloonAlertDialog.cancel();
-                                }
-                            }).create();
-                    messageBalloonAlertDialog.show();
-                }
-            });
-
-            //Logged user textView
-            loggedUserNameTextView.setText("Welcome " + LoginActivity.LOGGED_USER_NAME);
-            loggedUserTextView.setText(LoginActivity.LOGGED_USER);
-        }
-
-        //recipes search from given name
-        /*searchRecipeButton = (ImageButton) findViewById(R.id.searchRecipeImageButton);
-        searchRecipeEditText = (EditText) findViewById(R.id.searchRecipeEditText);
-        searchRecipeButton.setOnClickListener(new View.OnClickListener() {
+        //Get full version button
+        fullVersionBtn = (ImageButton) findViewById(R.id.fullVersionBtn);
+        fullVersionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String searchKey = searchRecipeEditText.getText().toString();
+            public void onClick(View v) {
+                String appPackageName = "com.fkf.commercial";
 
-                if(searchKey.equals(null) || !searchKey.equals("")) {
-                    recipeList = localDatabaseSQLiteOpenHelper.searchRecipesFromGivenRecipeName(searchKey);
-
-                    ViewGroup.LayoutParams scrollParams = latestAndPopularScrollBar.getLayoutParams();
-                    scrollParams.height = 0;
-                    latestAndPopularScrollBar.setLayoutParams(scrollParams);
-
-                    recipeListAdapter = new RecipeListAdapter(recipeList, context);
-                    recipeItemList.setAdapter(recipeListAdapter);
-
-                    yummyCategoryNameTextView.setText("   Search Results");
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Please enter key word for search", Toast.LENGTH_LONG).show();
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
                 }
             }
-        });*/
-
+        });
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
