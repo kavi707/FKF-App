@@ -34,6 +34,8 @@ import java.util.Map;
 
 import android.os.Handler;
 import com.fkf.free.services.ActivityUserPermissionServices;
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
 
 /**
  * Created by kavi on 6/22/13.
@@ -48,6 +50,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
 
     private ProgressDialog progress;
     private Handler handler;
+
+    private AdView googleAdViewHome;
 
     LinearLayout firstPopularYummyLinear;
     LinearLayout secondPopularYummyLinear;
@@ -148,6 +152,8 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         latestTitleTextView = (TextView) findViewById(R.id.latestTitleText);
         popularTitleTextView = (TextView) findViewById(R.id.popularTitleText);
 
+        googleAdViewHome = (AdView) findViewById(R.id.adHome);
+
         firstYummyImageButton = (ImageButton) findViewById(R.id.firstYummyImageButton);
         secondYummyImageButton = (ImageButton) findViewById(R.id.secondYummyImageButton);
         thirdYummyImageButton = (ImageButton) findViewById(R.id.thirdYummyImageButton);
@@ -191,6 +197,10 @@ public class RecipesActivity extends Activity implements View.OnClickListener{
         }
 
 
+        //set Google Ads bannerx
+        AdRequest re = new AdRequest();
+        re.setGender(AdRequest.Gender.FEMALE);
+        googleAdViewHome.loadAd(re);
 
 
         /********************************************/
