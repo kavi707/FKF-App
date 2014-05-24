@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.AndroidCharacter;
@@ -437,7 +438,7 @@ public class SingleRecipeActivity extends Activity {
                         }
                     } else {
                         messageBalloonAlertDialog = new AlertDialog.Builder(context)
-                                .setTitle(getString(R.string.pro_version_label))
+                                .setTitle(getString(R.string.full_version_label))
                                 .setMessage(getString(R.string.buy_pro_message))
                                 .setPositiveButton(getString(R.string.buy_label), new AlertDialog.OnClickListener() {
                                     /**
@@ -449,9 +450,13 @@ public class SingleRecipeActivity extends Activity {
                                      */
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        //TODO need to link this to pro-version in Play Store
-                                        Toast.makeText(getApplicationContext(),
-                                                "Buy commercial version", Toast.LENGTH_LONG).show();
+                                        String appPackageName = "com.fkf.commercial";
+
+                                        try {
+                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                                        } catch (android.content.ActivityNotFoundException ex) {
+                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
+                                        }
                                     }
                                 })
                                 .setNegativeButton(getString(R.string.cancel), new AlertDialog.OnClickListener() {
