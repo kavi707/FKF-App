@@ -437,46 +437,12 @@ public class SingleRecipeActivity extends Activity {
                             }
                         }
                     } else {
-                        messageBalloonAlertDialog = new AlertDialog.Builder(context)
-                                .setTitle(getString(R.string.full_version_label))
-                                .setMessage(getString(R.string.buy_pro_message))
-                                .setPositiveButton(getString(R.string.buy_label), new AlertDialog.OnClickListener() {
-                                    /**
-                                     * This method will be invoked when a button in the dialog is clicked.
-                                     *
-                                     * @param dialog The dialog that received the click.
-                                     * @param which  The button that was clicked (e.g.
-                                     *               {@link android.content.DialogInterface#BUTTON1}) or the position
-                                     */
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        String appPackageName = "com.fkf.commercial";
-
-                                        try {
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                                        } catch (android.content.ActivityNotFoundException ex) {
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
-                                        }
-                                    }
-                                })
-                                .setNegativeButton(getString(R.string.cancel), new AlertDialog.OnClickListener() {
-                                    /**
-                                     * This method will be invoked when a button in the dialog is clicked.
-                                     *
-                                     * @param dialog The dialog that received the click.
-                                     * @param which  The button that was clicked (e.g.
-                                     *               {@link android.content.DialogInterface#BUTTON1}) or the position
-                                     */
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        messageBalloonAlertDialog.cancel();
-                                    }
-                                }).create();
-                        messageBalloonAlertDialog.show();
+                        showBuyFullVersionMessageBalloon();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Application is in offline mode. Please on your mobile data", Toast.LENGTH_LONG).show();
+                    /*Toast.makeText(getApplicationContext(),
+                            "Application is in offline mode. Please on your mobile data", Toast.LENGTH_LONG).show();*/
+                    showBuyFullVersionMessageBalloon();
                 }
             }
         });
@@ -514,6 +480,49 @@ public class SingleRecipeActivity extends Activity {
         }
 
         loadLinkedRecipes();
+    }
+
+    /**
+     * Create the message balloon to show about full version availability.
+     * And show the message balloon
+     */
+    private void showBuyFullVersionMessageBalloon() {
+        messageBalloonAlertDialog = new AlertDialog.Builder(context)
+                .setTitle(getString(R.string.full_version_label))
+                .setMessage(getString(R.string.buy_pro_message))
+                .setPositiveButton(getString(R.string.buy_label), new AlertDialog.OnClickListener() {
+                    /**
+                     * This method will be invoked when a button in the dialog is clicked.
+                     *
+                     * @param dialog The dialog that received the click.
+                     * @param which  The button that was clicked (e.g.
+                     *               {@link android.content.DialogInterface#BUTTON1}) or the position
+                     */
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String appPackageName = "com.fkf.commercial";
+
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
+                        }
+                    }
+                })
+                .setNegativeButton(getString(R.string.cancel), new AlertDialog.OnClickListener() {
+                    /**
+                     * This method will be invoked when a button in the dialog is clicked.
+                     *
+                     * @param dialog The dialog that received the click.
+                     * @param which  The button that was clicked (e.g.
+                     *               {@link android.content.DialogInterface#BUTTON1}) or the position
+                     */
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        messageBalloonAlertDialog.cancel();
+                    }
+                }).create();
+        messageBalloonAlertDialog.show();
     }
 
     private LinearLayout createIngredientItemView (JSONObject ingredientObject) {
