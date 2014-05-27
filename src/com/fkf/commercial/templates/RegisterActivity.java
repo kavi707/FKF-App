@@ -116,9 +116,7 @@ public class RegisterActivity extends Activity {
                             md.update(md5String.getBytes());
                             byte[] digest = md.digest();
                             StringBuffer sb = new StringBuffer();
-                        /*for (byte b : digest) {
-                            sb.append(Integer.toHexString((b & 0xff)));
-                        }*/
+
                             for (int i = 0; i < digest.length; i++) {
                                 String h = Integer.toHexString(0xFF & digest[i]);
                                 while (h.length() < 2)
@@ -143,8 +141,6 @@ public class RegisterActivity extends Activity {
 
                             if (resultMap != null) {
                                 if (resultMap.get("status").equals("true")) {
-                                /*Toast.makeText(getApplicationContext(),
-                                        resultMap.get("msg"), Toast.LENGTH_LONG).show();*/
 
                                     finalUserName = username;
                                     finalPassword = password;

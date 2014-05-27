@@ -262,7 +262,7 @@ public class SingleRecipeActivity extends Activity {
         }
 
         singleRecipeDescriptionTextView.setText(finalDescriptionString);
-        singleRecipeContentLabelTextView.setText(/*selectedRecipe.getName() + */"Ingredients");
+        singleRecipeContentLabelTextView.setText("Ingredients");
 
         //device layout width and height
         layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(SingleRecipeActivity.this);
@@ -367,7 +367,6 @@ public class SingleRecipeActivity extends Activity {
                 @Override
                 public void onClick(View view) {
 
-//                boolean dbFovStatusBtnClickTest = localDatabaseSQLiteOpenHelper.isUserFavoriteRecipe(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
                     boolean dbFovStatusBtnClickTest = contentProviderAccessor.isUserFavoriteRecipe(context, selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
                     if (isOnline) {
                         boolean serverFovStatusBtnClickTest = connector.isMyFavorite(selectedRecipe.getProductId(), SingleRecipeActivity.this);
@@ -671,7 +670,6 @@ public class SingleRecipeActivity extends Activity {
      */
     private void loadLinkedImages(String jsonLinkedImages) {
 
-//        String jsonLinkedImages = selectedRecipe.getLinkImages();
         List<String> imageUrls = new ArrayList<String>();
         try {
             JSONArray linkedImagesJson = new JSONArray(jsonLinkedImages);
@@ -751,33 +749,6 @@ public class SingleRecipeActivity extends Activity {
 
         boolean dbFovStatus = contentProviderAccessor.isUserFavoriteRecipe(context, selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
         isFavorite = dbFovStatus;
-        /*if (isOnline) {
-            isFavoriteCheckTask isFavoriteCheckTask = new isFavoriteCheckTask();
-            boolean serverFovStatus = false;
-            try {
-                serverFovStatus = isFavoriteCheckTask.execute().get();
-                serverFovStatus = false;
-                if (dbFovStatus && serverFovStatus) {
-                    isFavorite = true;
-                } else {
-                    if (dbFovStatus) {
-                        localDatabaseSQLiteOpenHelper.removeFromUserFavorite(selectedRecipe.getProductId());
-                        isFavorite = false;
-                    }
-
-                    if (serverFovStatus) {
-                        localDatabaseSQLiteOpenHelper.saveUserFavoriteRecipes(selectedRecipe.getProductId(), LoginActivity.LOGGED_USER_ID);
-                        isFavorite = true;
-                    }
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        } else {
-            isFavorite = dbFovStatus;
-        }*/
 
         if (isFavorite) {
             singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_remove);
