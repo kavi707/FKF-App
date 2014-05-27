@@ -107,8 +107,6 @@ public class ApiConnector {
                     String fName = jsonUserData.getString("fname");
                     String pictureUrl = jsonUserData.getString("picture");
 
-                    Log.d("user's name : >>>>>>>>>>>>>> 1 ", fName);
-
                     statusMap.put("loginStatus", "1");
                     statusMap.put("userId", userId);
                     statusMap.put("username", username);
@@ -396,7 +394,6 @@ public class ApiConnector {
         String responseResult = null;
 
         try {
-//            HttpPost post = new HttpPost("http://10.0.2.2:7000/sms/send");
             HttpPost post = new HttpPost(url);
 
             StringEntity se = new StringEntity(req.toString());
@@ -429,6 +426,7 @@ public class ApiConnector {
                 Log.d("Error", "null response after sending http req");
                 responseResult = "error";
             }
+            client.getConnectionManager().shutdown();
 
         } catch (Exception ex) {
             Log.d("Exception", ex.toString());
