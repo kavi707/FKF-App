@@ -39,7 +39,7 @@
     <string name="related_recipe_heading">Linked Recipes</string>
     <string name="full_version_label">Full Version</string>
     <string name="buy_pro_message">This feature is available in the full version. Would you like to buy the full version ?</string>
-    <string name="buy_pro_message_2">More than 700 recipes available in the full version. Would you like to buy the full version</string>
+    <string name="buy_pro_message_2">More than 700 recipes available in the full version. Would you like to buy the full version ?</string>
     <string name="buy_label">Buy</string>
 
     <!-- Google Ads Unit ID -->
