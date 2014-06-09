@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -185,24 +186,16 @@ public class WelcomeActivity extends Activity {
                     //create internal app dir if not exists
                     userPermissionServices.createInternalAppDirectories(appFilePath);
 
-                    //update the database if server database is modified
-                    userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
+                    int sdkVersion = Build.VERSION.SDK_INT;
 
-                    //update the recipe categories from the server data
-                    userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
-
-                    //populate popular yummy details and download images
-                    userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
-                    //populate latest yummy details and download images
-                    boolean status = userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
-
-                    if (status) {
-                        Log.d("Process State", "TRUE");
-                        onContinue();
+                    if (sdkVersion < 14) {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                startBackgroundTasks();
+                            }
+                        });
                     } else {
-                        Log.d("Process State", "FALSE");
-                        Toast.makeText(context, "Process not successfully completed", Toast.LENGTH_LONG).show();
-                        finish();
+                        startBackgroundTasks();
                     }
 
                 }
@@ -215,6 +208,28 @@ public class WelcomeActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    private void startBackgroundTasks() {
+        //update the database if server database is modified
+        userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
+
+        //update the recipe categories from the server data
+        userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+
+        //populate popular yummy details and download images
+        userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
+        //populate latest yummy details and download images
+        boolean status = userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
+
+        if (status) {
+            Log.d("Process State", "TRUE");
+            onContinue();
+        } else {
+            Log.d("Process State", "FALSE");
+            Toast.makeText(context, "Process not successfully completed", Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 
     private void onContinue() {

@@ -11,6 +11,7 @@ import com.fkf.commercial.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.commercial.database.PopularOrLatestRecipe;
 import com.fkf.commercial.database.Recipe;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -275,6 +276,63 @@ public class ContentProviderAccessor {
 
             latestRecipeCount++;
         }
+    }
+
+    /**
+     * Return all latest recipes
+     * @param context
+     * @return
+     */
+    public List<PopularOrLatestRecipe> getAllLatestRecipes(Context context) {
+
+        List<PopularOrLatestRecipe> latestRecipesList = new ArrayList<PopularOrLatestRecipe>();
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.LATEST_YUMMY_TABLE_NAME);
+        if(contextUri != null) {
+            String[] selections = {
+                    LocalDatabaseSQLiteOpenHelper.LATEST_INDEX,
+                    LocalDatabaseSQLiteOpenHelper.PRODUCT_ID,
+                    LocalDatabaseSQLiteOpenHelper.RECIPE_NAME,
+                    LocalDatabaseSQLiteOpenHelper.IMAGE_URL_XS,
+                    LocalDatabaseSQLiteOpenHelper.IMAGE_URL_S,
+                    LocalDatabaseSQLiteOpenHelper.IMAGE_URL_M,
+                    LocalDatabaseSQLiteOpenHelper.IMAGE_URL_L,
+                    LocalDatabaseSQLiteOpenHelper.IMAGE_URL_T,
+                    LocalDatabaseSQLiteOpenHelper.IMAGE_URL_XL,
+            };
+
+            Cursor latestRecipesCursor = context.getContentResolver().query(contextUri,selections, null, null, null);
+            if(latestRecipesCursor != null) {
+                latestRecipesCursor.moveToFirst();
+                if(!latestRecipesCursor.isAfterLast()) {
+                    do {
+                        int index = latestRecipesCursor.getInt(0);
+                        String productId = latestRecipesCursor.getString(1);
+                        String recipeName = latestRecipesCursor.getString(2);
+                        String imageUrlXS = latestRecipesCursor.getString(3);
+                        String imageUrlS = latestRecipesCursor.getString(4);
+                        String imageUrlM = latestRecipesCursor.getString(5);
+                        String imageUrlL = latestRecipesCursor.getString(6);
+                        String imageUrlT = latestRecipesCursor.getString(7);
+                        String imageUrlXL = latestRecipesCursor.getString(8);
+
+                        PopularOrLatestRecipe popularOrLatestRecipe = new PopularOrLatestRecipe();
+                        popularOrLatestRecipe.setIndex(index);
+                        popularOrLatestRecipe.setProductId(productId);
+                        popularOrLatestRecipe.setRecipeName(recipeName);
+                        popularOrLatestRecipe.setImageUrlXS(imageUrlXS);
+                        popularOrLatestRecipe.setImageUrlS(imageUrlS);
+                        popularOrLatestRecipe.setImageUrlM(imageUrlM);
+                        popularOrLatestRecipe.setImageUrlL(imageUrlL);
+                        popularOrLatestRecipe.setImageUrlT(imageUrlT);
+                        popularOrLatestRecipe.setImageUrlXL(imageUrlXL);
+
+                        latestRecipesList.add(popularOrLatestRecipe);
+
+                    } while (latestRecipesCursor.moveToNext());
+                }
+            }
+        }
+        return latestRecipesList;
     }
 
     /**
