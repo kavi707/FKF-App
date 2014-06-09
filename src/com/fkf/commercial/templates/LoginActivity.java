@@ -214,7 +214,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                progress = ProgressDialog.show(LoginActivity.this, "Loading", "Loading the current recipes. Please wait ...");
+                /*progress = ProgressDialog.show(LoginActivity.this, "Loading", "Loading the current recipes. Please wait ...");
                 handler = new Handler(context.getMainLooper());
 
                 handler.post(new Runnable() {
@@ -233,7 +233,10 @@ public class LoginActivity extends Activity {
                             }
                         });
                     }
-                });
+                });*/
+
+                Intent recipesMenuIntent = new Intent(LoginActivity.this, RecipesMenuActivity.class);
+                startActivity(recipesMenuIntent);
             }
         });
     }

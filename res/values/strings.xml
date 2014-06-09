@@ -38,6 +38,8 @@
     <string name="singleRecipeInstructionLabel">Instructions</string>
     <string name="related_recipe_heading">Linked Recipes</string>
 
+    <string name="action_settings">Settings</string>
+
     <!-- Google Ads Unit ID -->
     <string name="admob_id">ca-app-pub-5523232753553387/5791410379</string>
 

@@ -8,8 +8,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.fkf.commercial.R;
+import com.fkf.commercial.WelcomeActivity;
 import com.fkf.commercial.database.Recipe;
 import com.fkf.commercial.services.image.loader.ImageLoader;
+import com.fkf.commercial.templates.LoginActivity;
 import com.fkf.commercial.templates.RecipesActivity;
 
 /**
@@ -56,7 +58,7 @@ public class RecipeListItem extends LinearLayout {
             description = recipe.getBody();
         }
 
-        int deviceWidth = RecipesActivity.layoutWidthAndHeight.get("width");
+        int deviceWidth = WelcomeActivity.widthAndHeight.get("width");
         String shortDesc = "";
         int shortDescLimit = 0;
         if(deviceWidth < 500) {
