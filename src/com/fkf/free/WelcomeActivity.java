@@ -187,7 +187,9 @@ public class WelcomeActivity extends Activity {
                     //create internal app dir if not exists
                     userPermissionServices.createInternalAppDirectories(appFilePath);
 
+                    //check device sdk version
                     int sdkVersion = Build.VERSION.SDK_INT;
+                    Log.d("Device SDK Version: ", String.valueOf(sdkVersion));
 
                     if (sdkVersion < 14) {
                         runOnUiThread(new Runnable() {
