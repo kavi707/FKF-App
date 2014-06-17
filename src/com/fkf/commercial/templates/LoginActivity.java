@@ -116,6 +116,7 @@ public class LoginActivity extends Activity {
                 registerButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.register_btn_pressed_background));
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
+                finish();
             }
         });
 
@@ -180,8 +181,10 @@ public class LoginActivity extends Activity {
                                 //update the logged user's favorite recipes
                                 userPermissionServices.updateUserFavoriteRecipesFromServer(LoginActivity.this);
 
-                                Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
-                                startActivity(recipesIntent);
+//                                Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
+//                                startActivity(recipesIntent);
+                                Intent recipesMenuIntent = new Intent(LoginActivity.this, RecipesMenuActivity.class);
+                                startActivity(recipesMenuIntent);
                                 LoginActivity.this.finish();
 
                                 errorStatus = false;
@@ -214,7 +217,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                /*progress = ProgressDialog.show(LoginActivity.this, "Loading", "Loading the current recipes. Please wait ...");
+                progress = ProgressDialog.show(LoginActivity.this, "Loading", "Loading the current recipes. Please wait ...");
                 handler = new Handler(context.getMainLooper());
 
                 handler.post(new Runnable() {
@@ -222,8 +225,10 @@ public class LoginActivity extends Activity {
                     public void run() {
 
                         LOGGED_STATUS = 0;
-                        Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
-                        startActivity(recipesIntent);
+//                        Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
+//                        startActivity(recipesIntent);
+                        Intent recipesMenuIntent = new Intent(LoginActivity.this, RecipesMenuActivity.class);
+                        startActivity(recipesMenuIntent);
                         finish();
 
                         runOnUiThread(new Runnable() {
@@ -233,10 +238,7 @@ public class LoginActivity extends Activity {
                             }
                         });
                     }
-                });*/
-
-                Intent recipesMenuIntent = new Intent(LoginActivity.this, RecipesMenuActivity.class);
-                startActivity(recipesMenuIntent);
+                });
             }
         });
     }

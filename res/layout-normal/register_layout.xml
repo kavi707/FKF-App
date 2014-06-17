@@ -42,45 +42,69 @@
                 <EditText
                     android:id="@+id/firstNameEditText"
                     android:layout_width="280dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_gravity="left"
                     android:hint="@string/firstNameLabel"
+                    android:background="@color/white"
                     android:typeface="normal" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="5dp" />
 
                 <EditText
                     android:id="@+id/userEmailEditText"
                     android:layout_width="280dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_gravity="left"
                     android:hint="@string/emailLabel"
+                    android:background="@color/white"
                     android:typeface="normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="5dp" />
 
                 <EditText
                     android:id="@+id/registerUserNameEditText"
                     android:layout_width="280dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_gravity="left"
                     android:hint="@string/usernameLabel"
+                    android:background="@color/white"
                     android:typeface="normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="5dp" />
 
                 <EditText
                     android:id="@+id/registerPasswordEditText"
                     android:layout_width="280dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_gravity="left"
                     android:hint="@string/passwordLabel"
                     android:password="true"
+                    android:background="@color/white"
                     android:typeface="normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="5dp" />
 
                 <EditText
                     android:id="@+id/verifyPasswordEditText"
                     android:layout_width="280dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_gravity="left"
                     android:hint="@string/verifyPasswordLabel"
                     android:password="true"
+                    android:background="@color/white"
                     android:typeface="normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="5dp" />
 
                 <CheckBox
                     android:id="@+id/newsletterCheckBox"

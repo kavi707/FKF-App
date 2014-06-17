@@ -19,6 +19,7 @@ import com.fkf.commercial.database.dbprovider.ContentProviderAccessor;
 import com.fkf.commercial.services.ActivityUserPermissionServices;
 import com.fkf.commercial.templates.LoginActivity;
 import com.fkf.commercial.templates.RecipesActivity;
+import com.fkf.commercial.templates.RecipesMenuActivity;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -229,8 +230,10 @@ public class WelcomeActivity extends Activity {
             LoginActivity.LOGGED_USER_PASSWORD = lastLoginDetails.get("password");
             LoginActivity.LOGGED_USER_PIC_URL = lastLoginDetails.get("picUrl");
 
-            Intent recipeIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
-            startActivity(recipeIntent);
+//            Intent recipeIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
+//            startActivity(recipeIntent);
+            Intent recipesMenuIntent = new Intent(WelcomeActivity.this, RecipesMenuActivity.class);
+            startActivity(recipesMenuIntent);
             finish();
         } else {
             Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);

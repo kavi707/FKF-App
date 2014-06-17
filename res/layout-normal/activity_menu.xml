@@ -19,9 +19,72 @@
         android:layout_gravity="start"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/logUserLayout"
+            android:background="@drawable/category_list_background"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/userIconImageView"
+                android:src="@drawable/default_user_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="5dp"/>
+
+            <LinearLayout
+                android:id="@+id/userDetailsLayout"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:layout_width="186dp">
+                <TextView
+                    android:layout_height="5dp"
+                    android:layout_width="match_parent"/>
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/userTextView"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:gravity="left"
+                    android:text="Welcome"
+                    android:typeface="normal"/>
+
+                <TextView
+                    android:layout_height="5dp"
+                    android:layout_width="match_parent"/>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/userNameTextView"
+                    android:textSize="14dp"
+                    android:gravity="left"
+                    android:text="@string/userLabel"
+                    android:typeface="normal"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/logoutButtonSeparator"
+                android:background="@color/black"
+                android:layout_height="match_parent"
+                android:layout_width="1dp"/>
+
+            <ImageButton
+                android:id="@+id/logoutButton"
+                android:src="@drawable/logout_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/menuHomeTextView"
-            android:layout_width="260dp"
+            android:layout_width="300dp"
             android:layout_height="50dip"
             android:background="@drawable/category_list_background"
             android:gravity="center_vertical"
@@ -32,7 +95,7 @@
 
         <LinearLayout
             android:id="@+id/menuMyFavoriteLinearLayout"
-            android:layout_width="260dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/category_list_background"
             android:orientation="horizontal">
@@ -58,7 +121,7 @@
         <!-- Listview to display slider menu -->
         <ListView
             android:id="@+id/list_slidermenu"
-            android:layout_width="260dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@color/list_background"
