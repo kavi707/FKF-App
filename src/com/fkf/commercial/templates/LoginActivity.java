@@ -32,6 +32,7 @@ public class LoginActivity extends Activity {
     private Button registerButton;
     private Button loginButton;
     private TextView browsRecipesTextView;
+    private TextView spaceTextView;
 
     private Context context = this;
     private Handler handler;
@@ -42,7 +43,7 @@ public class LoginActivity extends Activity {
     private LinearLayout usernameLinearLayout;
     private LinearLayout passwordLinearLayout;
     private ImageView logoImageView;
-    private LinearLayout.LayoutParams logoViewParams, usernameParams, passwordParams, loginButtonParams;
+    private LinearLayout.LayoutParams logoViewParams, usernameParams, passwordParams, loginButtonParams, spaceTextViewParams;
     private LinearLayout.LayoutParams usernameEditTextParams, passwordEditTextParams;
 
     private ProgressDialog progress;
@@ -103,6 +104,8 @@ public class LoginActivity extends Activity {
         loginButton = (Button) findViewById(R.id.loginButton);
         browsRecipesTextView = (TextView) findViewById(R.id.browsRecipesTextView);
 
+        spaceTextView = (TextView) findViewById(R.id.spaceTextView);
+
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
@@ -124,6 +127,10 @@ public class LoginActivity extends Activity {
         int width = deviceWidthAndHeight.get("width");
 
         if (width <= 480) {
+            spaceTextViewParams = (LinearLayout.LayoutParams) spaceTextView.getLayoutParams();
+            spaceTextViewParams.height = 80;
+            spaceTextView.setLayoutParams(spaceTextViewParams);
+
             logoViewParams = (LinearLayout.LayoutParams)logoImageView.getLayoutParams();
             logoViewParams.width = 350;
             logoImageView.setLayoutParams(logoViewParams);

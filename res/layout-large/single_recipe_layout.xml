@@ -115,6 +115,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/firstIngredientTitleBackground"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/category_name_textview_background">
@@ -153,6 +154,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/secondIngredientTitleBackground"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/category_name_textview_background">
@@ -191,6 +193,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/thirdIngredientTitleBackground"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/category_name_textview_background">

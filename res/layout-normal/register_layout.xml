@@ -33,6 +33,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <LinearLayout
+                android:id="@+id/contentLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
@@ -44,6 +45,7 @@
                     android:layout_width="280dp"
                     android:layout_height="45dp"
                     android:layout_gravity="left"
+                    android:gravity="center"
                     android:hint="@string/firstNameLabel"
                     android:background="@color/white"
                     android:typeface="normal" />
@@ -57,6 +59,7 @@
                     android:layout_width="280dp"
                     android:layout_height="45dp"
                     android:layout_gravity="left"
+                    android:gravity="center"
                     android:hint="@string/emailLabel"
                     android:background="@color/white"
                     android:typeface="normal" />
@@ -70,6 +73,7 @@
                     android:layout_width="280dp"
                     android:layout_height="45dp"
                     android:layout_gravity="left"
+                    android:gravity="center"
                     android:hint="@string/usernameLabel"
                     android:background="@color/white"
                     android:typeface="normal" />
@@ -83,6 +87,7 @@
                     android:layout_width="280dp"
                     android:layout_height="45dp"
                     android:layout_gravity="left"
+                    android:gravity="center"
                     android:hint="@string/passwordLabel"
                     android:password="true"
                     android:background="@color/white"
@@ -97,6 +102,7 @@
                     android:layout_width="280dp"
                     android:layout_height="45dp"
                     android:layout_gravity="left"
+                    android:gravity="center"
                     android:hint="@string/verifyPasswordLabel"
                     android:password="true"
                     android:background="@color/white"

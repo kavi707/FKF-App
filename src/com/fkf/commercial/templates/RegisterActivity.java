@@ -8,14 +8,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.fkf.commercial.R;
+import com.fkf.commercial.WelcomeActivity;
 import com.fkf.commercial.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.commercial.services.ActivityUserPermissionServices;
 import com.fkf.commercial.services.connections.ApiConnector;
@@ -39,6 +43,10 @@ public class RegisterActivity extends Activity {
     private EditText usernameEditText;
     private EditText passwordEditText;
     private EditText verifyPasswordEditText;
+    private LinearLayout contentLinearLayout;
+
+    private LinearLayout.LayoutParams editTextParams;
+    private LinearLayout.LayoutParams contentLinearLayoutParams;
 
     private CheckBox newsAlertCheckBox;
     private Button userRegisterButton;
@@ -72,10 +80,30 @@ public class RegisterActivity extends Activity {
         usernameEditText = (EditText) findViewById(R.id.registerUserNameEditText);
         passwordEditText = (EditText) findViewById(R.id.registerPasswordEditText);
         verifyPasswordEditText = (EditText) findViewById(R.id.verifyPasswordEditText);
+        contentLinearLayout = (LinearLayout) findViewById(R.id.contentLinearLayout);
 
         newsAlertCheckBox = (CheckBox) findViewById(R.id.newsletterCheckBox);
         newsAlertCheckBox.setChecked(true);
         userRegisterButton = (Button) findViewById(R.id.newRegisterButton);
+
+        if (WelcomeActivity.widthAndHeight.get("width") <= 480) {
+            contentLinearLayoutParams = (LinearLayout.LayoutParams) contentLinearLayout.getLayoutParams();
+            contentLinearLayoutParams.leftMargin = 20;
+            contentLinearLayoutParams.rightMargin = 0;
+            contentLinearLayout.setLayoutParams(contentLinearLayoutParams);
+
+            //Set layout params
+            editTextParams = (LinearLayout.LayoutParams) firstNameEditText.getLayoutParams();
+            editTextParams.width = 440;
+
+            firstNameEditText.setLayoutParams(editTextParams);
+            userEmailEditText.setLayoutParams(editTextParams);
+            usernameEditText.setLayoutParams(editTextParams);
+            passwordEditText.setLayoutParams(editTextParams);
+            verifyPasswordEditText.setLayoutParams(editTextParams);
+
+            userRegisterButton.setLayoutParams(editTextParams);
+        }
 
         userRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override

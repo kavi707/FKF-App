@@ -62,6 +62,7 @@ public class SingleRecipeActivity extends Activity {
 
     private LinearLayout.LayoutParams contentParams;
     private FrameLayout.LayoutParams favoriteButtonParams;
+    private LinearLayout.LayoutParams titleBackgroundParams;
     private LinearLayout instructionsLinearLayout;
     private LinearLayout relatedRecipeLinearLayout;
     private Map<String, Integer> layoutWidthAndHeight;
@@ -69,6 +70,7 @@ public class SingleRecipeActivity extends Activity {
     private LinearLayout firstItemIngredients, secondItemIngredients, thirdItemIngredients;
     private LinearLayout firstRecipeIngredientLinearLayout, secondRecipeIngredientLinearLayout, thirdRecipeIngredientLinearLayout;
     private LinearLayout linkedImagesLinearLayout, linkedRecipesLinearLayout;
+    private LinearLayout firstIngredientTitleBackground, secondIngredientTitleBackground, thirdIngredientTitleBackground;
 
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(this);
@@ -149,8 +151,13 @@ public class SingleRecipeActivity extends Activity {
 
     private void setUpView() {
 
+
         instructionsLinearLayout = (LinearLayout) findViewById(R.id.instructionsLinearLayout);
         relatedRecipeLinearLayout = (LinearLayout) findViewById(R.id.relatedRecipeLinearLayout);
+
+        firstIngredientTitleBackground = (LinearLayout) findViewById(R.id.firstIngredientTitleBackground);
+        secondIngredientTitleBackground = (LinearLayout) findViewById(R.id.secondIngredientTitleBackground);
+        thirdIngredientTitleBackground = (LinearLayout) findViewById(R.id.thirdIngredientTitleBackground);
 
         singleRecipeNameTextView = (TextView) findViewById(R.id.singleRecipeNameTextView);
         singleRecipeRatingBar = (RatingBar) findViewById(R.id.singleRecipeRatingBar);
@@ -426,7 +433,10 @@ public class SingleRecipeActivity extends Activity {
             singleRecipeMyFavoriteImageButton.setVisibility(View.GONE);
         }
 
-        //Set font size according to device screen size
+        //Set fonts size & title backgrounds according to device screen size
+        titleBackgroundParams = (LinearLayout.LayoutParams) firstIngredientTitleBackground.getLayoutParams();
+        titleBackgroundParams.width = 420;
+
         if (layoutWidthAndHeight.get("width") <= 480) {
 
             singleRecipeDescriptionTextView.setTextSize(14);
@@ -436,6 +446,12 @@ public class SingleRecipeActivity extends Activity {
             secondItemIngredientTitleTextView.setTextSize(14);
             thirdItemIngredientTitleTextView.setTextSize(14);
             getSingleRecipeInstructionLabelTextView.setTextSize(14);
+
+            firstIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            secondIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            thirdIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            instructionsLinearLayout.setLayoutParams(titleBackgroundParams);
+            relatedRecipeLinearLayout.setLayoutParams(titleBackgroundParams);
 
         } else if (layoutWidthAndHeight.get("width") <= 720) {
 
