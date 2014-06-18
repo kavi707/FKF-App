@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fkf.commercial.R;
+import com.fkf.commercial.WelcomeActivity;
 import com.fkf.commercial.adapter.RecipeListAdapter;
 import com.fkf.commercial.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.commercial.database.Recipe;
@@ -138,6 +139,9 @@ public class RecipeListFragment extends Fragment {
         //recipes search from given name
         searchRecipeListImageButton = (ImageButton) myFragmentView.findViewById(R.id.searchRecipeListImageButton);
         searchRecipeListEditText = (EditText) myFragmentView.findViewById(R.id.searchRecipeListEditText);
+        if (WelcomeActivity.widthAndHeight.get("width") <= 480) {
+            searchRecipeListEditText.setTextSize(14);
+        }
         searchRecipeListImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

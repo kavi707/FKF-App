@@ -820,6 +820,9 @@ public class HomeFragment extends Fragment {
         //recipes search from given name
         searchRecipeButton = (ImageButton) myFragmentView.findViewById(R.id.searchRecipeImageButton);
         searchRecipeEditText = (EditText) myFragmentView.findViewById(R.id.searchRecipeEditText);
+        if (WelcomeActivity.widthAndHeight.get("width") <= 480) {
+            searchRecipeEditText.setTextSize(14);
+        }
         searchRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
