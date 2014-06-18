@@ -53,6 +53,7 @@
                     android:textStyle="bold"
                     android:gravity="left"
                     android:text="Welcome"
+                    android:textColor="@color/gray"
                     android:typeface="normal"/>
 
                 <TextView
@@ -66,6 +67,7 @@
                     android:textSize="14dp"
                     android:gravity="left"
                     android:text="@string/userLabel"
+                    android:textColor="@color/gray"
                     android:typeface="normal"/>
             </LinearLayout>
 

@@ -118,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center_vertical"
                     android:text="@string/newsletterCheckBoxLabel"
+                    android:textColor="@color/white"
                     android:typeface="normal" />
 
                 <Button

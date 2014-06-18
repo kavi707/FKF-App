@@ -118,6 +118,7 @@
                     android:layout_gravity="left|center_vertical"
                     android:text="@string/newsletterCheckBoxLabel"
                     android:textSize="20dp"
+                    android:textColor="@color/white"
                     android:typeface="normal" />
 
                 <TextView

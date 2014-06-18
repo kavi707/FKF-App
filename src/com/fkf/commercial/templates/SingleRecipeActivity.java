@@ -463,6 +463,9 @@ public class SingleRecipeActivity extends Activity {
             thirdItemIngredientTitleTextView.setTextSize(15);
             getSingleRecipeInstructionLabelTextView.setTextSize(15);
 
+            titleBackgroundParams.width = 690;
+            firstIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+
         } else if (layoutWidthAndHeight.get("width") <= 1080) {
 
             singleRecipeDescriptionTextView.setTextSize(16);

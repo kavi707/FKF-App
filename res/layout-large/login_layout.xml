@@ -108,6 +108,7 @@
                     android:typeface="normal"
                     android:layout_gravity="center"
                     android:textSize="26dp"
+                    android:textColor="@color/white"
                     android:id="@+id/orTextView"/>
 
             <TextView
@@ -148,6 +149,7 @@
                         android:typeface="normal"
                         android:layout_marginLeft="40dp"
                         android:textSize="15dp"
+                        android:textColor="@color/white"
                         android:layout_gravity="left|center_vertical"/>
 
                 <Button
