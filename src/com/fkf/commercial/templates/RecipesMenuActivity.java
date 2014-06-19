@@ -54,7 +54,7 @@ public class RecipesMenuActivity extends Activity {
 
     private TextView menuHomeTextView;
     private TextView loggedOutButtonSeparatorTextView, loggedUserNameTextView, loggedUserTextView;
-    private LinearLayout menuMyFavoriteLinearLayout;
+    private LinearLayout menuMyFavoriteLinearLayout, logUserLayout;
     private AlertDialog messageBalloonAlertDialog;
     private ImageButton logoutButton;
     private ImageView profileImageView;
@@ -79,6 +79,16 @@ public class RecipesMenuActivity extends Activity {
 
         menuHomeTextView = (TextView) findViewById(R.id.menuHomeTextView);
         menuMyFavoriteLinearLayout = (LinearLayout) findViewById(R.id.menuMyFavoriteLinearLayout);
+
+        /**** This is for hide virtual key-board popup on this layout clicked ****/
+        logUserLayout = (LinearLayout) findViewById(R.id.logUserLayout);
+        logUserLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("LogUserLinearLayout", "LinearLayout Clicked");
+            }
+        });
+        /**************************************************************************/
 
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
