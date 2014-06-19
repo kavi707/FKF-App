@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -27,15 +26,10 @@ import android.widget.TextView;
 
 import com.fkf.commercial.R;
 import com.fkf.commercial.adapter.RecipeCategoryListAdapter;
-import com.fkf.commercial.adapter.RecipeListAdapter;
 import com.fkf.commercial.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.commercial.database.Recipe;
 import com.fkf.commercial.database.RecipeCategory;
 import com.fkf.commercial.services.image.loader.ImageLoader;
-import com.fkf.commercial.views.RecipeCategoryListItem;
-import com.fkf.commercial.views.RecipeListItem;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -265,7 +259,8 @@ public class RecipesMenuActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.welcome_single, menu);
+        //**************** Remove options menu *******************//
+        //getMenuInflater().inflate(R.menu.welcome_single, menu);
         return true;
     }
 
@@ -277,13 +272,14 @@ public class RecipesMenuActivity extends Activity {
         }
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_about:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    //**************** Remove options menu *******************//
     /* *
      * Called when invalidateOptionsMenu() is triggered
      */
@@ -291,7 +287,7 @@ public class RecipesMenuActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // if nav drawer is opened, hide the action items
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_about).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }*/
 
