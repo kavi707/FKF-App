@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -74,6 +76,9 @@ public class RegisterActivity extends Activity {
     }
 
     private void setUpView() {
+
+        //Set color to action bar
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff750810")));
 
         firstNameEditText = (EditText) findViewById(R.id.firstNameEditText);
         userEmailEditText = (EditText) findViewById(R.id.userEmailEditText);
