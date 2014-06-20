@@ -126,6 +126,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/singleRecipeContentLabel"
                             android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/white"
                             android:typeface="normal" />
                     </LinearLayout>
 
@@ -163,6 +164,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/singleRecipeContentLabel"
                             android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/white"
                             android:typeface="normal" />
                     </LinearLayout>
 
@@ -200,6 +202,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/singleRecipeContentLabel"
                             android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/white"
                             android:typeface="normal" />
                     </LinearLayout>
 
@@ -230,6 +233,7 @@
                         android:gravity="center_vertical"
                         android:text="@string/related_recipe_heading"
                         android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white"
                         android:typeface="normal" />
                 </LinearLayout>
 
@@ -256,6 +260,7 @@
                         android:layout_marginLeft="10dp"
                         android:text="@string/singleRecipeInstructionLabel"
                         android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white"
                         android:typeface="normal" />
                 </LinearLayout>
 

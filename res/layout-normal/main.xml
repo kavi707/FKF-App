@@ -58,6 +58,7 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/loadingMessage"
                     android:id="@+id/progressBarTitleTextView"
+                    android:textColor="@color/white"
                     android:layout_gravity="center"/>
 
             <TextView

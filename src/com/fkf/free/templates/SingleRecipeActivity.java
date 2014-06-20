@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -159,6 +160,9 @@ public class SingleRecipeActivity extends Activity {
     }
 
     private void setUpView() {
+
+        //Set color to action bar
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff750810")));
 
         instructionsLinearLayout = (LinearLayout) findViewById(R.id.instructionsLinearLayout);
         relatedRecipeLinearLayout = (LinearLayout) findViewById(R.id.relatedRecipeLinearLayout);

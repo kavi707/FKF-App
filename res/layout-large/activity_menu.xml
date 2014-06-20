@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Framelayout to display Fragments -->
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/logUserLayout"
+            android:background="@drawable/category_list_background"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:id="@+id/userDetailsLayout"
+                android:layout_width="260dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="7dp" />
+
+                <ImageButton
+                    android:id="@+id/fullVersionBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/full_version_btn_background"
+                    android:src="@drawable/full_version_btn" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/menuHomeTextView"
+            android:layout_width="375dp"
+            android:layout_height="50dip"
+            android:background="@drawable/category_list_background"
+            android:gravity="center_vertical"
+            android:text="  Home"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/normal_gray"
+            android:typeface="normal" />
+
+        <!-- Listview to display slider menu -->
+        <ListView
+            android:id="@+id/list_slidermenu"
+            android:layout_width="375dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/list_background"
+            android:choiceMode="singleChoice"
+            android:divider="@color/list_divider"
+            android:dividerHeight="1dp"
+            android:listSelector="@drawable/list_selector" />
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
