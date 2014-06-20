@@ -8,9 +8,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="15"/>
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="15"/>
     <application android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar"
+            android:theme="@android:style/android:Theme.Holo.Light.DarkActionBar"
             android:icon="@drawable/app_icon_free">
         <provider
                 android:name=".database.dbprovider.DbContentProvider"
@@ -32,6 +32,8 @@
         <activity android:name=".templates.RegisterActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".templates.RecipesActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".templates.RecipesMenuActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".templates.SingleRecipeActivity"
                   android:screenOrientation="portrait"/>

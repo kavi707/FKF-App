@@ -21,6 +21,7 @@ import com.fkf.free.database.dbprovider.ContentProviderAccessor;
 import com.fkf.free.services.ActivityUserPermissionServices;
 import com.fkf.free.templates.LoginActivity;
 import com.fkf.free.templates.RecipesActivity;
+import com.fkf.free.templates.RecipesMenuActivity;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -235,8 +236,10 @@ public class WelcomeActivity extends Activity {
 
     private void onContinue() {
         LoginActivity.LOGGED_STATUS = 0;
-        Intent recipesIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
-        startActivity(recipesIntent);
+        /*Intent recipesIntent = new Intent(WelcomeActivity.this, RecipesActivity.class);
+        startActivity(recipesIntent);*/
+        Intent recipesMenuIntent = new Intent(WelcomeActivity.this, RecipesMenuActivity.class);
+        startActivity(recipesMenuIntent);
         finish();
     }
 

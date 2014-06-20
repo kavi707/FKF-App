@@ -42,6 +42,8 @@
     <string name="buy_pro_message_2">More than 700 recipes available in the full version. Would you like to buy the full version ?</string>
     <string name="buy_label">Buy</string>
 
+    <string name="action_about">About</string>
+
     <!-- Google Ads Unit ID -->
     <string name="admob_id">ca-app-pub-5523232753553387/5791410379</string>
 
