@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -64,6 +66,9 @@ public class WelcomeActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        //Set color to action bar
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff750810")));
 
         //get device height and width (resolution)
         widthAndHeight = userPermissionServices.getDeviceWidthAndHeight(WelcomeActivity.this);

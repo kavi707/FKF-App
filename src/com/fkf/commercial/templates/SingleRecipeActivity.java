@@ -478,6 +478,9 @@ public class SingleRecipeActivity extends Activity {
             secondItemIngredientTitleTextView.setTextSize(16);
             thirdItemIngredientTitleTextView.setTextSize(16);
             getSingleRecipeInstructionLabelTextView.setTextSize(16);
+
+            titleBackgroundParams.width = 1035;
+            firstIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
         }
 
         loadLinkedRecipes();
