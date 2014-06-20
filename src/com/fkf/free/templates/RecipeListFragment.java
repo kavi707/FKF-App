@@ -19,6 +19,8 @@ import com.fkf.free.adapter.RecipeListAdapter;
 import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.free.database.Recipe;
 import com.fkf.free.database.RecipeCategory;
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 public class RecipeListFragment extends Fragment {
 
     private View myFragmentView;
+    private AdView googleAdView;
 
     private TextView yummyCategoryNameTextView;
     private ListView recipeItemList;
@@ -71,8 +74,15 @@ public class RecipeListFragment extends Fragment {
 
         yummyCategoryNameTextView = (TextView) myFragmentView.findViewById(R.id.yummyCategoryNameTextView);
 
+        googleAdView = (AdView) myFragmentView.findViewById(R.id.adRecipeList);
+
         //yummy list view for selected yummy category
         recipeItemList = (ListView) myFragmentView.findViewById(R.id.recipeItemList);
+
+        //set Google Ads bannerx
+        AdRequest re = new AdRequest();
+        re.setGender(AdRequest.Gender.FEMALE);
+        googleAdView.loadAd(re);
 
         recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(recipeCategory.getCategoryId());
         recipeListAdapter = new RecipeListAdapter(recipeList, this.context);

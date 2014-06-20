@@ -5,6 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="fill_parent">
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <com.google.ads.AdView xmlns:googleads="http://schemas.android.com/apk/lib/com.google.ads"
+            android:id="@+id/adHome"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            googleads:adSize="BANNER"
+            googleads:adUnitId="@string/admob_id" />
+
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/latestAndPopularScrollBar"
         android:fillViewport="true"

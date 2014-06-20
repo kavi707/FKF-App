@@ -23,6 +23,8 @@ import com.fkf.free.WelcomeActivity;
 import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.free.database.PopularOrLatestRecipe;
 import com.fkf.free.database.Recipe;
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -96,6 +98,8 @@ public class HomeFragment extends Fragment {
 
     LinearLayout.LayoutParams contentParams;
 
+    private AdView googleAdView;
+
     private ProgressDialog progress;
     private Handler handler;
 
@@ -158,6 +162,13 @@ public class HomeFragment extends Fragment {
         forthPopularRecipeRatingBar = (RatingBar) myFragmentView.findViewById(R.id.forthPopularRecipeRatingBar);
         fifthPopularRecipeRatingBar = (RatingBar) myFragmentView.findViewById(R.id.fifthPopularRecipeRatingBar);
         sixthPopularRecipeRatingBar = (RatingBar) myFragmentView.findViewById(R.id.sixthPopularRecipeRatingBar);
+
+        googleAdView = (AdView) myFragmentView.findViewById(R.id.adHome);
+
+        //set Google Ads bannerx
+        AdRequest re = new AdRequest();
+        re.setGender(AdRequest.Gender.FEMALE);
+        googleAdView.loadAd(re);
 
         List<PopularOrLatestRecipe> latestRecipes = localDatabaseSQLiteOpenHelper.getAllLatestRecipes();
         String[] latestRecipeNames = new String[10];
