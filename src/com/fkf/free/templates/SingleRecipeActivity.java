@@ -81,6 +81,9 @@ public class SingleRecipeActivity extends Activity {
     private LinearLayout firstRecipeIngredientLinearLayout, secondRecipeIngredientLinearLayout, thirdRecipeIngredientLinearLayout;
     private LinearLayout linkedImagesLinearLayout, linkedRecipesLinearLayout;
 
+    private LinearLayout firstIngredientTitleBackground, secondIngredientTitleBackground, thirdIngredientTitleBackground;
+    private LinearLayout.LayoutParams titleLayoutParams;
+
     private AlertDialog messageBalloonAlertDialog;
 
     private ActivityUserPermissionServices userPermissionServices = new ActivityUserPermissionServices();
@@ -166,6 +169,10 @@ public class SingleRecipeActivity extends Activity {
 
         instructionsLinearLayout = (LinearLayout) findViewById(R.id.instructionsLinearLayout);
         relatedRecipeLinearLayout = (LinearLayout) findViewById(R.id.relatedRecipeLinearLayout);
+
+        firstIngredientTitleBackground = (LinearLayout) findViewById(R.id.firstIngredientTitleBackground);
+        secondIngredientTitleBackground = (LinearLayout) findViewById(R.id.secondIngredientTitleBackground);
+        thirdIngredientTitleBackground = (LinearLayout) findViewById(R.id.thirdIngredientTitleBackground);
 
         singleRecipeNameTextView = (TextView) findViewById(R.id.singleRecipeNameTextView);
         singleRecipeRatingBar = (RatingBar) findViewById(R.id.singleRecipeRatingBar);
@@ -451,7 +458,10 @@ public class SingleRecipeActivity extends Activity {
             }
         });
 
-        //Set font size according to device screen size
+        titleLayoutParams = (LinearLayout.LayoutParams) firstIngredientTitleBackground.getLayoutParams();
+        titleLayoutParams.width = 420;
+
+        //Set font size and title layout params according to device screen size
         if (layoutWidthAndHeight.get("width") <= 480) {
 
             singleRecipeDescriptionTextView.setTextSize(14);
@@ -461,6 +471,12 @@ public class SingleRecipeActivity extends Activity {
             secondItemIngredientTitleTextView.setTextSize(14);
             thirdItemIngredientTitleTextView.setTextSize(14);
             getSingleRecipeInstructionLabelTextView.setTextSize(14);
+
+            firstIngredientTitleBackground.setLayoutParams(titleLayoutParams);
+            secondIngredientTitleBackground.setLayoutParams(titleLayoutParams);
+            thirdIngredientTitleBackground.setLayoutParams(titleLayoutParams);
+            instructionsLinearLayout.setLayoutParams(titleLayoutParams);
+            relatedRecipeLinearLayout.setLayoutParams(titleLayoutParams);
 
         } else if (layoutWidthAndHeight.get("width") <= 720) {
 
@@ -472,6 +488,9 @@ public class SingleRecipeActivity extends Activity {
             thirdItemIngredientTitleTextView.setTextSize(15);
             getSingleRecipeInstructionLabelTextView.setTextSize(15);
 
+            titleLayoutParams.width = 690;
+            firstIngredientTitleBackground.setLayoutParams(titleLayoutParams);
+
         } else if (layoutWidthAndHeight.get("width") <= 1080) {
 
             singleRecipeDescriptionTextView.setTextSize(16);
@@ -481,6 +500,9 @@ public class SingleRecipeActivity extends Activity {
             secondItemIngredientTitleTextView.setTextSize(16);
             thirdItemIngredientTitleTextView.setTextSize(16);
             getSingleRecipeInstructionLabelTextView.setTextSize(16);
+
+            titleLayoutParams.width = 1035;
+            firstIngredientTitleBackground.setLayoutParams(titleLayoutParams);
         }
 
         loadLinkedRecipes();
