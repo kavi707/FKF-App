@@ -81,7 +81,7 @@
                                 android:layout_gravity="center"
                                 android:textSize="18dp"
                                 android:typeface="normal"
-                                android:text="Text View"/>
+                                android:text="Recipe Name"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -106,7 +106,7 @@
                                 android:layout_gravity="center"
                                 android:textSize="18dp"
                                 android:typeface="normal"
-                                android:text="Text View"/>
+                                android:text="Recipe Name"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -131,7 +131,7 @@
                                 android:layout_gravity="center"
                                 android:textSize="18dp"
                                 android:typeface="normal"
-                                android:text="Text View"/>
+                                android:text="Recipe Name"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -156,7 +156,7 @@
                                 android:layout_gravity="center"
                                 android:textSize="18dp"
                                 android:typeface="normal"
-                                android:text="Text View"/>
+                                android:text="Recipe Name"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -181,7 +181,7 @@
                                 android:layout_gravity="center"
                                 android:textSize="18dp"
                                 android:typeface="normal"
-                                android:text="Text View"/>
+                                android:text="Recipe Name"/>
                         </LinearLayout>
                     </LinearLayout>
                 </HorizontalScrollView>

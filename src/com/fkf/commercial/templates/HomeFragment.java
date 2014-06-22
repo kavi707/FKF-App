@@ -167,12 +167,16 @@ public class HomeFragment extends Fragment {
         fifthPopularRecipeRatingBar = (RatingBar) myFragmentView.findViewById(R.id.fifthPopularRecipeRatingBar);
         sixthPopularRecipeRatingBar = (RatingBar) myFragmentView.findViewById(R.id.sixthPopularRecipeRatingBar);
 
-        List<PopularOrLatestRecipe> latestRecipes = localDatabaseSQLiteOpenHelper.getAllLatestRecipes();
         String[] latestRecipeNames = new String[10];
-        if(latestRecipes != null) {
-            for (PopularOrLatestRecipe latestRecipe : latestRecipes) {
-                latestRecipeNames[latestRecipe.getIndex()] = latestRecipe.getRecipeName();
+        try {
+            List<PopularOrLatestRecipe> latestRecipes = localDatabaseSQLiteOpenHelper.getAllLatestRecipes();
+            if (latestRecipes != null) {
+                for (PopularOrLatestRecipe latestRecipe : latestRecipes) {
+                    latestRecipeNames[latestRecipe.getIndex()] = latestRecipe.getRecipeName();
+                }
             }
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
         }
 
         /********************************************/
