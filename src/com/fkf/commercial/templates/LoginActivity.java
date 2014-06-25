@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class LoginActivity extends Activity {
     private Button loginButton;
     private TextView browsRecipesTextView;
     private TextView spaceTextView;
+    private TextView forgotPasswordLinkTextView;
 
     private Context context = this;
     private Handler handler;
@@ -109,6 +111,7 @@ public class LoginActivity extends Activity {
         registerButton = (Button) findViewById(R.id.registerButton);
         loginButton = (Button) findViewById(R.id.loginButton);
         browsRecipesTextView = (TextView) findViewById(R.id.browsRecipesTextView);
+        forgotPasswordLinkTextView = (TextView) findViewById(R.id.forgotPasswordLinkTextView);
 
         spaceTextView = (TextView) findViewById(R.id.spaceTextView);
 
@@ -252,6 +255,15 @@ public class LoginActivity extends Activity {
                         });
                     }
                 });
+            }
+        });
+
+        forgotPasswordLinkTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://www.fauziaskitchenfun.com/user/password/"));
+                startActivity(intent);
             }
         });
     }

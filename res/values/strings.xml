@@ -21,6 +21,7 @@
     <string name="passwordLabel">Password</string>
     <string name="verifyPasswordLabel">Verify Password</string>
     <string name="userLabel">User</string>
+    <string name="forgotPasswordLabel">Forgot Password ?</string>
 
     <!-- register view string resources -->
     <string name="firstNameLabel">First Name</string>
