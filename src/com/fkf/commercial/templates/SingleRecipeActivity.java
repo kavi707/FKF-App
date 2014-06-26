@@ -436,6 +436,9 @@ public class SingleRecipeActivity extends Activity {
             singleRecipeMyFavoriteImageButton.setVisibility(View.GONE);
         }
 
+        titleBackgroundParams = (LinearLayout.LayoutParams) instructionsLinearLayout.getLayoutParams();
+        Log.d(">>>>>>>>>>>>>>>>>>>>>>>> width: ", String.valueOf(titleBackgroundParams.width));
+
         //Set fonts size & title backgrounds according to device screen size
         titleBackgroundParams = (LinearLayout.LayoutParams) firstIngredientTitleBackground.getLayoutParams();
         titleBackgroundParams.width = 420;
@@ -480,6 +483,12 @@ public class SingleRecipeActivity extends Activity {
             getSingleRecipeInstructionLabelTextView.setTextSize(16);
 
             titleBackgroundParams.width = 1035;
+            firstIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+        } else if (layoutWidthAndHeight.get("width") <= 1200) {
+            titleBackgroundParams.width = 600;
+            firstIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+        } else if (layoutWidthAndHeight.get("width") <= 1600) {
+            titleBackgroundParams.width = 600;
             firstIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
         }
 
