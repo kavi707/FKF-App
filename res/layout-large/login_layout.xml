@@ -1,175 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:gravity="bottom"
-              android:background="@drawable/login_large"
-              android:layout_width="match_parent"
-              android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/login_large"
+    android:gravity="bottom"
+    android:orientation="vertical">
 
-    <ScrollView
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-        <LinearLayout
-                android:orientation="vertical"
-                android:focusableInTouchMode="true"
-                android:layout_gravity="top"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/spaceTextView"
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="100dp"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-            <ImageView
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/spaceTextView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <ImageView
+                    android:id="@+id/logoImageView"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/logoImageView"
-                    android:src="@drawable/logo"/>
-            <TextView
+                    android:src="@drawable/logo" />
+
+                <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="20dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/usernameLinearLayout"
-                android:orientation="horizontal">
-            <ImageView
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:id="@+id/usernameLinearLayout"
                     android:layout_width="wrap_content"
-                    android:src="@drawable/username_icon"/>
-            <EditText
-                    android:layout_width="330dp"
-                    android:layout_height="75dp"
-                    android:layout_gravity="center"
-                    android:textSize="25dp"
-                    android:focusableInTouchMode="true"
-                    android:hint="@string/usernameLabel"
-                    android:typeface="normal"
-                    android:background="@color/white"
-                    android:id="@+id/usernameEditText"/>
-            </LinearLayout>
-
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
-
-        <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/passwordLinearLayout"
-                android:orientation="horizontal">
-            <ImageView
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:src="@drawable/password_icon"/>
-            <EditText
-                    android:layout_width="330dp"
-                    android:layout_height="75dp"
                     android:layout_gravity="center"
-                    android:textSize="25dp"
-                    android:focusableInTouchMode="true"
-                    android:password="true"
-                    android:hint="@string/passwordLabel"
-                    android:typeface="normal"
-                    android:background="@color/white"
-                    android:id="@+id/passwordEditText"/>
-            </LinearLayout>
+                    android:orientation="horizontal">
 
-            <TextView
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/username_icon" />
+
+                    <EditText
+                        android:id="@+id/usernameEditText"
+                        android:layout_width="330dp"
+                        android:layout_height="75dp"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/usernameLabel"
+                        android:textSize="25dp"
+                        android:typeface="normal" />
+                </LinearLayout>
+
+                <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
-            <Button
+                <LinearLayout
+                    android:id="@+id/passwordLinearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/password_icon" />
+
+                    <EditText
+                        android:id="@+id/passwordEditText"
+                        android:layout_width="330dp"
+                        android:layout_height="75dp"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/passwordLabel"
+                        android:password="true"
+                        android:textSize="25dp"
+                        android:typeface="normal" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/loginButton"
                     android:layout_width="400dp"
                     android:layout_height="65dp"
                     android:layout_gravity="center"
-                    android:text="@string/loginButtonLabel"
-                    android:typeface="normal"
-                    android:id="@+id/loginButton"
-                    android:textColor="@color/white"
                     android:background="@drawable/login_btn_background"
+                    android:text="@string/loginButtonLabel"
+                    android:textColor="@color/white"
                     android:textSize="30dp"
-                    android:textStyle="bold"/>
-
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/orTextLabel"
-                    android:typeface="normal"
-                    android:layout_gravity="center"
-                    android:textSize="26dp"
-                    android:textColor="@color/white"
-                    android:id="@+id/orTextView"/>
-
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/recipesTextLabel"
-                    android:typeface="normal"
-                    android:layout_gravity="center"
-                    android:textSize="26dp"
-                    android:textColor="@color/white"
-                    android:id="@+id/browsRecipesTextView"/>
-
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/forgotPasswordLinkTextView"
-                android:text="@string/forgotPasswordLabel"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/white"
-                android:textSize="15dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
-
-            <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="80dp"
-                    android:background="@drawable/footer"
-                    android:layout_gravity="left|center_vertical">
+                    android:textStyle="bold"
+                    android:typeface="normal" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/accountCreateTextLabel"
-                        android:typeface="normal"
-                        android:layout_marginLeft="40dp"
-                        android:textSize="15dp"
-                        android:textColor="@color/white"
-                        android:layout_gravity="left|center_vertical"/>
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
 
-                <Button
-                        android:layout_width="110dp"
-                        android:layout_height="40dp"
-                        android:layout_marginRight="40dp"
-                        android:text="@string/registerButtonLabel"
-                        android:typeface="normal"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:background="@drawable/register_btn_background"
-                        android:id="@+id/registerButton"
-                        android:layout_gravity="right|center_vertical"/>
-            </FrameLayout>
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:id="@+id/orTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/orTextLabel"
+                    android:textColor="@color/white"
+                    android:textSize="26dp"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/browsRecipesTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/recipesTextLabel"
+                    android:textColor="@color/white"
+                    android:textSize="26dp"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/forgotPasswordLinkTextView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/forgotPasswordLabel"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/footer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="40dp"
+                android:text="@string/accountCreateTextLabel"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:typeface="normal" />
+
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/register_btn_background"
+                android:text="@string/registerButtonLabel"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+        </FrameLayout>
+    </RelativeLayout>
 </LinearLayout>
