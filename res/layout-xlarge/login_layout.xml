@@ -6,6 +6,7 @@
               android:layout_height="match_parent">
 
     <RelativeLayout
+            android:background="@drawable/login_large"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
         <LinearLayout
@@ -17,9 +18,15 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true">
 
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/logoImageView"
+                android:src="@drawable/logo"/>
+
             <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="120dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
             <EditText
                     android:layout_width="600dp"
@@ -69,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/orTextLabel"
                     android:layout_gravity="center"
+                    android:textColor="@color/white"
                     android:textSize="35dp"
                     android:id="@+id/orTextView"/>
 
@@ -83,12 +91,26 @@
                     android:text="@string/recipesTextLabel"
                     android:layout_gravity="center"
                     android:textSize="35dp"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/white"
                     android:id="@+id/browsRecipesTextView"/>
 
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <TextView
+                android:id="@+id/forgotPasswordLinkTextView"
+                android:text="@string/forgotPasswordLabel"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/white"
+                android:textSize="28dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <FrameLayout
+                android:background="@drawable/footer"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
                 android:layout_gravity="left|center_vertical"
@@ -101,6 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
                     android:textSize="35dp"
+                    android:textColor="@color/white"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/accountCreateTextLabel"
                     android:layout_gravity="left|center_vertical"/>
