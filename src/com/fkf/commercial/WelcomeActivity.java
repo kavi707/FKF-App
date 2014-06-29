@@ -188,19 +188,25 @@ public class WelcomeActivity extends Activity {
                     });
                 } else {
 
-                    //create internal app dir if not exists
-                    userPermissionServices.createInternalAppDirectories(appFilePath);
+                    boolean status = false;
 
-                    //update the database if server database is modified
-                    userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
+                    if (userPermissionServices.isDbUpdate(WelcomeActivity.this)) {
+                        //create internal app dir if not exists
+                        userPermissionServices.createInternalAppDirectories(appFilePath);
 
-                    //update the recipe categories from the server data
-                    userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+                        //update the database if server database is modified
+                        userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
 
-                    //populate popular yummy details and download images
-                    userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
-                    //populate latest yummy details and download images
-                    boolean status = userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
+                        //update the recipe categories from the server data
+                        userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+
+                        //populate popular yummy details and download images
+                        userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
+                        //populate latest yummy details and download images
+                        status = userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
+                    } else {
+                        status = true;
+                    }
 
                     if (status) {
                         Log.d("Process State", "TRUE");
