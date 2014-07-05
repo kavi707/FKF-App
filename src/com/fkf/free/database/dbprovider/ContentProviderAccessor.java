@@ -9,7 +9,6 @@ import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.free.database.PopularOrLatestRecipe;
 import com.fkf.free.database.Recipe;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -192,6 +191,76 @@ public class ContentProviderAccessor {
         if(contextUri != null) {
             context.getContentResolver().insert(contextUri, values);
         }
+    }
+
+    /**
+     * Get recipes from given category id
+     * @param categoryId
+     * @param context
+     * @return
+     */
+    public ArrayList<Recipe> getRecipesFromCategoryId(int categoryId, Context context) {
+        ArrayList<Recipe> selectedRecipeList = new ArrayList<Recipe>();
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.RECIPES_TABLE_NAME);
+        if (contextUri != null) {
+            String where = LocalDatabaseSQLiteOpenHelper.CATEGORY_ID + " = " + categoryId;
+
+            Cursor recipeCursor = context.getContentResolver().query(contextUri,null, where, null, null);
+            if(recipeCursor != null) {
+                recipeCursor.moveToFirst();
+                Recipe recipe;
+                if(!recipeCursor.isAfterLast()) {
+                    do {
+                        int recipeId = recipeCursor.getInt(0);
+                        String productId = recipeCursor.getString(1);
+                        String recipeName = recipeCursor.getString(2);
+                        String recipeDescription = recipeCursor.getString(3);
+                        String recipeIngredients = recipeCursor.getString(4);
+                        String recipeInstructions = recipeCursor.getString(5);
+                        int recipeCategoryId = recipeCursor.getInt(6);
+                        String recipeAddedDate = recipeCursor.getString(7);
+                        int recipeRatings = recipeCursor.getInt(8);
+                        String recipeImageUrl = recipeCursor.getString(9);
+                        String recipeImageUrl_xs = recipeCursor.getString(10);
+                        String recipeImageUrl_s = recipeCursor.getString(11);
+                        String recipeImageUrl_m = recipeCursor.getString(12);
+                        String recipeImageUrl_l = recipeCursor.getString(13);
+                        String linkedImages = recipeCursor.getString(14);
+                        String linkedRecipes = recipeCursor.getString(15);
+                        int legacy = recipeCursor.getInt(16);
+                        String recipeBody = recipeCursor.getString(17);
+                        String recipeImageUrl_t = recipeCursor.getString(18);
+                        String recipeImageUrl_xl = recipeCursor.getString(19);
+
+                        recipe = new Recipe();
+
+                        recipe.setId(recipeId);
+                        recipe.setProductId(productId);
+                        recipe.setName(recipeName);
+                        recipe.setDescription(recipeDescription);
+                        recipe.setIngredients(recipeIngredients);
+                        recipe.setInstructions(recipeInstructions);
+                        recipe.setCategoryId(recipeCategoryId);
+                        recipe.setAddedDate(recipeAddedDate);
+                        recipe.setRatings(recipeRatings);
+                        recipe.setImageUrl(recipeImageUrl);
+                        recipe.setImageUrl_xs(recipeImageUrl_xs);
+                        recipe.setImageUrl_s(recipeImageUrl_s);
+                        recipe.setImageUrl_m(recipeImageUrl_m);
+                        recipe.setImageUrl_l(recipeImageUrl_l);
+                        recipe.setLinkImages(linkedImages);
+                        recipe.setLinkRecipeIds(linkedRecipes);
+                        recipe.setLegacy(legacy);
+                        recipe.setBody(recipeBody);
+                        recipe.setImageUrlT(recipeImageUrl_t);
+                        recipe.setImageUrl_xl(recipeImageUrl_xl);
+
+                        selectedRecipeList.add(recipe);
+                    } while (recipeCursor.moveToNext());
+                }
+            }
+        }
+        return selectedRecipeList;
     }
 
     public boolean isRecipeExist(String recipeProductId, Context context) {

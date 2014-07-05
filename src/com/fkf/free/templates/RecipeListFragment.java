@@ -19,6 +19,7 @@ import com.fkf.free.adapter.RecipeListAdapter;
 import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.free.database.Recipe;
 import com.fkf.free.database.RecipeCategory;
+import com.fkf.free.database.dbprovider.ContentProviderAccessor;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 
@@ -47,6 +48,7 @@ public class RecipeListFragment extends Fragment {
     private String titleHeading = "";
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper;
+    private ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
 
     public RecipeListFragment(RecipeCategory recipeCategory, Context context) {
         if (recipeCategory != null)

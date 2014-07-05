@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -209,74 +210,104 @@ public class HomeFragment extends Fragment {
             getHeight = (810 * WelcomeActivity.widthAndHeight.get("width"))/1080;
         }
 
-        File firstImageFile = new File(context.getFilesDir()+"/fauzias/latest_yummys/icon_1");
-        if(firstImageFile.exists()) {
-            Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
-            firstYummyImageButton.setImageBitmap(firstBitmap);
-            contentParams = (LinearLayout.LayoutParams)firstYummyImageButton.getLayoutParams();
-            contentParams.height = Math.round(getHeight);
-            contentParams.width = WelcomeActivity.widthAndHeight.get("width");
-            firstYummyImageButton.setLayoutParams(contentParams);
-            firstYummyTextView.setText("  " + latestRecipeNames[1]);
-        } else {
-            firstYummyImageButton.setImageResource(R.drawable.fkf_xs);
-            firstYummyTextView.setText("  " + latestRecipeNames[1]);
+        try {
+            File firstImageFile = new File(context.getFilesDir() + "/fauzias/latest_yummys/icon_1");
+            if (firstImageFile.exists()) {
+                Bitmap firstBitmap = BitmapFactory.decodeFile(firstImageFile.getAbsolutePath());
+                firstYummyImageButton.setImageBitmap(firstBitmap);
+                contentParams = (LinearLayout.LayoutParams) firstYummyImageButton.getLayoutParams();
+                contentParams.height = Math.round(getHeight);
+                contentParams.width = WelcomeActivity.widthAndHeight.get("width");
+                firstYummyImageButton.setLayoutParams(contentParams);
+                firstYummyTextView.setText("  " + latestRecipeNames[1]);
+            } else {
+                firstYummyImageButton.setImageResource(R.drawable.fkf_xs);
+                firstYummyTextView.setText("  " + latestRecipeNames[1]);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "First Latest Recipe");
+            setDefaultImageToLatestRecipe(firstYummyImageButton, firstYummyTextView);
+            ex.printStackTrace();
         }
 
-        File secondImageFile = new File(context.getFilesDir()+"/fauzias/latest_yummys/icon_2");
-        if(secondImageFile.exists()) {
-            Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
-            secondYummyImageButton.setImageBitmap(secondBitmap);
-            contentParams = (LinearLayout.LayoutParams)secondYummyImageButton.getLayoutParams();
-            contentParams.height = Math.round(getHeight);
-            contentParams.width = WelcomeActivity.widthAndHeight.get("width");
-            secondYummyImageButton.setLayoutParams(contentParams);
-            secondYummyTextView.setText("  " + latestRecipeNames[2]);
-        } else {
-            secondYummyImageButton.setImageResource(R.drawable.fkf_xs);
-            secondYummyTextView.setText("  " + latestRecipeNames[2]);
+        try {
+            File secondImageFile = new File(context.getFilesDir() + "/fauzias/latest_yummys/icon_2");
+            if (secondImageFile.exists()) {
+                Bitmap secondBitmap = BitmapFactory.decodeFile(secondImageFile.getAbsolutePath());
+                secondYummyImageButton.setImageBitmap(secondBitmap);
+                contentParams = (LinearLayout.LayoutParams) secondYummyImageButton.getLayoutParams();
+                contentParams.height = Math.round(getHeight);
+                contentParams.width = WelcomeActivity.widthAndHeight.get("width");
+                secondYummyImageButton.setLayoutParams(contentParams);
+                secondYummyTextView.setText("  " + latestRecipeNames[2]);
+            } else {
+                secondYummyImageButton.setImageResource(R.drawable.fkf_xs);
+                secondYummyTextView.setText("  " + latestRecipeNames[2]);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "Second Latest Recipe");
+            setDefaultImageToLatestRecipe(secondYummyImageButton, secondYummyTextView);
+            ex.printStackTrace();
         }
 
-        File thirdImageFile = new File(context.getFilesDir()+"/fauzias/latest_yummys/icon_3");
-        if(thirdImageFile.exists()) {
-            Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
-            thirdYummyImageButton.setImageBitmap(thirdBitmap);
-            contentParams = (LinearLayout.LayoutParams)thirdYummyImageButton.getLayoutParams();
-            contentParams.height = Math.round(getHeight);
-            contentParams.width = WelcomeActivity.widthAndHeight.get("width");
-            thirdYummyImageButton.setLayoutParams(contentParams);
-            thirdYummyTextView.setText(latestRecipeNames[3]);
-        } else {
-            thirdYummyImageButton.setImageResource(R.drawable.fkf_xs);
-            thirdYummyTextView.setText(latestRecipeNames[3]);
+        try {
+            File thirdImageFile = new File(context.getFilesDir() + "/fauzias/latest_yummys/icon_3");
+            if (thirdImageFile.exists()) {
+                Bitmap thirdBitmap = BitmapFactory.decodeFile(thirdImageFile.getAbsolutePath());
+                thirdYummyImageButton.setImageBitmap(thirdBitmap);
+                contentParams = (LinearLayout.LayoutParams) thirdYummyImageButton.getLayoutParams();
+                contentParams.height = Math.round(getHeight);
+                contentParams.width = WelcomeActivity.widthAndHeight.get("width");
+                thirdYummyImageButton.setLayoutParams(contentParams);
+                thirdYummyTextView.setText(latestRecipeNames[3]);
+            } else {
+                thirdYummyImageButton.setImageResource(R.drawable.fkf_xs);
+                thirdYummyTextView.setText(latestRecipeNames[3]);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "Third Latest Recipe");
+            setDefaultImageToLatestRecipe(thirdYummyImageButton, thirdYummyTextView);
+            ex.printStackTrace();
         }
 
-        File forthImageFile = new File(context.getFilesDir()+"/fauzias/latest_yummys/icon_4");
-        if(forthImageFile.exists()) {
-            Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
-            forthYummyImageButton.setImageBitmap(forthBitmap);
-            contentParams = (LinearLayout.LayoutParams)forthYummyImageButton.getLayoutParams();
-            contentParams.height = Math.round(getHeight);
-            contentParams.width = WelcomeActivity.widthAndHeight.get("width");
-            forthYummyImageButton.setLayoutParams(contentParams);
-            forthYummyTextView.setText("  " + latestRecipeNames[4]);
-        } else {
-            forthYummyImageButton.setImageResource(R.drawable.fkf_xs);
-            forthYummyTextView.setText("  " + latestRecipeNames[4]);
+        try {
+            File forthImageFile = new File(context.getFilesDir() + "/fauzias/latest_yummys/icon_4");
+            if (forthImageFile.exists()) {
+                Bitmap forthBitmap = BitmapFactory.decodeFile(forthImageFile.getAbsolutePath());
+                forthYummyImageButton.setImageBitmap(forthBitmap);
+                contentParams = (LinearLayout.LayoutParams) forthYummyImageButton.getLayoutParams();
+                contentParams.height = Math.round(getHeight);
+                contentParams.width = WelcomeActivity.widthAndHeight.get("width");
+                forthYummyImageButton.setLayoutParams(contentParams);
+                forthYummyTextView.setText("  " + latestRecipeNames[4]);
+            } else {
+                forthYummyImageButton.setImageResource(R.drawable.fkf_xs);
+                forthYummyTextView.setText("  " + latestRecipeNames[4]);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "Forth Latest Recipe");
+            setDefaultImageToLatestRecipe(forthYummyImageButton, forthYummyTextView);
+            ex.printStackTrace();
         }
 
-        File fifthImageFile = new File(context.getFilesDir()+"/fauzias/latest_yummys/icon_5");
-        if(fifthImageFile.exists()) {
-            Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
-            fifthYummyImageButton.setImageBitmap(fifthBitmap);
-            contentParams = (LinearLayout.LayoutParams)fifthYummyImageButton.getLayoutParams();
-            contentParams.height = Math.round(getHeight);
-            contentParams.width = WelcomeActivity.widthAndHeight.get("width");
-            fifthYummyImageButton.setLayoutParams(contentParams);
-            fifthYummyTextView.setText("  " + latestRecipeNames[5]);
-        } else {
-            fifthYummyImageButton.setImageResource(R.drawable.fkf_xs);
-            fifthYummyTextView.setText("  " + latestRecipeNames[5]);
+        try {
+            File fifthImageFile = new File(context.getFilesDir() + "/fauzias/latest_yummys/icon_5");
+            if (fifthImageFile.exists()) {
+                Bitmap fifthBitmap = BitmapFactory.decodeFile(fifthImageFile.getAbsolutePath());
+                fifthYummyImageButton.setImageBitmap(fifthBitmap);
+                contentParams = (LinearLayout.LayoutParams) fifthYummyImageButton.getLayoutParams();
+                contentParams.height = Math.round(getHeight);
+                contentParams.width = WelcomeActivity.widthAndHeight.get("width");
+                fifthYummyImageButton.setLayoutParams(contentParams);
+                fifthYummyTextView.setText("  " + latestRecipeNames[5]);
+            } else {
+                fifthYummyImageButton.setImageResource(R.drawable.fkf_xs);
+                fifthYummyTextView.setText("  " + latestRecipeNames[5]);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "Fifth Latest Recipe");
+            setDefaultImageToLatestRecipe(fifthYummyImageButton, fifthYummyTextView);
+            ex.printStackTrace();
         }
 
         //latest yummys image button click events
@@ -421,13 +452,19 @@ public class HomeFragment extends Fragment {
 
         //popular yummys linear layout click events
         //first popular yummy
-        firstPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.firstPopularRecipeImageView);
-        File firstPopularImageFile = new File(context.getFilesDir()+"/fauzias/popular_yummys/icon_1");
-        if(firstPopularImageFile.exists()) {
-            Bitmap firstPopularBitmap = BitmapFactory.decodeFile(firstPopularImageFile.getAbsolutePath());
-            firstPopularYummyImageView.setImageBitmap(firstPopularBitmap);
-        } else {
+        try {
+            firstPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.firstPopularRecipeImageView);
+            File firstPopularImageFile = new File(context.getFilesDir() + "/fauzias/popular_yummys/icon_1");
+            if (firstPopularImageFile.exists()) {
+                Bitmap firstPopularBitmap = BitmapFactory.decodeFile(firstPopularImageFile.getAbsolutePath());
+                firstPopularYummyImageView.setImageBitmap(firstPopularBitmap);
+            } else {
+                firstPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "First Popular Recipe");
             firstPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            ex.printStackTrace();
         }
 
         firstPopularYummyLinear = (LinearLayout) myFragmentView.findViewById(R.id.firstPopularYummyLinear);
@@ -459,13 +496,19 @@ public class HomeFragment extends Fragment {
         });
 
         //second popular yummy
-        secondPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.secondPopularRecipeImageView);
-        File secondPopularImageFile = new File(context.getFilesDir()+"/fauzias/popular_yummys/icon_2");
-        if(secondPopularImageFile.exists()) {
-            Bitmap secondPopularBitmap = BitmapFactory.decodeFile(secondPopularImageFile.getAbsolutePath());
-            secondPopularYummyImageView.setImageBitmap(secondPopularBitmap);
-        } else {
+        try {
+            secondPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.secondPopularRecipeImageView);
+            File secondPopularImageFile = new File(context.getFilesDir() + "/fauzias/popular_yummys/icon_2");
+            if (secondPopularImageFile.exists()) {
+                Bitmap secondPopularBitmap = BitmapFactory.decodeFile(secondPopularImageFile.getAbsolutePath());
+                secondPopularYummyImageView.setImageBitmap(secondPopularBitmap);
+            } else {
+                secondPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "Second Popular Recipe");
             secondPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            ex.printStackTrace();
         }
 
         secondPopularYummyLinear = (LinearLayout) myFragmentView.findViewById(R.id.secondPopularYummyLinear);
@@ -497,13 +540,19 @@ public class HomeFragment extends Fragment {
         });
 
         //third popular yummy
-        thirdPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.thirdPopularRecipeImageView);
-        File thirdPopularImageFile = new File(context.getFilesDir()+"/fauzias/popular_yummys/icon_3");
-        if(thirdPopularImageFile.exists()) {
-            Bitmap thirdPopularBitmap = BitmapFactory.decodeFile(thirdPopularImageFile.getAbsolutePath());
-            thirdPopularYummyImageView.setImageBitmap(thirdPopularBitmap);
-        } else {
+        try {
+            thirdPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.thirdPopularRecipeImageView);
+            File thirdPopularImageFile = new File(context.getFilesDir() + "/fauzias/popular_yummys/icon_3");
+            if (thirdPopularImageFile.exists()) {
+                Bitmap thirdPopularBitmap = BitmapFactory.decodeFile(thirdPopularImageFile.getAbsolutePath());
+                thirdPopularYummyImageView.setImageBitmap(thirdPopularBitmap);
+            } else {
+                thirdPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "Third Popular Recipe");
             thirdPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            ex.printStackTrace();
         }
 
         thirdPopularYummyLinear = (LinearLayout) myFragmentView.findViewById(R.id.thirdPopularYummyLinear);
@@ -535,13 +584,19 @@ public class HomeFragment extends Fragment {
         });
 
         //forth popular yummy
-        forthPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.forthPopularRecipeImageView);
-        File forthPopularImageFile = new File(context.getFilesDir()+"/fauzias/popular_yummys/icon_4");
-        if(forthPopularImageFile.exists()) {
-            Bitmap forthPopularBitmap = BitmapFactory.decodeFile(forthPopularImageFile.getAbsolutePath());
-            forthPopularYummyImageView.setImageBitmap(forthPopularBitmap);
-        } else {
+        try {
+            forthPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.forthPopularRecipeImageView);
+            File forthPopularImageFile = new File(context.getFilesDir() + "/fauzias/popular_yummys/icon_4");
+            if (forthPopularImageFile.exists()) {
+                Bitmap forthPopularBitmap = BitmapFactory.decodeFile(forthPopularImageFile.getAbsolutePath());
+                forthPopularYummyImageView.setImageBitmap(forthPopularBitmap);
+            } else {
+                forthPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "Forth Popular Recipe");
             forthPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            ex.printStackTrace();
         }
 
         forthPopularYummyLinear = (LinearLayout) myFragmentView.findViewById(R.id.forthPopularYummyLinear);
@@ -573,13 +628,19 @@ public class HomeFragment extends Fragment {
         });
 
         //fifth popular yummy
-        fifthPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.fifthPopularRecipeImageView);
-        File fifthPopularImageFile = new File(context.getFilesDir()+"/fauzias/popular_yummys/icon_5");
-        if(fifthPopularImageFile.exists()) {
-            Bitmap fifthPopularBitmap = BitmapFactory.decodeFile(fifthPopularImageFile.getAbsolutePath());
-            fifthPopularYummyImageView.setImageBitmap(fifthPopularBitmap);
-        } else {
+        try {
+            fifthPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.fifthPopularRecipeImageView);
+            File fifthPopularImageFile = new File(context.getFilesDir() + "/fauzias/popular_yummys/icon_5");
+            if (fifthPopularImageFile.exists()) {
+                Bitmap fifthPopularBitmap = BitmapFactory.decodeFile(fifthPopularImageFile.getAbsolutePath());
+                fifthPopularYummyImageView.setImageBitmap(fifthPopularBitmap);
+            } else {
+                fifthPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "Fifth Popular Recipe");
             fifthPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            ex.printStackTrace();
         }
 
         fifthPopularYummyLinear = (LinearLayout) myFragmentView.findViewById(R.id.fifthPopularYummyLinear);
@@ -611,13 +672,19 @@ public class HomeFragment extends Fragment {
         });
 
         //sixth popular yummy
-        sixthPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.sixthPopularRecipeImageView);
-        File sixthPopularImageFile = new File(context.getFilesDir()+"/fauzias/popular_yummys/icon_6");
-        if(sixthPopularImageFile.exists()) {
-            Bitmap sixthPopularBitmap = BitmapFactory.decodeFile(sixthPopularImageFile.getAbsolutePath());
-            sixthPopularYummyImageView.setImageBitmap(sixthPopularBitmap);
-        } else {
+        try {
+            sixthPopularYummyImageView = (ImageView) myFragmentView.findViewById(R.id.sixthPopularRecipeImageView);
+            File sixthPopularImageFile = new File(context.getFilesDir() + "/fauzias/popular_yummys/icon_6");
+            if (sixthPopularImageFile.exists()) {
+                Bitmap sixthPopularBitmap = BitmapFactory.decodeFile(sixthPopularImageFile.getAbsolutePath());
+                sixthPopularYummyImageView.setImageBitmap(sixthPopularBitmap);
+            } else {
+                sixthPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            }
+        } catch (NullPointerException ex) {
+            Log.d("HomeFragment/NullPointerException:", "Sixth Popular Recipe");
             sixthPopularYummyImageView.setImageResource(R.drawable.default_recipe_image_squre);
+            ex.printStackTrace();
         }
 
         sixthPopularYummyLinear = (LinearLayout) myFragmentView.findViewById(R.id.sixthPopularYummyLinear);
@@ -821,5 +888,18 @@ public class HomeFragment extends Fragment {
         }
 
 
+    }
+
+    private void setDefaultImageToLatestRecipe(ImageButton latestRecipeImageButton, TextView latestRecipeTextView) {
+        if (WelcomeActivity.widthAndHeight.get("width") <= 480) {
+            latestRecipeImageButton.setImageResource(R.drawable.fkf_xs);
+            latestRecipeTextView.setText("  Recipe Name");
+        } else if (WelcomeActivity.widthAndHeight.get("width") <= 720) {
+            latestRecipeImageButton.setImageResource(R.drawable.fkf_m);
+            latestRecipeTextView.setText("  Recipe Name");
+        } else if (WelcomeActivity.widthAndHeight.get("width") <= 1080) {
+            latestRecipeImageButton.setImageResource(R.drawable.fkf_s);
+            latestRecipeTextView.setText("  Recipe Name");
+        }
     }
 }
