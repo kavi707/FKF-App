@@ -24,6 +24,7 @@ import com.fkf.free.WelcomeActivity;
 import com.fkf.free.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.free.database.PopularOrLatestRecipe;
 import com.fkf.free.database.Recipe;
+import com.fkf.free.database.dbprovider.ContentProviderAccessor;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 
@@ -106,6 +107,7 @@ public class HomeFragment extends Fragment {
 
     private Context context;
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper;
+    private ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
     private ArrayList<Recipe> recipeList;
 
     public HomeFragment(){}
@@ -173,7 +175,8 @@ public class HomeFragment extends Fragment {
 
         String[] latestRecipeNames = new String[10];
         try {
-            List<PopularOrLatestRecipe> latestRecipes = localDatabaseSQLiteOpenHelper.getAllLatestRecipes();
+            //List<PopularOrLatestRecipe> latestRecipes = localDatabaseSQLiteOpenHelper.getAllLatestRecipes();
+            List<PopularOrLatestRecipe> latestRecipes = contentProviderAccessor.getAllLatestRecipes(context);
             if (latestRecipes != null) {
                 for (PopularOrLatestRecipe latestRecipe : latestRecipes) {
                     latestRecipeNames[latestRecipe.getIndex()] = latestRecipe.getRecipeName();
@@ -715,7 +718,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        List<PopularOrLatestRecipe> allPopularRecipeList = localDatabaseSQLiteOpenHelper.getAllPopularRecipes();
+        //List<PopularOrLatestRecipe> allPopularRecipeList = localDatabaseSQLiteOpenHelper.getAllPopularRecipes();
+        List<PopularOrLatestRecipe> allPopularRecipeList = contentProviderAccessor.getAllPopularRecipes(context);
         if (allPopularRecipeList != null && !allPopularRecipeList.isEmpty()) {
             for (PopularOrLatestRecipe popularOrLatestRecipe : allPopularRecipeList) {
 

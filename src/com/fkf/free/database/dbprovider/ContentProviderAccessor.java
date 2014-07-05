@@ -258,6 +258,7 @@ public class ContentProviderAccessor {
                         selectedRecipeList.add(recipe);
                     } while (recipeCursor.moveToNext() && selectedRecipeList.size() < 11);
                 }
+                recipeCursor.close();
             }
         }
         return selectedRecipeList;
@@ -447,6 +448,43 @@ public class ContentProviderAccessor {
 
             popularRecipeCount++;
         }
+    }
+
+    public List<PopularOrLatestRecipe> getAllPopularRecipes(Context context) {
+        List<PopularOrLatestRecipe> popularRecipesList = new ArrayList<PopularOrLatestRecipe>();
+        Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.POPULAR_YUMMY_TABLE_NAME);
+        if (contextUri != null) {
+            Cursor popularRecipesCursor = context.getContentResolver().query(contextUri, null, null, null, null);
+            if(popularRecipesCursor != null) {
+                popularRecipesCursor.moveToFirst();
+                if(!popularRecipesCursor.isAfterLast()) {
+                    do {
+                        int index = popularRecipesCursor.getInt(1);
+                        String productId = popularRecipesCursor.getString(2);
+                        String recipeName = popularRecipesCursor.getString(3);
+                        String imageUrlXS = popularRecipesCursor.getString(4);
+                        String imageUrlS = popularRecipesCursor.getString(5);
+                        String imageUrlM = popularRecipesCursor.getString(6);
+                        String imageUrlL = popularRecipesCursor.getString(7);
+                        String imageUrlXL = popularRecipesCursor.getString(8);
+
+                        PopularOrLatestRecipe popularOrLatestRecipe = new PopularOrLatestRecipe();
+                        popularOrLatestRecipe.setIndex(index);
+                        popularOrLatestRecipe.setProductId(productId);
+                        popularOrLatestRecipe.setRecipeName(recipeName);
+                        popularOrLatestRecipe.setImageUrlXS(imageUrlXS);
+                        popularOrLatestRecipe.setImageUrlS(imageUrlS);
+                        popularOrLatestRecipe.setImageUrlM(imageUrlM);
+                        popularOrLatestRecipe.setImageUrlL(imageUrlL);
+                        popularOrLatestRecipe.setImageUrlXL(imageUrlXL);
+
+                        popularRecipesList.add(popularOrLatestRecipe);
+                    } while (popularRecipesCursor.moveToNext());
+                }
+                popularRecipesCursor.close();
+            }
+        }
+        return popularRecipesList;
     }
 
     /**
