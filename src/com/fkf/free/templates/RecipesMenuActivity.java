@@ -42,6 +42,7 @@ public class RecipesMenuActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private boolean isHomeFragment = false;
 
     // nav drawer title
     private CharSequence mDrawerTitle;
@@ -115,6 +116,7 @@ public class RecipesMenuActivity extends Activity {
                     .replace(R.id.frame_container, fragment).commit();
 
             setTitle(R.string.app_name);
+            isHomeFragment = true;
         }
 
         menuHomeTextView.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +129,7 @@ public class RecipesMenuActivity extends Activity {
 
                 setTitle(R.string.app_name);
                 mDrawerLayout.closeDrawers();
+                isHomeFragment = true;
             }
         });
 
@@ -200,6 +203,7 @@ public class RecipesMenuActivity extends Activity {
             mDrawerList.setSelection(position);
             setTitle(R.string.app_name);
             mDrawerLayout.closeDrawers();
+            isHomeFragment = false;
         } else {
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
@@ -235,23 +239,34 @@ public class RecipesMenuActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
         if(keyCode == KeyEvent.KEYCODE_BACK) {
 
-            messageBalloonAlertDialog = new AlertDialog.Builder(context)
-                    .setTitle(R.string.warning)
-                    .setMessage("Do you want to close Fauzia's Kitchen Fun ?")
-                    .setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            RecipesMenuActivity.this.finish();
-                        }
-                    })
-                    .setNegativeButton(R.string.no, new AlertDialog.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            messageBalloonAlertDialog.cancel();
-                        }
-                    }).create();
-            messageBalloonAlertDialog.show();
+            if (isHomeFragment) {
+                messageBalloonAlertDialog = new AlertDialog.Builder(context)
+                        .setTitle(R.string.warning)
+                        .setMessage("Do you want to close Fauzia's Kitchen Fun ?")
+                        .setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                RecipesMenuActivity.this.finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, new AlertDialog.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                messageBalloonAlertDialog.cancel();
+                            }
+                        }).create();
+                messageBalloonAlertDialog.show();
+            } else {
+                Fragment fragment = new HomeFragment(context);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, fragment).commit();
+
+                setTitle(R.string.app_name);
+                mDrawerLayout.closeDrawers();
+                isHomeFragment = true;
+            }
         }
-        return super.onKeyDown(keyCode, keyEvent);
+        return false;
     }
 }

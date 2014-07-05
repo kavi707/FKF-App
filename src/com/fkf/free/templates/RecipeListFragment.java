@@ -54,7 +54,7 @@ public class RecipeListFragment extends Fragment {
         this.localDatabaseSQLiteOpenHelper = new LocalDatabaseSQLiteOpenHelper(context);
         this.context = context;
 
-        Log.d(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>...", String.valueOf(this.recipeCategory.getCategoryId()));
+        Log.d("Selected Category ID: ", String.valueOf(this.recipeCategory.getCategoryId()));
     }
 
     public RecipeListFragment(){}
