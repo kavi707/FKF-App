@@ -218,18 +218,25 @@ public class WelcomeActivity extends Activity {
     }
 
     private void startBackgroundTasks() {
-        //update the database if server database is modified
-        userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
 
-        //update the recipe categories from the server data
-        userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+        boolean updatedStatus = false;
 
-        //populate popular yummy details and download images
-        userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
-        //populate latest yummy details and download images
-        boolean status = userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
+        if (userPermissionServices.isDbUpdate(WelcomeActivity.this)) {
+            //update the database if server database is modified
+            userPermissionServices.updateLocalRecipesFromServerRecipes(WelcomeActivity.this);
 
-        if (status) {
+            //update the recipe categories from the server data
+            userPermissionServices.updateLocalRecipeCategoriesFromServer(WelcomeActivity.this);
+
+            //populate popular yummy details and download images
+            userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
+            //populate latest yummy details and download images
+            updatedStatus = userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
+        } else {
+            updatedStatus = true;
+        }
+
+        if (updatedStatus) {
             Log.d("Process State", "TRUE");
             onContinue();
         } else {
