@@ -23,6 +23,7 @@ import com.fkf.commercial.adapter.RecipeListAdapter;
 import com.fkf.commercial.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.commercial.database.Recipe;
 import com.fkf.commercial.database.RecipeCategory;
+import com.fkf.commercial.database.dbprovider.ContentProviderAccessor;
 
 import org.w3c.dom.Text;
 
@@ -52,6 +53,7 @@ public class RecipeListFragment extends Fragment {
     private String titleHeading = "";
 
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper;
+    private ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
 
     public RecipeListFragment(RecipeCategory recipeCategory, Context context) {
         if (recipeCategory != null)
@@ -97,7 +99,8 @@ public class RecipeListFragment extends Fragment {
             }
             yummyCategoryNameTextView.setText(titleHeading);
         } else {
-            recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(recipeCategory.getCategoryId());
+            //recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(recipeCategory.getCategoryId());
+            recipeList = contentProviderAccessor.getRecipesFromCategoryId(recipeCategory.getCategoryId(), context);
             recipeListAdapter = new RecipeListAdapter(recipeList, this.context);
             recipeItemList.setAdapter(recipeListAdapter);
             yummyCategoryNameTextView.setText("  " + recipeCategory.getCategoryName());
