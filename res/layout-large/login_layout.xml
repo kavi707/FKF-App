@@ -31,7 +31,7 @@
                 <ImageView
                     android:id="@+id/logoImageView"
                     android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/logo" />
 
                 <TextView
@@ -153,10 +153,43 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
 
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="left|center_vertical"
+                    android:background="@drawable/footer">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_marginLeft="40dp"
+                        android:text="@string/accountCreateTextLabel"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"
+                        android:typeface="normal" />
+
+                    <Button
+                        android:id="@+id/registerButton"
+                        android:layout_width="110dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginRight="40dp"
+                        android:background="@drawable/register_btn_background"
+                        android:text="@string/registerButtonLabel"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+                </FrameLayout>
+
             </LinearLayout>
         </ScrollView>
 
-        <FrameLayout
+        <!--<FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="80dp"
             android:layout_alignParentBottom="true"
@@ -187,6 +220,6 @@
                 android:textSize="15dp"
                 android:textStyle="bold"
                 android:typeface="normal" />
-        </FrameLayout>
+        </FrameLayout>-->
     </RelativeLayout>
 </LinearLayout>

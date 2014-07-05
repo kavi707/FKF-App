@@ -471,6 +471,10 @@ public class SingleRecipeActivity extends Activity {
 
             titleBackgroundParams.width = 690;
             firstIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            secondIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            thirdIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            instructionsLinearLayout.setLayoutParams(titleBackgroundParams);
+            relatedRecipeLinearLayout.setLayoutParams(titleBackgroundParams);
 
         } else if (layoutWidthAndHeight.get("width") <= 1080) {
 
@@ -484,12 +488,24 @@ public class SingleRecipeActivity extends Activity {
 
             titleBackgroundParams.width = 1035;
             firstIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            secondIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            thirdIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            instructionsLinearLayout.setLayoutParams(titleBackgroundParams);
+            relatedRecipeLinearLayout.setLayoutParams(titleBackgroundParams);
         } else if (layoutWidthAndHeight.get("width") <= 1200) {
             titleBackgroundParams.width = 600;
             firstIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            secondIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            thirdIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            instructionsLinearLayout.setLayoutParams(titleBackgroundParams);
+            relatedRecipeLinearLayout.setLayoutParams(titleBackgroundParams);
         } else if (layoutWidthAndHeight.get("width") <= 1600) {
             titleBackgroundParams.width = 600;
             firstIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            secondIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            thirdIngredientTitleBackground.setLayoutParams(titleBackgroundParams);
+            instructionsLinearLayout.setLayoutParams(titleBackgroundParams);
+            relatedRecipeLinearLayout.setLayoutParams(titleBackgroundParams);
         }
 
         loadLinkedRecipes();

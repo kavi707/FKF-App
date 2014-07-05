@@ -17,7 +17,7 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="top"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical">
@@ -31,7 +31,7 @@
                 <ImageView
                     android:id="@+id/logoImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/logo" />
 
@@ -164,10 +164,43 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="left|center_vertical"
+                    android:background="@drawable/footer">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_marginLeft="35dp"
+                        android:text="@string/accountCreateTextLabel"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        android:typeface="normal" />
+
+                    <Button
+                        android:id="@+id/registerButton"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginRight="35dp"
+                        android:background="@drawable/register_btn_background"
+                        android:text="@string/registerButtonLabel"
+                        android:textColor="@color/white"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+                </FrameLayout>
             </LinearLayout>
         </ScrollView>
 
-        <FrameLayout
+        <!--<FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
@@ -198,6 +231,6 @@
                 android:textSize="13dp"
                 android:textStyle="bold"
                 android:typeface="normal" />
-        </FrameLayout>
+        </FrameLayout>-->
     </RelativeLayout>
 </LinearLayout>

@@ -134,11 +134,28 @@ public class LoginActivity extends Activity {
 
         Map<String, Integer> deviceWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(LoginActivity.this);
         int width = deviceWidthAndHeight.get("width");
+        int height = deviceWidthAndHeight.get("height");
+
+        spaceTextViewParams = (LinearLayout.LayoutParams) spaceTextView.getLayoutParams();
+        if (height <= 854) {
+            Log.d("Height Level: ", "1");
+            spaceTextViewParams.height = 60;
+            spaceTextView.setLayoutParams(spaceTextViewParams);
+        } else if (height <= 1280) {
+            Log.d("Height Level: ", "2");
+            spaceTextViewParams.height = 200;
+            spaceTextView.setLayoutParams(spaceTextViewParams);
+        } else if (height <= 1920) {
+            Log.d("Height Level: ", "3");
+            spaceTextViewParams.height = 360;
+            spaceTextView.setLayoutParams(spaceTextViewParams);
+        } else if (height <= 2560){
+            Log.d("Height Level: ", "4");
+            spaceTextViewParams.height = 0;
+            spaceTextView.setLayoutParams(spaceTextViewParams);
+        }
 
         if (width <= 480) {
-            spaceTextViewParams = (LinearLayout.LayoutParams) spaceTextView.getLayoutParams();
-            spaceTextViewParams.height = 80;
-            spaceTextView.setLayoutParams(spaceTextViewParams);
 
             logoViewParams = (LinearLayout.LayoutParams)logoImageView.getLayoutParams();
             logoViewParams.width = 350;
