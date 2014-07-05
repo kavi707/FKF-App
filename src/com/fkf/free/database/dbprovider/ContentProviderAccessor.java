@@ -256,7 +256,7 @@ public class ContentProviderAccessor {
                         recipe.setImageUrl_xl(recipeImageUrl_xl);
 
                         selectedRecipeList.add(recipe);
-                    } while (recipeCursor.moveToNext());
+                    } while (recipeCursor.moveToNext() && selectedRecipeList.size() < 11);
                 }
             }
         }

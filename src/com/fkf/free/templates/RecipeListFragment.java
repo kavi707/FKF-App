@@ -86,7 +86,8 @@ public class RecipeListFragment extends Fragment {
         re.setGender(AdRequest.Gender.FEMALE);
         googleAdView.loadAd(re);
 
-        recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(recipeCategory.getCategoryId());
+        //recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(recipeCategory.getCategoryId());
+        recipeList = contentProviderAccessor.getRecipesFromCategoryId(recipeCategory.getCategoryId(), context);
         recipeListAdapter = new RecipeListAdapter(recipeList, this.context);
         recipeItemList.setAdapter(recipeListAdapter);
         yummyCategoryNameTextView.setText("  " + recipeCategory.getCategoryName());
