@@ -50,6 +50,7 @@ import java.util.jar.Attributes;
  * Created by kavi on 6/29/13.
  * Hold the new single recipe view functionalities.
  * single_recipe_layout.xml Activity class
+ *
  * @author Kavimal Wijewardana <kavi707@gmail.com>
  */
 public class SingleRecipeActivity extends Activity {
@@ -206,7 +207,7 @@ public class SingleRecipeActivity extends Activity {
         int selectedRecipeId = extras.getInt("SELECTED_RECIPE_ID");
         oldRecipeProductId = extras.getInt("OLD_RECIPE_ID");
 
-        if(selectedRecipeId < 0) {
+        if (selectedRecipeId < 0) {
 
             switch (selectedRecipeId) {
                 //Latest recipe cases
@@ -248,14 +249,14 @@ public class SingleRecipeActivity extends Activity {
             }
 
             List<Recipe> tempRecipeList = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(selectedRecipeProductId);
-            if(!tempRecipeList.isEmpty()) {
+            if (!tempRecipeList.isEmpty()) {
                 selectedRecipe = tempRecipeList.get(0);
                 setUiContents();
             }
 
         } else {
             ArrayList<Recipe> selectedRecipes = localDatabaseSQLiteOpenHelper.getRecipeFromRecipeProductId(String.valueOf(selectedRecipeId));
-            if(selectedRecipes.size() != 1) {
+            if (selectedRecipes.size() != 1) {
                 // Error message abt data querying
             } else {
                 selectedRecipe = selectedRecipes.get(0);
@@ -283,7 +284,7 @@ public class SingleRecipeActivity extends Activity {
             try {
                 JSONArray descriptionJsonArray = new JSONArray(descriptionString);
                 for (int descStringCount = 0; descStringCount < descriptionJsonArray.length(); descStringCount++) {
-                    finalDescriptionString = finalDescriptionString + descriptionJsonArray.getString(descStringCount).replace("#","") + "\n\n";
+                    finalDescriptionString = finalDescriptionString + descriptionJsonArray.getString(descStringCount).replace("#", "") + "\n\n";
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -295,15 +296,15 @@ public class SingleRecipeActivity extends Activity {
 
         //device layout width and height
         layoutWidthAndHeight = userPermissionServices.getDeviceWidthAndHeight(SingleRecipeActivity.this);
-        contentParams = (LinearLayout.LayoutParams)singleRecipeImageViewer.getLayoutParams();
-        float height = (810 * layoutWidthAndHeight.get("width"))/1080;
+        contentParams = (LinearLayout.LayoutParams) singleRecipeImageViewer.getLayoutParams();
+        float height = (810 * layoutWidthAndHeight.get("width")) / 1080;
         contentParams.height = Math.round(height);
         contentParams.width = layoutWidthAndHeight.get("width");
         singleRecipeImageViewer.setLayoutParams(contentParams);
 
-        if(layoutWidthAndHeight.get("width") <= 480) {
+        if (layoutWidthAndHeight.get("width") <= 480) {
 //            singleRecipeMyFavoriteImageButton.
-            favoriteButtonParams = (FrameLayout.LayoutParams)singleRecipeMyFavoriteImageButton.getLayoutParams();
+            favoriteButtonParams = (FrameLayout.LayoutParams) singleRecipeMyFavoriteImageButton.getLayoutParams();
             favoriteButtonParams.height = 43;
             favoriteButtonParams.width = 140;
             singleRecipeMyFavoriteImageButton.setLayoutParams(favoriteButtonParams);
@@ -318,11 +319,11 @@ public class SingleRecipeActivity extends Activity {
 
             String instructionString = selectedRecipe.getInstructions();
             String finalInstructionString = "";
-            if (!instructionString.equals("") && !instructionString.equals(null)){
+            if (!instructionString.equals("") && !instructionString.equals(null)) {
                 try {
                     JSONArray instructionJsonArray = new JSONArray(instructionString);
                     for (int instructionStringCount = 0; instructionStringCount < instructionJsonArray.length(); instructionStringCount++) {
-                        finalInstructionString = finalInstructionString + instructionJsonArray.getString(instructionStringCount)+ "\n\n";
+                        finalInstructionString = finalInstructionString + instructionJsonArray.getString(instructionStringCount) + "\n\n";
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -458,10 +459,10 @@ public class SingleRecipeActivity extends Activity {
             }
         });
 
-        titleLayoutParams = (LinearLayout.LayoutParams) firstIngredientTitleBackground.getLayoutParams();
+        //Set fonts size & title backgrounds according to device screen size
+        titleLayoutParams = (LinearLayout.LayoutParams) instructionsLinearLayout.getLayoutParams();
         titleLayoutParams.width = 420;
 
-        //Set font size and title layout params according to device screen size
         if (layoutWidthAndHeight.get("width") <= 480) {
 
             singleRecipeDescriptionTextView.setTextSize(14);
@@ -502,6 +503,12 @@ public class SingleRecipeActivity extends Activity {
             getSingleRecipeInstructionLabelTextView.setTextSize(16);
 
             titleLayoutParams.width = 1035;
+            firstIngredientTitleBackground.setLayoutParams(titleLayoutParams);
+        } else if (layoutWidthAndHeight.get("width") <= 1200) {
+            titleLayoutParams.width = 600;
+            firstIngredientTitleBackground.setLayoutParams(titleLayoutParams);
+        } else if (layoutWidthAndHeight.get("width") <= 1600) {
+            titleLayoutParams.width = 600;
             firstIngredientTitleBackground.setLayoutParams(titleLayoutParams);
         }
 
@@ -551,7 +558,7 @@ public class SingleRecipeActivity extends Activity {
         messageBalloonAlertDialog.show();
     }
 
-    private LinearLayout createIngredientItemView (JSONObject ingredientObject) {
+    private LinearLayout createIngredientItemView(JSONObject ingredientObject) {
         LinearLayout ingredientLinearLayout = new LinearLayout(context);
         TextView ingredientNameTextView = new TextView(context);
         TextView ingredientNoteTextView = new TextView(context);
@@ -691,6 +698,7 @@ public class SingleRecipeActivity extends Activity {
 
     /**
      * Create TextView to each liked recipe and load it to view
+     *
      * @param linkedRecipeId
      * @param recipeCount
      */
@@ -775,6 +783,7 @@ public class SingleRecipeActivity extends Activity {
     /**
      * Set the downloaded image bitmap object to dynamically created ImageView
      * Load the created ImageView to LinearLayout
+     *
      * @param imageUrl
      */
     private void setImageViewsToMainView(String imageUrl) {
@@ -866,7 +875,7 @@ public class SingleRecipeActivity extends Activity {
             isFavorite = dbFovStatus;
         }*/
 
-        if(isFavorite) {
+        if (isFavorite) {
             singleRecipeMyFavoriteImageButton.setImageResource(R.drawable.fav_remove);
         }
     }
