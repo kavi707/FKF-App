@@ -36,6 +36,7 @@ public class LoginActivity extends Activity {
     private Button loginButton;
     private TextView browsRecipesTextView;
     private TextView spaceTextView;
+    private TextView bottomSpaceTextView;
     private TextView forgotPasswordLinkTextView;
 
     private Context context = this;
@@ -47,8 +48,8 @@ public class LoginActivity extends Activity {
     private LinearLayout usernameLinearLayout;
     private LinearLayout passwordLinearLayout;
     private ImageView logoImageView;
-    private LinearLayout.LayoutParams logoViewParams, usernameParams, passwordParams, loginButtonParams, spaceTextViewParams;
-    private LinearLayout.LayoutParams usernameEditTextParams, passwordEditTextParams;
+    private LinearLayout.LayoutParams logoViewParams, usernameParams, passwordParams, loginButtonParams, spaceTextViewParams, logoImageViewParams;
+    private LinearLayout.LayoutParams usernameEditTextParams, passwordEditTextParams, bottomSpaceTextViewParams;
 
     private ProgressDialog progress;
 
@@ -114,6 +115,7 @@ public class LoginActivity extends Activity {
         forgotPasswordLinkTextView = (TextView) findViewById(R.id.forgotPasswordLinkTextView);
 
         spaceTextView = (TextView) findViewById(R.id.spaceTextView);
+        bottomSpaceTextView = (TextView) findViewById(R.id.bottomSpaceTextView);
 
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
@@ -137,11 +139,18 @@ public class LoginActivity extends Activity {
         int height = deviceWidthAndHeight.get("height");
 
         spaceTextViewParams = (LinearLayout.LayoutParams) spaceTextView.getLayoutParams();
+        logoImageViewParams = (LinearLayout.LayoutParams) logoImageView.getLayoutParams();
+        bottomSpaceTextViewParams = (LinearLayout.LayoutParams) bottomSpaceTextView.getLayoutParams();
         if (height <= 854) {
             Log.d("Height Level: ", "1");
-            //spaceTextViewParams.height = 60;
-            spaceTextViewParams.height = 0;
+            logoImageViewParams.height = 0;
+            logoImageView.setLayoutParams(logoImageViewParams);
+
+            spaceTextViewParams.height = 140;
             spaceTextView.setLayoutParams(spaceTextViewParams);
+
+            bottomSpaceTextViewParams.height = 40;
+            bottomSpaceTextView.setLayoutParams(bottomSpaceTextViewParams);
         } else if (height <= 1280) {
             Log.d("Height Level: ", "2");
             //spaceTextViewParams.height = 200;

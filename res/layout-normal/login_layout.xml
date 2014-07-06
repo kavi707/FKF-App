@@ -149,6 +149,7 @@
                     android:typeface="normal" />
 
                 <TextView
+                    android:id="@+id/bottomSpaceTextView"
                     android:layout_width="fill_parent"
                     android:layout_height="60dp" />
 

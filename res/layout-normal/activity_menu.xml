@@ -14,7 +14,7 @@
         android:layout_height="match_parent" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="295dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:orientation="vertical">
@@ -86,7 +86,7 @@
 
         <TextView
             android:id="@+id/menuHomeTextView"
-            android:layout_width="300dp"
+            android:layout_width="295dp"
             android:layout_height="50dip"
             android:background="@drawable/category_list_background"
             android:gravity="center_vertical"
@@ -97,7 +97,7 @@
 
         <LinearLayout
             android:id="@+id/menuMyFavoriteLinearLayout"
-            android:layout_width="300dp"
+            android:layout_width="295dp"
             android:layout_height="50dp"
             android:background="@drawable/category_list_background"
             android:orientation="horizontal">
@@ -123,7 +123,7 @@
         <!-- Listview to display slider menu -->
         <ListView
             android:id="@+id/list_slidermenu"
-            android:layout_width="300dp"
+            android:layout_width="295dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@color/list_background"

@@ -101,6 +101,7 @@
                     android:id="@+id/browsRecipesTextView"/>
 
             <TextView
+                android:id="@+id/bottomSpaceTextView"
                 android:layout_width="fill_parent"
                 android:layout_height="80dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
