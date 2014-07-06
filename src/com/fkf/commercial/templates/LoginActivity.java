@@ -139,15 +139,18 @@ public class LoginActivity extends Activity {
         spaceTextViewParams = (LinearLayout.LayoutParams) spaceTextView.getLayoutParams();
         if (height <= 854) {
             Log.d("Height Level: ", "1");
-            spaceTextViewParams.height = 60;
+            //spaceTextViewParams.height = 60;
+            spaceTextViewParams.height = 0;
             spaceTextView.setLayoutParams(spaceTextViewParams);
         } else if (height <= 1280) {
             Log.d("Height Level: ", "2");
-            spaceTextViewParams.height = 200;
+            //spaceTextViewParams.height = 200;
+            spaceTextViewParams.height = 0;
             spaceTextView.setLayoutParams(spaceTextViewParams);
         } else if (height <= 1920) {
             Log.d("Height Level: ", "3");
-            spaceTextViewParams.height = 360;
+            //spaceTextViewParams.height = 360;
+            spaceTextViewParams.height = 0;
             spaceTextView.setLayoutParams(spaceTextViewParams);
         } else if (height <= 2560){
             Log.d("Height Level: ", "4");

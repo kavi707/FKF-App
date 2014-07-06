@@ -11,21 +11,21 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <ScrollView
+        <!--<ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent">-->
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="top"
+                android:gravity="bottom"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/spaceTextView"
                     android:layout_width="fill_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="1dp"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <ImageView
@@ -138,7 +138,7 @@
 
                 <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="80dp" />
 
                 <TextView
                     android:id="@+id/forgotPasswordLinkTextView"
@@ -187,7 +187,7 @@
                 </FrameLayout>
 
             </LinearLayout>
-        </ScrollView>
+        <!--</ScrollView>-->
 
         <!--<FrameLayout
             android:layout_width="fill_parent"
