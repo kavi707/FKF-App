@@ -96,7 +96,7 @@ public class ActivityUserPermissionServices {
      * @param activity
      * @return
      */
-    public int getDeviceScreenSize(Activity activity) {
+    public int getDeviceScreenSize(Context activity) {
 
         int screenSizeInt = 0;
 

@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.fkf.commercial.database.LocalDatabaseSQLiteOpenHelper;
 import com.fkf.commercial.database.PopularOrLatestRecipe;
 import com.fkf.commercial.database.Recipe;
 import com.fkf.commercial.database.dbprovider.ContentProviderAccessor;
+import com.fkf.commercial.services.ActivityUserPermissionServices;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -111,7 +113,9 @@ public class HomeFragment extends Fragment {
     private Context context;
     private LocalDatabaseSQLiteOpenHelper localDatabaseSQLiteOpenHelper;
     private ContentProviderAccessor contentProviderAccessor = new ContentProviderAccessor();
+    private ActivityUserPermissionServices activityUserPermissionServices = new ActivityUserPermissionServices();
     private ArrayList<Recipe> recipeList;
+    private int deviceWidth;
 
     public HomeFragment(){}
 
@@ -186,7 +190,29 @@ public class HomeFragment extends Fragment {
         /********* Latest yummys buttons ************/
         /********************************************/
 
-        if(WelcomeActivity.widthAndHeight.get("width") <= 480) {
+        try {
+            deviceWidth = WelcomeActivity.widthAndHeight.get("width");
+        } catch (NullPointerException ex) {
+            Log.d("NullPointerException","Null pointer at recipes for category Id");
+            int getDeviceSize = activityUserPermissionServices.getDeviceScreenSize(context);
+            switch(getDeviceSize) {
+                case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+                    deviceWidth = 1600;
+                    break;
+                case Configuration.SCREENLAYOUT_SIZE_LARGE:
+                    deviceWidth = 1080;
+                    break;
+                case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+                    deviceWidth = 720;
+                    break;
+                case Configuration.SCREENLAYOUT_SIZE_SMALL:
+                    deviceWidth = 480;
+                    break;
+            }
+            ex.printStackTrace();
+        }
+
+        if(deviceWidth <= 480) {
 
             latestTitleParams = (RelativeLayout.LayoutParams)latestTitleTextView.getLayoutParams();
             latestTitleParams.width = 400;
@@ -201,14 +227,13 @@ public class HomeFragment extends Fragment {
         }
 
         //Embedded images to yummys buttons
-        int deviceWidth = WelcomeActivity.widthAndHeight.get("width");
         float getHeight;
         if (deviceWidth == 480) {
-            getHeight = (480 * WelcomeActivity.widthAndHeight.get("width"))/640;
+            getHeight = (480 * deviceWidth)/640;
         } else if (deviceWidth == 720){
-            getHeight = (540 * WelcomeActivity.widthAndHeight.get("width"))/720;
+            getHeight = (540 * deviceWidth)/720;
         } else {
-            getHeight = (810 * WelcomeActivity.widthAndHeight.get("width"))/1080;
+            getHeight = (810 * deviceWidth)/1080;
         }
 
         try {
@@ -218,7 +243,7 @@ public class HomeFragment extends Fragment {
                 firstYummyImageButton.setImageBitmap(firstBitmap);
                 contentParams = (LinearLayout.LayoutParams) firstYummyImageButton.getLayoutParams();
                 contentParams.height = Math.round(getHeight);
-                contentParams.width = WelcomeActivity.widthAndHeight.get("width");
+                contentParams.width = deviceWidth;
                 firstYummyImageButton.setLayoutParams(contentParams);
                 firstYummyTextView.setText("  " + latestRecipeNames[1]);
             } else {
@@ -238,7 +263,7 @@ public class HomeFragment extends Fragment {
                 secondYummyImageButton.setImageBitmap(secondBitmap);
                 contentParams = (LinearLayout.LayoutParams) secondYummyImageButton.getLayoutParams();
                 contentParams.height = Math.round(getHeight);
-                contentParams.width = WelcomeActivity.widthAndHeight.get("width");
+                contentParams.width = deviceWidth;
                 secondYummyImageButton.setLayoutParams(contentParams);
                 secondYummyTextView.setText("  " + latestRecipeNames[2]);
             } else {
@@ -258,7 +283,7 @@ public class HomeFragment extends Fragment {
                 thirdYummyImageButton.setImageBitmap(thirdBitmap);
                 contentParams = (LinearLayout.LayoutParams) thirdYummyImageButton.getLayoutParams();
                 contentParams.height = Math.round(getHeight);
-                contentParams.width = WelcomeActivity.widthAndHeight.get("width");
+                contentParams.width = deviceWidth;
                 thirdYummyImageButton.setLayoutParams(contentParams);
                 thirdYummyTextView.setText(latestRecipeNames[3]);
             } else {
@@ -278,7 +303,7 @@ public class HomeFragment extends Fragment {
                 forthYummyImageButton.setImageBitmap(forthBitmap);
                 contentParams = (LinearLayout.LayoutParams) forthYummyImageButton.getLayoutParams();
                 contentParams.height = Math.round(getHeight);
-                contentParams.width = WelcomeActivity.widthAndHeight.get("width");
+                contentParams.width = deviceWidth;
                 forthYummyImageButton.setLayoutParams(contentParams);
                 forthYummyTextView.setText("  " + latestRecipeNames[4]);
             } else {
@@ -298,7 +323,7 @@ public class HomeFragment extends Fragment {
                 fifthYummyImageButton.setImageBitmap(fifthBitmap);
                 contentParams = (LinearLayout.LayoutParams) fifthYummyImageButton.getLayoutParams();
                 contentParams.height = Math.round(getHeight);
-                contentParams.width = WelcomeActivity.widthAndHeight.get("width");
+                contentParams.width = deviceWidth;
                 fifthYummyImageButton.setLayoutParams(contentParams);
                 fifthYummyTextView.setText("  " + latestRecipeNames[5]);
             } else {
@@ -894,7 +919,7 @@ public class HomeFragment extends Fragment {
         //recipes search from given name
         searchRecipeButton = (ImageButton) myFragmentView.findViewById(R.id.searchRecipeImageButton);
         searchRecipeEditText = (EditText) myFragmentView.findViewById(R.id.searchRecipeEditText);
-        if (WelcomeActivity.widthAndHeight.get("width") <= 480) {
+        if (deviceWidth <= 480) {
             searchRecipeEditText.setTextSize(14);
         }
         searchRecipeButton.setOnClickListener(new View.OnClickListener() {
@@ -924,13 +949,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void setDefaultImageToLatestRecipe(ImageButton latestRecipeImageButton, TextView latestRecipeTextView) {
-        if (WelcomeActivity.widthAndHeight.get("width") <= 480) {
+        if (deviceWidth <= 480) {
             latestRecipeImageButton.setImageResource(R.drawable.fkf_xs);
             latestRecipeTextView.setText("  Recipe Name");
-        } else if (WelcomeActivity.widthAndHeight.get("width") <= 720) {
+        } else if (deviceWidth <= 720) {
             latestRecipeImageButton.setImageResource(R.drawable.fkf_m);
             latestRecipeTextView.setText("  Recipe Name");
-        } else if (WelcomeActivity.widthAndHeight.get("width") <= 1080) {
+        } else if (deviceWidth <= 1080) {
             latestRecipeImageButton.setImageResource(R.drawable.fkf_s);
             latestRecipeTextView.setText("  Recipe Name");
         }

@@ -100,10 +100,17 @@ public class RecipeListFragment extends Fragment {
             yummyCategoryNameTextView.setText(titleHeading);
         } else {
             //recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(recipeCategory.getCategoryId());
-            recipeList = contentProviderAccessor.getRecipesFromCategoryId(recipeCategory.getCategoryId(), context);
-            recipeListAdapter = new RecipeListAdapter(recipeList, this.context);
-            recipeItemList.setAdapter(recipeListAdapter);
-            yummyCategoryNameTextView.setText("  " + recipeCategory.getCategoryName());
+            try {
+                recipeList = contentProviderAccessor.getRecipesFromCategoryId(recipeCategory.getCategoryId(), context);
+                recipeListAdapter = new RecipeListAdapter(recipeList, this.context);
+                recipeItemList.setAdapter(recipeListAdapter);
+                yummyCategoryNameTextView.setText("  " + recipeCategory.getCategoryName());
+            } catch (NullPointerException ex) {
+                Log.d("NullPointerException","Null pointer at recipes for category Id");
+                yummyCategoryNameTextView.setText("  " + recipeCategory.getCategoryName());
+                Toast.makeText(context, "Please reload the category again", Toast.LENGTH_LONG);
+                ex.printStackTrace();
+            }
         }
 
         recipeItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
