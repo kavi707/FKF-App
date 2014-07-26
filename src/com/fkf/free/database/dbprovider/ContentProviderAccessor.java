@@ -185,6 +185,7 @@ public class ContentProviderAccessor {
         values.put(LocalDatabaseSQLiteOpenHelper.BODY, recipe.getBody());
         values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_T, recipe.getImageUrlT());
         values.put(LocalDatabaseSQLiteOpenHelper.IMAGE_URL_XL, recipe.getImageUrl_xl());
+        values.put(LocalDatabaseSQLiteOpenHelper.SERVINGS, recipe.getServings());
 
         //using content provider database access
         Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, LocalDatabaseSQLiteOpenHelper.RECIPES_TABLE_NAME);
@@ -231,6 +232,7 @@ public class ContentProviderAccessor {
                         String recipeBody = recipeCursor.getString(17);
                         String recipeImageUrl_t = recipeCursor.getString(18);
                         String recipeImageUrl_xl = recipeCursor.getString(19);
+                        String servings = recipeCursor.getString(20);
 
                         recipe = new Recipe();
 
@@ -254,6 +256,7 @@ public class ContentProviderAccessor {
                         recipe.setBody(recipeBody);
                         recipe.setImageUrlT(recipeImageUrl_t);
                         recipe.setImageUrl_xl(recipeImageUrl_xl);
+                        recipe.setServings(servings);
 
                         selectedRecipeList.add(recipe);
                     } while (recipeCursor.moveToNext() && selectedRecipeList.size() < 11);

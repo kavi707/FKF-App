@@ -101,9 +101,17 @@
                     android:textColor="@color/normal_gray"
                     android:typeface="normal" />
 
-                <!--<TextView
+                <TextView
+                    android:id="@+id/servingsTextView"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/normal_gray"
+                    android:typeface="normal"
+                    android:text="Servings"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />-->
+                    android:layout_height="wrap_content" />
 
                 <!-- First ingredient -->
                 <LinearLayout
