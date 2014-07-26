@@ -49,6 +49,7 @@ public class SingleRecipeActivity extends Activity {
     private TextView singleRecipeNameTextView;
     private RatingBar singleRecipeRatingBar;
     private TextView singleRecipeDescriptionTextView;
+    private TextView servingsTextView;
     private TextView getSingleRecipeInstructionLabelTextView;
     private TextView singleRecipeInstructionTextView;
 
@@ -165,6 +166,7 @@ public class SingleRecipeActivity extends Activity {
         singleRecipeNameTextView = (TextView) findViewById(R.id.singleRecipeNameTextView);
         singleRecipeRatingBar = (RatingBar) findViewById(R.id.singleRecipeRatingBar);
         singleRecipeDescriptionTextView = (TextView) findViewById(R.id.singleRecipeDescriptionTextView);
+        servingsTextView = (TextView) findViewById(R.id.servingsTextView);
         singleRecipeInstructionTextView = (TextView) findViewById(R.id.singleRecipeInstructionTextView);
         getSingleRecipeInstructionLabelTextView = (TextView) findViewById(R.id.singleRecipeInstructionLabelTextView);
 
@@ -264,7 +266,7 @@ public class SingleRecipeActivity extends Activity {
             try {
                 JSONArray descriptionJsonArray = new JSONArray(descriptionString);
                 for (int descStringCount = 0; descStringCount < descriptionJsonArray.length(); descStringCount++) {
-                    finalDescriptionString = finalDescriptionString + descriptionJsonArray.getString(descStringCount).replace("#", "") + "\n\n";
+                    finalDescriptionString = finalDescriptionString + descriptionJsonArray.getString(descStringCount).replace("#", "") + "\n";
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -272,6 +274,7 @@ public class SingleRecipeActivity extends Activity {
         }
 
         singleRecipeDescriptionTextView.setText(finalDescriptionString);
+        servingsTextView.setText(selectedRecipe.getServings());
         singleRecipeContentLabelTextView.setText("Ingredients");
 
         //device layout width and height
@@ -446,6 +449,7 @@ public class SingleRecipeActivity extends Activity {
         if (layoutWidthAndHeight.get("width") <= 480) {
 
             singleRecipeDescriptionTextView.setTextSize(14);
+            servingsTextView.setTextSize(14);
             singleRecipeContentLabelTextView.setTextSize(14);
             singleRecipeInstructionTextView.setTextSize(14);
             singleRecipeContentLabelTextView.setTextSize(14);
@@ -462,6 +466,7 @@ public class SingleRecipeActivity extends Activity {
         } else if (layoutWidthAndHeight.get("width") <= 720) {
 
             singleRecipeDescriptionTextView.setTextSize(15);
+            servingsTextView.setTextSize(15);
             singleRecipeContentLabelTextView.setTextSize(15);
             singleRecipeInstructionTextView.setTextSize(15);
             singleRecipeContentLabelTextView.setTextSize(15);
@@ -479,6 +484,7 @@ public class SingleRecipeActivity extends Activity {
         } else if (layoutWidthAndHeight.get("width") <= 1080) {
 
             singleRecipeDescriptionTextView.setTextSize(16);
+            servingsTextView.setTextSize(16);
             singleRecipeContentLabelTextView.setTextSize(16);
             singleRecipeInstructionTextView.setTextSize(16);
             singleRecipeContentLabelTextView.setTextSize(16);

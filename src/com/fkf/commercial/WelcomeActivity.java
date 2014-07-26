@@ -43,6 +43,7 @@ public class WelcomeActivity extends Activity {
     protected boolean mbActive;
     private String appFilePath;
     private boolean isActivityActivated = false;
+    private boolean isAppOnFirstTime = false;
 
     private ProgressBar appLoadingProgressBar;
     private TextView appLoadingProgressTitleTextView;
@@ -77,12 +78,14 @@ public class WelcomeActivity extends Activity {
         appFilePath = getFilesDir().getAbsolutePath();
 
         if (localDatabaseSQLiteOpenHelper.checkDataBase()) {
+            isAppOnFirstTime = false;
             if (isApplicationUpdatedForToday()) {
                 onContinue();
             } else {
                 setUpViews();
             }
         } else {
+            isAppOnFirstTime = true;
             setUpViews();
         }
 
@@ -205,7 +208,17 @@ public class WelcomeActivity extends Activity {
                         //populate latest yummy details and download images
                         status = userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
                     } else {
-                        status = true;
+                        if (isAppOnFirstTime) {
+                            //create internal app dir if not exists
+                            userPermissionServices.createInternalAppDirectories(appFilePath);
+
+                            //populate popular yummy details and download images
+                            userPermissionServices.populatePopularYummyDetails(WelcomeActivity.this, appFilePath);
+                            //populate latest yummy details and download images
+                            status = userPermissionServices.populateLatestYummyDetails(WelcomeActivity.this, appFilePath);
+                        } else {
+                            status = true;
+                        }
                     }
 
                     if (status) {
