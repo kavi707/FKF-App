@@ -57,6 +57,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String LINKED_RECIPE_IDS = "linked_recipes";
     public static final String LEGACY = "legacy";
     public static final String BODY = "body";
+    public static final String SERVINGS = "servings";
 
     //popular yummy table
     public static final String POPULAR_YUMMY_TABLE_NAME = "popular_yummys";
@@ -271,7 +272,8 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 LEGACY + " int, " +
                 BODY + " text, " +
                 IMAGE_URL_T + " text, " +
-                IMAGE_URL_XL + " text " +
+                IMAGE_URL_XL + " text, " +
+                SERVINGS + " text " +
                 ");";
         sqLiteDatabase.execSQL(createRecipesTableQuery);
     }
@@ -654,6 +656,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(LINKED_RECIPE_IDS, recipe.getLinkRecipeIds());
         values.put(LEGACY, recipe.getLegacy());
         values.put(BODY, recipe.getBody());
+        values.put(SERVINGS, recipe.getServings());
 
         //using content provider database access
         Uri contextUri = Uri.withAppendedPath(DbContentProvider.CONTENT_URI, RECIPES_TABLE_NAME);
@@ -707,6 +710,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String recipeBody = recipeCursor.getString(17);
                     String recipeImageUrl_t = recipeCursor.getString(18);
                     String recipeImageUrl_xl = recipeCursor.getString(19);
+                    String servings = recipeCursor.getString(20);
 
                     recipe = new Recipe();
 
@@ -730,6 +734,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setBody(recipeBody);
                     recipe.setImageUrlT(recipeImageUrl_t);
                     recipe.setImageUrl_xl(recipeImageUrl_xl);
+                    recipe.setServings(servings);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -843,6 +848,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String body = recipeCursor.getString(17);
                     String recipeImageUrl_t = recipeCursor.getString(18);
                     String recipeImageUrl_xl = recipeCursor.getString(19);
+                    String servings = recipeCursor.getString(20);
 
                     recipe = new Recipe();
 
@@ -866,6 +872,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setBody(body);
                     recipe.setImageUrlT(recipeImageUrl_t);
                     recipe.setImageUrl_xl(recipeImageUrl_xl);
+                    recipe.setServings(servings);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
@@ -916,6 +923,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     String body = recipeCursor.getString(17);
                     String recipeImageUrl_t = recipeCursor.getString(18);
                     String recipeImageUrl_xl = recipeCursor.getString(19);
+                    String servings = recipeCursor.getString(20);
 
                     recipe = new Recipe();
 
@@ -939,6 +947,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     recipe.setBody(body);
                     recipe.setImageUrlT(recipeImageUrl_t);
                     recipe.setImageUrl_xl(recipeImageUrl_xl);
+                    recipe.setServings(servings);
 
                     selectedRecipeList.add(recipe);
                 } while (recipeCursor.moveToNext());
