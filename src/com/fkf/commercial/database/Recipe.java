@@ -27,6 +27,7 @@ public class Recipe {
     private String linkRecipeIds;
     private int legacy;
     private String body;
+    private String servings;
 
     public int getId() {
         return id;
@@ -186,5 +187,13 @@ public class Recipe {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getServings() {
+        return servings;
+    }
+
+    public void setServings(String servings) {
+        this.servings = servings;
     }
 }
