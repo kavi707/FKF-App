@@ -23,6 +23,7 @@ import com.fkf.commercial.templates.LoginActivity;
 import com.fkf.commercial.templates.RecipesActivity;
 import com.fkf.commercial.templates.RecipesMenuActivity;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -77,15 +78,28 @@ public class WelcomeActivity extends Activity {
         //following content is for get the internal application files path
         appFilePath = getFilesDir().getAbsolutePath();
 
-        if (localDatabaseSQLiteOpenHelper.checkDataBase()) {
+        //If updated.txt file is not exists, create file and update the database
+        File appUpdateFile = new File(appFilePath+"/fauzias/updated.txt");
+        if (!appUpdateFile.exists()) {
+            isAppOnFirstTime = true;
+            try {
+                localDatabaseSQLiteOpenHelper.createDatabase();
+                localDatabaseSQLiteOpenHelper.openDataBase();
+                appUpdateFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
             isAppOnFirstTime = false;
+        }
+
+        if (localDatabaseSQLiteOpenHelper.checkDataBase()) {
             if (isApplicationUpdatedForToday()) {
                 onContinue();
             } else {
                 setUpViews();
             }
         } else {
-            isAppOnFirstTime = true;
             setUpViews();
         }
 
@@ -226,7 +240,7 @@ public class WelcomeActivity extends Activity {
                         onContinue();
                     } else {
                         Log.d("Process State", "FALSE");
-                        Toast.makeText(context, "Process not successfully completed", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, "Process not successfully completed", Toast.LENGTH_LONG).show();
                         finish();
                     }
 
