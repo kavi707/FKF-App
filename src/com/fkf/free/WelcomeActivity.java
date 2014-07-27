@@ -83,6 +83,7 @@ public class WelcomeActivity extends Activity {
         //If updated.txt file is not exists, create file and update the database
         File appUpdateFile = new File(appFilePath+"/fauzias/updated.txt");
         if (!appUpdateFile.exists()) {
+            isAppOnFirstTime = true;
             try {
                 localDatabaseSQLiteOpenHelper.createDatabase();
                 localDatabaseSQLiteOpenHelper.openDataBase();
@@ -90,18 +91,18 @@ public class WelcomeActivity extends Activity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            isAppOnFirstTime = false;
         }
 
 
         if (localDatabaseSQLiteOpenHelper.checkDataBase()) {
-            isAppOnFirstTime = false;
             if (isApplicationUpdatedForToday()) {
                 onContinue();
             } else {
                 setUpViews();
             }
         } else {
-            isAppOnFirstTime = true;
             setUpViews();
         }
 
