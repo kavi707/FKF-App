@@ -101,17 +101,31 @@
                     android:textColor="@color/normal_gray"
                     android:typeface="normal" />
 
-                <TextView
-                    android:id="@+id/servingsTextView"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:textColor="@color/normal_gray"
-                    android:typeface="normal"
-                    android:text="Servings"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Servings: "
+                        android:textColor="@color/normal_gray"
+                        android:textStyle="bold"
+                        android:textSize="14dp"
+                        android:typeface="normal" />
+
+                    <TextView
+                        android:id="@+id/servingsTextView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:text="Servings"
+                        android:textColor="@color/normal_gray"
+                        android:typeface="normal" />
+                </LinearLayout>
 
                 <!-- First ingredient -->
                 <LinearLayout

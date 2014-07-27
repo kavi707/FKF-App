@@ -25,6 +25,7 @@ import com.fkf.free.templates.LoginActivity;
 import com.fkf.free.templates.RecipesActivity;
 import com.fkf.free.templates.RecipesMenuActivity;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -78,6 +79,19 @@ public class WelcomeActivity extends Activity {
 
         //following content is for get the internal application files path
         appFilePath = getFilesDir().getAbsolutePath();
+
+        //If updated.txt file is not exists, create file and update the database
+        File appUpdateFile = new File(appFilePath+"/fauzias/updated.txt");
+        if (!appUpdateFile.exists()) {
+            try {
+                localDatabaseSQLiteOpenHelper.createDatabase();
+                localDatabaseSQLiteOpenHelper.openDataBase();
+                appUpdateFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         if (localDatabaseSQLiteOpenHelper.checkDataBase()) {
             isAppOnFirstTime = false;
