@@ -3,6 +3,7 @@ package com.fkf.commercial;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -79,10 +80,13 @@ public class WelcomeActivity extends Activity {
         appFilePath = getFilesDir().getAbsolutePath();
 
         //If updated.txt file is not exists, create file and update the database
-        File appUpdateFile = new File(appFilePath+"/fauzias/updated.txt");
+        File appUpdateFile = new File(appFilePath+"/fauzias/updated01.txt");
         if (!appUpdateFile.exists()) {
             isAppOnFirstTime = true;
             try {
+                ContextWrapper contextWrapper = new ContextWrapper(context);
+                contextWrapper.deleteDatabase("local_fkf_db.sqlite");
+
                 localDatabaseSQLiteOpenHelper.createDatabase();
                 localDatabaseSQLiteOpenHelper.openDataBase();
                 appUpdateFile.createNewFile();
