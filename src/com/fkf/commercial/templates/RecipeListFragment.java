@@ -107,7 +107,7 @@ public class RecipeListFragment extends Fragment {
                 yummyCategoryNameTextView.setText("  " + recipeCategory.getCategoryName());
             } catch (NullPointerException ex) {
                 Log.d("NullPointerException","Null pointer at recipes for category Id");
-                yummyCategoryNameTextView.setText("  " + recipeCategory.getCategoryName());
+                yummyCategoryNameTextView.setText("  Category");
                 Toast.makeText(context, "Please reload the category again", Toast.LENGTH_LONG);
                 ex.printStackTrace();
             }
@@ -158,12 +158,16 @@ public class RecipeListFragment extends Fragment {
                 String searchKey = searchRecipeListEditText.getText().toString();
 
                 if(searchKey.equals(null) || !searchKey.equals("")) {
-                    recipeList = localDatabaseSQLiteOpenHelper.searchRecipesFromGivenRecipeName(searchKey);
+                    try {
+                        recipeList = localDatabaseSQLiteOpenHelper.searchRecipesFromGivenRecipeName(searchKey);
 
-                    recipeListAdapter = new RecipeListAdapter(recipeList, context);
-                    recipeItemList.setAdapter(recipeListAdapter);
+                        recipeListAdapter = new RecipeListAdapter(recipeList, context);
+                        recipeItemList.setAdapter(recipeListAdapter);
 
-                    yummyCategoryNameTextView.setText("   Search Results");
+                        yummyCategoryNameTextView.setText("   Search Results");
+                    } catch (NullPointerException ex) {
+                        Log.d("LOG_TAG:", "NullPointerException thrown");
+                    }
                 } else {
                     Toast.makeText(context,
                             "Please enter key word for search", Toast.LENGTH_LONG).show();
