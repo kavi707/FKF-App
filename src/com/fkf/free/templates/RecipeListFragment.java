@@ -87,42 +87,46 @@ public class RecipeListFragment extends Fragment {
         googleAdView.loadAd(re);
 
         //recipeList = localDatabaseSQLiteOpenHelper.getRecipesFromCategoryId(recipeCategory.getCategoryId());
-        recipeList = contentProviderAccessor.getRecipesFromCategoryId(recipeCategory.getCategoryId(), context);
-        recipeListAdapter = new RecipeListAdapter(recipeList, this.context);
-        recipeItemList.setAdapter(recipeListAdapter);
-        yummyCategoryNameTextView.setText("  " + recipeCategory.getCategoryName());
+        try {
+            recipeList = contentProviderAccessor.getRecipesFromCategoryId(recipeCategory.getCategoryId(), context);
+            recipeListAdapter = new RecipeListAdapter(recipeList, this.context);
+            recipeItemList.setAdapter(recipeListAdapter);
+            yummyCategoryNameTextView.setText("  " + recipeCategory.getCategoryName());
 
-        recipeItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Recipe selectedItemContent = (Recipe) (recipeItemList.getItemAtPosition(i));
-                if (selectedItemContent != null) {
+            recipeItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Recipe selectedItemContent = (Recipe) (recipeItemList.getItemAtPosition(i));
+                    if (selectedItemContent != null) {
 
-                    itemContent = selectedItemContent;
+                        itemContent = selectedItemContent;
 
-                    progress = ProgressDialog.show(context, "Loading", "Loading the " + itemContent.getName() + " details. Please wait...");
-                    handler = new android.os.Handler(context.getMainLooper());
+                        progress = ProgressDialog.show(context, "Loading", "Loading the " + itemContent.getName() + " details. Please wait...");
+                        handler = new android.os.Handler(context.getMainLooper());
 
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent singleRecipeIntent = new Intent(context, SingleRecipeActivity.class);
-                            singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(itemContent.getProductId()));
-                            singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
-                            startActivity(singleRecipeIntent);
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent singleRecipeIntent = new Intent(context, SingleRecipeActivity.class);
+                                singleRecipeIntent.putExtra("SELECTED_RECIPE_ID", Integer.parseInt(itemContent.getProductId()));
+                                singleRecipeIntent.putExtra("OLD_RECIPE_ID", -1);
+                                startActivity(singleRecipeIntent);
 
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progress.dismiss();
-                                }
-                            });
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progress.dismiss();
+                                    }
+                                });
 
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
-            }
-        });
+            });
+        } catch (NullPointerException ex) {
+            Log.d("LOG_TAG:", "NullPointerException thrown");
+        }
     }
 }
