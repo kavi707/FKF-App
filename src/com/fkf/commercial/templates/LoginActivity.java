@@ -212,42 +212,47 @@ public class LoginActivity extends Activity {
                             String getPassword = passwordEditText.getText().toString();
                             loginResult = connector.userLogin(getUsername, getPassword);
 
-                            if (loginResult.get("loginStatus").equals("1")) {
+                            try {
+                                if (loginResult.get("loginStatus").equals("1")) {
 
-                                LOGGED_USER_ID = loginResult.get("userId");
-                                LOGGED_USER = loginResult.get("username");
-                                LOGGED_USER_PASSWORD = loginResult.get("password");
-                                LOGGED_USER_NAME = loginResult.get("fName");
-                                LOGGED_USER_PIC_URL = loginResult.get("picUrl");
+                                    LOGGED_USER_ID = loginResult.get("userId");
+                                    LOGGED_USER = loginResult.get("username");
+                                    LOGGED_USER_PASSWORD = loginResult.get("password");
+                                    LOGGED_USER_NAME = loginResult.get("fName");
+                                    LOGGED_USER_PIC_URL = loginResult.get("picUrl");
 
-                                LOGGED_STATUS = 1;
+                                    LOGGED_STATUS = 1;
 
-                                localDatabaseSQLiteOpenHelper.insertLoginDetails(loginResult);
-                                //update the logged user's favorite recipes
-                                userPermissionServices.updateUserFavoriteRecipesFromServer(LoginActivity.this);
+                                    localDatabaseSQLiteOpenHelper.insertLoginDetails(loginResult);
+                                    //update the logged user's favorite recipes
+                                    userPermissionServices.updateUserFavoriteRecipesFromServer(LoginActivity.this);
 
-//                                Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
-//                                startActivity(recipesIntent);
-                                Intent recipesMenuIntent = new Intent(LoginActivity.this, RecipesMenuActivity.class);
-                                startActivity(recipesMenuIntent);
-                                LoginActivity.this.finish();
+//                                  Intent recipesIntent = new Intent(LoginActivity.this, RecipesActivity.class);
+//                                  startActivity(recipesIntent);
+                                    Intent recipesMenuIntent = new Intent(LoginActivity.this, RecipesMenuActivity.class);
+                                    startActivity(recipesMenuIntent);
+                                    LoginActivity.this.finish();
 
-                                errorStatus = false;
+                                    errorStatus = false;
 
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progress.dismiss();
-                                    }
-                                });
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            progress.dismiss();
+                                        }
+                                    });
 
-                            } else if (loginResult.get("loginStatus").equals("2")) {
-                                loginButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_btn_background));
-                                progress.dismiss();
-                                errorStatus = true;
-                                errorMsg = loginResult.get("msg");
+                                } else if (loginResult.get("loginStatus").equals("2")) {
+                                    loginButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_btn_background));
+                                    progress.dismiss();
+                                    errorStatus = true;
+                                    errorMsg = loginResult.get("msg");
+                                    Toast.makeText(getApplicationContext(),
+                                            "Login failed. Because of " + errorMsg, Toast.LENGTH_LONG).show();
+                                }
+                            } catch (NullPointerException ex) {
                                 Toast.makeText(getApplicationContext(),
-                                        "Login failed. Because of " + errorMsg, Toast.LENGTH_LONG).show();
+                                        "Application is on offline mode. If need to login, please put your device to online", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
