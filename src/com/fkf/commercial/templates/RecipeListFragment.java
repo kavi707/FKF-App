@@ -108,7 +108,7 @@ public class RecipeListFragment extends Fragment {
             } catch (NullPointerException ex) {
                 Log.d("NullPointerException","Null pointer at recipes for category Id");
                 yummyCategoryNameTextView.setText("  Category");
-                Toast.makeText(context, "Please reload the category again", Toast.LENGTH_LONG);
+                //Toast.makeText(context, "Please reload the category again", Toast.LENGTH_LONG);
                 ex.printStackTrace();
             }
         }
