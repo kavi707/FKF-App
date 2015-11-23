@@ -79,7 +79,12 @@ public class WelcomeActivity extends Activity {
         widthAndHeight = userPermissionServices.getDeviceWidthAndHeight(WelcomeActivity.this);
 
         //following content is for get the internal application files path
-        appFilePath = getFilesDir().getAbsolutePath();
+        try {
+            appFilePath = getFilesDir().getAbsolutePath();
+        } catch (NullPointerException ex) {
+            appFilePath = getFilesDir().getPath();
+        }
+        Log.d("File path: ", appFilePath);
 
         //If updated.txt file is not exists, create file and update the database
         File appUpdateFile = new File(appFilePath+"/fauzias/updated01.txt");
