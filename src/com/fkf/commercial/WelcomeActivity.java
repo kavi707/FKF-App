@@ -306,6 +306,11 @@ public class WelcomeActivity extends Activity {
         if (year == updatedDate.get("updatedYear") &&
                 month == updatedDate.get("updatedMonth") && day == updatedDate.get("updatedDay")) {
             status = true;
+            /*if (isAppOnFirstTime) {
+                status = false;
+            } else {
+                status = true;
+            }*/
         } else {
             status = false;
         }
