@@ -29,7 +29,7 @@ public class LocalDatabaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private SQLiteDatabase localFKFDatabase;
 
-    public static final String DB_NAME = "local_fkf_db.sqlite";
+    public static final String DB_NAME = "local_fkf_db_update.sqlite";
     public static final int VERSION = 1;
 
     public static final String DB_PATH = "/data/data/com.fkf.free/databases/";
